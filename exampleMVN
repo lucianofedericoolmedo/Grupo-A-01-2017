@@ -1,0 +1,20 @@
+Desde la consola, ir al proyecto GIT creado
+
+
+mvn archetype:generate
+-DgroupId=ar.edu.unq.desapp.grupox
+-DartifactId=desapp-groupx-backend
+-Dpackage=unq.tpi.desapp -Dversion=1.0-SNAPSHOT
+-DarchetypeArtifactId=maven-archetype-webapp
+
+
+Entrar al proyecto
+
+
+mvn install eclipse:eclipse
+
+
+Ir a eclipse e importar el proyecto
+
+
+Push del proyecto inicial
