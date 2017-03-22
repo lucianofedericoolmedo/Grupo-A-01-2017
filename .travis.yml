@@ -3,7 +3,7 @@ sudo: required
 jdk:
 - oraclejdk8
 script:
-- cd desApp-groupA-backend && ./mvnw clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+- cd desApp-groupA-backend && ./mvnw clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8 && ./mvnw  test -B
 deploy:
   provider: heroku
   api_key:
