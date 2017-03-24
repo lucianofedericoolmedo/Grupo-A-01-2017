@@ -41,6 +41,11 @@
 			<scope>test</scope>			
 		</dependency>
 		
+		<dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.1.0.v20131115</version>
+		</dependency>
 		
 		<dependency>
 				<groupId>javax.servlet</groupId>
