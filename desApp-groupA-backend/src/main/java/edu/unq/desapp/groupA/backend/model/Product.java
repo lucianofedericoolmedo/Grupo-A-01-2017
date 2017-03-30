@@ -11,6 +11,8 @@ public class Product {
 	
 	private Brand brand;
 
+	private Price price;
+	
 	// Getters and Setters
 	public String getName() {
 		return name;
@@ -34,6 +36,14 @@ public class Product {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
 	}
 
 }
