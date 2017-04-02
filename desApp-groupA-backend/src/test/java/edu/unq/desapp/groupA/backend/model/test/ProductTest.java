@@ -38,7 +38,7 @@ public class ProductTest {
 	}
 
 	@Test
-	public void testGettersAndSettersBrand() {
+	public void testGettersAndSettersProduct() {
 		Product newProduct = new Product();
 		
 		newProduct.setName("Surtidas");
