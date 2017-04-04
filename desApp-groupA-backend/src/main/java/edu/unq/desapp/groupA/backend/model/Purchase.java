@@ -1,21 +1,19 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.List;
-
 public class Purchase {
 
 	// Instance Variables
-	private List<ItemPurchase> items;
-
+	private Cart cart;
+	
 	private PaymentType payment;
 
 	// Getters and Setters
-	public List<ItemPurchase> getItems() {
-		return items;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setItems(List<ItemPurchase> items) {
-		this.items = items;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	public PaymentType getPayment() {
@@ -24,6 +22,15 @@ public class Purchase {
 
 	public void setPayment(PaymentType payment) {
 		this.payment = payment;
+	}
+
+	// Logic
+	/**
+	 * Calculates the total value of the purchase.
+	 * @return : A Double representing the total value.
+	 */
+	public Double totalValue() {
+		return cart.totalValue();
 	}
 
 }

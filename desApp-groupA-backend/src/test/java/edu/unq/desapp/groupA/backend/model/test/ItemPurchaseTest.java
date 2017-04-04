@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.unq.desapp.groupA.backend.model.ItemPurchase;
+import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Product;
 
 public class ItemPurchaseTest {
@@ -21,14 +21,14 @@ public class ItemPurchaseTest {
 	
 	@Test
 	public void createItemPurchase() {
-		ItemPurchase newItemPurchase = new ItemPurchase();
+		ItemCart newItemPurchase = new ItemCart();
 		
-		assertEquals(ItemPurchase.class, newItemPurchase.getClass());
+		assertEquals(ItemCart.class, newItemPurchase.getClass());
 	}
 
 	@Test
 	public void testGettersAndSettersItemPurchase() {
-		ItemPurchase newItemPurchase = new ItemPurchase();
+		ItemCart newItemPurchase = new ItemCart();
 		
 		newItemPurchase.setProduct(aProduct);
 		newItemPurchase.setQuantity(quantityToTest);

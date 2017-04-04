@@ -36,4 +36,9 @@ public class Price {
 		this.finishingValidityDate = finishingValidityDate;
 	}
 
+	// Logic
+	public Double priceForQuantity(Integer quantity) {
+		return price * quantity;
+	}
+
 }

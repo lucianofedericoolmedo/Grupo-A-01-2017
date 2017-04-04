@@ -36,4 +36,19 @@ public abstract class Discount {
 		this.percentagePerProductToDiscount = percentagePerProductToDiscount;
 	}
 
+	// Logic
+	public abstract Double valueToDiscount(ItemCart itemCart);
+	
+	public abstract Boolean isItemValidForDiscount(ItemCart item);
+	
+	public void applyDiscountIfApplicable(ItemCart item) {
+		if (!item.hasAppliedDiscount() && isItemValidForDiscount(item)) {
+			item.setDiscount(this);
+		}
+	}
+	
+	public Double percentageValuePerProduct(Double value) {
+		return (value / 100) * percentagePerProductToDiscount;
+	}
+
 }

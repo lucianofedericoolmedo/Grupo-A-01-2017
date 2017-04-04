@@ -2,24 +2,21 @@ package edu.unq.desapp.groupA.backend.model.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.unq.desapp.groupA.backend.model.ItemPurchase;
+import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 
 public class PurchaseTest {
 
-	private List<ItemPurchase> items;
+	private Cart cart;
 	private PaymentType aPaymentType;
 
 	@Before
 	public void setup() {
-		items = new LinkedList<ItemPurchase>();
+		cart = new Cart();
 		aPaymentType = new PaymentType();
 	}
 	
@@ -34,10 +31,10 @@ public class PurchaseTest {
 	public void testGettersAndSettersPurchase() {
 		Purchase newPurchase = new Purchase();
 		
-		newPurchase.setItems(items);
+		newPurchase.setCart(cart);
 		newPurchase.setPayment(aPaymentType);
 		
-		assertEquals(items, newPurchase.getItems());
+		assertEquals(cart, newPurchase.getCart());
 		assertEquals(aPaymentType, newPurchase.getPayment());
 	}
 
