@@ -1,10 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Google Map Hello World Example</title>
 <style type="text/css">
 div#map_container{
@@ -26,7 +21,7 @@ div#map_container{
     var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
     var request = {
 		origin: "Roque Sáenz Peña 352",
-		destination: "Castelli 243",
+		destination: "Av. Calchaquí 3950",
 		travelMode: google.maps.DirectionsTravelMode.DRIVING,
 		unitSystem: google.maps.DirectionsUnitSystem.METRIC,
 		provideRouteAlternatives: true
@@ -42,9 +37,9 @@ div#map_container{
   }
 </script>
 </head>
+
 <body onload="loadMap()">
 <div id="map_container"></div>
 </body>
 
-</html>
 </html>
