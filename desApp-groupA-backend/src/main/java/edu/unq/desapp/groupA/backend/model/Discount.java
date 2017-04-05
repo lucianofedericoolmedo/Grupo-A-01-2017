@@ -9,7 +9,9 @@ public abstract class Discount {
 	
 	private DateTime finishingDate;
 	
-	private Integer percentagePerProductToDiscount;
+	private Double percentagePerProductToDiscount;
+	
+	private Priority priority;
 
 	// Getters and Setters
 	public DateTime getStartingDate() {
@@ -28,12 +30,20 @@ public abstract class Discount {
 		this.finishingDate = finishingDate;
 	}
 
-	public Integer getPercentagePerProductToDiscount() {
+	public Double getPercentagePerProductToDiscount() {
 		return percentagePerProductToDiscount;
 	}
 
-	public void setPercentagePerProductToDiscount(Integer percentagePerProductToDiscount) {
+	public void setPercentagePerProductToDiscount(Double percentagePerProductToDiscount) {
 		this.percentagePerProductToDiscount = percentagePerProductToDiscount;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
 	}
 
 	// Logic
@@ -41,10 +51,18 @@ public abstract class Discount {
 	
 	public abstract Boolean isItemValidForDiscount(ItemCart item);
 	
-	public void applyDiscountIfApplicable(ItemCart item) {
+	/**
+	 * Set this discount to the item if the item does NOT have any applied discount and
+	 * if the item meets the required condition.
+	 * @param item : The ItemCart to set the Discount.
+	 * @return true if the Discount was applied. false if not.
+	 */
+	public Boolean applyDiscountIfApplicable(ItemCart item) {
 		if (!item.hasAppliedDiscount() && isItemValidForDiscount(item)) {
 			item.setDiscount(this);
+			return true;
 		}
+		return false;
 	}
 	
 	public Double percentageValuePerProduct(Double value) {

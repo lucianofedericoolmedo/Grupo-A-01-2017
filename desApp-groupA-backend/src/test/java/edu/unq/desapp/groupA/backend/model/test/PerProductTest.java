@@ -19,7 +19,7 @@ public class PerProductTest {
 	private ItemCart aItemCart;
 	private Product aProduct;
 	private Price aPrice;
-	private Integer percentageToDiscountTest;
+	private Double percentageToDiscountTest;
 	private Double priceForProduct;
 	private DateTime startingDate;
 	private DateTime finishingDate;
@@ -27,7 +27,7 @@ public class PerProductTest {
 
 	@Before
 	public void setup() {
-		percentageToDiscountTest = 10;
+		percentageToDiscountTest = 10.00;
 		priceForProduct = 20.00;
 		
 		aPrice = new Price();
@@ -72,7 +72,7 @@ public class PerProductTest {
 	public void testCanApplyDiscountToValidItemCartWithoutDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -87,7 +87,7 @@ public class PerProductTest {
 	public void testCanNotApplyDiscountToInvalidItemCartWithoutDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -103,7 +103,7 @@ public class PerProductTest {
 	public void testCanNotApplyDiscountToValidItemCartWithDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -121,7 +121,7 @@ public class PerProductTest {
 	public void testValidItemCartWithoutDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -135,7 +135,7 @@ public class PerProductTest {
 	public void testInvalidItemCartWithoutDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -150,7 +150,7 @@ public class PerProductTest {
 	public void testValueToDiscountForQuantityOneOfProductAndTenPercentDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(10);
+		newPerProduct.setPercentagePerProductToDiscount(10.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -165,7 +165,7 @@ public class PerProductTest {
 	public void testValueToDiscountForQuantityOneOfProductAndTwentyFivePercentDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(25);
+		newPerProduct.setPercentagePerProductToDiscount(25.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -180,7 +180,7 @@ public class PerProductTest {
 	public void testValueToDiscountForQuantityThreeOfProductAndFivePercentDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(5);
+		newPerProduct.setPercentagePerProductToDiscount(5.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);
@@ -195,7 +195,7 @@ public class PerProductTest {
 	public void testValueToDiscountForQuantitySixteenOfProductAndFifteenPercentDiscount() {
 		PerProduct newPerProduct = new PerProduct();
 		
-		newPerProduct.setPercentagePerProductToDiscount(15);
+		newPerProduct.setPercentagePerProductToDiscount(15.00);
 		newPerProduct.setProductForDiscount(aProduct);
 		newPerProduct.setStartingDate(startingDate);
 		newPerProduct.setFinishingDate(finishingDate);

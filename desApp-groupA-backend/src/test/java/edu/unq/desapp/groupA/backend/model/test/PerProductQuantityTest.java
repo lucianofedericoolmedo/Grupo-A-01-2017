@@ -18,7 +18,7 @@ import edu.unq.desapp.groupA.backend.model.Product;
 public class PerProductQuantityTest {
 
 	private Product aProduct;
-	private Integer percentageToDiscountTest;
+	private Double percentageToDiscountTest;
 	private Integer quantityToApply;
 	private DateTime startingDate;
 	private DateTime finishingDate;
@@ -28,7 +28,7 @@ public class PerProductQuantityTest {
 
 	@Before
 	public void setup() {
-		percentageToDiscountTest = 10;
+		percentageToDiscountTest = 10.00;
 		priceForProduct = 20.00;
 		quantityToApply = 2;
 		
@@ -73,7 +73,7 @@ public class PerProductQuantityTest {
 	public void testCanApplyDiscountToValidItemCartWithoutDiscount() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(10);
+		newPerProductQuantity.setPercentagePerProductToDiscount(10.00);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setQuantityToApply(3);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -89,7 +89,7 @@ public class PerProductQuantityTest {
 	public void testCanNotApplyDiscountToInvalidItemCartWithoutDiscount() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(10);
+		newPerProductQuantity.setPercentagePerProductToDiscount(10.00);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setQuantityToApply(3);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -105,7 +105,7 @@ public class PerProductQuantityTest {
 	public void testCanNotApplyDiscountToValidItemCartWithDiscount() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(10);
+		newPerProductQuantity.setPercentagePerProductToDiscount(10.00);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setQuantityToApply(6);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -124,7 +124,7 @@ public class PerProductQuantityTest {
 	public void testValidItemCartWithoutDiscount() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(10);
+		newPerProductQuantity.setPercentagePerProductToDiscount(10.00);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setQuantityToApply(5);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -139,7 +139,7 @@ public class PerProductQuantityTest {
 	public void testInvalidItemCartWithoutDiscount() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(10);
+		newPerProductQuantity.setPercentagePerProductToDiscount(10.00);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setQuantityToApply(5);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -154,7 +154,7 @@ public class PerProductQuantityTest {
 	public void testValueToDiscountForQuantityTwoInCartFiftyPercentDiscountForTwoProducts() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 
-		newPerProductQuantity.setPercentagePerProductToDiscount(50);
+		newPerProductQuantity.setPercentagePerProductToDiscount(50.00);
 		newPerProductQuantity.setQuantityToApply(2);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -170,7 +170,7 @@ public class PerProductQuantityTest {
 	public void testValueToDiscountForQuantityThreeInCartTwentyFivePercentDiscountForTwoProducts() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(25);
+		newPerProductQuantity.setPercentagePerProductToDiscount(25.00);
 		newPerProductQuantity.setQuantityToApply(2);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -186,7 +186,7 @@ public class PerProductQuantityTest {
 	public void testValueToDiscountForQuantityFiveInCartAndFivePercentDiscountForTwoProducts() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(5);
+		newPerProductQuantity.setPercentagePerProductToDiscount(5.00);
 		newPerProductQuantity.setQuantityToApply(2);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setStartingDate(startingDate);
@@ -202,7 +202,7 @@ public class PerProductQuantityTest {
 	public void testValueToDiscountForQuantitySixteenOfProductAndTwentyPercentDiscountForTheeProducts() {
 		PerProductQuantity newPerProductQuantity = new PerProductQuantity();
 		
-		newPerProductQuantity.setPercentagePerProductToDiscount(20);
+		newPerProductQuantity.setPercentagePerProductToDiscount(20.00);
 		newPerProductQuantity.setQuantityToApply(3);
 		newPerProductQuantity.setProductForDiscount(aProduct);
 		newPerProductQuantity.setStartingDate(startingDate);

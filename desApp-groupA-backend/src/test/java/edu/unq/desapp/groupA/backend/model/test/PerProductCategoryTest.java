@@ -19,7 +19,7 @@ import edu.unq.desapp.groupA.backend.model.ProductCategory;
 public class PerProductCategoryTest {
 
 	private ProductCategory aProductCategory;
-	private Integer percentageToDiscountTest;
+	private Double percentageToDiscountTest;
 	private DateTime startingDate;
 	private DateTime finishingDate;
 	private Double priceForProduct;
@@ -29,7 +29,7 @@ public class PerProductCategoryTest {
 
 	@Before
 	public void setup() {
-		percentageToDiscountTest = 10;
+		percentageToDiscountTest = 10.00;
 		priceForProduct = 20.00;
 		
 		aPrice = new Price();
@@ -73,7 +73,7 @@ public class PerProductCategoryTest {
 	public void testCanApplyDiscountToValidItemCartWithoutDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -88,7 +88,7 @@ public class PerProductCategoryTest {
 	public void testCanNotApplyDiscountToInvalidItemCartWithoutDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -106,7 +106,7 @@ public class PerProductCategoryTest {
 	public void testCanNotApplyDiscountToValidItemCartWithDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -124,7 +124,7 @@ public class PerProductCategoryTest {
 	public void testValidItemCartWithoutDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -138,7 +138,7 @@ public class PerProductCategoryTest {
 	public void testInvalidItemCartWithoutDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -155,7 +155,7 @@ public class PerProductCategoryTest {
 	public void testValueToDiscountForQuantityOneOfProductAndTenPercentDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(10);
+		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -170,7 +170,7 @@ public class PerProductCategoryTest {
 	public void testValueToDiscountForQuantityOneOfProductAndTwentyFivePercentDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(25);
+		newPerProductCategory.setPercentagePerProductToDiscount(25.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -185,7 +185,7 @@ public class PerProductCategoryTest {
 	public void testValueToDiscountForQuantityThreeOfProductAndFivePercentDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(5);
+		newPerProductCategory.setPercentagePerProductToDiscount(5.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
@@ -200,7 +200,7 @@ public class PerProductCategoryTest {
 	public void testValueToDiscountForQuantitySixteenOfProductAndFifteenPercentDiscount() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
-		newPerProductCategory.setPercentagePerProductToDiscount(15);
+		newPerProductCategory.setPercentagePerProductToDiscount(15.00);
 		newPerProductCategory.setCategoryForDiscount(aProductCategory);
 		newPerProductCategory.setStartingDate(startingDate);
 		newPerProductCategory.setFinishingDate(finishingDate);
