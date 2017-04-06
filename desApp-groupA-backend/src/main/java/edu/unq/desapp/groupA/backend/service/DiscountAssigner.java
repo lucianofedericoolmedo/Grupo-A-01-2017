@@ -17,16 +17,23 @@ public class DiscountAssigner {
 		List<ItemCart> itemsToApply = new LinkedList<ItemCart>(itemsCart);
 		Priority[] priorities = new Priority[]{Priority.HIGH, Priority.MEDIUM, Priority.LOW};
 		for (Priority priority : priorities) {
-			findDiscountsWithPriorityAndAssigns(itemsToApply, priority);
+			if (!findDiscountsWithPriorityAndAssigns(itemsToApply, priority)) {
+				break;
+			}
 		}
 	}
 	
-	public void findDiscountsWithPriorityAndAssigns(List<ItemCart> items, Priority priority) {
-		List<Discount> discountsWithHighPriority = findActiveDiscountsWithPriority(Priority.HIGH);
-		items.removeAll(assignDiscounts(items, discountsWithHighPriority));
-		if (items.isEmpty()) {
-			return;
-		}
+	/**
+	 * Finds the active discounts with the priority and assigns the found discounts.
+	 * @param items : The items to assign discounts if corresponds.
+	 * @param priority : The priority to find the discounts.
+	 * @return A Boolean: true if there is any item cart without Discounts. false if every item
+	 * cart has an applied discount.
+	 */
+	public Boolean findDiscountsWithPriorityAndAssigns(List<ItemCart> items, Priority priority) {
+		List<Discount> discountsWithHighPriority = findActiveDiscountsWithPriority(priority);
+		items.removeAll(assignSpecifiedDiscounts(items, discountsWithHighPriority));
+		return !items.isEmpty();
 	}
 	
 	/**
@@ -35,13 +42,18 @@ public class DiscountAssigner {
 	 * @param discounts : The discounts to assign.
 	 * @return A list of ItemCart containing the elements with not applied Discounts. 
 	 */
-	public List<ItemCart> assignDiscounts(List<ItemCart> items, List<Discount> discounts) {
+	public List<ItemCart> assignSpecifiedDiscounts(List<ItemCart> items, List<Discount> discounts) {
 		List<ItemCart> itemsNotMatchingRequirements = new LinkedList<ItemCart>();
-		for (Discount discount : discounts) {
-			for (ItemCart item : items) {
-				if (!discount.applyDiscountIfApplicable(item)) {
-					itemsNotMatchingRequirements.add(item);
+		for (ItemCart item : items) {
+			Boolean hasAnyAppliedDiscount = false;
+			for (Discount discount : discounts) {
+				hasAnyAppliedDiscount |= discount.applyDiscountIfApplicable(item);
+				if (hasAnyAppliedDiscount) {
+					break;
 				}
+			}
+			if (!hasAnyAppliedDiscount) {
+				itemsNotMatchingRequirements.add(item);
 			}
 		}
 		return itemsNotMatchingRequirements;

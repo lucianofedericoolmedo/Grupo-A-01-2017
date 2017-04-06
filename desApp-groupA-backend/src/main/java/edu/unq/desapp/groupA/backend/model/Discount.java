@@ -47,12 +47,22 @@ public abstract class Discount {
 	}
 
 	// Logic
+	/**
+	 * Calculates the value to be discounted of an item cart
+	 * @param itemCart : The item cart with the value to be calculated.
+	 * @return A Double indicating the total value of the cart item.
+	 */
 	public abstract Double valueToDiscount(ItemCart itemCart);
 	
+	/**
+	 * Evaluates a cart item to check if it is valid to apply the Discount. 
+	 * @param item : The item to be evaluated.
+	 * @return A Boolean indicating if the item meets the requirements. 
+	 */
 	public abstract Boolean isItemValidForDiscount(ItemCart item);
 	
 	/**
-	 * Set this discount to the item if the item does NOT have any applied discount and
+	 * Sets this discount to the item if the item does NOT have any applied discount and
 	 * if the item meets the required condition.
 	 * @param item : The ItemCart to set the Discount.
 	 * @return true if the Discount was applied. false if not.
@@ -64,7 +74,13 @@ public abstract class Discount {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Calculates the percentage of a Double value using the percentage indicated
+	 * in percentagePerProductToDiscount. 
+	 * @param value : The value to obtain the percentage.
+	 * @return A Double value of the percentage applied to the parameter.
+	 */
 	public Double percentageValuePerProduct(Double value) {
 		return (value / 100) * percentagePerProductToDiscount;
 	}

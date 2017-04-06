@@ -14,6 +14,11 @@ public class Product {
 
 	private Price price;
 	
+	// Constructors
+	public Product() {
+		categories = new LinkedList<ProductCategory>();
+	}
+	
 	// Getters and Setters
 	public String getName() {
 		return name;
@@ -57,9 +62,6 @@ public class Product {
 	}
 
 	public void addCategory(ProductCategory aProductCategory) {
-		if (categories == null) {
-			categories = new LinkedList<ProductCategory>();
-		}
 		categories.add(aProductCategory);
 	}
 
