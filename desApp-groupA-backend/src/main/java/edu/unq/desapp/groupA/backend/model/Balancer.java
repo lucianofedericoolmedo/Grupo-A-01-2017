@@ -3,7 +3,6 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Balancer {
 
@@ -28,28 +27,46 @@ public class Balancer {
 	}
 		
 
-	public Caja solicitarCaja(int cantidadProductos) {
+	public Caja obtenerCaja(Pedido pedido) {
 		List<Caja> cajasDisponibles = this.cajasHabilitadas.stream().filter(caja -> caja.isDisponible()).collect(Collectors.toList());
 		if (! cajasDisponibles.isEmpty()){
-			return this.solicitarCajaDisponible(cajasDisponibles,cantidadProductos);
+			return this.obtenerCajaDisponible(cajasDisponibles,pedido);
 		}
 		else {
-			return this.enviarPedido(this.cajasHabilitadas,cantidadProductos);
+			return this.enviarPedidoACola(this.cajasHabilitadas,pedido);
 		}
 	}
 	
-	private Caja enviarPedido(List<Caja> cajasHabilitadas, int cantidadProductos) {
-		Caja caja = cajasHabilitadas.stream().min((p1, p2) -> Integer.compare(p1.getProductosParaProcesar(), p2.getProductosParaProcesar())).get();
-		if (caja != null){
-			caja.procesar(cantidadProductos);
-		}
+	private Caja enviarPedidoACola(List<Caja> cajasHabilitadas, Pedido pedido) {
+		List<Caja> elems = cajasHabilitadas;
+		Caja caja = elems.stream().sorted((c1, c2) -> c1.getProductosParaProcesar().compareTo(c2.getProductosParaProcesar())).findFirst().get();
+		//Caja caja = cajasHabilitadas.stream().min((c1, c2) -> Integer.compare(c1.getProductosParaProcesar(), c2.getProductosParaProcesar())).get();
+		//Caja obj = Collections.min(cajasHabilitadas.stream().map(c1.getProductosParaProcesar()).collect(Collectors.toList()));
+		//Caja caja = elems.get(0);
+		caja.procesar(pedido);
 		return caja;
 	}
 
-	public Caja solicitarCajaDisponible(List<Caja> cajasDisponibles,int cantidadProductos){
+	public Caja obtenerCajaDisponible(List<Caja> cajasDisponibles, Pedido pedido){
 		Caja caja = cajasDisponibles.get(0);
-		caja.procesar(cantidadProductos);
+		caja.procesar(pedido);
 		return caja;
 	}
+	
+	public void solicitarCaja(Pedido pedido){
+		Caja cajaAsignada = this.obtenerCaja(pedido);
+		pedido.asignarCaja(cajaAsignada);
+	}
+
+	
+	public Pedido registrarPedido(Usuario usuario, List<Producto> listaDeProductos) {
+		//TODO: Refac en armar el pedido con un builder o algo mas intension-reavealing
+		Pedido pedido =  new Pedido();
+		pedido.setUsuario(usuario);
+		pedido.setItems(listaDeProductos);
+		this.solicitarCaja(pedido);
+		return pedido;
+	}
+
 
 }

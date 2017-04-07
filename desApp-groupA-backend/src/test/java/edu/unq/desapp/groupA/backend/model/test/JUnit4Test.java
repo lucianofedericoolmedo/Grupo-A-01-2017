@@ -1,22 +1,17 @@
-/*
- * Copyright 2015-2016 the original author or authors.
- *
- * All rights reserved. This program and the accompanying materials are
- * made available under the terms of the Eclipse Public License v1.0 which
- * accompanies this distribution and is available at
- *
- * http://www.eclipse.org/legal/epl-v10.html
- */
-
 package edu.unq.desapp.groupA.backend.model.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
 import edu.unq.desapp.groupA.backend.model.Balancer;
 import edu.unq.desapp.groupA.backend.model.Caja;
+import edu.unq.desapp.groupA.backend.model.Pedido;
+import edu.unq.desapp.groupA.backend.model.Producto;
+import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class JUnit4Test {
 
@@ -28,11 +23,20 @@ public class JUnit4Test {
 	@Test
 	public void testXXX() {
 		Balancer balancer = new Balancer();
-		balancer.setCantidadCajasHabilitadas(1);
+		balancer.setCantidadCajasHabilitadas(2);
 		Caja caja = balancer.getCajasHabilitadas().get(0);
-		int cantidadProductos = 5;
-		Caja cajaSolicitada = balancer.solicitarCaja(cantidadProductos);
-		assertEquals(caja,cajaSolicitada);
+		
+		List<Producto> listaDeProductos = new ArrayList<Producto>();
+		listaDeProductos.add(new Producto("Cicatricure"));
+		listaDeProductos.add(new Producto("Heineken"));
+		
+		Usuario user = new Usuario();
+		user.setBalancer(balancer);
+		
+		// TODO: Encapsular en carrito ...
+		Pedido pedido = user.realizarPedido(listaDeProductos);
+		
+		assertEquals(caja,pedido.getCajaAsignada());
 	}
 	
 	@Test
@@ -41,12 +45,24 @@ public class JUnit4Test {
 		balancer.setCantidadCajasHabilitadas(2);
 		Caja caja1 = balancer.getCajasHabilitadas().get(0);
 		Caja caja2 = balancer.getCajasHabilitadas().get(1);
-		caja1.procesar(2);
-		caja2.procesar(1);
-		int cantidadProductos = 5;
-		Caja cajaSolicitada = balancer.solicitarCaja(cantidadProductos);
-		assertEquals(caja2,cajaSolicitada);
-		assertFalse(caja1.equals(cajaSolicitada));
+		
+		List<Producto> listaDeProductos = new ArrayList<Producto>();
+		listaDeProductos.add(new Producto("Cicatricure"));
+		listaDeProductos.add(new Producto("Heineken"));
+		
+		
+		Usuario user = new Usuario();
+		user.setBalancer(balancer);
+		
+		Pedido pedido2 = new Pedido();
+		pedido2.setListaDeProductos(listaDeProductos);
+		
+		caja2.agregarPedido(pedido2);
+		
+		Pedido pedido = user.realizarPedido(listaDeProductos);
+		
+		
+		assertEquals(caja1,pedido.getCajaAsignada());
 	}
 	
 	

@@ -1,13 +1,21 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Caja {
 	
 	private Boolean disponible;
-	private Integer productosParaProcesar;
+	private List<Pedido> listaDePedidos;
+
+
+	public Boolean getDisponible() {
+		return disponible;
+	}
 
 	public Caja(){
-		this.productosParaProcesar = 0;
 		this.disponible = true;
+		this.listaDePedidos = new ArrayList<Pedido>();
 	}
 	
 	public void setDisponible(Boolean disponible) {
@@ -15,22 +23,23 @@ public class Caja {
 	}
 
 	public Boolean isDisponible() {
-		// TODO Auto-generated method stub
 		return disponible;
 	}
 
-	public void procesar(int cantidadProductos) {
-		this.setProductosParaProcesar(cantidadProductos);
+	public void procesar(Pedido pedido) {
+		pedido.asignarCaja(this);
 		this.setDisponible(false);
-		
+	}
+
+	public void agregarPedido(Pedido p) {
+		this.listaDePedidos.add(p);
 	}
 
 	public Integer getProductosParaProcesar() {
-		return productosParaProcesar;
+		Integer res = 0; 
+		for (Pedido p : this.listaDePedidos){
+			res += p.getListaDeProductos().size();
+		}
+		return res;
 	}
-
-	public void setProductosParaProcesar(Integer productosParaProcesar) {
-		this.productosParaProcesar = productosParaProcesar;
-	}
-
 }
