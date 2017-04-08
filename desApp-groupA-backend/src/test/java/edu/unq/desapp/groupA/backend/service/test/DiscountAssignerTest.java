@@ -79,7 +79,7 @@ public class DiscountAssignerTest {
 	}
 	
 	@Test
-	public void test_AssignSpecifiedDiscounts_TwoValidItems() {
+	public void test_GivenTwoValidItems_WhenAssignSpecifiedDiscounts_ThenTheTwoValidItemsShouldHaveAppliedDiscounts() {
 		List<ItemCart> items = new LinkedList<ItemCart>();
 		items.add(itemCartForDiscountPerCategory);
 		items.add(itemCartForDiscountPerProduct);
@@ -96,7 +96,7 @@ public class DiscountAssignerTest {
 	}
 
 	@Test
-	public void test_AssignSpecifiedDiscounts_TwoValidItems_OneNonValid() {
+	public void test_GivenThreeItems_WhenAssignSpecifiedDiscounts_ThenTwoItemsAreValidAndOneIsNonValid() {
 		List<ItemCart> items = new LinkedList<ItemCart>();
 		items.add(itemCartForDiscountPerCategory);
 		items.add(itemCartForDiscountPerProduct);
@@ -117,7 +117,7 @@ public class DiscountAssignerTest {
 	}
 
 	@Test
-	public void test_AssignSpecifiedDiscounts_OneValidItemWithBothDiscountsApplicables() {
+	public void test_GivenOneValidItemForManyDiscounts_WhenAssignSpecifiedDiscounts_ThenTheItemShouldHaveTheFirstAppliedDiscount() {
 		perProductDiscountHighPriority.setProductForDiscount(aProductForDiscountPerProductAndPerCategory);
 
 		List<ItemCart> items = new LinkedList<ItemCart>();
@@ -136,7 +136,7 @@ public class DiscountAssignerTest {
 	}
 
 	@Test
-	public void test_AssignSpecifiedDiscounts_TwoValidItems_ThreeNonValid() {
+	public void test_GivenThreeItems_WhenAssignSpecifiedDiscounts_ThenTwoItemsShouldBeValidAndThreeShouldBeNonValid() {
 		List<ItemCart> items = new LinkedList<ItemCart>();
 		items.add(itemCartForDiscountPerCategory);
 		items.add(itemCartForDiscountPerProduct);

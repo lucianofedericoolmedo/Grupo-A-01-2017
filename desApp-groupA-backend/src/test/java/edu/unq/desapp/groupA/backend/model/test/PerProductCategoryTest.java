@@ -70,7 +70,7 @@ public class PerProductCategoryTest {
 	}
 
 	@Test
-	public void testCanApplyDiscountToValidItemCartWithoutDiscount() {
+	public void test_GivenAnItemWithoutDiscount_WhenApplyingDiscountToValidItem_ThenTheItemsShouldHaveTheDiscountApplied() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -81,11 +81,12 @@ public class PerProductCategoryTest {
 		aItemCart.setQuantity(1);
 		
 		newPerProductCategory.applyDiscountIfApplicable(aItemCart);
+		assertTrue(aItemCart.hasAppliedDiscount());
 		assertEquals(newPerProductCategory, aItemCart.getDiscount());
 	}
 
 	@Test
-	public void testCanNotApplyDiscountToInvalidItemCartWithoutDiscount() {
+	public void test_GivenAnItemWithoutDiscount_WhenApplyingDiscountToInvalidItem_ThenTheItemsShouldNotHaveTheDiscountApplied() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -99,11 +100,12 @@ public class PerProductCategoryTest {
 		aItemCart.setQuantity(1);
 		
 		newPerProductCategory.applyDiscountIfApplicable(aItemCart);
+		assertFalse(aItemCart.hasAppliedDiscount());
 		assertFalse(newPerProductCategory.equals(aItemCart.getDiscount()));
 	}
 
 	@Test
-	public void testCanNotApplyDiscountToValidItemCartWithDiscount() {
+	public void test_GivenAnItemWithDiscount_WhenApplyingDiscountToValidItem_ThenTheItemShouldHaveTheDiscountAppliedAtFirst() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -117,11 +119,12 @@ public class PerProductCategoryTest {
 		aItemCart.setDiscount(anotherDiscount);
 		
 		newPerProductCategory.applyDiscountIfApplicable(aItemCart);
+		assertTrue(aItemCart.hasAppliedDiscount());
 		assertEquals(anotherDiscount, aItemCart.getDiscount());
 	}
 	
 	@Test
-	public void testValidItemCartWithoutDiscount() {
+	public void test_GivenAnItem_WhenVerifyingTheValidItem_ThenTheDiscountShouldReturnTrue() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -135,7 +138,7 @@ public class PerProductCategoryTest {
 	}
 
 	@Test
-	public void testInvalidItemCartWithoutDiscount() {
+	public void test_GivenAnItem_WhenVerifyingTheInvalidItem_ThenTheDiscountShouldReturnFalse() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -152,7 +155,7 @@ public class PerProductCategoryTest {
 	}
 	
 	@Test
-	public void testValueToDiscountForQuantityOneOfProductAndTenPercentDiscount() {
+	public void test_GivenAnItemWithOneProductOfValueTwentyAndADiscountOfTenPercent_WhenCalculatingTheValueToDiscount_ThenTheDiscountShouldReturnTwo() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(10.00);
@@ -162,12 +165,14 @@ public class PerProductCategoryTest {
 		
 		aItemCart.setQuantity(1);
 		
+		Double valueToDiscount = newPerProductCategory.valueToDiscount(aItemCart);
 		// The price is 20.00 so 10% would be 2.00
-		assertEquals((Double) 2.00, newPerProductCategory.valueToDiscount(aItemCart));
+		Double expected = 2.00;
+		assertEquals(expected, valueToDiscount);
 	}
 
 	@Test
-	public void testValueToDiscountForQuantityOneOfProductAndTwentyFivePercentDiscount() {
+	public void test_GivenAnItemWithOneProductOfValueTwentyAndADiscountOfTwentyFivePercent_WhenCalculatingTheValueToDiscount_ThenTheDiscountShouldReturnFive() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(25.00);
@@ -177,12 +182,14 @@ public class PerProductCategoryTest {
 		
 		aItemCart.setQuantity(1);
 		
+		Double valueToDiscount = newPerProductCategory.valueToDiscount(aItemCart);
 		// The price is 20.00 so 25% would be 5.00
-		assertEquals((Double) 5.00, newPerProductCategory.valueToDiscount(aItemCart));
+		Double expected = 5.00;
+		assertEquals(expected, valueToDiscount);
 	}
 
 	@Test
-	public void testValueToDiscountForQuantityThreeOfProductAndFivePercentDiscount() {
+	public void test_GivenAnItemWithThreeProductOfValueTwentyAndADiscountOfFivePercent_WhenCalculatingTheValueToDiscount_ThenTheDiscountShouldReturnThree() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(5.00);
@@ -191,13 +198,15 @@ public class PerProductCategoryTest {
 		newPerProductCategory.setFinishingDate(finishingDate);
 		
 		aItemCart.setQuantity(3);
-		
+
+		Double valueToDiscount = newPerProductCategory.valueToDiscount(aItemCart);
 		// The price is (20.00 + 20.00 + 20.00 = 60.00) so 5% would be 3.00
-		assertEquals((Double) 3.00, newPerProductCategory.valueToDiscount(aItemCart));
+		Double expected = 3.00;
+		assertEquals(expected, valueToDiscount);
 	}
 
 	@Test
-	public void testValueToDiscountForQuantitySixteenOfProductAndFifteenPercentDiscount() {
+	public void test_GivenAnItemWithSixteenProductOfValueTwentyAndADiscountOfFifteenPercent_WhenCalculatingTheValueToDiscount_ThenTheDiscountShouldReturnFortyEight() {
 		PerProductCategory newPerProductCategory = new PerProductCategory();
 		
 		newPerProductCategory.setPercentagePerProductToDiscount(15.00);
@@ -206,9 +215,11 @@ public class PerProductCategoryTest {
 		newPerProductCategory.setFinishingDate(finishingDate);
 		
 		aItemCart.setQuantity(16);
-		
+
+		Double valueToDiscount = newPerProductCategory.valueToDiscount(aItemCart);
 		// The price is (20.00 * 16 = 320.00) so 15% would be 48.00
-		assertEquals((Double) 48.00, newPerProductCategory.valueToDiscount(aItemCart));
+		Double expected = 48.00;
+		assertEquals(expected, valueToDiscount);
 	}
 
 }
