@@ -40,9 +40,6 @@ public class Balancer {
 	private Caja enviarPedidoACola(List<Caja> cajasHabilitadas, Pedido pedido) {
 		List<Caja> elems = cajasHabilitadas;
 		Caja caja = elems.stream().sorted((c1, c2) -> c1.getProductosParaProcesar().compareTo(c2.getProductosParaProcesar())).findFirst().get();
-		//Caja caja = cajasHabilitadas.stream().min((c1, c2) -> Integer.compare(c1.getProductosParaProcesar(), c2.getProductosParaProcesar())).get();
-		//Caja obj = Collections.min(cajasHabilitadas.stream().map(c1.getProductosParaProcesar()).collect(Collectors.toList()));
-		//Caja caja = elems.get(0);
 		caja.procesar(pedido);
 		return caja;
 	}

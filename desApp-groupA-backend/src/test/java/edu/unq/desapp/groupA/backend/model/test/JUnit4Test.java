@@ -20,6 +20,8 @@ public class JUnit4Test {
 		assertEquals(3, 1 + 2);
 	}
 	
+	//TODO: Merging and prepare for recommendations, el pedido es el cart ... por ejemplo
+	
 	@Test
 	public void testXXX() {
 		Balancer balancer = new Balancer();
