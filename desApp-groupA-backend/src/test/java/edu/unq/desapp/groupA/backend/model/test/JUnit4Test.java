@@ -41,16 +41,14 @@ public class JUnit4Test {
 	 *  O sea que sea un service particular con funciones particulares asi queda facil el
 	 *  refac a un service ALASPRING ...
 	 */
-	
-	//TODO: HOY FINALIZAR REFAC DE SERVICES Y TAREAS PENDIENTES; MERGE CON LO DE SERGIO.
-	
-	
+		
 	/*
 	 * ESTOS DEBERIAN TEST END-TO-END
 	 * 
 	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO ,
 	 * OTRO TEST PARA OBTENER LOS PURCHASES DE UN USUARIO,
 	 * OTRO PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
+	 * OTRO PARA MANTENER LAS ESTADISTICAS ...
 	 * 
 	@Test
 	public void testXXX() {
@@ -133,12 +131,10 @@ public class JUnit4Test {
 				stream().map(p -> p.getName()).collect(Collectors.toSet());
 		
 		assertEquals(expectedProductsInPurchase,productsInPurchase);
-				
 		
-		//TODO: Make this work ...
+		//TODO: DivideInTwoTest
 		
-		
-		List<String> expectedP = Arrays.asList("heineken");		
+		List<String> expectedP = Arrays.asList("Heineken");		
 		List<String> recomendacionesNombre = comprandoALoLocoService.getRecomendacionesPara(cicatricure).stream().collect(Collectors.toList());
 				
 		assertEquals( expectedP , recomendacionesNombre);

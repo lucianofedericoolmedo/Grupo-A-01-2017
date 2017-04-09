@@ -64,9 +64,12 @@ public class ComprandoALoLocoService {
 		/* TODO: Establecer una cantidad minima de repetidos
 		*/
 		for (String prod : productosConCantidadDeRepetidos.keySet()){
+			/*
 			if (productosConCantidadDeRepetidos.get(prod) > 1){
 				productos.add(prod);
 			}
+			*/
+			productos.add(prod);
 		}
 		
 		return productos;

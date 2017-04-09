@@ -34,20 +34,10 @@ public class PurchaseService {
 		this.purchases.add(purchase);
 		return purchase;
 	}
-
-	private List<Product> getProductsByCart(Cart cart){
-		return cart.getItems().stream().map(p -> p.getProduct()).collect(Collectors.toList());
-	}
 	
 	private List<Product> getDistinct(Product product, Cart cart){
-		List<Product> products = this.getProductsByCart(cart);
-		List<Product> result = new ArrayList<Product>();
-		for (Product prod : products){
-			if (! prod.getName().equals(product.getName())){
-				result.add(prod);
-			}
-		}
-		return result;
+		return cart.getItems().stream().map(p -> p.getProduct()).
+				filter(p -> p.getName() != product.getName()).collect(Collectors.toList());
 	}
 	
 	public List<Product> findByProduct(Product product) {
