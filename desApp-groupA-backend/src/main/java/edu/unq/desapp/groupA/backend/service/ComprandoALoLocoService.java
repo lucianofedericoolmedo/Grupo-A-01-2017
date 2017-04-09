@@ -18,7 +18,7 @@ import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
-public class ExampleQueryManager {
+public class ComprandoALoLocoService {
 
 	private BalancerService balancerService;
 	private CashRegisterService cashRegisterService;
@@ -73,7 +73,7 @@ public class ExampleQueryManager {
 	}
 
 	private Map<String, Long> getAllRepeatedProducts(Product product){
-		List<Cart> carts = this.itemCartService.findByProduct(product);
+		List<Cart> carts = this.purchaseService.findByProduct(product);
 		List<Product> prods = this.getProductsForCarts(carts, product);
 		
 		Map<String, Long> counts =
@@ -154,7 +154,6 @@ public class ExampleQueryManager {
 
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
 			String name, Price price) {
-		// TODO Auto-generated method stub
 		return this.productService.createProduct(brand, categories, name, price);
 	}
 

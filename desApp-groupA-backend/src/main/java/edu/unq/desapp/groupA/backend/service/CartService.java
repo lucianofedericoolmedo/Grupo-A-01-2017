@@ -57,7 +57,6 @@ public class CartService {
 	}
 
 	public List<Product> getProductsDistinctFrom(Cart cart, Product product) {
-		// TODO Auto-generated method stub
 		return this.getProducts(cart).stream().filter(p -> !p.getName().equals(product.getName())).collect(Collectors.toList());
 	}
 
