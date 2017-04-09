@@ -192,5 +192,11 @@ public class ExampleQueryManager {
 		return this.paymentTypeService;
 	}
 
+	public List<Product> getProductsInPurchase(Purchase purchase) {
+		Cart cart = purchase.getCart();
+		List<ItemCart> items = itemCartService.findByCart(cart);
+		return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
+	}
+
 	
 }

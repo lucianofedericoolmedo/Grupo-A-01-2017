@@ -1,7 +1,6 @@
 package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,9 +12,20 @@ import edu.unq.desapp.groupA.backend.model.Usuario;
 public class CartService {
 
 	private List<Cart> cartsAvailable;
+	private Long identifier;
 
+	
 	public CartService(){
 		this.setCartsAvailable(new ArrayList<Cart>());
+		this.identifier = (long) 0;
+	}
+	
+	public Long getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(Long id) {
+		this.identifier = id;
 	}
 	
 	public Cart create(List<ItemCart> items, Usuario usuario) {
@@ -53,12 +63,16 @@ public class CartService {
 
 	public Cart createCart(Usuario user) {
 		Cart cart = new Cart();
+		cart.setIdentifier(this.insertID());
 		cart.setUser(user);
 		this.cartsAvailable.add(cart);
 		return cart;
 	}
-
 	
-	
+	private Long insertID(){
+		Long value = this.getIdentifier();
+		this.identifier = this.identifier + (long) 1;
+		return value;
+	}
 	
 }

@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
@@ -43,6 +44,12 @@ public class ItemCartService {
 			}
 		}
 		return result;
+	}
+
+
+	public List<ItemCart> findByCart(Cart cart) {
+		return items.stream().filter(i -> i.getCart().getIdentifier().equals(cart.getIdentifier()))
+				.collect(Collectors.toList());
 	}
 	
 	

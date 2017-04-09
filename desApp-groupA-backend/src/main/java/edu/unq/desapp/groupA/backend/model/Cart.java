@@ -13,6 +13,9 @@ public class Cart {
 	
 	private Usuario user;
 
+
+	private Long identifier;
+
 	//Getters and Setters
 	public List<ItemCart> getItems() {
 		return items;
@@ -48,5 +51,12 @@ public class Cart {
 	public Usuario user(){
 		return this.user;
 	}
+
+	public void setIdentifier(Long identifier) {
+		this.identifier = identifier;
+	}
 	
+	public Long getIdentifier(){
+		return this.identifier;
+	}
 }

@@ -2,20 +2,18 @@ package edu.unq.desapp.groupA.backend.model.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
-import edu.unq.desapp.groupA.backend.model.CartState;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
-import edu.unq.desapp.groupA.backend.model.Pedido;
 import edu.unq.desapp.groupA.backend.model.Product;
-import edu.unq.desapp.groupA.backend.model.Producto;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 import edu.unq.desapp.groupA.backend.service.BalancerService;
@@ -106,17 +104,16 @@ public class JUnit4Test {
 		Product cicatricure = queryManager.createProduct(brand, null, "Cicatricure", null);
 		Product heineken = queryManager.createProduct(brand, null, "Heineken", null);
 		
+		/*
 		List<Product> listaDeProductos = new ArrayList<Product>();
 		listaDeProductos.add(cicatricure);
 		listaDeProductos.add(heineken);
 		
+		
 		List<Product> listaDeProductos2 = new ArrayList<Product>();
 		
 		Product okebon = queryManager.createProduct(brand, null, "Okebon", null);
-		
-		listaDeProductos2.add(cicatricure);
-		listaDeProductos2.add(okebon);
-		
+		*/		
 		Usuario user = new Usuario();
 		
 		Cart cart = queryManager.createCartForUser(user);
@@ -138,6 +135,17 @@ public class JUnit4Test {
 		
 		Purchase purchase = queryManager.createPurchase(cart,paymentType, 
 				cashRegister);
+		
+		
+		// TENGO ESTOS PRODUCTOS
+		Set<String> expectedProductsInPurchase = Arrays.asList(heineken,cicatricure).
+				stream().map(p -> p.getName()).collect(Collectors.toSet());
+		Set<String> productsInPurchase = queryManager.getProductsInPurchase(purchase).
+				stream().map(p -> p.getName()).collect(Collectors.toSet());
+		
+		assertEquals(expectedProductsInPurchase,productsInPurchase);
+				
+		
 		
 		
 		/*
