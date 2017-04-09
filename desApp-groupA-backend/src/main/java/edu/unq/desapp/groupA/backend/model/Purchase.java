@@ -7,6 +7,8 @@ public class Purchase {
 		
 	private PaymentType payment;
 
+	private CashRegister cashRegister;
+
 	// Getters and Setters
 	public Cart getCart() {
 		return cart;
@@ -33,4 +35,11 @@ public class Purchase {
 		return cart.totalValue();
 	}
 
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+	
+	public CashRegister getCashRegister(){
+		return this.cashRegister;
+	}
 }

@@ -8,7 +8,7 @@ public class Pedido {
 
 	private Usuario usuario;
 	private List<Producto> listaDeProductos;
-	private Caja cajaAsignada;
+	private CashRegister cajaAsignada;
 	private Date dateCreated;
 
 	private CartState cartState;
@@ -34,17 +34,17 @@ public class Pedido {
 		
 	}
 
-	public void asignarCaja(Caja caja) {
+	public void asignarCaja(CashRegister caja) {
 		this.setCajaAsignada(caja);
-		caja.agregarPedido(this);
+		//caja.agregarPedido(this);
 		this.setDateCreated(new Date());		
 	}
 
-	public Caja getCajaAsignada() {
+	public CashRegister getCajaAsignada() {
 		return cajaAsignada;
 	}
 
-	public void setCajaAsignada(Caja cajaAsignada) {
+	public void setCajaAsignada(CashRegister cajaAsignada) {
 		this.cajaAsignada = cajaAsignada;
 	}
 

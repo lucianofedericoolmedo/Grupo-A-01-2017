@@ -6,7 +6,12 @@ import java.util.List;
 public class Cart {
 
 	// Instance Variables
+	
+	//TODO:Remove this
 	private List<ItemCart> items;
+	
+	
+	private Usuario user;
 
 	//Getters and Setters
 	public List<ItemCart> getItems() {
@@ -34,6 +39,14 @@ public class Cart {
 			}
 		}
 		return itemsCartWithCategory;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+	
+	public Usuario user(){
+		return this.user;
 	}
 	
 }
