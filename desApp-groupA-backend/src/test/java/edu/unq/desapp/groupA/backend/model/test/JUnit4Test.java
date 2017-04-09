@@ -14,17 +14,17 @@ import edu.unq.desapp.groupA.backend.model.Caja;
 import edu.unq.desapp.groupA.backend.model.CartState;
 import edu.unq.desapp.groupA.backend.model.Pedido;
 import edu.unq.desapp.groupA.backend.model.Producto;
-import edu.unq.desapp.groupA.backend.model.ExampleQueryManager;
+import edu.unq.desapp.groupA.backend.service.ExampleQueryManager;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class JUnit4Test {
 
-	@Test
-	public void test() {
-		assertEquals(3, 1 + 2);
-	}
 	
-	//TODO: Merging and prepare for recommendations, el pedido es el cart ... por ejemplo
+	//TODO: Merging and prepare for el pedido es el cart ... por ejemplo
+	
+	//TODO: Coverage ... pasar a hacer test mas interesantes, separ los test segun categorias, vease
+	// que involucra , si son unitarios, funcionales ... y encima tmb que testean , o sea ..,
+	// si son de model quedarian en model/unittests model/functional ... (?)
 	
 	@Test
 	public void testXXX() {
@@ -90,6 +90,15 @@ public class JUnit4Test {
 		/*
 		 * Paso el estado a ser un PURCHASE, DEBERIA CREAR UN PURCHASE OBJ,
 		 * Y DEBERIA PODER PEDIR RECOMENDACIONES
+		 */
+		
+		/*
+		 * 
+		 * DONE: RECOMENDACIONES, TODAVIA NO CREE EL PURCHASE OBJ.
+		 * 		 DEBERIA REFACTOREAR EL CODIGO PARA HACER FUNCIONES ATOMICAS ... 
+		 * 		 Y USAR EL MANAGER PARA HACER LOS PEDIDOS Y NO ENLAZAR COSAS DE UNA PARA EL PASAJE 
+		 * 		DE ESTADOS DEL PEDIDO Y COSAS ASI...
+		 * 
 		 */
 		
 		caja.atenderPedido(pedido);

@@ -16,8 +16,6 @@ public class Caja {
 		this.listaDePedidos = listaDePedidos;
 	}
 
-	private ExampleQueryManager sistema; // ESTO MEDIANTE DB QUEDARIA MODELADO DIFERENTE...
-
 
 	public Boolean getDisponible() {
 		return disponible;
@@ -71,11 +69,4 @@ public class Caja {
 		
 	}
 
-	public ExampleQueryManager getSistema() {
-		return sistema;
-	}
-
-	public void setSistema(ExampleQueryManager sistema) {
-		this.sistema = sistema;
-	}
 }

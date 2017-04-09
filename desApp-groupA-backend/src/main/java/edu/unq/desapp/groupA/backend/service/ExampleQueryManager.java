@@ -1,9 +1,14 @@
-package edu.unq.desapp.groupA.backend.model;
+package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import edu.unq.desapp.groupA.backend.model.Balancer;
+import edu.unq.desapp.groupA.backend.model.Caja;
+import edu.unq.desapp.groupA.backend.model.Pedido;
+import edu.unq.desapp.groupA.backend.model.Producto;
 
 public class ExampleQueryManager {
 
