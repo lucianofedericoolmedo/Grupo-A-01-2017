@@ -2,13 +2,16 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pedido {
 
 	private Usuario usuario;
 	private List<Producto> listaDeProductos;
 	private Caja cajaAsignada;
-	private Date horarioAsignacion;
+	private Date dateCreated;
+
+	private CartState cartState;
 
 	public List<Producto> getListaDeProductos() {
 		return listaDeProductos;
@@ -34,7 +37,7 @@ public class Pedido {
 	public void asignarCaja(Caja caja) {
 		this.setCajaAsignada(caja);
 		caja.agregarPedido(this);
-		this.setHorarioAsignacion(new Date());		
+		this.setDateCreated(new Date());		
 	}
 
 	public Caja getCajaAsignada() {
@@ -45,12 +48,29 @@ public class Pedido {
 		this.cajaAsignada = cajaAsignada;
 	}
 
-	public Date getHorarioAsignacion() {
-		return horarioAsignacion;
+
+	public CartState getCartState() {
+		return cartState;
 	}
 
-	public void setHorarioAsignacion(Date horarioAsignacion) {
-		this.horarioAsignacion = horarioAsignacion;
+	public void setCartState(CartState cartState) {
+		this.cartState = cartState;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public boolean hasProduct(Producto producto) {
+		/*
+		 * TODO: Quizas sea mejor redefinir el equals del pedido con el nombre...
+		 */
+		List<String> nombresDeProductos=  this.listaDeProductos.stream().map(p -> p.getNombre()).collect(Collectors.toList());
+		return nombresDeProductos.contains(producto.getNombre());
 	}
 
 	

@@ -2,11 +2,21 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Caja {
 	
 	private Boolean disponible;
 	private List<Pedido> listaDePedidos;
+	public List<Pedido> getListaDePedidos() {
+		return listaDePedidos;
+	}
+
+	public void setListaDePedidos(List<Pedido> listaDePedidos) {
+		this.listaDePedidos = listaDePedidos;
+	}
+
+	private ExampleQueryManager sistema; // ESTO MEDIANTE DB QUEDARIA MODELADO DIFERENTE...
 
 
 	public Boolean getDisponible() {
@@ -32,14 +42,40 @@ public class Caja {
 	}
 
 	public void agregarPedido(Pedido p) {
+		p.setCartState(CartState.INQUEUE);
 		this.listaDePedidos.add(p);
+	}
+	
+	public List<Pedido> getPedidosPendientes(){
+		List<Pedido> pedidos = this.listaDePedidos.stream().filter(p -> p.getCartState() == CartState.INQUEUE).collect(Collectors.toList());
+		return pedidos;
+		
+	}
+	
+	public List<Pedido> getPedidosConcretados(){
+		List<Pedido> pedidos = this.listaDePedidos.stream().filter(p -> p.getCartState() == CartState.PURCHASE).collect(Collectors.toList());
+		return pedidos;
+		
 	}
 
 	public Integer getProductosParaProcesar() {
 		Integer res = 0; 
-		for (Pedido p : this.listaDePedidos){
+		for (Pedido p : this.getPedidosPendientes()){
 			res += p.getListaDeProductos().size();
 		}
 		return res;
+	}
+
+	public void atenderPedido(Pedido pedido) {
+		pedido.setCartState(CartState.PURCHASE);
+		
+	}
+
+	public ExampleQueryManager getSistema() {
+		return sistema;
+	}
+
+	public void setSistema(ExampleQueryManager sistema) {
+		this.sistema = sistema;
 	}
 }

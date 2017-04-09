@@ -4,7 +4,7 @@ public class Purchase {
 
 	// Instance Variables
 	private Cart cart;
-	
+		
 	private PaymentType payment;
 
 	// Getters and Setters

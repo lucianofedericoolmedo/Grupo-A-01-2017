@@ -3,6 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Balancer {
 
@@ -33,13 +34,17 @@ public class Balancer {
 			return this.obtenerCajaDisponible(cajasDisponibles,pedido);
 		}
 		else {
-			return this.enviarPedidoACola(this.cajasHabilitadas,pedido);
+			
+
+			return this.enviarPedidoACola(pedido);
 		}
 	}
 	
-	private Caja enviarPedidoACola(List<Caja> cajasHabilitadas, Pedido pedido) {
-		List<Caja> elems = cajasHabilitadas;
-		Caja caja = elems.stream().sorted((c1, c2) -> c1.getProductosParaProcesar().compareTo(c2.getProductosParaProcesar())).findFirst().get();
+	private Caja enviarPedidoACola( Pedido pedido) {
+		Stream<Caja> cajas = this.cajasHabilitadas.stream().filter(caja -> !caja.isDisponible())
+				.sorted((c1, c2) -> c1.getProductosParaProcesar().compareTo(c2.getProductosParaProcesar()));
+		
+		Caja caja = cajas.findFirst().get();
 		caja.procesar(pedido);
 		return caja;
 	}
@@ -59,6 +64,7 @@ public class Balancer {
 	public Pedido registrarPedido(Usuario usuario, List<Producto> listaDeProductos) {
 		//TODO: Refac en armar el pedido con un builder o algo mas intension-reavealing
 		Pedido pedido =  new Pedido();
+		pedido.setCartState(CartState.UNATTENDED);
 		pedido.setUsuario(usuario);
 		pedido.setItems(listaDeProductos);
 		this.solicitarCaja(pedido);
