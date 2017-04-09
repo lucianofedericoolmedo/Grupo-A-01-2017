@@ -2,11 +2,9 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
-import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class CartService {
@@ -28,40 +26,17 @@ public class CartService {
 		this.identifier = id;
 	}
 	
-	public Cart create(List<ItemCart> items, Usuario usuario) {
-		Cart cart =  new Cart();
-		cart.setItems(items);
-		/*
-		pedido.setCartState(CartState.UNATTENDED);
-		pedido.setUsuario(usuario);
-		pedido.setItems(listaDeProductos);
-		*/
-		cartsAvailable.add(cart);
-		return cart;
-	}
-
-
-
 	public List<Cart> getCartsAvailable() {
 		return cartsAvailable;
 	}
-
-
 
 	public void setCartsAvailable(List<Cart> cartsAvailable) {
 		this.cartsAvailable = cartsAvailable;
 	}
 
-	public List<Product> getProducts(Cart cart) {
-		return cart.getItems().stream().map(itemC -> itemC.getProduct()).collect(Collectors.toList());
-	}
-
-	public List<Product> getProductsDistinctFrom(Cart cart, Product product) {
-		return this.getProducts(cart).stream().filter(p -> !p.getName().equals(product.getName())).collect(Collectors.toList());
-	}
-
 	public Cart createCart(Usuario user) {
 		Cart cart = new Cart();
+		cart.setItems(new ArrayList<ItemCart>());
 		cart.setIdentifier(this.insertID());
 		cart.setUser(user);
 		this.cartsAvailable.add(cart);
@@ -73,5 +48,6 @@ public class CartService {
 		this.identifier = this.identifier + (long) 1;
 		return value;
 	}
+
 	
 }

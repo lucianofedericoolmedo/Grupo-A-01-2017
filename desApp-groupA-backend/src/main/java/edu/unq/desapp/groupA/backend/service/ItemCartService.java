@@ -31,7 +31,7 @@ public class ItemCartService {
 		ItemCart item = new ItemCart();
 		item.setCart(cart);
 		item.setProduct(product);
-		this.items.add(item);		
+		cart.addItems(item);	
 		return item;
 		
 	}

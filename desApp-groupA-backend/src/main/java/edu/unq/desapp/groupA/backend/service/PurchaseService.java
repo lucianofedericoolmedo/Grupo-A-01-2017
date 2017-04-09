@@ -28,19 +28,35 @@ public class PurchaseService {
 	
 	public Purchase createPurchase(Cart cart, PaymentType paymentType, CashRegister cashRegister){
 		Purchase purchase = new Purchase();
-		// Armar un Cart
 		purchase.setCashRegister(cashRegister);
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
+		this.purchases.add(purchase);
 		return purchase;
 	}
 
-	public List<Cart> findByProduct(Product product) {
-		List<Cart> res = new ArrayList<Cart>();
-		for (Cart cart : this.purchases.stream().map(p -> p.getCart()).collect(Collectors.toList())){
-			res.add(cart);
+	private List<Product> getProductsByCart(Cart cart){
+		return cart.getItems().stream().map(p -> p.getProduct()).collect(Collectors.toList());
+	}
+	
+	private List<Product> getDistinct(Product product, Cart cart){
+		List<Product> products = this.getProductsByCart(cart);
+		List<Product> result = new ArrayList<Product>();
+		for (Product prod : products){
+			if (! prod.getName().equals(product.getName())){
+				result.add(prod);
+			}
 		}
-		return res;
+		return result;
+	}
+	
+	public List<Product> findByProduct(Product product) {
+		List<Product> prods = new ArrayList<Product>();
+		List<Cart> carts = this.purchases.stream().map(p -> p.getCart()).collect(Collectors.toList());
+		for (Cart cart : carts) {
+			prods.addAll(this.getDistinct(product,cart));
+		}		
+		return prods;
 	}
 	
 	

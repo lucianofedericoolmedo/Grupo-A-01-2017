@@ -49,7 +49,8 @@ public class JUnit4Test {
 	 * ESTOS DEBERIAN TEST END-TO-END
 	 * 
 	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO ,
-	 * OTRO TEST PARA OBTENER LOS PURCHASES DE UN USUARIO
+	 * OTRO TEST PARA OBTENER LOS PURCHASES DE UN USUARIO,
+	 * OTRO PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
 	 * 
 	@Test
 	public void testXXX() {
@@ -135,6 +136,7 @@ public class JUnit4Test {
 				
 		
 		//TODO: Make this work ...
+		
 		
 		List<String> expectedP = Arrays.asList("heineken");		
 		List<String> recomendacionesNombre = comprandoALoLocoService.getRecomendacionesPara(cicatricure).stream().collect(Collectors.toList());

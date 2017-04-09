@@ -73,21 +73,13 @@ public class ComprandoALoLocoService {
 	}
 
 	private Map<String, Long> getAllRepeatedProducts(Product product){
-		List<Cart> carts = this.purchaseService.findByProduct(product);
-		List<Product> prods = this.getProductsForCarts(carts, product);
+		List<Product> prods = this.purchaseService.findByProduct(product);
 		
 		Map<String, Long> counts =
 				prods.stream().map(p -> p.getName()).collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 		return counts;
 	}
 	
-	private List<Product> getProductsForCarts(List<Cart> carts, Product product) {
-		List<Product>  elems = new ArrayList<Product>();
-		for (Cart cart : carts){
-			elems.addAll(cartService.getProductsDistinctFrom(cart,product));
-		}
-		return elems;
-	}
 
 	public List<CashRegister> getCajas() {
 		return this.cashRegisterService.getCajasHabilitadas();
@@ -192,8 +184,7 @@ public class ComprandoALoLocoService {
 	}
 
 	public List<Product> getProductsInPurchase(Purchase purchase) {
-		Cart cart = purchase.getCart();
-		List<ItemCart> items = itemCartService.findByCart(cart);
+		List<ItemCart> items = purchase.getCart().getItems();
 		return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
 	}
 

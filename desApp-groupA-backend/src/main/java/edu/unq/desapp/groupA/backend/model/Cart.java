@@ -59,4 +59,8 @@ public class Cart {
 	public Long getIdentifier(){
 		return this.identifier;
 	}
+
+	public void addItems(ItemCart item) {
+		this.items.add(item);		
+	}
 }
