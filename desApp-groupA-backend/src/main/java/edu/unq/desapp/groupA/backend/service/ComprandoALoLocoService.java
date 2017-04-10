@@ -88,10 +88,21 @@ public class ComprandoALoLocoService {
 	}
 
 	private Map<String, Long> getAllRepeatedProducts(Product product){
-		List<Product> prods = this.purchaseService.findByProduct(product);
+		List<Cart> allCarts = this.purchaseService.getAllCarts();
+		List<Product> prods = new ArrayList<Product>();
+		for (Cart cart : allCarts ){
+			if(this.cartService.isCartIncludingProduct(cart,product)){
+				prods.addAll(cart.getItems().stream().
+						filter(itemC -> 
+						itemC.getProduct() != product).					
+						map(itemC -> 
+						itemC.getProduct()).collect(Collectors.toList()));
+			}
+		}
 		
 		Map<String, Long> counts =
-				prods.stream().map(p -> p.getName()).collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+				prods.stream().map(p -> p.getName()).
+					collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 		return counts;
 	}
 	

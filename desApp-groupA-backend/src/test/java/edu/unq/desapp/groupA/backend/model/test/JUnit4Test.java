@@ -89,6 +89,7 @@ public class JUnit4Test {
 	private ComprandoALoLocoService comprandoALoLocoService;
 	private Product cicatricure;
 	private Product heineken;
+	private Product avon;
 	private Purchase purchase;
 	private Usuario user;
 	private ProductCategory cuidadoPersonal;
@@ -97,6 +98,8 @@ public class JUnit4Test {
 	private ProductCategory cervezas;
 	private List<ProductCategory> categories1;
 	private List<ProductCategory> categories2;
+	private Purchase purchase2;
+	
 
 	@Before
 	public void setup() {
@@ -137,22 +140,43 @@ public class JUnit4Test {
 		newPrice2.setStartingValidityDate(firstDayOfMonthOne);
 		newPrice2.setFinishingValidityDate(tenthDayOfMonthOne);
 		
+		Price newPrice3 = new Price();
+		newPrice3.setPrice(180.00);
+		newPrice3.setStartingValidityDate(firstDayOfMonthOne);
+		newPrice3.setFinishingValidityDate(tenthDayOfMonthOne);
+		
 		cicatricure = comprandoALoLocoService.createProduct(brand, categories1, "Cicatricure", newPrice2);
 		heineken = comprandoALoLocoService.createProduct(brand, categories2, "Heineken", newPrice);
-		user = comprandoALoLocoService.createUser("pochoLaPantera","elHijoDeCuca","pocho@gmail.com");
+		avon = comprandoALoLocoService.createProduct(brand, categories2, "Avon", newPrice3);
 		
+		user = comprandoALoLocoService.createUser("pochoLaPantera","elHijoDeCuca","pocho@gmail.com");
+				
 		Cart cart = comprandoALoLocoService.createCartForUser(user);
+		
+		Cart otherCart = comprandoALoLocoService.createCartForUser(user);
+		
+		
 		// POSTA NECESITAMOS USAR BUILDERS ....
+		
+		
 		comprandoALoLocoService.createItemCart(cart,cicatricure);
 		comprandoALoLocoService.createItemCart(cart,heineken);
 		
+		comprandoALoLocoService.createItemCart(otherCart,avon);
+		comprandoALoLocoService.createItemCart(otherCart,heineken);
+		
 		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
+		CashRegister cashRegister2 = comprandoALoLocoService.getCashRegister();
 		
 		PaymentType paymentType = comprandoALoLocoService.createPaymentType("unNombre", 
 				"unaDescripcion");
 		
 		purchase = comprandoALoLocoService.createPurchase(cart,paymentType, 
 				cashRegister);
+		
+		purchase2 = comprandoALoLocoService.createPurchase(otherCart,paymentType, 
+				cashRegister2);
+		
 	}
 	
 	//TESTS DE UMBRALES
@@ -165,14 +189,19 @@ public class JUnit4Test {
 		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService());
 		comprandoALoLocoService.setUserProfileService(new UserProfileService());
 		// Habria que ser más especifico con los thresold que podria crear...
+		
 		ProductThresold pt = comprandoALoLocoService.createProductThreshold();		
 		UserProfile userProfile = comprandoALoLocoService.createUserProfile(user,pt);
+		
+		
 		
 		// OBTENE ESTADISTICAS DE COMPRAS SOBRE EL PRODUCTO
 		/*
 		 * Deberia tener mas de una compra, deberia ademas comparar con los elementos
 		 * que tenga un carrito en este momento particular
 		 */
+		
+		
 		
 		
 		

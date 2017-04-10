@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
+import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class CartService {
@@ -47,6 +48,10 @@ public class CartService {
 		Long value = this.getIdentifier();
 		this.identifier = this.identifier + (long) 1;
 		return value;
+	}
+
+	public boolean isCartIncludingProduct(Cart cart, Product product) {
+		return cart.getItems().stream().anyMatch(itemC -> itemC.getProduct() == product);
 	}
 
 	
