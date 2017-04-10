@@ -9,6 +9,7 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class PurchaseService {
 
@@ -47,6 +48,10 @@ public class PurchaseService {
 			prods.addAll(this.getDistinct(product,cart));
 		}		
 		return prods;
+	}
+
+	public List<Purchase> getPurchasesByUser(Usuario user) {
+		return this.purchases.stream().filter(p -> p.getCart().getUser().equals(user)).collect(Collectors.toList());
 	}
 	
 	

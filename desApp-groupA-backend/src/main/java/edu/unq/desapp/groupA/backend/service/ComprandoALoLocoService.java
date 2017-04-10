@@ -104,12 +104,10 @@ public class ComprandoALoLocoService {
 		}
 	}
 	
-	
-
-	public Cart realizarPedido(Usuario user, Cart cart) {
-		return balancerService.registrarPedido(user,cart);
+	public List<Purchase> getPurchasesByUser(Usuario user){
+		return purchaseService.getPurchasesByUser(user);
 	}
-
+	
 	public CartService getCartService() {
 		return cartService;
 	}

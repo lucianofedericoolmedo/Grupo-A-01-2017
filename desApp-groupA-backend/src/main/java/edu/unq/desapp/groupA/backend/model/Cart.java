@@ -48,7 +48,7 @@ public class Cart {
 		this.user = user;
 	}
 	
-	public Usuario user(){
+	public Usuario getUser(){
 		return this.user;
 	}
 

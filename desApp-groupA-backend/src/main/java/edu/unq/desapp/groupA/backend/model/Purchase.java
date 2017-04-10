@@ -42,4 +42,5 @@ public class Purchase {
 	public CashRegister getCashRegister(){
 		return this.cashRegister;
 	}
+
 }

@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
-import edu.unq.desapp.groupA.backend.model.Pedido;
 
 public class CashRegisterService {
 
@@ -30,7 +28,7 @@ public class CashRegisterService {
 	}
 
 		
-	CashRegister getAvailableCashRegister(List<CashRegister> cajasDisponibles){
+	public CashRegister getAvailableCashRegister(List<CashRegister> cajasDisponibles){
 		CashRegister caja = cajasDisponibles.get(0);
 		return caja;
 	}
