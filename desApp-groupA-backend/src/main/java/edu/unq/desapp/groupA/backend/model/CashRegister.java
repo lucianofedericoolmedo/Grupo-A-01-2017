@@ -2,35 +2,22 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CashRegister {
 	
-	private Boolean disponible;
+	private Boolean available;
 	private List<Cart> carts;
 	
 
-
-	public Boolean getDisponible() {
-		return disponible;
-	}
-
 	public CashRegister(){
-		this.disponible = true;
+		this.setAvailable(true);
 		this.setCarts(new ArrayList<Cart>());
 	}
-	
-	public void setDisponible(Boolean disponible) {
-		this.disponible = disponible;
-	}
 
-	public Boolean isDisponible() {
-		return disponible;
-	}
 
 	public void procesar(Pedido pedido) {
 		pedido.asignarCaja(this);
-		this.setDisponible(false);
+		this.setAvailable(false);
 	}
 
 	public void agregarPedido(Cart p) {
@@ -67,6 +54,16 @@ public class CashRegister {
 
 	public void setCarts(List<Cart> carts) {
 		this.carts = carts;
+	}
+
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
 	}
 
 	

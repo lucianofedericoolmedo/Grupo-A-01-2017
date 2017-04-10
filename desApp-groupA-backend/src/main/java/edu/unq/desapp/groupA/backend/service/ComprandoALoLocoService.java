@@ -7,11 +7,9 @@ import java.util.stream.Collectors;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
-import edu.unq.desapp.groupA.backend.model.CartState;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
-import edu.unq.desapp.groupA.backend.model.Pedido;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
@@ -61,7 +59,7 @@ public class ComprandoALoLocoService {
 	public List<String> getRecomendacionesPara(Product producto){
 		List<String> productos = new ArrayList<String>();
 		Map<String, Long> productosConCantidadDeRepetidos = getAllRepeatedProducts(producto);
-		/* TODO: Establecer una cantidad minima de repetidos
+		/* TODO: Establecer una cantidad minima de repetidos para hacer una recomendacion
 		*/
 		for (String prod : productosConCantidadDeRepetidos.keySet()){
 			/*
@@ -85,21 +83,17 @@ public class ComprandoALoLocoService {
 	
 
 	public List<CashRegister> getCajas() {
-		return this.cashRegisterService.getCajasHabilitadas();
+		return this.cashRegisterService.getRegisteredCashRegisters();
 	}
 
-	public void atenderPedido(Pedido pedido) {
-		pedido.setCartState(CartState.PURCHASE);
-		
-	}
 	
 	public CashRegister getCashRegister() {
-		List<CashRegister> availableCashRegister = cashRegisterService.obtenerCajasDisponibles();
+		List<CashRegister> availableCashRegister = cashRegisterService.getAvailableCashRegisters();
 		if (! availableCashRegister.isEmpty()){
 			return cashRegisterService.getAvailableCashRegister(availableCashRegister);
 		}
 		else {
-			List<CashRegister> cajasHabilitadas = cashRegisterService.getCajasHabilitadas();
+			List<CashRegister> cajasHabilitadas = cashRegisterService.getRegisteredCashRegisters();
 			return balancerService.sendCartToQueue(cajasHabilitadas);
 		}
 	}
@@ -142,7 +136,7 @@ public class ComprandoALoLocoService {
 
 
 	public CashRegister findCashRegisterByIndex(int index) {
-		return this.cashRegisterService.findCajasByIndex(index);
+		return this.cashRegisterService.findCashRegisterByIndex(index);
 	}
 
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
@@ -172,7 +166,7 @@ public class ComprandoALoLocoService {
 
 	public void createCashRegisters(int index) {
 		for (int i = 0 ; i < index ; i ++){
-			this.cashRegisterService.createCaja();
+			this.cashRegisterService.createCashRegister();
 		}
 	}
 

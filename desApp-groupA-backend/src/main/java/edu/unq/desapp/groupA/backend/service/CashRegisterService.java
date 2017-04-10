@@ -8,23 +8,25 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 
 public class CashRegisterService {
 
-	private List<CashRegister> cajasHabilitadas;
+	private List<CashRegister> registeredCashRegisters;
 	
+	public List<CashRegister> getRegisteredCashRegisters() {
+		return registeredCashRegisters;
+	}
+
+	public void setRegisteredCashRegisters(List<CashRegister> registeredCashRegisters) {
+		this.registeredCashRegisters = registeredCashRegisters;
+	}
+
+
 	public CashRegisterService(){
-		this.cajasHabilitadas = new ArrayList<CashRegister>();
+		this.registeredCashRegisters = new ArrayList<CashRegister>();
 	}
 
-	public void setCajasHabilitadas(List<CashRegister> cajasHabilitadas) {
-		this.cajasHabilitadas = cajasHabilitadas;
-	}
 
-	public List<CashRegister> getCajasHabilitadas() {
-		return this.cajasHabilitadas;
-	}
-
-	public void createCaja() {
-		CashRegister nuevaCaja = new CashRegister();
-		cajasHabilitadas.add(nuevaCaja);		
+	public void createCashRegister() {
+		CashRegister cr = new CashRegister();
+		registeredCashRegisters.add(cr);		
 	}
 
 		
@@ -33,13 +35,13 @@ public class CashRegisterService {
 		return caja;
 	}
 
-	public List<CashRegister> obtenerCajasDisponibles() {
-		return this.getCajasHabilitadas().stream().filter(caja -> caja.isDisponible()).collect(Collectors.toList());
+	public List<CashRegister> getAvailableCashRegisters() {
+		return this.registeredCashRegisters.stream().filter(caja -> caja.getAvailable()).collect(Collectors.toList());
 
 	}
 
-	public CashRegister findCajasByIndex(int index) {
-		return this.getCajasHabilitadas().get(index);
+	public CashRegister findCashRegisterByIndex(int index) {
+		return this.registeredCashRegisters.get(index);
 	}
 	
 	
