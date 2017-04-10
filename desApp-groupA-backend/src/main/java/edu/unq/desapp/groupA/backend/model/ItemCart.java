@@ -9,7 +9,6 @@ public class ItemCart {
 	
 	private Discount discount;
 
-	private Cart cart;
 
 	// Getters and Setters
 	public Product getProduct() {
@@ -53,12 +52,5 @@ public class ItemCart {
 		return product.equals(productForDiscount);
 	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	public Cart getCart(){
-		return this.cart;
-	}
 	
 }

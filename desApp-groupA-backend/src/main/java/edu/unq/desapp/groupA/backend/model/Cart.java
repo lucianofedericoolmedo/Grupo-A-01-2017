@@ -7,7 +7,6 @@ public class Cart {
 
 	// Instance Variables
 	
-	//TODO:Remove this
 	private List<ItemCart> items;
 	
 	
