@@ -21,9 +21,13 @@ public class UserService {
 		this.users = new ArrayList<Usuario>();
 	}
 	
-	public Usuario createUser(){
-		Usuario usuario = new Usuario();
-		return usuario;
+	public Usuario createUser(String username, String password, String email){
+		Usuario user = new Usuario();
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setUsername(username);
+		this.users.add(user);
+		return user;
 	}
 	
 	

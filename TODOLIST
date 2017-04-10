@@ -1,0 +1,26 @@
+
+"El sistema coordinará las cajas habilitadas y mantendrá la cola de espera de manera eficiente.
+Se deberá poder administrar la cantidad de cajas habilitadas y el tiempo promedio de atención
+teniendo en cuenta el tipo de producto o categoría"
+
+Cola de espera deberia ver si hay un usuario esperando mucho tiempo para ser atendido , lo deberia cambiar de caja ...
+Tmb hay que registrar el tiempo de atencion promedio, o sea crear una estadistica en relacion a ello para el usuario...
+
+Quizas cuando se genera una compra (o apenas posteriormente hay que generar la estadistica tambien para el umbral del usuario.
+
+"El COMPRADOR podrá ir tildando productos de su lista y el sistema irá llevando el monto
+gastado. El sistema también permitirá configurar alertas para notificarle al comprador si ha
+superado cierto umbral de diferencia histórica entre categorías de productos. Esta alerta se
+puede habilitar y deshabilitar. Ej: Superó en 10% la categoría de bebidas alcohólicas, Superó
+en 10% golosinas."
+
+"Si el COMPRADOR decide que el tiempo de espera es demasiado, podrá seleccionar que lo
+envien a domicilio. Para ello, será necesario crear una dirección de envío, mostrarlo en un
+mapa de google maps y mostrar la distancia a su casa. Si el comprador decide está opción, se
+deberá notificar al sistema y trasladarse al sector de envíos para su procesamiento. El pago se
+hará en su casa cuando llegue el envío."
+
+"A partir de que un usuario se registre, podrá comenzar a definir su perfil. El perfil de usuario
+contendrá sus preferencias de compras de categorías (umbrales) y monto de compra (umbral).
+Estas preferencias podrían cambiar o ampliarse más adelante."
+

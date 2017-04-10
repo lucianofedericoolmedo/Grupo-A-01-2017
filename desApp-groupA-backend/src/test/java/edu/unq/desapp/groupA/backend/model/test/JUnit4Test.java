@@ -7,14 +7,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
+import org.junit.Before;
 import org.junit.Test;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
+import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
+import edu.unq.desapp.groupA.backend.model.ProductCategory;
+import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 import edu.unq.desapp.groupA.backend.service.BalancerService;
 import edu.unq.desapp.groupA.backend.service.CartService;
@@ -23,7 +29,9 @@ import edu.unq.desapp.groupA.backend.service.ComprandoALoLocoService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
 import edu.unq.desapp.groupA.backend.service.PaymentTypeService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
+import edu.unq.desapp.groupA.backend.service.ProductThresoldService;
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
+import edu.unq.desapp.groupA.backend.service.UserProfileService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 
 public class JUnit4Test {
@@ -46,9 +54,9 @@ public class JUnit4Test {
 	 * ESTOS DEBERIAN TEST END-TO-END
 	 * 
 	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO ,
-	 * OTRO TEST PARA OBTENER LOS PURCHASES DE UN USUARIO,
-	 * OTRO PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
-	 * OTRO PARA MANTENER LAS ESTADISTICAS ...
+	 * OTROS TEST PARA OBTENER LOS PURCHASES DE UN USUARIO,
+	 * OTROS PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
+	 * OTROS PARA MANTENER LAS ESTADISTICAS ...
 	 * 
 	@Test
 	public void testXXX() {
@@ -78,17 +86,21 @@ public class JUnit4Test {
 	
 	*/
 	
-	@Test
-	public void testXXX2() {
-		
-		
-		/*
-		 * TODO: Prepare factory to inject queryManager service dependencies ..., 
-		 * but not using constructors injection
-		 */
-		
-		ComprandoALoLocoService comprandoALoLocoService = new ComprandoALoLocoService();
-		
+	private ComprandoALoLocoService comprandoALoLocoService;
+	private Product cicatricure;
+	private Product heineken;
+	private Purchase purchase;
+	private Usuario user;
+	private ProductCategory cuidadoPersonal;
+	private ProductCategory cremas;
+	private ProductCategory bebidas;
+	private ProductCategory cervezas;
+	private List<ProductCategory> categories1;
+	private List<ProductCategory> categories2;
+
+	@Before
+	public void setup() {
+		comprandoALoLocoService = new ComprandoALoLocoService();
 		comprandoALoLocoService.setBalancerService(new BalancerService());
 		
 		comprandoALoLocoService.setCashRegisterService(new CashRegisterService());
@@ -102,16 +114,35 @@ public class JUnit4Test {
 		
 		comprandoALoLocoService.createCashRegisters(2);
 		
-				
 		Brand brand = new Brand();
 		
-		Product cicatricure = comprandoALoLocoService.createProduct(brand, null, "Cicatricure", null);
-		Product heineken = comprandoALoLocoService.createProduct(brand, null, "Heineken", null);
+		cervezas = new ProductCategory();
+		cuidadoPersonal = new ProductCategory();
+		bebidas = new ProductCategory();
+		cremas = new ProductCategory();
 		
+		categories1 = Arrays.asList(cuidadoPersonal,cremas);
+		categories2 = Arrays.asList(bebidas,cervezas);
 		
-		Usuario user = new Usuario();
+		DateTime firstDayOfMonthOne = new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(2017);
+		DateTime tenthDayOfMonthOne = new DateTime().withDayOfMonth(10).withMonthOfYear(1).withYear(2017);
+		
+		Price newPrice = new Price();
+		newPrice.setPrice(10.00);
+		newPrice.setStartingValidityDate(firstDayOfMonthOne);
+		newPrice.setFinishingValidityDate(tenthDayOfMonthOne);
+		
+		Price newPrice2 = new Price();
+		newPrice2.setPrice(90.00);
+		newPrice2.setStartingValidityDate(firstDayOfMonthOne);
+		newPrice2.setFinishingValidityDate(tenthDayOfMonthOne);
+		
+		cicatricure = comprandoALoLocoService.createProduct(brand, categories1, "Cicatricure", newPrice2);
+		heineken = comprandoALoLocoService.createProduct(brand, categories2, "Heineken", newPrice);
+		user = comprandoALoLocoService.createUser("pochoLaPantera","elHijoDeCuca","pocho@gmail.com");
 		
 		Cart cart = comprandoALoLocoService.createCartForUser(user);
+		// POSTA NECESITAMOS USAR BUILDERS ....
 		comprandoALoLocoService.createItemCart(cart,cicatricure);
 		comprandoALoLocoService.createItemCart(cart,heineken);
 		
@@ -120,9 +151,44 @@ public class JUnit4Test {
 		PaymentType paymentType = comprandoALoLocoService.createPaymentType("unNombre", 
 				"unaDescripcion");
 		
-		Purchase purchase = comprandoALoLocoService.createPurchase(cart,paymentType, 
+		purchase = comprandoALoLocoService.createPurchase(cart,paymentType, 
 				cashRegister);
+	}
+	
+	//TESTS DE UMBRALES
+	
+	
+	@Test
+	public void testXXX1() {
+		// REFAC Using BUILDERS
+		comprandoALoLocoService.setUserService(new UserService());
+		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService());
+		comprandoALoLocoService.setUserProfileService(new UserProfileService());
+		// Habria que ser más especifico con los thresold que podria crear...
+		ProductThresold pt = comprandoALoLocoService.createProductThreshold();		
+		UserProfile userProfile = comprandoALoLocoService.createUserProfile(user,pt);
 		
+		// OBTENE ESTADISTICAS DE COMPRAS SOBRE EL PRODUCTO
+		/*
+		 * Deberia tener mas de una compra, deberia ademas comparar con los elementos
+		 * que tenga un carrito en este momento particular
+		 */
+		
+		
+		
+		//Usuario user = new Usuario();
+	}
+	
+	
+	
+	@Test
+	public void testXXX2() {
+		
+		
+		/*
+		 * TODO: Prepare factory to inject queryManager service dependencies ..., 
+		 * but not using constructors injection
+		 */
 		
 		// TENGO ESTOS PRODUCTOS
 		Set<String> expectedProductsInPurchase = Arrays.asList(heineken,cicatricure).
@@ -138,16 +204,7 @@ public class JUnit4Test {
 		List<String> recomendacionesNombre = comprandoALoLocoService.getRecomendacionesPara(cicatricure).stream().collect(Collectors.toList());
 				
 		assertEquals( expectedP , recomendacionesNombre);
-		
-		
-		
+				
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

@@ -13,13 +13,35 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
+import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.Thresold;
+import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class ComprandoALoLocoService {
 
 	private BalancerService balancerService;
 	private CashRegisterService cashRegisterService;
+	
+
+	private CartService cartService;
+	private UserService userService;
+	private ItemCartService itemCartService;
+	private ProductService productService;
+	private PurchaseService purchaseService;
+	private PaymentTypeService paymentTypeService;
+	private ProductThresoldService productThresoldService;
+	private UserProfileService userProfileService;
+	
+	/*
+	 * Add all the other services ... 
+	 */
+	
+	public ProductThresoldService getProductThresoldService() {
+		return productThresoldService;
+	}
+	
 	public CashRegisterService getCashRegisterService() {
 		return cashRegisterService;
 	}
@@ -28,18 +50,10 @@ public class ComprandoALoLocoService {
 		this.cashRegisterService = cashRegisterService;
 	}
 
-	private CartService cartService;
-	private UserService userService;
-	private ItemCartService itemCartService;
-	private ProductService productService;
-	private PurchaseService purchaseService;
-	private PaymentTypeService paymentTypeService;
-	
-	
-	/*
-	 * Add all the other services ... 
-	 */
-	
+	public void setProductThresoldService(ProductThresoldService productThresoldService) {
+		this.productThresoldService = productThresoldService;
+	}
+
 	public PurchaseService getPurchaseService() {
 		return purchaseService;
 	}
@@ -181,6 +195,28 @@ public class ComprandoALoLocoService {
 	public List<Product> getProductsInPurchase(Purchase purchase) {
 		List<ItemCart> items = purchase.getCart().getItems();
 		return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
+	}
+
+	public Usuario createUser(String username, String password, String email) {
+		// TODO Auto-generated method stub
+		return userService.createUser(username, password, email);
+	}
+
+	public ProductThresold createProductThreshold() {
+		// TODO Auto-generated method stub
+		return productThresoldService.createProductThreshold();
+	}
+
+	public UserProfile createUserProfile(Usuario user, Thresold pt) {
+		return userProfileService.createUserProfile(user, pt);
+	}
+
+	public UserProfileService getUserProfileService() {
+		return userProfileService;
+	}
+
+	public void setUserProfileService(UserProfileService userProfileService) {
+		this.userProfileService = userProfileService;
 	}
 
 	
