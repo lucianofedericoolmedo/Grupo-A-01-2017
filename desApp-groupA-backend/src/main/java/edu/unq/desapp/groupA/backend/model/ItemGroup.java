@@ -1,7 +1,7 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class ItemGroup<ItemType extends Item> {
 
@@ -22,21 +22,15 @@ public abstract class ItemGroup<ItemType extends Item> {
 
 	// Logic
 	public Double totalValue() {
-		Double totalValue = 0.00;
-		for (ItemType item : items) {
-			totalValue += item.totalValue();
-		}
-		return totalValue;
+		return items.stream().map(item -> item.totalValue()).reduce(0.00, (x,y) -> x + y);
 	}
 
 	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount) {
-		List<ItemType> itemsCartWithCategory = new LinkedList<ItemType>();
-		for (ItemType item : items) {
-			if (item.isCategory(categoryForDiscount)) {
-				itemsCartWithCategory.add(item);
-			}
-		}
-		return itemsCartWithCategory;
+		return items.stream().filter(item -> item.isCategory(categoryForDiscount)).collect(Collectors.toList());
+	}
+	
+	public Boolean containsProduct(Product product) {
+		return items.stream().anyMatch(item -> item.isProduct(product));
 	}
 
 	public void setUser(Usuario user) {

@@ -150,7 +150,7 @@ public class ComprandoALoLocoService {
 	}
 
 	public ItemCart createItemCart(Cart cart, Product prod) {
-		ItemCart itemCart = itemCartService.createItemCart(prod, cart);
+		ItemCart itemCart = itemCartService.createItemCart(prod,0, cart);
 		return itemCart;
 	}
 

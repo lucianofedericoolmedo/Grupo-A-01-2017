@@ -5,6 +5,19 @@ public class ItemCart extends Item {
 	// Instance Variables
 	private Discount discount;
 
+	private Boolean checked;
+
+	// Constructors
+	public ItemCart() {
+		this.checked = false;
+	}
+
+	public ItemCart(Product product, Integer quantity) {
+		this.product = product;
+		this.quantity = quantity;
+		this.checked = false;
+	}
+
 	// Getters and Setters
 	public Discount getDiscount() {
 		return discount;
@@ -18,5 +31,13 @@ public class ItemCart extends Item {
 	public Boolean hasAppliedDiscount() {
 		return discount != null;
 	}
-	
+
+	public Boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
+
 }

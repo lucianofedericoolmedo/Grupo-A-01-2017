@@ -41,11 +41,11 @@ public class ShoppingListService {
 		shoppingList.setUser(user);
 		return shoppingList;
 	}
-	
+
 	private Long insertID(){
 		Long value = this.getIdentifier();
 		this.identifier = this.identifier + (long) 1;
 		return value;
 	}
-
+	
 }
