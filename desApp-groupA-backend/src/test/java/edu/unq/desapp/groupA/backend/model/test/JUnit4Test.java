@@ -1,6 +1,7 @@
 package edu.unq.desapp.groupA.backend.model.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +23,15 @@ import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.repository.CartRepository;
+import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
+import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
+import edu.unq.desapp.groupA.backend.repository.PaymentTypeRepository;
+import edu.unq.desapp.groupA.backend.repository.ProductRepository;
+import edu.unq.desapp.groupA.backend.repository.ProductThresoldRepository;
+import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
+import edu.unq.desapp.groupA.backend.repository.UserProfileRepository;
+import edu.unq.desapp.groupA.backend.repository.UserRepository;
 import edu.unq.desapp.groupA.backend.service.BalancerService;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.CashRegisterService;
@@ -36,54 +46,20 @@ import edu.unq.desapp.groupA.backend.service.UserService;
 
 public class JUnit4Test {
 
-	
-	
-	
 	//TODO: Coverage ... pasar a hacer test mas interesantes, separ los test segun categorias, vease
 	// que involucra , si son unitarios, funcionales ... y encima tmb que testean , o sea ..,
 	// si son de model quedarian en model/unittests model/functional ... (?)
 	
-	
-	/*
-	 * TODO: Change ExampleQueryManager to a service for a specific task,
-	 *  O sea que sea un service particular con funciones particulares asi queda facil el
-	 *  refac a un service ALASPRING ...
-	 */
 		
 	/*
 	 * ESTOS DEBERIAN TEST END-TO-END
 	 * 
-	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO ,
-	 * OTROS TEST PARA OBTENER LOS PURCHASES DE UN USUARIO,
+	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO PARA EL BALANCEADOR DE CARGA
+	 * UN TEST PARA EL TIEMPO DE RESPUESTA (?)
+	 * UN TEST PARA LA CANCELACION Y CAMBIO EN LA FORMA DE ENVIO
 	 * OTROS PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
 	 * OTROS PARA MANTENER LAS ESTADISTICAS ...
 	 * 
-	@Test
-	public void testXXX() {
-
-		
-		ExampleQueryManager queryManager = new ExampleQueryManager();
-		
-		queryManager.setBalancerService(new BalancerService());
-		BalancerService balancerService = queryManager.getBalancerService();
-		
-		queryManager.createCajas(2);
-		
-		CajaService cajaService = queryManager.getCajaService();
-		
-		List<Producto> listaDeProductos = new ArrayList<Producto>();
-		listaDeProductos.add(new Producto("Cicatricure"));
-		listaDeProductos.add(new Producto("Heineken"));
-		
-		
-		Usuario user = queryManager.createUser();
-		
-		// TODO: Encapsular en carrito ...
-		Pedido pedido = queryManager.realizarPedido(user,listaDeProductos);
-		
-		assertEquals(caja,pedido.getCajaAsignada());
-	}
-	
 	*/
 	
 	private ComprandoALoLocoService comprandoALoLocoService;
@@ -106,14 +82,17 @@ public class JUnit4Test {
 		comprandoALoLocoService = new ComprandoALoLocoService();
 		comprandoALoLocoService.setBalancerService(new BalancerService());
 		
-		comprandoALoLocoService.setCashRegisterService(new CashRegisterService());
+		comprandoALoLocoService.setCashRegisterService(new CashRegisterService(new CashRegisterRepository()));
 		
-		comprandoALoLocoService.setUserService(new UserService());
-		comprandoALoLocoService.setCartService(new CartService());
-		comprandoALoLocoService.setItemCartService(new ItemCartService());
-		comprandoALoLocoService.setProductService(new ProductService());
-		comprandoALoLocoService.setPaymentTypeService(new PaymentTypeService());
-		comprandoALoLocoService.setPurchaseService(new PurchaseService());
+		comprandoALoLocoService.setUserService(new UserService(new UserRepository()));
+		comprandoALoLocoService.setCartService(new CartService(new CartRepository(), (long) 0));
+		comprandoALoLocoService.setItemCartService(new ItemCartService(new ItemCartRepository()));
+		comprandoALoLocoService.setProductService(new ProductService(new ProductRepository()));
+		comprandoALoLocoService.setPaymentTypeService(new PaymentTypeService( new PaymentTypeRepository()));
+		comprandoALoLocoService.setPurchaseService(new PurchaseService( new PurchaseRepository()));
+		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService(new ProductThresoldRepository()));
+		comprandoALoLocoService.setUserProfileService(new UserProfileService( new UserProfileRepository()));
+		
 		
 		comprandoALoLocoService.createCashRegisters(2);
 		
@@ -185,9 +164,7 @@ public class JUnit4Test {
 	@Test
 	public void testXXX1() {
 		// REFAC Using BUILDERS
-		comprandoALoLocoService.setUserService(new UserService());
-		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService());
-		comprandoALoLocoService.setUserProfileService(new UserProfileService());
+		
 		// Habria que ser más especifico con los thresold que podria crear...
 		
 		ProductThresold pt = comprandoALoLocoService.createProductThreshold();		
@@ -200,10 +177,6 @@ public class JUnit4Test {
 		 * Deberia tener mas de una compra, deberia ademas comparar con los elementos
 		 * que tenga un carrito en este momento particular
 		 */
-		
-		
-		
-		
 		
 		//Usuario user = new Usuario();
 	}
@@ -233,6 +206,17 @@ public class JUnit4Test {
 		List<String> recomendacionesNombre = comprandoALoLocoService.getRecomendacionesPara(cicatricure).stream().collect(Collectors.toList());
 				
 		assertEquals( expectedP , recomendacionesNombre);
+		
+		List<String> expectedP1 = Arrays.asList("Cicatricure", "Avon");		
+		List<String> recomendacionesNombre2 = comprandoALoLocoService.getRecomendacionesPara(heineken).stream().collect(Collectors.toList());
+				
+		assertEquals( expectedP1 , recomendacionesNombre2);
+		
+		
+		List<Purchase> purchases = comprandoALoLocoService.getPurchasesByUser(user);
+		
+		assertTrue( purchases.contains(purchase) && purchases.contains(purchase2));
+		
 				
 	}
 	

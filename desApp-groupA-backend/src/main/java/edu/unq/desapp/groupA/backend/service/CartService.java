@@ -1,24 +1,23 @@
 package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
 public class CartService {
 
-	private List<Cart> cartsAvailable;
+	private CartRepository repository;
 	private Long identifier;
-
 	
-	public CartService(){
-		this.setCartsAvailable(new ArrayList<Cart>());
-		this.identifier = (long) 0;
+	public CartService(CartRepository repository, Long identifier) {
+		this.repository = repository;
+		this.identifier = identifier;
 	}
-	
+
 	public Long getIdentifier() {
 		return identifier;
 	}
@@ -27,20 +26,12 @@ public class CartService {
 		this.identifier = id;
 	}
 	
-	public List<Cart> getCartsAvailable() {
-		return cartsAvailable;
-	}
-
-	public void setCartsAvailable(List<Cart> cartsAvailable) {
-		this.cartsAvailable = cartsAvailable;
-	}
-
 	public Cart createCart(Usuario user) {
 		Cart cart = new Cart();
 		cart.setItems(new ArrayList<ItemCart>());
 		cart.setIdentifier(this.insertID());
 		cart.setUser(user);
-		this.cartsAvailable.add(cart);
+		this.repository.save(cart);
 		return cart;
 	}
 	
@@ -51,7 +42,15 @@ public class CartService {
 	}
 
 	public boolean isCartIncludingProduct(Cart cart, Product product) {
-		return cart.getItems().stream().anyMatch(itemC -> itemC.getProduct() == product);
+		return this.repository.isCartIncludingProduct(cart,product);
+	}
+
+	public CartRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(CartRepository repository) {
+		this.repository = repository;
 	}
 
 	

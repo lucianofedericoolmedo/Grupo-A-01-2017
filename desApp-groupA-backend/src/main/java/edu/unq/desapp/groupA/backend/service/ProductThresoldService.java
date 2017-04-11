@@ -1,21 +1,27 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.unq.desapp.groupA.backend.model.ProductThresold;
+import edu.unq.desapp.groupA.backend.repository.ProductThresoldRepository;
 
 public class ProductThresoldService {
 
-	private List<ProductThresold> productThresolds;
+	private ProductThresoldRepository repository;
 	
-	public ProductThresoldService(){
-		this.productThresolds = new ArrayList<ProductThresold>();
+	public ProductThresoldService(ProductThresoldRepository repository) {
+		this.repository = repository;
+	}
+
+	public ProductThresoldRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(ProductThresoldRepository repository) {
+		this.repository = repository;
 	}
 
 	public ProductThresold createProductThreshold() {
 		ProductThresold productThresold = new ProductThresold();		
-		this.productThresolds.add(productThresold);
+		this.repository.save(productThresold);
 		return productThresold;
 	}
 }

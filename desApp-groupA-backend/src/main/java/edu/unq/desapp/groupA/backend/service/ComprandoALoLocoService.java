@@ -72,7 +72,7 @@ public class ComprandoALoLocoService {
 
 	public List<String> getRecomendacionesPara(Product producto){
 		List<String> productos = new ArrayList<String>();
-		Map<String, Long> productosConCantidadDeRepetidos = getAllRepeatedProducts(producto);
+		Map<String, Long> productosConCantidadDeRepetidos = getProductsAndRepetitions(producto);
 		/* TODO: Establecer una cantidad minima de repetidos para hacer una recomendacion
 		*/
 		for (String prod : productosConCantidadDeRepetidos.keySet()){
@@ -87,7 +87,7 @@ public class ComprandoALoLocoService {
 		return productos;
 	}
 
-	private Map<String, Long> getAllRepeatedProducts(Product product){
+	private Map<String, Long> getProductsAndRepetitions(Product product){
 		List<Cart> allCarts = this.purchaseService.getAllCarts();
 		List<Product> prods = new ArrayList<Product>();
 		for (Cart cart : allCarts ){
@@ -115,7 +115,7 @@ public class ComprandoALoLocoService {
 	public CashRegister getCashRegister() {
 		List<CashRegister> availableCashRegister = cashRegisterService.getAvailableCashRegisters();
 		if (! availableCashRegister.isEmpty()){
-			return cashRegisterService.getAvailableCashRegister(availableCashRegister);
+			return availableCashRegister.get(0);
 		}
 		else {
 			List<CashRegister> cajasHabilitadas = cashRegisterService.getRegisteredCashRegisters();
@@ -209,7 +209,6 @@ public class ComprandoALoLocoService {
 	}
 
 	public Usuario createUser(String username, String password, String email) {
-		// TODO Auto-generated method stub
 		return userService.createUser(username, password, email);
 	}
 
