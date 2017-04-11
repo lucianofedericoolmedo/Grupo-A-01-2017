@@ -187,11 +187,6 @@ public class JUnit4Test {
 	public void testXXX2() {
 		
 		
-		/*
-		 * TODO: Prepare factory to inject queryManager service dependencies ..., 
-		 * but not using constructors injection
-		 */
-		
 		// TENGO ESTOS PRODUCTOS
 		Set<String> expectedProductsInPurchase = Arrays.asList(heineken,cicatricure).
 				stream().map(p -> p.getName()).collect(Collectors.toSet());
