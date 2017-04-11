@@ -1,65 +1,24 @@
 package edu.unq.desapp.groupA.backend.model;
 
 import java.util.LinkedList;
-import java.util.List;
 
-public class Cart {
+public class Cart extends ItemGroup<ItemCart> {
 
 	// Instance Variables
-	
-	private List<ItemCart> items;
-	
-	
-	private Usuario user;
+	private ShoppingList usedShoppingList;
 
-
-	private Long identifier;
-
-	//Getters and Setters
-	public List<ItemCart> getItems() {
-		return items;
-	}
-
-	public void setItems(List<ItemCart> items) {
-		this.items = items;
-	}
-
-	// Logic
-	public Double totalValue() {
-		Double totalValue = 0.00;
-		for (ItemCart item : items) {
-			totalValue += item.totalValue();
-		}
-		return totalValue;
-	}
-
-	public List<ItemCart> itemsCartWithCategory(ProductCategory categoryForDiscount) {
-		List<ItemCart> itemsCartWithCategory = new LinkedList<ItemCart>();
-		for (ItemCart item : items) {
-			if (item.isCategory(categoryForDiscount)) {
-				itemsCartWithCategory.add(item);
-			}
-		}
-		return itemsCartWithCategory;
-	}
-
-	public void setUser(Usuario user) {
-		this.user = user;
+	// Constructors
+	public Cart() {
+		this.items = new LinkedList<ItemCart>();
 	}
 	
-	public Usuario getUser(){
-		return this.user;
+	// Getters and Setters
+	public ShoppingList getUsedShoppingList() {
+		return usedShoppingList;
 	}
 
-	public void setIdentifier(Long identifier) {
-		this.identifier = identifier;
-	}
-	
-	public Long getIdentifier(){
-		return this.identifier;
+	public void setUsedShoppingList(ShoppingList usedShoppingList) {
+		this.usedShoppingList = usedShoppingList;
 	}
 
-	public void addItems(ItemCart item) {
-		this.items.add(item);		
-	}
 }
