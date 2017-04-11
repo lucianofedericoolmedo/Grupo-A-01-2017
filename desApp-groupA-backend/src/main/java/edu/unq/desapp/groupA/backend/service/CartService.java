@@ -19,6 +19,7 @@ public class CartService {
 
 	public CartService(){
 		this.setCartsAvailable(new ArrayList<Cart>());
+		this.itemCartService = new ItemCartService();
 		this.identifier = (long) 0;
 	}
 	
