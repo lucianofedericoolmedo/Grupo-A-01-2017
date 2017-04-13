@@ -1,8 +1,12 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
+import edu.unq.desapp.groupA.backend.csv.CsvResultBasicProductBuilder;
+import edu.unq.desapp.groupA.backend.csv.basicStructures.BasicProduct;
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
@@ -34,4 +38,16 @@ public class ProductService {
 		products.add(product);
 		return product;
 	}
+	
+	public void updateProductsVisCSVFile(String filePath) throws FileNotFoundException {
+		List<BasicProduct> basicProducts = CSVFileParser.parseCSVFile(filePath, new CsvResultBasicProductBuilder());
+		for (BasicProduct basicProduct : basicProducts) {
+			updateFromBasicProduct(basicProduct);
+		}
+	}
+
+	public void updateFromBasicProduct(BasicProduct basicProduct) {
+		
+	}
+
 }
