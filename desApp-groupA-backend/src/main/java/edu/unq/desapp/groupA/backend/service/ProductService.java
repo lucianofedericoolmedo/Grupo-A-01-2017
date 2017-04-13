@@ -1,29 +1,22 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
+import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
 public class ProductService {
 
-	private List<Product> products;
-
-	public List<Product> getProducts() {
-		return products;
+	private ProductRepository repository;
+		
+	public ProductService(ProductRepository repository) {
+		this.repository = repository;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
-	public ProductService(){
-		this.products = new ArrayList<Product>();
-	}
-	
+
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
 			String name, Price price){
 		Product product = new Product();
@@ -31,7 +24,15 @@ public class ProductService {
 		product.setCategories(categories);
 		product.setName(name);
 		product.setPrice(price);
-		products.add(product);
+		repository.save(product);
 		return product;
+	}
+
+	public ProductRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(ProductRepository repository) {
+		this.repository = repository;
 	}
 }

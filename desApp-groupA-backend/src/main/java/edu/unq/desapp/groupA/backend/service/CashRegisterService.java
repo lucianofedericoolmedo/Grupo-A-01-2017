@@ -1,47 +1,45 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.unq.desapp.groupA.backend.model.CashRegister;
+import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
 
 public class CashRegisterService {
 
-	private List<CashRegister> registeredCashRegisters;
-	
-	public List<CashRegister> getRegisteredCashRegisters() {
-		return registeredCashRegisters;
+	private CashRegisterRepository repository;
+
+	public CashRegisterService(CashRegisterRepository repository) {
+		this.repository = repository;
 	}
-
-	public void setRegisteredCashRegisters(List<CashRegister> registeredCashRegisters) {
-		this.registeredCashRegisters = registeredCashRegisters;
-	}
-
-
-	public CashRegisterService(){
-		this.registeredCashRegisters = new ArrayList<CashRegister>();
-	}
-
 
 	public void createCashRegister() {
 		CashRegister cr = new CashRegister();
-		registeredCashRegisters.add(cr);		
-	}
-
-		
-	public CashRegister getAvailableCashRegister(List<CashRegister> cajasDisponibles){
-		CashRegister caja = cajasDisponibles.get(0);
-		return caja;
+		repository.save(cr);		
 	}
 
 	public List<CashRegister> getAvailableCashRegisters() {
-		return this.registeredCashRegisters.stream().filter(caja -> caja.getAvailable()).collect(Collectors.toList());
+		return this.repository.getAvailableCashRegisters();
 
 	}
 
 	public CashRegister findCashRegisterByIndex(int index) {
-		return this.registeredCashRegisters.get(index);
+		return this.repository.findCashRegisterByIndex(index);				
+	}
+
+
+	public CashRegisterRepository getRepository() {
+		return repository;
+	}
+
+
+	public void setRepository(CashRegisterRepository repository) {
+		this.repository = repository;
+	}
+
+
+	public List<CashRegister> getRegisteredCashRegisters() {
+		return this.repository.getRegisteredCashRegisters();
 	}
 	
 	
