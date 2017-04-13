@@ -52,6 +52,7 @@ public class CartService {
 		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
 		cart.setItems(items);
 		cart.setUsedShoppingList(shoppingList);
+		repository.save(cart);
 		return cart;
 	}
 

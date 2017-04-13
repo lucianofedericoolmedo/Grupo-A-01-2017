@@ -15,12 +15,14 @@ import org.junit.Test;
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
+import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
@@ -130,9 +132,23 @@ public class JUnit4Test {
 		
 		user = comprandoALoLocoService.createUser("pochoLaPantera","elHijoDeCuca","pocho@gmail.com");
 				
-		Cart cart = comprandoALoLocoService.createCartForUser(user);
+		//Cart cart = comprandoALoLocoService.createCartForUser(user);
 		
-		Cart otherCart = comprandoALoLocoService.createCartForUser(user);
+		// ACA CREE LA SHOPPING LIST
+		ShoppingList shoppingList = comprandoALoLocoService.createShoppingListForUser(user);
+		ItemShoppingList heinekenItem = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList);
+		ItemShoppingList cicatricureItem = comprandoALoLocoService.createItemShoppingList(cicatricure,1,shoppingList);
+		
+		
+		// ACA CREE LA SHOPPING LIST
+		ShoppingList shoppingList2 = comprandoALoLocoService.createShoppingListForUser(user);
+		ItemShoppingList heinekenItem2 = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList2);
+		ItemShoppingList cicatricureItem2 = comprandoALoLocoService.createItemShoppingList(cicatricure,1,shoppingList2);
+		
+		//ACA CREO EL CARRITO
+		
+		Cart cart = comprandoALoLocoService.createCartForShoppingList(shoppingList);
+		Cart otherCart = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
 		
 		
 		// POSTA NECESITAMOS USAR BUILDERS ....

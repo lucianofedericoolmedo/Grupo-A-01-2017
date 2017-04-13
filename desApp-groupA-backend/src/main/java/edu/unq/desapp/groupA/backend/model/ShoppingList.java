@@ -9,4 +9,9 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 		this.items = new LinkedList<ItemShoppingList>();
 	}
 
+	public void addItem(ItemShoppingList itemShoppingList) {
+		this.items.add(itemShoppingList);
+	}
+
+
 }

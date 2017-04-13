@@ -9,12 +9,14 @@ import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
+import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.Thresold;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
@@ -33,6 +35,8 @@ public class ComprandoALoLocoService {
 	private PaymentTypeService paymentTypeService;
 	private ProductThresoldService productThresoldService;
 	private UserProfileService userProfileService;
+	private ShoppingListService shoppingListService;
+	private ItemShoppingListService itemShoppingListService;
 	
 	/*
 	 * Add all the other services ... 
@@ -227,6 +231,18 @@ public class ComprandoALoLocoService {
 
 	public void setUserProfileService(UserProfileService userProfileService) {
 		this.userProfileService = userProfileService;
+	}
+
+	public ShoppingList createShoppingListForUser(Usuario user) {
+		return shoppingListService.createShoppingList(user);
+	}
+
+	public ItemShoppingList createItemShoppingList(Product product, Integer quantity, ShoppingList shoppingList) {
+		return itemShoppingListService.createItemShoppingList(product,quantity,shoppingList);
+	}
+
+	public Cart createCartForShoppingList(ShoppingList shoppingList) {
+		return cartService.createCartForShoppingList(shoppingList);
 	}
 
 	
