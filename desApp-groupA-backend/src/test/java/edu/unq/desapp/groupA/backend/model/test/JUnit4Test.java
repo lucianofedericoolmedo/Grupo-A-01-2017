@@ -39,10 +39,12 @@ import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.CashRegisterService;
 import edu.unq.desapp.groupA.backend.service.ComprandoALoLocoService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
+import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.PaymentTypeService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.ProductThresoldService;
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
+import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 import edu.unq.desapp.groupA.backend.service.UserProfileService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 
@@ -95,6 +97,9 @@ public class JUnit4Test {
 		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService(new ProductThresoldRepository()));
 		comprandoALoLocoService.setUserProfileService(new UserProfileService( new UserProfileRepository()));
 		
+		//CAMBIAR ESTOS SETTERS
+		comprandoALoLocoService.setShoppingListService(new ShoppingListService());
+		comprandoALoLocoService.setItemShoppingListService(new ItemShoppingListService());
 		
 		comprandoALoLocoService.createCashRegisters(2);
 		
@@ -143,7 +148,7 @@ public class JUnit4Test {
 		// ACA CREE LA SHOPPING LIST
 		ShoppingList shoppingList2 = comprandoALoLocoService.createShoppingListForUser(user);
 		ItemShoppingList heinekenItem2 = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList2);
-		ItemShoppingList cicatricureItem2 = comprandoALoLocoService.createItemShoppingList(cicatricure,1,shoppingList2);
+		ItemShoppingList avonItem = comprandoALoLocoService.createItemShoppingList(avon,1,shoppingList2);
 		
 		//ACA CREO EL CARRITO
 		
@@ -153,12 +158,15 @@ public class JUnit4Test {
 		
 		// POSTA NECESITAMOS USAR BUILDERS ....
 		
-		
+		/*
+		 * Sirven para crear items a un carrito fuera de la lista ...
 		comprandoALoLocoService.createItemCart(cart,cicatricure);
 		comprandoALoLocoService.createItemCart(cart,heineken);
 		
 		comprandoALoLocoService.createItemCart(otherCart,avon);
 		comprandoALoLocoService.createItemCart(otherCart,heineken);
+		*/
+		
 		
 		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
 		CashRegister cashRegister2 = comprandoALoLocoService.getCashRegister();

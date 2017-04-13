@@ -17,6 +17,9 @@ public class ItemShoppingListService {
 		this.repository = repository;
 	}
 	
+	public ItemShoppingListService(){
+		this.repository = new ItemShoppingListRepository();
+	}
 
 	public ItemShoppingList createItemShoppingList(Product product, Integer quantity,ShoppingList shoppingList) {
 		ItemShoppingList itemShoppingList = new ItemShoppingList();

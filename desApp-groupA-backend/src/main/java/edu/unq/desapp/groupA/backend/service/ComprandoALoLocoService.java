@@ -25,8 +25,6 @@ public class ComprandoALoLocoService {
 
 	private BalancerService balancerService;
 	private CashRegisterService cashRegisterService;
-	
-
 	private CartService cartService;
 	private UserService userService;
 	private ItemCartService itemCartService;
@@ -35,12 +33,29 @@ public class ComprandoALoLocoService {
 	private PaymentTypeService paymentTypeService;
 	private ProductThresoldService productThresoldService;
 	private UserProfileService userProfileService;
-	private ShoppingListService shoppingListService;
+	private ShoppingListService shoppingListService;	
 	private ItemShoppingListService itemShoppingListService;
 	
 	/*
 	 * Add all the other services ... 
 	 */
+	
+	public ShoppingListService getShoppingListService() {
+		return shoppingListService;
+	}
+
+	public void setShoppingListService(ShoppingListService shoppingListService) {
+		this.shoppingListService = shoppingListService;
+	}
+
+	public ItemShoppingListService getItemShoppingListService() {
+		return itemShoppingListService;
+	}
+
+	public void setItemShoppingListService(ItemShoppingListService itemShoppingListService) {
+		this.itemShoppingListService = itemShoppingListService;
+	}
+
 	
 	public ProductThresoldService getProductThresoldService() {
 		return productThresoldService;
