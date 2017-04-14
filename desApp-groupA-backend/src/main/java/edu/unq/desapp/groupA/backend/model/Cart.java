@@ -1,12 +1,14 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Cart extends ItemGroup<ItemCart> {
 
 	// Instance Variables
 	private ShoppingList usedShoppingList;
-
+	private Date reservationTime;
+	
 	// Constructors
 	public Cart() {
 		this.items = new LinkedList<ItemCart>();
@@ -25,4 +27,15 @@ public class Cart extends ItemGroup<ItemCart> {
 		this.usedShoppingList = usedShoppingList;
 	}
 
+	public Integer quantityOfItems() {
+		return this.items.size();
+	}
+
+	public void setReservationTime(Date date) {
+		this.reservationTime = date;
+	}
+	
+	public Date getReservationTime() {
+		return reservationTime;
+	}
 }

@@ -9,7 +9,7 @@ public class BalancerService {
 	
 	CashRegister sendCartToQueue(List<CashRegister> cajasHabilitadas) {
 		Stream<CashRegister> crs = cajasHabilitadas.stream().filter(cr -> !cr.getAvailable())
-				.sorted((c1, c2) -> c1.getProductosParaProcesar().compareTo(c2.getProductosParaProcesar()));
+				.sorted((c1, c2) -> c1.getProductsToProcess().compareTo(c2.getProductsToProcess()));
 		
 		CashRegister cashRegister = crs.findFirst().get();
 		return cashRegister;

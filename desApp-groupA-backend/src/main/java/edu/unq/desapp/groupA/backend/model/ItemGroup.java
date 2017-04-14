@@ -7,7 +7,7 @@ public abstract class ItemGroup<ItemType extends Item> {
 
 	protected List<ItemType> items;
 	
-	protected Usuario user;
+	protected User user;
 
 	private Long identifier;
 
@@ -33,11 +33,11 @@ public abstract class ItemGroup<ItemType extends Item> {
 		return items.stream().anyMatch(item -> item.isProduct(product));
 	}
 
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	
-	public Usuario getUser(){
+	public User getUser(){
 		return this.user;
 	}
 

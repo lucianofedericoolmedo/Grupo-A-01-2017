@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 
 public class PurchaseRepository {
 
@@ -28,7 +28,7 @@ public class PurchaseRepository {
 		this.purchases.add(p);
 	}
 
-	public List<Purchase> getPurchasesByUser(Usuario user) {
+	public List<Purchase> getPurchasesByUser(User user) {
 		return this.purchases.stream().filter(p -> p.getCart().getUser().equals(user)).collect(Collectors.toList());
 	}
 

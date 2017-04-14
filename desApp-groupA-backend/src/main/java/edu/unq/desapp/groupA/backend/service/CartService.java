@@ -9,7 +9,7 @@ import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
 public class CartService {
@@ -33,7 +33,7 @@ public class CartService {
 		this.identifier = id;
 	}
 	
-	public Cart createCart(Usuario user) {
+	public Cart createCart(User user) {
 		Cart cart = new Cart();
 		cart.setItems(new ArrayList<ItemCart>());
 		cart.setIdentifier(this.insertID());

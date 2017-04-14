@@ -22,9 +22,10 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.ProductThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
 import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
@@ -45,6 +46,7 @@ import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.ProductThresoldService;
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
+import edu.unq.desapp.groupA.backend.service.TimeResponseService;
 import edu.unq.desapp.groupA.backend.service.UserProfileService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 
@@ -71,7 +73,7 @@ public class JUnit4Test {
 	private Product heineken;
 	private Product avon;
 	private Purchase purchase;
-	private Usuario user;
+	private User user;
 	private ProductCategory cuidadoPersonal;
 	private ProductCategory cremas;
 	private ProductCategory bebidas;
@@ -79,7 +81,7 @@ public class JUnit4Test {
 	private List<ProductCategory> categories1;
 	private List<ProductCategory> categories2;
 	private Purchase purchase2;
-	
+	private Purchase purchase3;
 
 	@Before
 	public void setup() {
@@ -100,7 +102,7 @@ public class JUnit4Test {
 		//CAMBIAR ESTOS SETTERS
 		comprandoALoLocoService.setShoppingListService(new ShoppingListService());
 		comprandoALoLocoService.setItemShoppingListService(new ItemShoppingListService());
-		
+		comprandoALoLocoService.setTimeResponseService(new TimeResponseService());
 		comprandoALoLocoService.createCashRegisters(2);
 		
 		Brand brand = new Brand();
@@ -150,11 +152,20 @@ public class JUnit4Test {
 		ItemShoppingList heinekenItem2 = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList2);
 		ItemShoppingList avonItem = comprandoALoLocoService.createItemShoppingList(avon,1,shoppingList2);
 		
+		User otherUser = comprandoALoLocoService.createUser("Julio", "1234", "mail@gmail.com");		
+		ShoppingList shoppingList3 = comprandoALoLocoService.createShoppingListForUser(otherUser);
+		Product brahma = comprandoALoLocoService.createProduct(brand, categories2, "brahma", newPrice);
+		Product guaymallen = comprandoALoLocoService.createProduct(brand, categories2, "guaymallen", newPrice);
+		
+		ItemShoppingList brahmaItem = comprandoALoLocoService.createItemShoppingList(brahma,1,shoppingList3);
+		ItemShoppingList guaymallenItem = comprandoALoLocoService.createItemShoppingList(guaymallen,1,shoppingList3);
+		
+		
 		//ACA CREO EL CARRITO
 		
 		Cart cart = comprandoALoLocoService.createCartForShoppingList(shoppingList);
 		Cart otherCart = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
-		
+		Cart otherCart2 = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
 		
 		// POSTA NECESITAMOS USAR BUILDERS ....
 		
@@ -170,15 +181,29 @@ public class JUnit4Test {
 		
 		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
 		CashRegister cashRegister2 = comprandoALoLocoService.getCashRegister();
+		CashRegister cashRegister3 = comprandoALoLocoService.getCashRegister();
+		
 		
 		PaymentType paymentType = comprandoALoLocoService.createPaymentType("unNombre", 
 				"unaDescripcion");
+				
+		cashRegister = comprandoALoLocoService.requirePurchase(cart,cashRegister);
+		cashRegister2 = comprandoALoLocoService.requirePurchase(otherCart,cashRegister2);
+		cashRegister3 = comprandoALoLocoService.requirePurchase(otherCart2,cashRegister3);
 		
-		purchase = comprandoALoLocoService.createPurchase(cart,paymentType, 
-				cashRegister);
+		
+				
+		purchase = comprandoALoLocoService.createPurchase(cart,paymentType,cashRegister);
 		
 		purchase2 = comprandoALoLocoService.createPurchase(otherCart,paymentType, 
 				cashRegister2);
+		
+		//Now cart2 user decided to leave the cashRegister queue ...
+		
+		purchase2 = comprandoALoLocoService.shipp(otherCart, paymentType ,cashRegister, new ShippingAddress());
+		
+		assertEquals(comprandoALoLocoService.getAllPurchases().size() , 3);
+				
 		
 	}
 	
@@ -230,8 +255,7 @@ public class JUnit4Test {
 		List<String> recomendacionesNombre2 = comprandoALoLocoService.getRecomendacionesPara(heineken).stream().collect(Collectors.toList());
 				
 		assertEquals( expectedP1 , recomendacionesNombre2);
-		
-		
+				
 		List<Purchase> purchases = comprandoALoLocoService.getPurchasesByUser(user);
 		
 		assertTrue( purchases.contains(purchase) && purchases.contains(purchase2));

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
 
 public class ShoppingListService {
@@ -25,7 +25,7 @@ public class ShoppingListService {
 		this.identifier = id;
 	}
 
-	public ShoppingList createShoppingList(Usuario user) {
+	public ShoppingList createShoppingList(User user) {
 		ShoppingList shoppingList = new ShoppingList();
 		shoppingList.setItems(new ArrayList<ItemShoppingList>());
 		shoppingList.setIdentifier(this.insertID());
