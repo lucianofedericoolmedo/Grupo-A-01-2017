@@ -14,10 +14,10 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
-import edu.unq.desapp.groupA.backend.model.ProductThresold;
+import edu.unq.desapp.groupA.backend.model.ProductCategoryThresold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.Thresold;
+import edu.unq.desapp.groupA.backend.model.Threshold;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 
@@ -231,12 +231,12 @@ public class ComprandoALoLocoService {
 		return userService.createUser(username, password, email);
 	}
 
-	public ProductThresold createProductThreshold() {
+	public ProductCategoryThresold createProductThreshold() {
 		// TODO Auto-generated method stub
 		return productThresoldService.createProductThreshold();
 	}
 
-	public UserProfile createUserProfile(Usuario user, Thresold pt) {
+	public UserProfile createUserProfile(Usuario user, Threshold pt) {
 		return userProfileService.createUserProfile(user, pt);
 	}
 

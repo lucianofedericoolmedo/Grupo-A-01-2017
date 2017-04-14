@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
+
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.Usuario;
@@ -34,5 +36,15 @@ public class PurchaseRepository {
 
 	public List<Cart> getAllCarts() {
 		return this.purchases.stream().map(p -> p.getCart()).collect(Collectors.toList());
+	}
+
+	public List<Purchase> findLastPurchases(Integer quantityToFetch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Purchase> findPurchasesFrom(DateTime dateFromToFetch) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

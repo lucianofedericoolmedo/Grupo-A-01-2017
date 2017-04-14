@@ -26,6 +26,14 @@ public class Purchase {
 		this.payment = payment;
 	}
 
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+	
+	public CashRegister getCashRegister(){
+		return this.cashRegister;
+	}
+
 	// Logic
 	/**
 	 * Calculates the total value of the purchase.
@@ -35,12 +43,8 @@ public class Purchase {
 		return cart.totalValue();
 	}
 
-	public void setCashRegister(CashRegister cashRegister) {
-		this.cashRegister = cashRegister;
-	}
-	
-	public CashRegister getCashRegister(){
-		return this.cashRegister;
+	public Double totalValueOfProductCategory(ProductCategory productCategory) {
+		return cart.totalValueOfProductCategory(productCategory);
 	}
 
 }

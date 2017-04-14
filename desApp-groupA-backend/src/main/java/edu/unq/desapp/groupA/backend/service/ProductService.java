@@ -26,17 +26,9 @@ public class ProductService {
 	public ProductService(ProductRepository repository, BrandService brandService, StockService stockService,
 						  PriceService priceService) {
 		this.repository = repository;
-		this.brandService = brandService;
-		this.stockService = stockService;
-		this.priceService = priceService;
-	}
-
-	public ProductRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(ProductRepository repository) {
-		this.repository = repository;
+		this.setBrandService(brandService);
+		this.setStockService(stockService);
+		this.setPriceService(priceService);
 	}
 
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
@@ -63,12 +55,45 @@ public class ProductService {
 			product = this.getRepository().save(new Product());
 		}
 		product.setName(basicProduct.getName());
-		Brand brand = brandService.findByNameOrCreate(basicProduct.getBrand());
+		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
 		product.setBrand(brand);
-		Price price = priceService.updatePriceForProduct(product, basicProduct.getPrice());
+		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		product.setPrice(price);
-		stockService.updateStockForProduct(product, basicProduct.getStock());
+		getStockService().updateStockForProduct(product, basicProduct.getStock());
 		this.getRepository().save(product);
+	}
+
+	// Services
+	public BrandService getBrandService() {
+		return brandService;
+	}
+
+	public void setBrandService(BrandService brandService) {
+		this.brandService = brandService;
+	}
+
+	public StockService getStockService() {
+		return stockService;
+	}
+
+	public void setStockService(StockService stockService) {
+		this.stockService = stockService;
+	}
+
+	public PriceService getPriceService() {
+		return priceService;
+	}
+
+	public void setPriceService(PriceService priceService) {
+		this.priceService = priceService;
+	}
+
+	public ProductRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(ProductRepository repository) {
+		this.repository = repository;
 	}
 
 }
