@@ -2,7 +2,7 @@ package edu.unq.desapp.groupA.backend.model;
 
 import org.joda.time.DateTime;
 
-public class Price {
+public class Price extends Entity {
 
 	// Instance Variables
 	private Double price;

@@ -2,7 +2,7 @@ package edu.unq.desapp.groupA.backend.model;
 
 import org.joda.time.DateTime;
 
-public abstract class Discount {
+public abstract class Discount extends Entity {
 	
 	// Instance Variables
 	private DateTime startingDate;

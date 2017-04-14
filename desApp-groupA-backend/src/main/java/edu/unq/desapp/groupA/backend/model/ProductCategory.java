@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class ProductCategory {
+public class ProductCategory extends Entity {
 
 	// Instance Variables
 	private String name;

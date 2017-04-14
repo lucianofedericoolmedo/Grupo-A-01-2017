@@ -3,7 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CashRegister {
+public class CashRegister extends Entity {
 	
 	private Boolean available;
 	private List<Cart> carts;

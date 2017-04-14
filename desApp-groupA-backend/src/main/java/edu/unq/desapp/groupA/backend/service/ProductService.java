@@ -42,14 +42,14 @@ public class ProductService {
 		return product;
 	}
 	
-	public void updateProductsVisCSVFile(String filePath) throws FileNotFoundException {
+	public void updateProductsViaCSVFile(String filePath) throws FileNotFoundException {
 		List<BasicProduct> basicProducts = CSVFileParser.parseCSVFile(filePath, new CsvResultBasicProductBuilder());
 		for (BasicProduct basicProduct : basicProducts) {
-			updateFromBasicProduct(basicProduct);
+			updateOrCreateFromBasicProduct(basicProduct);
 		}
 	}
 
-	public void updateFromBasicProduct(BasicProduct basicProduct) {
+	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
 		Product product = this.getRepository().find(basicProduct.getId());
 		if (product == null) {
 			product = this.getRepository().save(new Product());
@@ -60,7 +60,7 @@ public class ProductService {
 		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		product.setPrice(price);
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
-		this.getRepository().save(product);
+		return this.getRepository().save(product);
 	}
 
 	// Services

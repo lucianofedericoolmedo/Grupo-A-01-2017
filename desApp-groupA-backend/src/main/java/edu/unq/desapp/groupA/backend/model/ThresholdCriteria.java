@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 
-public abstract class ThresholdCriteria {
+public abstract class ThresholdCriteria extends Entity{
 
 	public abstract String getDescription();
 

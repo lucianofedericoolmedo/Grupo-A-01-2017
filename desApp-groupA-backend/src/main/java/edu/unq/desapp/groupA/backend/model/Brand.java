@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Brand {
+public class Brand extends Entity {
 
 	// Instance Variables
 	private String name;

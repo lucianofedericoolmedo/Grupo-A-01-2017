@@ -3,7 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ItemGroup<ItemType extends Item> {
+public abstract class ItemGroup<ItemType extends Item> extends Entity {
 
 	protected List<ItemType> items;
 	

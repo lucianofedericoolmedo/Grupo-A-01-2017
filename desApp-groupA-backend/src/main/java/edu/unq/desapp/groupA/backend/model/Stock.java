@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Stock {
+public class Stock extends Entity {
 
 	// Instance Variables
 	private Product product;

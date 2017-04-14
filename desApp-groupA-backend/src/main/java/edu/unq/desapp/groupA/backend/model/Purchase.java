@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Purchase {
+public class Purchase extends Entity {
 
 	// Instance Variables
 	private Cart cart;

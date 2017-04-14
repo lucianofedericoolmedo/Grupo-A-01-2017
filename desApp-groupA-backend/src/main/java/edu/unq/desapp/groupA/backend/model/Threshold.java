@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 
-public abstract class Threshold {
+public abstract class Threshold extends Entity {
 
 	// Instance Variables
 	protected Double percentageToSurpass;
