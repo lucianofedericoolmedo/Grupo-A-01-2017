@@ -1,9 +1,18 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Brand {
+public class Brand extends Entity {
 
 	// Instance Variables
 	private String name;
+
+	// Constructors
+	public Brand() {
+		
+	}
+
+	public Brand(String name) {
+		this.name = name;
+	}
 
 	// Getters and Setters
 	public String getName() {

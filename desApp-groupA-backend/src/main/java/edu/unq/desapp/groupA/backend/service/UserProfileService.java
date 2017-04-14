@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import edu.unq.desapp.groupA.backend.model.Thresold;
+import edu.unq.desapp.groupA.backend.model.Threshold;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.Usuario;
 import edu.unq.desapp.groupA.backend.repository.UserProfileRepository;
@@ -21,7 +21,7 @@ public class UserProfileService {
 		this.repository = repository;
 	}
 
-	public UserProfile createUserProfile(Usuario user, Thresold thresold) {
+	public UserProfile createUserProfile(Usuario user, Threshold thresold) {
 		UserProfile userProfile = new UserProfile();
 		userProfile.setThresold(thresold);
 		userProfile.setUser(user);

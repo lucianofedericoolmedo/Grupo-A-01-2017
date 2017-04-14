@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class PaymentType {
+public class PaymentType extends Entity {
 	
 	// Instance Variables
 	private String name;

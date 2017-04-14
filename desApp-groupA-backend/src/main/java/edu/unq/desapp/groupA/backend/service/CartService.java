@@ -67,7 +67,9 @@ public class CartService {
 		if (cart.containsProduct(product)) {
 			throw new ProductAlreadyInItemGroupException(product, "The cart already has and item with the product");
 		}
-		return itemCartService.createItemCart(product, 0, cart);
+		ItemCart itemCart = getItemCartService().createItemCart(product, 0, cart);
+		cart.addItems(itemCart);
+		return itemCart;
 	}
 
 	private Long insertID(){
@@ -86,6 +88,14 @@ public class CartService {
 
 	public void setRepository(CartRepository repository) {
 		this.repository = repository;
+	}
+
+	public ItemCartService getItemCartService() {
+		return itemCartService;
+	}
+
+	public void setItemCartService(ItemCartService itemCartService) {
+		this.itemCartService = itemCartService;
 	}
 
 	

@@ -45,6 +45,7 @@ public class ItemCartService {
 
 	public void checkItemCart(ItemCart itemCart) {
 		itemCart.setChecked(true);
+		this.getRepository().save(itemCart);
 	}
 
 }

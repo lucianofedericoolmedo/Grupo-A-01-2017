@@ -3,7 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Product {
+public class Product extends Entity {
 
 	// Instance Variables
 	private String name;
