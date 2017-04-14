@@ -1,0 +1,21 @@
+---------------------------------------------------------------------
+TAG 1.0
+---------------------------------------------------------------------
+NEW FEATURES:
+* Implemented most of the model requested in Documentation.
+* Implemented Discounts.
+* Implemented Thresholds.
+* Created services centralizing functionalities.
+* Created CSV parser module for creating Products from a CSV file.
+
+NOTES:
+* Missing tests.
+* Not implemented retrieving information from repositories. As it will be refactored in future versions using a database, this will be easier using queries.
+  Although most of the functionalities are tested using external data.
+* Not implemented delivering purchases to the client house.
+* Not implemented User management system.
+* Not implemented Roles and Permissions system.
+* Unfinished User profile.
+* Some functionalities were not include in a centralized service.
+* Implemented Discounts having three levels of prioties. HIGH, MEDIUM, LOW. When applying discounts to a specific Item in the Cart (ItemCart) the Discounts with higher priority will be set first, if applies. Then the rest with lower priority will be applied. Once an Item in a Cart has an applied Discount, another Discount can NOT be applied to the same Item. The ADMINISTRATOR will have the possibility of managing the Discount level of priority when creating or updating the Discounts.
+* Implemented Thresholds with a Threshold Criteria. These criteria indicates if the Thresholds should use the last 'n' purchases, or if it should use the purchases starting from an specific date to calculate the average. The USER will have the possibility of managing this criteria for each Threshold.
