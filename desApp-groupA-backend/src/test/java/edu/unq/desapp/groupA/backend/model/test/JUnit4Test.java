@@ -20,7 +20,7 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
-import edu.unq.desapp.groupA.backend.model.ProductCategoryThresold;
+import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
@@ -191,7 +191,7 @@ public class JUnit4Test {
 		
 		// Habria que ser más especifico con los thresold que podria crear...
 		
-		ProductCategoryThresold pt = comprandoALoLocoService.createProductThreshold();		
+		ProductCategoryThreshold pt = comprandoALoLocoService.createProductThreshold();		
 		UserProfile userProfile = comprandoALoLocoService.createUserProfile(user,pt);
 		
 		

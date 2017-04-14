@@ -37,18 +37,26 @@ public abstract class ItemGroup<ItemType extends Item> {
 	}
 
 	// Logic
-	public Double totalValue() {
+	protected Double totalValueOfItems(List<ItemType> items) {
 		return items.stream().map(item -> item.totalValue()).reduce(0.00, (x,y) -> x + y);
+	}
+	
+	public Double totalValue() {
+		return totalValueOfItems(items);
 	}
 
 	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount) {
+		return itemsCartWithCategory(categoryForDiscount, items);
+	}
+
+	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount, List<ItemType> items) {
 		return items.stream().filter(item -> item.isCategory(categoryForDiscount)).collect(Collectors.toList());
 	}
-	
+
 	public Double totalValueOfProductCategory(ProductCategory productCategory) {
-		return itemsCartWithCategory(productCategory).stream().map(item -> item.totalValue()).reduce(0.00, (x,y) -> x + y);
+		return totalValueOfItems(itemsCartWithCategory(productCategory));
 	}
-	
+
 	public Boolean containsProduct(Product product) {
 		return items.stream().anyMatch(item -> item.isProduct(product));
 	}

@@ -7,7 +7,7 @@ public class PurchasePriceThreshold extends Threshold {
 
 	// Instance Variables
 	private Double priceToSurpass;
-	
+
 	// Getters and Setters
 	public Double getPriceToSurpass() {
 		return priceToSurpass;
@@ -20,12 +20,12 @@ public class PurchasePriceThreshold extends Threshold {
 	// Logic
 	@Override
 	public List<Double> purchasesToEvaluateValues(List<Purchase> purchasesToEvaluate) {
-		return purchasesToEvaluate.stream().map(p -> p.totalValue()).collect(Collectors.toList());
+		return purchasesToEvaluate.stream().map(p -> p.totalValueOfCheckedItem()).collect(Collectors.toList());
 	}
 
 	@Override
 	public Double currentCartValue(Cart cart) {
-		return cart.totalValue();
+		return cart.totalValueOfCheckedItems();
 	}
 
 }

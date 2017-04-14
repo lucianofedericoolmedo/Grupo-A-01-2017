@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import edu.unq.desapp.groupA.backend.model.ProductCategoryThresold;
+import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 import edu.unq.desapp.groupA.backend.repository.ProductThresoldRepository;
 
 public class ProductThresoldService {
@@ -19,8 +19,8 @@ public class ProductThresoldService {
 		this.repository = repository;
 	}
 
-	public ProductCategoryThresold createProductThreshold() {
-		ProductCategoryThresold productThresold = new ProductCategoryThresold();		
+	public ProductCategoryThreshold createProductThreshold() {
+		ProductCategoryThreshold productThresold = new ProductCategoryThreshold();		
 		this.repository.save(productThresold);
 		return productThresold;
 	}

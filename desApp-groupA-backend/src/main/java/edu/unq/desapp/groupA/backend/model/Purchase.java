@@ -42,9 +42,17 @@ public class Purchase {
 	public Double totalValue() {
 		return cart.totalValue();
 	}
+	
+	public Double totalValueOfCheckedItem() {
+		return cart.totalValueOfCheckedItems();
+	}
 
 	public Double totalValueOfProductCategory(ProductCategory productCategory) {
 		return cart.totalValueOfProductCategory(productCategory);
+	}
+
+	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory productCategory) {
+		return cart.totalValueOfCheckedItemsWithProductCategory(productCategory);
 	}
 
 }

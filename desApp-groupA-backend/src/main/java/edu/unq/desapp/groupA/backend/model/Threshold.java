@@ -57,12 +57,13 @@ public abstract class Threshold {
 		// Calculate historical
 		List<Double> purchasesTotals = purchasesToEvaluateValues(purchasesToEvaluate);
 		Double historicalTotalValue = purchasesTotals.stream().reduce(0.00, (x,y) -> x + y);
+		historicalTotalValue /= purchasesTotals.size();
 		// Calculate current
 		Double currentTotalValue = currentCartValue(cart);
 		
 		Double diference = (historicalTotalValue / 100) * getPercentageToSurpass();
 		Double quantityToSurpass = historicalTotalValue +  diference;
-		return quantityToSurpass > currentTotalValue;
+		return currentTotalValue > quantityToSurpass;
 	}
 	
 	public List<Purchase> fetchPurchases(PurchaseService purchaseService){
