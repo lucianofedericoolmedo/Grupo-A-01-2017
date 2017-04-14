@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public abstract class Item {
+public abstract class Item  {
 
 	// Instance Variables
 	protected Product product;

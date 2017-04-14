@@ -20,19 +20,6 @@ public abstract class ItemGroup<ItemType extends Item> {
 		this.items = items;
 	}
 
-	// Logic
-	public Double totalValue() {
-		return items.stream().map(item -> item.totalValue()).reduce(0.00, (x,y) -> x + y);
-	}
-
-	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount) {
-		return items.stream().filter(item -> item.isCategory(categoryForDiscount)).collect(Collectors.toList());
-	}
-	
-	public Boolean containsProduct(Product product) {
-		return items.stream().anyMatch(item -> item.isProduct(product));
-	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -47,6 +34,35 @@ public abstract class ItemGroup<ItemType extends Item> {
 	
 	public Long getIdentifier(){
 		return this.identifier;
+	}
+
+	// Logic
+	protected Double totalValueOfItems(List<ItemType> items) {
+		return items.stream().map(item -> item.totalValue()).reduce(0.00, (x,y) -> x + y);
+	}
+	
+
+
+	
+	public Double totalValue() {
+		return totalValueOfItems(items);
+	}
+
+	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount) {
+		return itemsCartWithCategory(categoryForDiscount, items);
+	}
+	
+
+	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount, List<ItemType> items) {
+		return items.stream().filter(item -> item.isCategory(categoryForDiscount)).collect(Collectors.toList());
+	}
+
+	public Double totalValueOfProductCategory(ProductCategory productCategory) {
+		return totalValueOfItems(itemsCartWithCategory(productCategory));
+	}
+
+	public Boolean containsProduct(Product product) {
+		return items.stream().anyMatch(item -> item.isProduct(product));
 	}
 
 	public void addItems(ItemType item) {

@@ -32,6 +32,14 @@ public class Purchase {
 		this.payment = payment;
 	}
 
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+	
+	public CashRegister getCashRegister(){
+		return this.cashRegister;
+	}
+
 	// Logic
 	/**
 	 * Calculates the total value of the purchase.
@@ -40,13 +48,17 @@ public class Purchase {
 	public Double totalValue() {
 		return cart.totalValue();
 	}
-
-	public void setCashRegister(CashRegister cashRegister) {
-		this.cashRegister = cashRegister;
-	}
 	
-	public CashRegister getCashRegister(){
-		return this.cashRegister;
+	public Double totalValueOfCheckedItem() {
+		return cart.totalValueOfCheckedItems();
+	}
+
+	public Double totalValueOfProductCategory(ProductCategory productCategory) {
+		return cart.totalValueOfProductCategory(productCategory);
+	}
+
+	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory productCategory) {
+		return cart.totalValueOfCheckedItemsWithProductCategory(productCategory);
 	}
 
 	public ShippingAddress getShippingAddress() {

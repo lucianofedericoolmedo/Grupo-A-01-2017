@@ -2,6 +2,8 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cart extends ItemGroup<ItemCart> {
 
@@ -25,6 +27,19 @@ public class Cart extends ItemGroup<ItemCart> {
 
 	public void setUsedShoppingList(ShoppingList usedShoppingList) {
 		this.usedShoppingList = usedShoppingList;
+	}
+	
+	// Logic
+	public List<ItemCart> checkedItems() {
+		return items.stream().filter(item -> item.getChecked()).collect(Collectors.toList());
+	}
+
+	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory categoryForDiscount) {
+		return totalValueOfItems(itemsCartWithCategory(categoryForDiscount, checkedItems()));
+	}
+	
+	public Double totalValueOfCheckedItems() {
+		return totalValueOfItems(checkedItems());
 	}
 
 	public Integer quantityOfItems() {

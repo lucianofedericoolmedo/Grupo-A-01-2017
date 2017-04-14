@@ -3,7 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 public class UserProfile {
 
 	private User user;
-	private Thresold thresold;
+	private Threshold thresold;
 	
 	public User getUser() {
 		return user;
@@ -13,11 +13,11 @@ public class UserProfile {
 		this.user = user;
 	}
 	
-	public Thresold getThresold() {
+	public Threshold getThresold() {
 		return thresold;
 	}
 	
-	public void setThresold(Thresold thresold) {
+	public void setThresold(Threshold thresold) {
 		this.thresold = thresold;
 	}
 	

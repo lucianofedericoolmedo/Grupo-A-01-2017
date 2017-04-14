@@ -3,6 +3,8 @@ package edu.unq.desapp.groupA.backend.service;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Purchase;
@@ -50,6 +52,12 @@ public class PurchaseService {
 		return this.repository.getPurchases();
 	}
 	
-	
+	public List<Purchase> fetchLastPurchases(Integer quantityToFetch) {
+		return repository.findLastPurchases(quantityToFetch);
+	}
+
+	public List<Purchase> fetchPurchasesFrom(DateTime dateFromToFetch) {
+		return repository.findPurchasesFrom(dateFromToFetch);
+	}
 	
 }

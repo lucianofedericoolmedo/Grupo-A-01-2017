@@ -7,8 +7,6 @@ public class ItemCart extends Item {
 
 	private Boolean checked;
 
-	private Product product;
-
 	// Constructors
 	public ItemCart() {
 		this.checked = false;
@@ -40,14 +38,6 @@ public class ItemCart extends Item {
 
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
-	}
-	
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 }

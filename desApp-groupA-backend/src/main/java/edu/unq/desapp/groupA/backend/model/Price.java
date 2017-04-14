@@ -7,10 +7,23 @@ public class Price {
 	// Instance Variables
 	private Double price;
 	
+	private Product product;
+	
 	private DateTime startingValidityDate;
 	
 	private DateTime finishingValidityDate;
 	
+	// Constructors
+	public Price() {
+		
+	}
+
+	public Price(Product product, Double price) {
+		this.product = product;
+		this.price = price;
+		this.startingValidityDate = DateTime.now();
+	}
+
 	// Getters and Setters
 	public Double getPrice() {
 		return price;
@@ -34,6 +47,14 @@ public class Price {
 
 	public void setFinishingValidityDate(DateTime finishingValidityDate) {
 		this.finishingValidityDate = finishingValidityDate;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	// Logic

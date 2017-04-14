@@ -17,11 +17,17 @@ public class ProductRepository {
 		this.products = products;
 	}
 	
-	public void save(Product product){
+	public Product save(Product product){
 		this.products.add(product);
+		return product;
 	}
 	
 	public ProductRepository(){
 		this.products = new ArrayList<Product>();
 	}
+
+	public Product find(Long id) {
+		return null;
+	}
+
 }

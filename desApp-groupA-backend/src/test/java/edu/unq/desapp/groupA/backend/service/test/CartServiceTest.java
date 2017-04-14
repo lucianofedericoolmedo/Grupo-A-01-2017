@@ -14,12 +14,15 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
+import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 import edu.unq.desapp.groupA.backend.service.CartService;
+import edu.unq.desapp.groupA.backend.service.ItemCartService;
 
 public class CartServiceTest {
 
 	private CartService cartService;
 	private User aUser;
+	private ItemCartService itemCartService; 
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;
 	private Product product1;
@@ -32,7 +35,10 @@ public class CartServiceTest {
 
 	@Before
 	public void setup() {
+		itemCartService = new ItemCartService(new ItemCartRepository());
+
 		cartService = new CartService(new CartRepository(), (long) (0));
+		cartService.setItemCartService(itemCartService);
 		
 		aUser = new User();
 		
