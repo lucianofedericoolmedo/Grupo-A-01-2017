@@ -1,7 +1,6 @@
 package edu.unq.desapp.groupA.backend.service;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
@@ -11,23 +10,35 @@ import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
+import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
 public class ProductService {
 
-	private List<Product> products;
+	private ProductRepository repository;
+	private BrandService brandService;
+	private StockService stockService;
+	private PriceService priceService;
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public ProductService(ProductRepository repository) {
+		this.repository = repository;
 	}
 	
-	public ProductService(){
-		this.products = new ArrayList<Product>();
+	public ProductService(ProductRepository repository, BrandService brandService, StockService stockService,
+						  PriceService priceService) {
+		this.repository = repository;
+		this.brandService = brandService;
+		this.stockService = stockService;
+		this.priceService = priceService;
 	}
-	
+
+	public ProductRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(ProductRepository repository) {
+		this.repository = repository;
+	}
+
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
 			String name, Price price){
 		Product product = new Product();
@@ -35,7 +46,7 @@ public class ProductService {
 		product.setCategories(categories);
 		product.setName(name);
 		product.setPrice(price);
-		products.add(product);
+		repository.save(product);
 		return product;
 	}
 	
@@ -47,7 +58,17 @@ public class ProductService {
 	}
 
 	public void updateFromBasicProduct(BasicProduct basicProduct) {
-		
+		Product product = this.getRepository().find(basicProduct.getId());
+		if (product == null) {
+			product = this.getRepository().save(new Product());
+		}
+		product.setName(basicProduct.getName());
+		Brand brand = brandService.findByNameOrCreate(basicProduct.getBrand());
+		product.setBrand(brand);
+		Price price = priceService.updatePriceForProduct(product, basicProduct.getPrice());
+		product.setPrice(price);
+		stockService.updateStockForProduct(product, basicProduct.getStock());
+		this.getRepository().save(product);
 	}
 
 }

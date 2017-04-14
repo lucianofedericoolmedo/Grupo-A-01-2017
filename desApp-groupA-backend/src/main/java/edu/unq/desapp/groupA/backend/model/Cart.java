@@ -12,6 +12,10 @@ public class Cart extends ItemGroup<ItemCart> {
 		this.items = new LinkedList<ItemCart>();
 	}
 	
+	public boolean includesProduct(Product p){
+		return this.items.stream().anyMatch(itemC -> itemC.getProduct().equals(p));
+	}
+	
 	// Getters and Setters
 	public ShoppingList getUsedShoppingList() {
 		return usedShoppingList;

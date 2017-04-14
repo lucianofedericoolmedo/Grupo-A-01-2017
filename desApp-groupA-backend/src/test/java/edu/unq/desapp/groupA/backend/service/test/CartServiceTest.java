@@ -13,6 +13,7 @@ import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.repository.CartRepository;
 import edu.unq.desapp.groupA.backend.service.CartService;
 
 public class CartServiceTest {
@@ -31,7 +32,7 @@ public class CartServiceTest {
 
 	@Before
 	public void setup() {
-		cartService = new CartService();
+		cartService = new CartService(new CartRepository(), (long) (0));
 		
 		aUser = new Usuario();
 		

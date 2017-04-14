@@ -19,8 +19,11 @@ public class CSVFileParser {
 		List<BuildingType> basicStructures = new LinkedList<BuildingType>();
 		
 		while (scanner.hasNext()) {
-			BuildingType basicStructure = builder.build(parseLine(scanner.nextLine())); 
-			basicStructures.add(basicStructure);
+			String nextLine = scanner.nextLine();
+			BuildingType basicStructure = builder.build(parseLine(nextLine));
+			if (basicStructure != null) {
+				basicStructures.add(basicStructure);
+			}
 		}
 		scanner.close();
 		
@@ -32,40 +35,42 @@ public class CSVFileParser {
 	}
 
 	private static List<String> parseLine(String csvLine, char separator, char quote, char ignoreLine) {
+		List<String> result = new LinkedList<String>();
+
 		if (isEmptyLine(csvLine)) {
-			return null;
+			return result;
 		}
 
-		List<String> result = new LinkedList<String>();
 		char[] csvArray = csvLine.toCharArray();
-
 		StringBuffer currentValue = new StringBuffer();
 		Boolean isInsideQuotes = false;
 		Boolean possibleEscapedDoubleQuote = false;
 
 		for (char csvChar : csvArray) {
 			if (shouldIgnoreRestOfLine(csvChar, ignoreLine)) {
-				result.add(currentValue.toString());
+				String savedValue = currentValue.toString();
+				if (!isEmptyLine(savedValue)) {
+					result.add(savedValue);
+				}
 				isInsideQuotes = false;
 				possibleEscapedDoubleQuote = false;
 				return result;
 			}
 
 			if (isQuote(csvChar, quote)) {
-				if (isInsideQuotes) {
-					if (possibleEscapedDoubleQuote) {
-						possibleEscapedDoubleQuote = false;
-						currentValue.append(csvChar);
-					} else {
-						possibleEscapedDoubleQuote = true;
-					}
+				if (possibleEscapedDoubleQuote) {
+					possibleEscapedDoubleQuote = false;
+					isInsideQuotes = true;
+					currentValue.append(csvChar);
 				} else {
+					possibleEscapedDoubleQuote = true;
 					isInsideQuotes = !isInsideQuotes;
 				}
 			} else {
 				possibleEscapedDoubleQuote = false;
 				if (isSeparator(csvChar, separator) && !isInsideQuotes) {
 					result.add(currentValue.toString());
+					currentValue = new StringBuffer();
 				} else {
 					currentValue.append(csvChar);
 				}
@@ -77,7 +82,7 @@ public class CSVFileParser {
 	}
 	
 	private static Boolean isEmptyLine(String csvLine) {
-		return csvLine == null || csvLine == ""; 
+		return csvLine == null || csvLine.equals("");
 	}
 	
 	private static Boolean shouldIgnoreRestOfLine(char currentChar, char ignoreIndicator) {

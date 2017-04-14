@@ -7,6 +7,16 @@ public class Stock {
 	
 	private Integer quantity;
 
+	// Constructors
+	public Stock() {
+		
+	}
+
+	public Stock(Product product, Integer quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+
 	// Getters and Setters
 	public Product getProduct() {
 		return product;

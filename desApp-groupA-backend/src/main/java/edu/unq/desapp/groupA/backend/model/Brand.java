@@ -5,6 +5,15 @@ public class Brand {
 	// Instance Variables
 	private String name;
 
+	// Constructors
+	public Brand() {
+		
+	}
+
+	public Brand(String name) {
+		this.name = name;
+	}
+
 	// Getters and Setters
 	public String getName() {
 		return name;
