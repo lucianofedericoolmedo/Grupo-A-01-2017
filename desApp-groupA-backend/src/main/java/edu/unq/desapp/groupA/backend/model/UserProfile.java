@@ -2,14 +2,14 @@ package edu.unq.desapp.groupA.backend.model;
 
 public class UserProfile {
 
-	private Usuario user;
+	private User user;
 	private Threshold thresold;
 	
-	public Usuario getUser() {
+	public User getUser() {
 		return user;
 	}
 	
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

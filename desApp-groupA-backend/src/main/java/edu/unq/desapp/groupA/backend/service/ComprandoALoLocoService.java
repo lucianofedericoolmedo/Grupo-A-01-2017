@@ -16,10 +16,11 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.Threshold;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
-import edu.unq.desapp.groupA.backend.model.Usuario;
 
 public class ComprandoALoLocoService {
 
@@ -35,6 +36,7 @@ public class ComprandoALoLocoService {
 	private UserProfileService userProfileService;
 	private ShoppingListService shoppingListService;	
 	private ItemShoppingListService itemShoppingListService;
+	private TimeResponseService timeResponseService;
 	
 	/*
 	 * Add all the other services ... 
@@ -142,7 +144,7 @@ public class ComprandoALoLocoService {
 		}
 	}
 	
-	public List<Purchase> getPurchasesByUser(Usuario user){
+	public List<Purchase> getPurchasesByUser(User user){
 		return purchaseService.getPurchasesByUser(user);
 	}
 	
@@ -188,7 +190,7 @@ public class ComprandoALoLocoService {
 		return this.productService.createProduct(brand, categories, name, price);
 	}
 
-	public Cart createCartForUser(Usuario user) {
+	public Cart createCartForUser(User user) {
 		Cart cart = cartService.createCart(user);
 		return cart;
 	}
@@ -199,8 +201,18 @@ public class ComprandoALoLocoService {
 	}
 
 	public Purchase createPurchase(Cart cart,PaymentType paymentType, CashRegister cashRegister) {
-		Purchase purchase = purchaseService.createPurchase(cart, paymentType, cashRegister);
+		cashRegister.removeItems(cart.quantityOfItems());
+		Purchase purchase = purchaseService.createPurchase(cart, paymentType);
+		timeResponseService.registerResponseTime(cart.getReservationTime(),purchase.getCreationDate());
 		return purchase;
+	}
+
+	public TimeResponseService getTimeResponseService() {
+		return timeResponseService;
+	}
+
+	public void setTimeResponseService(TimeResponseService timeResponseService) {
+		this.timeResponseService = timeResponseService;
 	}
 
 	public PaymentType createPaymentType(String name, String description) {
@@ -227,7 +239,7 @@ public class ComprandoALoLocoService {
 		return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
 	}
 
-	public Usuario createUser(String username, String password, String email) {
+	public User createUser(String username, String password, String email) {
 		return userService.createUser(username, password, email);
 	}
 
@@ -236,7 +248,7 @@ public class ComprandoALoLocoService {
 		return productThresoldService.createProductThreshold();
 	}
 
-	public UserProfile createUserProfile(Usuario user, Threshold pt) {
+	public UserProfile createUserProfile(User user, Threshold pt) {
 		return userProfileService.createUserProfile(user, pt);
 	}
 
@@ -248,7 +260,7 @@ public class ComprandoALoLocoService {
 		this.userProfileService = userProfileService;
 	}
 
-	public ShoppingList createShoppingListForUser(Usuario user) {
+	public ShoppingList createShoppingListForUser(User user) {
 		return shoppingListService.createShoppingList(user);
 	}
 
@@ -258,6 +270,21 @@ public class ComprandoALoLocoService {
 
 	public Cart createCartForShoppingList(ShoppingList shoppingList) {
 		return cartService.createCartForShoppingList(shoppingList);
+	}
+
+	public CashRegister requirePurchase(Cart cart, CashRegister cashRegister) {
+		cashRegister.requirePurchase(cart);
+		return cashRegister;
+	}
+
+	public Purchase shipp(Cart cart, PaymentType paymentType,CashRegister cashRegister, ShippingAddress shippingAddress) {
+		cashRegister.removeItems(cart.quantityOfItems());
+		return purchaseService.createPurchase(cart, paymentType,shippingAddress);
+	}
+
+	public List<Purchase> getAllPurchases() {
+		// TODO Auto-generated method stub
+		return purchaseService.getPurchases();
 	}
 
 	

@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Usuario {
+public class User {
 
 	private String username;	
 	private String password;

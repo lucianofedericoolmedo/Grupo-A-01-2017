@@ -1,13 +1,19 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Purchase extends Entity {
+import java.util.Date;
+
+public class Purchase {
 
 	// Instance Variables
 	private Cart cart;
+	
+	private ShippingAddress shippingAddress;
 		
 	private PaymentType payment;
 
 	private CashRegister cashRegister;
+
+	private Date creationDate;
 
 	// Getters and Setters
 	public Cart getCart() {
@@ -53,6 +59,22 @@ public class Purchase extends Entity {
 
 	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory productCategory) {
 		return cart.totalValueOfCheckedItemsWithProductCategory(productCategory);
+	}
+
+	public ShippingAddress getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public void setCreationDate(Date date) {
+		this.creationDate = date;		
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
 }

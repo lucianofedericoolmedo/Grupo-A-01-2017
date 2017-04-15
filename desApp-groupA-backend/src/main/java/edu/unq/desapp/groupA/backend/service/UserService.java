@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.UserRepository;
 
 public class UserService {
@@ -19,8 +19,8 @@ public class UserService {
 		this.repository = userRepository;
 	}
 
-	public Usuario createUser(String username, String password, String email){
-		Usuario user = new Usuario();
+	public User createUser(String username, String password, String email){
+		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setUsername(username);
