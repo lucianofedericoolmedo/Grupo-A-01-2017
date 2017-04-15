@@ -1,15 +1,16 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.joda.time.DateTime;
 
 public class Cart extends ItemGroup<ItemCart> {
 
 	// Instance Variables
 	private ShoppingList usedShoppingList;
-	private Date reservationTime;
+	private DateTime reservationTime;
 	
 	// Constructors
 	public Cart() {
@@ -42,17 +43,15 @@ public class Cart extends ItemGroup<ItemCart> {
 		return totalValueOfItems(checkedItems());
 	}
 
-	
-
 	public Integer quantityOfItems() {
 		return this.items.size();
 	}
 
-	public void setReservationTime(Date date) {
+	public void setReservationTime(DateTime date) {
 		this.reservationTime = date;
 	}
 	
-	public Date getReservationTime() {
+	public DateTime getReservationTime() {
 		return reservationTime;
 	}
 }

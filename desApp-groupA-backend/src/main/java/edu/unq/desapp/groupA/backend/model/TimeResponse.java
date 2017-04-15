@@ -1,36 +1,36 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class TimeResponse {
 
-	private Date reservationTime;
-	private Date responseTime;
+	private DateTime reservationTime;
+	private DateTime responseTime;
 
-	public TimeResponse(Date reservationTime, Date responseTime) {
+	public TimeResponse(DateTime reservationTime, DateTime responseTime) {
 		this.setReservationTime(reservationTime);
 		this.setResponseTime(responseTime);
 	}
 
-	public Date getReservationTime() {
+	public DateTime getReservationTime() {
 		return reservationTime;
 	}
 
-	public void setReservationTime(Date reservationTime) {
+	public void setReservationTime(DateTime reservationTime) {
 		this.reservationTime = reservationTime;
 	}
 
-	public Date getResponseTime() {
+	public DateTime getResponseTime() {
 		return responseTime;
 	}
 
-	public void setResponseTime(Date responseTime) {
+	public void setResponseTime(DateTime responseTime) {
 		this.responseTime = responseTime;
 	}
 	
 	//TODO: Refac using Joda-Time
-	public Date attentionTime(){
-		return new Date();
+	public DateTime attentionTime(){
+		return new DateTime();
 	}
 
 }

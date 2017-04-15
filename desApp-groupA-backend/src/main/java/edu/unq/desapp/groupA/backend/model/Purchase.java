@@ -1,8 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.Date;
-
-public class Purchase {
+public class Purchase extends Entity {
 
 	// Instance Variables
 	private Cart cart;
@@ -12,8 +10,6 @@ public class Purchase {
 	private PaymentType payment;
 
 	private CashRegister cashRegister;
-
-	private Date creationDate;
 
 	// Getters and Setters
 	public Cart getCart() {
@@ -67,14 +63,6 @@ public class Purchase {
 
 	public void setShippingAddress(ShippingAddress shippingAddress) {
 		this.shippingAddress = shippingAddress;
-	}
-
-	public void setCreationDate(Date date) {
-		this.creationDate = date;		
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
 	}
 
 }

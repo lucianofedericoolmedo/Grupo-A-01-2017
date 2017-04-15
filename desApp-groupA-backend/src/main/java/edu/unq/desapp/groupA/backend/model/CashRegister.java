@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class CashRegister extends Entity {
 	
@@ -31,7 +31,7 @@ public class CashRegister extends Entity {
 
 
 	public void requirePurchase(Cart cart) {
-		cart.setReservationTime(new Date());
+		cart.setReservationTime(new DateTime());
 		this.available = false;
 		this.setProductsToProcess(this.productsToProcess + cart.quantityOfItems());		
 	}

@@ -3,6 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 public class UserProfile {
 
 	private User user;
+
 	private Threshold thresold;
 	
 	public User getUser() {

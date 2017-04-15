@@ -1,6 +1,5 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -20,7 +19,7 @@ public class PurchaseService {
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
-		purchase.setCreationDate(new Date());
+		purchase.setCreationDate(new DateTime());
 		this.repository.save(purchase);
 		return purchase;
 	}
@@ -41,7 +40,7 @@ public class PurchaseService {
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
-		purchase.setCreationDate(new Date());
+		purchase.setCreationDate(new DateTime());
 		purchase.setShippingAddress(shippingAddress);
 		this.repository.save(purchase);
 		return purchase;
