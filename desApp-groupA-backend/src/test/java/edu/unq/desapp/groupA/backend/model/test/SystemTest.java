@@ -14,7 +14,6 @@ import org.junit.Test;
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
-import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
@@ -28,24 +27,9 @@ import edu.unq.desapp.groupA.backend.service.provider.ComprandoALoLocoProvider;
 import edu.unq.desapp.groupA.backend.service.provider.PriceFactory;
 import edu.unq.desapp.groupA.backend.service.provider.ShoppingListFactory;
 
-public class JUnit4Test {
+public class SystemTest {
 
-	//TODO: Coverage ... pasar a hacer test mas interesantes, separ los test segun categorias, vease
-	// que involucra , si son unitarios, funcionales ... y encima tmb que testean , o sea ..,
-	// si son de model quedarian en model/unittests model/functional ... (?)
-	
 		
-	/*
-	 * ESTOS DEBERIAN TEST END-TO-END
-	 * 
-	 * HACER UN TEST PERO CON UN PURCHASE YA ARMADO PARA EL BALANCEADOR DE CARGA
-	 * UN TEST PARA EL TIEMPO DE RESPUESTA (?)
-	 * UN TEST PARA LA CANCELACION Y CAMBIO EN LA FORMA DE ENVIO
-	 * OTROS PARA LAS SUGERENCIAS DE PREFERENCIAS DE USUARIO,
-	 * OTROS PARA MANTENER LAS ESTADISTICAS ...
-	 * 
-	*/
-	
 	private ComprandoALoLocoService comprandoALoLocoService;
 	private Product cicatricure;
 	private Product heineken;
@@ -125,7 +109,7 @@ public class JUnit4Test {
 	}
 	
 	@Test
-	public void testShipping(){
+	public void testWhenUserDecidesToMakeAShippingHeShouldReceiveOne(){
 		
 		User otherUser = comprandoALoLocoService.createUser("Julio", "1234", "mail@gmail.com");
 		
@@ -133,8 +117,8 @@ public class JUnit4Test {
 		Product brahma = comprandoALoLocoService.createProduct(brand, drinkCategory, "brahma", drinkPrice);
 		Product guaymallen = comprandoALoLocoService.createProduct(brand, drinkCategory, "guaymallen", drinkPrice);
 		
-		ItemShoppingList brahmaItem = comprandoALoLocoService.createItemShoppingList(brahma,1,shoppingList3);
-		ItemShoppingList guaymallenItem = comprandoALoLocoService.createItemShoppingList(guaymallen,1,shoppingList3);
+		comprandoALoLocoService.createItemShoppingList(brahma,1,shoppingList3);
+		comprandoALoLocoService.createItemShoppingList(guaymallen,1,shoppingList3);
 		
 		
 		Cart otherCart2 = comprandoALoLocoService.createCartForShoppingList(shoppingList3);
@@ -142,13 +126,12 @@ public class JUnit4Test {
 		cashRegister3 = comprandoALoLocoService.requirePurchase(otherCart2,cashRegister3);
 		
 		purchase3 = comprandoALoLocoService.shipp(otherCart2, paymentType ,cashRegister3, new ShippingAddress());
+		assertEquals(comprandoALoLocoService.getShippings().size(),1);
 	}
 	
 	
-
-	
 	@Test
-	public void testProductsInPurchase() {		
+	public void testWhenUserPurchasesFromFirstCartThenProductsInPurchaseShouldBeHeinkenAnCicatricure() {		
 		
 		Set<String> expectedProductsInPurchase = Arrays.asList(heineken,cicatricure).
 				stream().map(p -> p.getName()).collect(Collectors.toSet());
@@ -178,7 +161,6 @@ public class JUnit4Test {
 	
 	@Test
 	public void testPurchasesFromUser() {	
-		//TODO: Make it work
 		List<Purchase> purchases = comprandoALoLocoService.getPurchasesByUser(user);		
 		assertTrue( purchases.contains(firstPurchase) && purchases.contains(secondPurchase));	
 		assertEquals( purchases.size(), 2);	

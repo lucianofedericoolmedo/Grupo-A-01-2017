@@ -38,13 +38,18 @@ public class PurchaseRepository {
 		return this.purchases.stream().map(p -> p.getCart()).collect(Collectors.toList());
 	}
 
+	
 	public List<Purchase> findLastPurchases(Integer quantityToFetch) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.purchases.stream().sorted((c1, c2) -> (c1.getCreationDate().isAfter(c2.getCreationDate())) ? 1 : 0).
+			collect(Collectors.toList()).subList(0, quantityToFetch);
 	}
 
 	public List<Purchase> findPurchasesFrom(DateTime dateFromToFetch) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.purchases.stream().filter(p -> p.getCreationDate().isAfter(dateFromToFetch)).
+				collect(Collectors.toList());
+	}
+	
+	public List<Purchase> getShippings() {
+		return this.purchases.stream().filter(p -> p.getShippingAddress() != null).collect(Collectors.toList());
 	}
 }

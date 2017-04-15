@@ -51,12 +51,18 @@ public class PurchaseService {
 		return this.repository.getPurchases();
 	}
 	
+	
 	public List<Purchase> fetchLastPurchases(Integer quantityToFetch) {
 		return repository.findLastPurchases(quantityToFetch);
 	}
 
 	public List<Purchase> fetchPurchasesFrom(DateTime dateFromToFetch) {
 		return repository.findPurchasesFrom(dateFromToFetch);
+	}
+	
+
+	public List<Purchase> getShippings() {
+		return repository.getShippings();
 	}
 	
 }

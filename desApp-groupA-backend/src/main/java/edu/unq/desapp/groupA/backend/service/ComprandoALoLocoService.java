@@ -286,5 +286,9 @@ public class ComprandoALoLocoService {
 		return purchaseService.getPurchases();
 	}
 
+	public List<Purchase> getShippings() {
+		return purchaseService.getShippings();
+	}
+
 	
 }

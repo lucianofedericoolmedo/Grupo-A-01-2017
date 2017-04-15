@@ -27,7 +27,6 @@ public class DateThresholdCriteria extends ThresholdCriteria {
 		return description;
 	}
 
-	// Logic
 	@Override
 	public List<Purchase> fetchPurchasesCriteria(PurchaseService purchaseService) {
 		return purchaseService.fetchPurchasesFrom(dateFromToFetch);

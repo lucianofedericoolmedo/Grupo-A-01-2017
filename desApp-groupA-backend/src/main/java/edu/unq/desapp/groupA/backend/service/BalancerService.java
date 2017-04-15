@@ -7,13 +7,19 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 
 public class BalancerService {
 	
-	CashRegister sendCartToQueue(List<CashRegister> cajasHabilitadas) {
-		Stream<CashRegister> crs = cajasHabilitadas.stream().filter(cr -> !cr.getAvailable())
-				.sorted((c1, c2) -> c1.getProductsToProcess().compareTo(c2.getProductsToProcess()));
-		
+	CashRegister sendCartToQueue(List<CashRegister> cashRegisters) {
+		Stream<CashRegister> crs = unAvailableCashRegisters(cashRegisters);
+		crs = sortByProductsToProcess(crs);
 		CashRegister cashRegister = crs.findFirst().get();
 		return cashRegister;
 	}
+	
+	Stream<CashRegister> sortByProductsToProcess(Stream<CashRegister> cashRegisters){
+		return cashRegisters.sorted((c1, c2) -> c1.getProductsToProcess().compareTo(c2.getProductsToProcess()));
+	}
 
+	Stream<CashRegister> unAvailableCashRegisters(List<CashRegister> cashRegisters){
+		return cashRegisters.stream().filter(cr -> !cr.getAvailable());
+	}
 	
 }
