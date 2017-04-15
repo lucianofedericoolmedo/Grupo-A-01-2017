@@ -12,7 +12,7 @@ import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.Usuario;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 import edu.unq.desapp.groupA.backend.service.CartService;
@@ -22,7 +22,7 @@ public class CartServiceTest {
 
 	private CartService cartService;
 	private ItemCartService itemCartService; 
-	private Usuario aUser;
+	private User aUser;
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;
 	private Product product1;
@@ -40,7 +40,7 @@ public class CartServiceTest {
 		cartService = new CartService(new CartRepository(), (long) (0));
 		cartService.setItemCartService(itemCartService);
 		
-		aUser = new Usuario();
+		aUser = new User();
 		
 		product0 = new Product();
 		itemShoppingList0 = new ItemShoppingList();

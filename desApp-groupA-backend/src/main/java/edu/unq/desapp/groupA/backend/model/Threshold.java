@@ -13,7 +13,7 @@ public abstract class Threshold extends Entity {
 	
 	protected ThresholdCriteria criteria;
 	
-	protected Usuario user;
+	protected User user;
 	
 	// Getters and Setters
 	public Double getPercentageToSurpass() {
@@ -40,11 +40,11 @@ public abstract class Threshold extends Entity {
 		this.criteria = criteria;
 	}
 
-	public Usuario getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

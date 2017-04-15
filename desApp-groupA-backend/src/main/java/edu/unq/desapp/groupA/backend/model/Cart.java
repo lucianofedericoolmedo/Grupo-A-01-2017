@@ -4,11 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
+
 public class Cart extends ItemGroup<ItemCart> {
 
 	// Instance Variables
 	private ShoppingList usedShoppingList;
-
+	private DateTime reservationTime;
+	
 	// Constructors
 	public Cart() {
 		this.items = new LinkedList<ItemCart>();
@@ -40,4 +43,15 @@ public class Cart extends ItemGroup<ItemCart> {
 		return totalValueOfItems(checkedItems());
 	}
 
+	public Integer quantityOfItems() {
+		return this.items.size();
+	}
+
+	public void setReservationTime(DateTime date) {
+		this.reservationTime = date;
+	}
+	
+	public DateTime getReservationTime() {
+		return reservationTime;
+	}
 }

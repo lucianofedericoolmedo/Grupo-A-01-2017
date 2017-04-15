@@ -7,7 +7,7 @@ public abstract class ItemGroup<ItemType extends Item> extends Entity {
 
 	protected List<ItemType> items;
 	
-	protected Usuario user;
+	protected User user;
 
 	private Long identifier;
 
@@ -20,11 +20,11 @@ public abstract class ItemGroup<ItemType extends Item> extends Entity {
 		this.items = items;
 	}
 
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	
-	public Usuario getUser(){
+	public User getUser(){
 		return this.user;
 	}
 

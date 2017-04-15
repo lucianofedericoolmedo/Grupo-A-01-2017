@@ -2,8 +2,11 @@ package edu.unq.desapp.groupA.backend.model;
 
 public class Purchase extends Entity {
 
+
 	// Instance Variables
 	private Cart cart;
+	
+	private ShippingAddress shippingAddress;
 		
 	private PaymentType payment;
 
@@ -53,6 +56,14 @@ public class Purchase extends Entity {
 
 	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory productCategory) {
 		return cart.totalValueOfCheckedItemsWithProductCategory(productCategory);
+	}
+
+	public ShippingAddress getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
 }
