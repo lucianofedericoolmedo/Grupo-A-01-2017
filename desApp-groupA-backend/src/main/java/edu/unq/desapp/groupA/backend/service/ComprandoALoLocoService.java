@@ -283,7 +283,6 @@ public class ComprandoALoLocoService {
 	}
 
 	public List<Purchase> getAllPurchases() {
-		// TODO Auto-generated method stub
 		return purchaseService.getPurchases();
 	}
 

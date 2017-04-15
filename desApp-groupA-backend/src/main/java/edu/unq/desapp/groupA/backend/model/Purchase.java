@@ -1,5 +1,9 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Purchase extends Entity {
 
 	// Instance Variables
@@ -63,6 +67,21 @@ public class Purchase extends Entity {
 
 	public void setShippingAddress(ShippingAddress shippingAddress) {
 		this.shippingAddress = shippingAddress;
+	}
+	
+	public User getUser(){
+		return getCart().getUser();
+	}
+	
+	
+	public Set<String> namesOfProductsInPurchase(){
+		return this.getProducts().stream().map(p -> p.getName()).collect(Collectors.toSet());
+	}
+	
+
+	private List<Product> getProducts() {
+		// TODO Auto-generated method stub
+		return this.cart.items.stream().map(p-> p.getProduct()).collect(Collectors.toList());
 	}
 
 }

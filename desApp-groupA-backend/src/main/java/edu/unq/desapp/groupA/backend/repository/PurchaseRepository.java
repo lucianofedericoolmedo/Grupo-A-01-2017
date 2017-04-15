@@ -31,7 +31,7 @@ public class PurchaseRepository {
 	}
 
 	public List<Purchase> getPurchasesByUser(User user) {
-		return this.purchases.stream().filter(p -> p.getCart().getUser().equals(user)).collect(Collectors.toList());
+		return this.purchases.stream().filter(p -> p.getUser().isSameUser(user)).collect(Collectors.toList());
 	}
 
 	public List<Cart> getAllCarts() {

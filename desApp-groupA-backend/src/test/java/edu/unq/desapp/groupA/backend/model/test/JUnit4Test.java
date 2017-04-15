@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,35 +19,14 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
-import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.User;
-import edu.unq.desapp.groupA.backend.repository.CartRepository;
-import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
-import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
-import edu.unq.desapp.groupA.backend.repository.PaymentTypeRepository;
-import edu.unq.desapp.groupA.backend.repository.ProductRepository;
-import edu.unq.desapp.groupA.backend.repository.ProductThresoldRepository;
-import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
-import edu.unq.desapp.groupA.backend.repository.UserProfileRepository;
-import edu.unq.desapp.groupA.backend.repository.UserRepository;
-import edu.unq.desapp.groupA.backend.service.BalancerService;
-import edu.unq.desapp.groupA.backend.service.CartService;
-import edu.unq.desapp.groupA.backend.service.CashRegisterService;
 import edu.unq.desapp.groupA.backend.service.ComprandoALoLocoService;
-import edu.unq.desapp.groupA.backend.service.ItemCartService;
-import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
-import edu.unq.desapp.groupA.backend.service.PaymentTypeService;
-import edu.unq.desapp.groupA.backend.service.ProductService;
-import edu.unq.desapp.groupA.backend.service.ProductThresoldService;
-import edu.unq.desapp.groupA.backend.service.PurchaseService;
-import edu.unq.desapp.groupA.backend.service.ShoppingListService;
-import edu.unq.desapp.groupA.backend.service.TimeResponseService;
-import edu.unq.desapp.groupA.backend.service.UserProfileService;
-import edu.unq.desapp.groupA.backend.service.UserService;
+import edu.unq.desapp.groupA.backend.service.provider.ComprandoALoLocoProvider;
+import edu.unq.desapp.groupA.backend.service.provider.PriceFactory;
+import edu.unq.desapp.groupA.backend.service.provider.ShoppingListFactory;
 
 public class JUnit4Test {
 
@@ -72,194 +50,138 @@ public class JUnit4Test {
 	private Product cicatricure;
 	private Product heineken;
 	private Product avon;
-	private Purchase purchase;
+	private Purchase firstPurchase;
 	private User user;
-	private ProductCategory cuidadoPersonal;
-	private ProductCategory cremas;
-	private ProductCategory bebidas;
-	private ProductCategory cervezas;
-	private List<ProductCategory> categories1;
-	private List<ProductCategory> categories2;
-	private Purchase purchase2;
+	private ProductCategory healthCare;
+	private ProductCategory lotions;
+	private ProductCategory beverage;
+	private ProductCategory beer;
+	private List<ProductCategory> healthCategory;
+	private List<ProductCategory> drinkCategory;
+	private Purchase secondPurchase;
 	private Purchase purchase3;
-
+	private Brand brand;
+	private Price cicatricurePrice;
+	private Price drinkPrice;
+	private Price avonPrice;
+	private PaymentType paymentType;
+	
 	@Before
 	public void setup() {
-		comprandoALoLocoService = new ComprandoALoLocoService();
-		comprandoALoLocoService.setBalancerService(new BalancerService());
 		
-		comprandoALoLocoService.setCashRegisterService(new CashRegisterService(new CashRegisterRepository()));
+		comprandoALoLocoService = ComprandoALoLocoProvider.settingComprandoALoLocoService();
 		
-		comprandoALoLocoService.setUserService(new UserService(new UserRepository()));
-		comprandoALoLocoService.setCartService(new CartService(new CartRepository(), (long) 0));
-		comprandoALoLocoService.setItemCartService(new ItemCartService(new ItemCartRepository()));
-		comprandoALoLocoService.setProductService(new ProductService(new ProductRepository()));
-		comprandoALoLocoService.setPaymentTypeService(new PaymentTypeService( new PaymentTypeRepository()));
-		comprandoALoLocoService.setPurchaseService(new PurchaseService( new PurchaseRepository()));
-		comprandoALoLocoService.setProductThresoldService(new ProductThresoldService(new ProductThresoldRepository()));
-		comprandoALoLocoService.setUserProfileService(new UserProfileService( new UserProfileRepository()));
+		brand = new Brand();
 		
-		//CAMBIAR ESTOS SETTERS
-		comprandoALoLocoService.setShoppingListService(new ShoppingListService());
-		comprandoALoLocoService.setItemShoppingListService(new ItemShoppingListService());
-		comprandoALoLocoService.setTimeResponseService(new TimeResponseService());
-		comprandoALoLocoService.createCashRegisters(2);
+		beer = new ProductCategory();
+		healthCare = new ProductCategory();
+		beverage = new ProductCategory();
+		lotions = new ProductCategory();
 		
-		Brand brand = new Brand();
+		healthCategory = Arrays.asList(healthCare,lotions);
+		drinkCategory = Arrays.asList(beverage,beer);
 		
-		cervezas = new ProductCategory();
-		cuidadoPersonal = new ProductCategory();
-		bebidas = new ProductCategory();
-		cremas = new ProductCategory();
 		
-		categories1 = Arrays.asList(cuidadoPersonal,cremas);
-		categories2 = Arrays.asList(bebidas,cervezas);
+		drinkPrice = PriceFactory.exampleNewElem(10.00);
+		cicatricurePrice = PriceFactory.exampleNewElem(90.00);
+		avonPrice = PriceFactory.exampleNewElem(180.00);
 		
-		DateTime firstDayOfMonthOne = new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(2017);
-		DateTime tenthDayOfMonthOne = new DateTime().withDayOfMonth(10).withMonthOfYear(1).withYear(2017);
-		
-		Price newPrice = new Price();
-		newPrice.setPrice(10.00);
-		newPrice.setStartingValidityDate(firstDayOfMonthOne);
-		newPrice.setFinishingValidityDate(tenthDayOfMonthOne);
-		
-		Price newPrice2 = new Price();
-		newPrice2.setPrice(90.00);
-		newPrice2.setStartingValidityDate(firstDayOfMonthOne);
-		newPrice2.setFinishingValidityDate(tenthDayOfMonthOne);
-		
-		Price newPrice3 = new Price();
-		newPrice3.setPrice(180.00);
-		newPrice3.setStartingValidityDate(firstDayOfMonthOne);
-		newPrice3.setFinishingValidityDate(tenthDayOfMonthOne);
-		
-		cicatricure = comprandoALoLocoService.createProduct(brand, categories1, "Cicatricure", newPrice2);
-		heineken = comprandoALoLocoService.createProduct(brand, categories2, "Heineken", newPrice);
-		avon = comprandoALoLocoService.createProduct(brand, categories2, "Avon", newPrice3);
+		cicatricure = comprandoALoLocoService.createProduct(brand, healthCategory, "Cicatricure", cicatricurePrice);
+		heineken = comprandoALoLocoService.createProduct(brand, drinkCategory, "Heineken", drinkPrice);
+		avon = comprandoALoLocoService.createProduct(brand, drinkCategory, "Avon", avonPrice);
 		
 		user = comprandoALoLocoService.createUser("pochoLaPantera","elHijoDeCuca","pocho@gmail.com");
 				
-		//Cart cart = comprandoALoLocoService.createCartForUser(user);
-		
-		// ACA CREE LA SHOPPING LIST
-		ShoppingList shoppingList = comprandoALoLocoService.createShoppingListForUser(user);
-		ItemShoppingList heinekenItem = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList);
-		ItemShoppingList cicatricureItem = comprandoALoLocoService.createItemShoppingList(cicatricure,1,shoppingList);
+		ShoppingList shoppingList = ShoppingListFactory.
+				exampleShoppingList(comprandoALoLocoService, user, Arrays.asList(heineken,cicatricure));
 		
 		
-		// ACA CREE LA SHOPPING LIST
-		ShoppingList shoppingList2 = comprandoALoLocoService.createShoppingListForUser(user);
-		ItemShoppingList heinekenItem2 = comprandoALoLocoService.createItemShoppingList(heineken,1,shoppingList2);
-		ItemShoppingList avonItem = comprandoALoLocoService.createItemShoppingList(avon,1,shoppingList2);
+		ShoppingList shoppingList2 = ShoppingListFactory.
+				exampleShoppingList(comprandoALoLocoService, user, Arrays.asList(heineken,avon));
+				
 		
-		User otherUser = comprandoALoLocoService.createUser("Julio", "1234", "mail@gmail.com");		
+		Cart aCartForPocho = comprandoALoLocoService.createCartForShoppingList(shoppingList);
+		Cart anotherCartForPocho = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
+		
+				
+		
+		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
+		CashRegister anotherCashRegister = comprandoALoLocoService.getCashRegister();
+		
+		
+		paymentType = comprandoALoLocoService.createPaymentType("Credit Card", 
+				"Mastercard");
+		
+				
+		cashRegister = comprandoALoLocoService.requirePurchase(aCartForPocho,cashRegister);
+		anotherCashRegister = comprandoALoLocoService.requirePurchase(anotherCartForPocho,anotherCashRegister);
+		
+		
+				
+		firstPurchase = comprandoALoLocoService.createPurchase(aCartForPocho,paymentType,cashRegister);		
+		secondPurchase = comprandoALoLocoService.createPurchase(anotherCartForPocho,paymentType, 
+				anotherCashRegister);
+		
+	}
+	
+	@Test
+	public void testShipping(){
+		
+		User otherUser = comprandoALoLocoService.createUser("Julio", "1234", "mail@gmail.com");
+		
 		ShoppingList shoppingList3 = comprandoALoLocoService.createShoppingListForUser(otherUser);
-		Product brahma = comprandoALoLocoService.createProduct(brand, categories2, "brahma", newPrice);
-		Product guaymallen = comprandoALoLocoService.createProduct(brand, categories2, "guaymallen", newPrice);
+		Product brahma = comprandoALoLocoService.createProduct(brand, drinkCategory, "brahma", drinkPrice);
+		Product guaymallen = comprandoALoLocoService.createProduct(brand, drinkCategory, "guaymallen", drinkPrice);
 		
 		ItemShoppingList brahmaItem = comprandoALoLocoService.createItemShoppingList(brahma,1,shoppingList3);
 		ItemShoppingList guaymallenItem = comprandoALoLocoService.createItemShoppingList(guaymallen,1,shoppingList3);
 		
 		
-		//ACA CREO EL CARRITO
-		
-		Cart cart = comprandoALoLocoService.createCartForShoppingList(shoppingList);
-		Cart otherCart = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
-		Cart otherCart2 = comprandoALoLocoService.createCartForShoppingList(shoppingList2);
-		
-		// POSTA NECESITAMOS USAR BUILDERS ....
-		
-		/*
-		 * Sirven para crear items a un carrito fuera de la lista ...
-		comprandoALoLocoService.createItemCart(cart,cicatricure);
-		comprandoALoLocoService.createItemCart(cart,heineken);
-		
-		comprandoALoLocoService.createItemCart(otherCart,avon);
-		comprandoALoLocoService.createItemCart(otherCart,heineken);
-		*/
-		
-		
-		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
-		CashRegister cashRegister2 = comprandoALoLocoService.getCashRegister();
+		Cart otherCart2 = comprandoALoLocoService.createCartForShoppingList(shoppingList3);
 		CashRegister cashRegister3 = comprandoALoLocoService.getCashRegister();
-		
-		
-		PaymentType paymentType = comprandoALoLocoService.createPaymentType("unNombre", 
-				"unaDescripcion");
-				
-		cashRegister = comprandoALoLocoService.requirePurchase(cart,cashRegister);
-		cashRegister2 = comprandoALoLocoService.requirePurchase(otherCart,cashRegister2);
 		cashRegister3 = comprandoALoLocoService.requirePurchase(otherCart2,cashRegister3);
 		
-		
-				
-		purchase = comprandoALoLocoService.createPurchase(cart,paymentType,cashRegister);
-		
-		purchase2 = comprandoALoLocoService.createPurchase(otherCart,paymentType, 
-				cashRegister2);
-		
-		//Now cart2 user decided to leave the cashRegister queue ...
-		
-		purchase2 = comprandoALoLocoService.shipp(otherCart, paymentType ,cashRegister, new ShippingAddress());
-		
-		assertEquals(comprandoALoLocoService.getAllPurchases().size() , 3);
-				
-		
-	}
-	
-	//TESTS DE UMBRALES
-	
-	
-	@Test
-	public void testXXX1() {
-		// REFAC Using BUILDERS
-		
-		// Habria que ser más especifico con los thresold que podria crear...
-		
-		ProductCategoryThreshold pt = comprandoALoLocoService.createProductThreshold();		
-		UserProfile userProfile = comprandoALoLocoService.createUserProfile(user,pt);
-		
-		
-		
-		// OBTENE ESTADISTICAS DE COMPRAS SOBRE EL PRODUCTO
-		/*
-		 * Deberia tener mas de una compra, deberia ademas comparar con los elementos
-		 * que tenga un carrito en este momento particular
-		 */
-		
-		//Usuario user = new Usuario();
+		purchase3 = comprandoALoLocoService.shipp(otherCart2, paymentType ,cashRegister3, new ShippingAddress());
 	}
 	
 	
+
 	
 	@Test
-	public void testXXX2() {
+	public void testProductsInPurchase() {		
 		
-		
-		// TENGO ESTOS PRODUCTOS
 		Set<String> expectedProductsInPurchase = Arrays.asList(heineken,cicatricure).
 				stream().map(p -> p.getName()).collect(Collectors.toSet());
-		Set<String> productsInPurchase = comprandoALoLocoService.getProductsInPurchase(purchase).
-				stream().map(p -> p.getName()).collect(Collectors.toSet());
-		
+		Set<String> productsInPurchase = firstPurchase.namesOfProductsInPurchase();		
 		assertEquals(expectedProductsInPurchase,productsInPurchase);
-		
-		//TODO: DivideInTwoTest
-		
+	}
+	
+	@Test
+	public void testRecommendationsWhenHasOnlyOneCoincidenceForRecommendations(){
 		List<String> expectedP = Arrays.asList("Heineken");		
 		List<String> recomendacionesNombre = comprandoALoLocoService.getRecomendacionesPara(cicatricure).stream().collect(Collectors.toList());
-				
 		assertEquals( expectedP , recomendacionesNombre);
-		
+	}
+	
+	@Test
+	public void testRecommendationsWhenHasMoreCoincidenceForRecommendations(){
 		List<String> expectedP1 = Arrays.asList("Cicatricure", "Avon");		
 		List<String> recomendacionesNombre2 = comprandoALoLocoService.getRecomendacionesPara(heineken).stream().collect(Collectors.toList());
-				
-		assertEquals( expectedP1 , recomendacionesNombre2);
-				
-		List<Purchase> purchases = comprandoALoLocoService.getPurchasesByUser(user);
-		
-		assertTrue( purchases.contains(purchase) && purchases.contains(purchase2));
-		
+		assertEquals( expectedP1 , recomendacionesNombre2);		
+	}
+	
+	@Test 
+	public void testAllPurchases(){
+		assertEquals(comprandoALoLocoService.getAllPurchases().size() , 2);
+	}
+	
+	
+	@Test
+	public void testPurchasesFromUser() {	
+		//TODO: Make it work
+		List<Purchase> purchases = comprandoALoLocoService.getPurchasesByUser(user);		
+		assertTrue( purchases.contains(firstPurchase) && purchases.contains(secondPurchase));	
+		assertEquals( purchases.size(), 2);	
 				
 	}
 	
