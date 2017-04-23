@@ -1,8 +1,11 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.io.Serializable;
 import org.joda.time.DateTime;
 
-public class Entity {
+public class Entity implements Serializable {
+
+	private static final long serialVersionUID = 4056818895685613967L;
 
 	// Instance Variables
 	protected Long id;
