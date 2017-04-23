@@ -2,17 +2,26 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.List;
 
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 
-public abstract class Threshold extends Entity {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Threshold extends PersistenceEntity {
+
+	private static final long serialVersionUID = 3955350844177425893L;
 
 	// Instance Variables
 	protected Double percentageToSurpass;
 	
 	protected Boolean enabled;
 	
+	@ManyToOne
 	protected ThresholdCriteria criteria;
 	
+	@ManyToOne
 	protected User user;
 	
 	// Getters and Setters

@@ -77,11 +77,11 @@
 <!-- 				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
 			</props>
 		</property>
-		<property name="mappingLocations">
+		<!-- property name="mappingLocations">
 			<list>
 				<value>classpath*:mappings/*.hbm.xml</value>
 			</list>
-		</property>
+		</property -->
 
 	</bean>
 
@@ -99,20 +99,5 @@
 			<ref bean="persistence.dataSource" />
 		</constructor-arg>
 	</bean>
-
-	
-	<!-- ________________________________________ -->
-	<!-- ________________________________________ -->
-	<!-- ___________ Beans  de negocio___________ -->
-	<!-- ________________________________________ -->
-	<!-- ________________________________________ -->
-	
-	<bean id="persistence.personrepository" class="ar.edu.unq.repositories.PersonRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
-	<bean id="persistence.carrepository" class="ar.edu.unq.repositories.CarRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
-	
 
 </beans>

@@ -1,9 +1,17 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 import org.joda.time.DateTime;
 
-public abstract class Discount extends Entity {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Discount extends PersistenceEntity {
 	
+	private static final long serialVersionUID = 1266654534266762877L;
+
 	// Instance Variables
 	private DateTime startingDate;
 	
@@ -11,6 +19,7 @@ public abstract class Discount extends Entity {
 	
 	private Double percentagePerProductToDiscount;
 	
+	@Enumerated(value = EnumType.STRING)
 	private Priority priority;
 
 	// Getters and Setters

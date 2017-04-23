@@ -1,8 +1,16 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public abstract class Item extends Entity {
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Item extends PersistenceEntity {
+
+	private static final long serialVersionUID = -454916293375732956L;
 
 	// Instance Variables
+	@ManyToOne
 	protected Product product;
 
 	protected Integer quantity;

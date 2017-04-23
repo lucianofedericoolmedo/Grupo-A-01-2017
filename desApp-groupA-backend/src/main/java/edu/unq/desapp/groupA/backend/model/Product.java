@@ -2,16 +2,27 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-public class Product extends Entity {
+@Entity
+@Table(name="products")
+public class Product extends PersistenceEntity {
+
+	private static final long serialVersionUID = 8727166810127029053L;
 
 	// Instance Variables
 	private String name;
 
+	@ManyToMany
 	private List<ProductCategory> categories;
 	
+	@ManyToOne
 	private Brand brand;
 
+	@ManyToOne
 	private Price price;
 	
 	// Constructors

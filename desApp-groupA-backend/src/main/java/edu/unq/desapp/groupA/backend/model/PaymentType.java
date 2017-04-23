@@ -1,7 +1,14 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class PaymentType extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payments_types")
+public class PaymentType extends PersistenceEntity {
 	
+	private static final long serialVersionUID = 6224752371785504407L;
+
 	// Instance Variables
 	private String name;
 	

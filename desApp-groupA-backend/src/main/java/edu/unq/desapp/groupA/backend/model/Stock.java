@@ -1,8 +1,17 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Stock extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "stocks")
+public class Stock extends PersistenceEntity {
+
+	private static final long serialVersionUID = -5951486096677461006L;
 
 	// Instance Variables
+	@ManyToOne
 	private Product product;
 	
 	private Integer quantity;

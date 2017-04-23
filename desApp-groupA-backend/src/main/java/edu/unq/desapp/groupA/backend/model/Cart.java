@@ -4,12 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.joda.time.DateTime;
 
+@Entity
+@Table(name = "carts")
 public class Cart extends ItemGroup<ItemCart> {
 
+	private static final long serialVersionUID = -6570435320228105087L;
+
 	// Instance Variables
+	@ManyToOne
 	private ShoppingList usedShoppingList;
+	
 	private DateTime reservationTime;
 	
 	// Constructors

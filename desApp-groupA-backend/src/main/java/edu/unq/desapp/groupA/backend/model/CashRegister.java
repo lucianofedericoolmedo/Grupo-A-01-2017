@@ -1,34 +1,37 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.joda.time.DateTime;
 
-public class CashRegister extends Entity {
+@Entity
+@Table(name = "cash_registers")
+public class CashRegister extends PersistenceEntity {
 	
+	private static final long serialVersionUID = 2557711174710524531L;
+
+	// Instance Variables
 	private Boolean available;
 	private Integer productsToProcess;
 	
-
+	// Getters and Setters
 	public Integer getProductsToProcess() {
 		return productsToProcess;
 	}
-
 
 	public CashRegister(){
 		this.productsToProcess = 0;
 		this.setAvailable(true);
 	}
 
-
-
 	public Boolean getAvailable() {
 		return available;
 	}
 
-
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
-
 
 	public void requirePurchase(Cart cart) {
 		cart.setReservationTime(new DateTime());
@@ -40,7 +43,6 @@ public class CashRegister extends Entity {
 		this.productsToProcess = productosPorProcesar;
 	}
 
-
 	public void removeItems(Integer quantityOfItems) {
 		this.setProductsToProcess(this.productsToProcess - quantityOfItems);
 		if (this.productsToProcess == 0){
@@ -49,8 +51,4 @@ public class CashRegister extends Entity {
 		
 	}
 	
-	
-
-	
-
 }

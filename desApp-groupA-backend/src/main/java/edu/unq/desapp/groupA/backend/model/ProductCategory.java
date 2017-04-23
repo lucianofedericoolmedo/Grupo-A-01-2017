@@ -1,7 +1,14 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class ProductCategory extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "products_categories")
+public class ProductCategory extends PersistenceEntity {
+
+	private static final long serialVersionUID = 8142353411183447982L;
+	
 	// Instance Variables
 	private String name;
 

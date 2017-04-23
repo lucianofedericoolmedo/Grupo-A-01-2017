@@ -2,9 +2,16 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 
+@Entity
+@Table(name = "thresholds_criterias_quantity")
 public class QuantityThresholdCriteria extends ThresholdCriteria {
+
+	private static final long serialVersionUID = -584977931345610443L;
 
 	public static final String description = "Por cantidad de ultimas compras";
 	

@@ -1,13 +1,22 @@
 package edu.unq.desapp.groupA.backend.model;
 
 import java.io.Serializable;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 import org.joda.time.DateTime;
 
-public class Entity implements Serializable {
+@MappedSuperclass
+public class PersistenceEntity implements Serializable {
 
 	private static final long serialVersionUID = 4056818895685613967L;
 
 	// Instance Variables
+	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	protected Long id;
 
 	protected DateTime creationDate;

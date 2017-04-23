@@ -1,12 +1,21 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.joda.time.DateTime;
 
-public class Price extends Entity {
+@Entity
+@Table(name = "prices")
+public class Price extends PersistenceEntity {
+
+	private static final long serialVersionUID = 4954174396323406182L;
 
 	// Instance Variables
 	private Double price;
 	
+	@ManyToOne
 	private Product product;
 	
 	private DateTime startingValidityDate;

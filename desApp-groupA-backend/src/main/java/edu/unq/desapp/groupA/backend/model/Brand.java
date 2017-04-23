@@ -1,7 +1,13 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public class Brand extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "brands")
+public class Brand extends PersistenceEntity {
+
+	private static final long serialVersionUID = 1276171792953917236L;
 	// Instance Variables
 	private String name;
 

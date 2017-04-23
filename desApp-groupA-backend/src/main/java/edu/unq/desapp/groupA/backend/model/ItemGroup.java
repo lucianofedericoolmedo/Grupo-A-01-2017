@@ -3,8 +3,17 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ItemGroup<ItemType extends Item> {
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity {
+
+	private static final long serialVersionUID = -7139614401053628294L;
+
+	// Instance Variables
+	@ManyToOne
 	protected List<ItemType> items;
 	
 	protected User user;

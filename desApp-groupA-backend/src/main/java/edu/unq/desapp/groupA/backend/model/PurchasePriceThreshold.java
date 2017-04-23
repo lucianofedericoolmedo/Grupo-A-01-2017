@@ -3,8 +3,15 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "thresholds_purchase_price")
 public class PurchasePriceThreshold extends Threshold {
 
+	private static final long serialVersionUID = 329192937256974350L;
+	
 	// Instance Variables
 	private Double priceToSurpass;
 
