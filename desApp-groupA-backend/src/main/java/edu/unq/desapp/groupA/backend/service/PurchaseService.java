@@ -3,6 +3,8 @@ package edu.unq.desapp.groupA.backend.service;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
@@ -11,8 +13,11 @@ import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
 
+
+@Service
 public class PurchaseService {
 
+	@Autowired
 	private PurchaseRepository repository;	
 	
 	public Purchase createPurchase(Cart cart, PaymentType paymentType){

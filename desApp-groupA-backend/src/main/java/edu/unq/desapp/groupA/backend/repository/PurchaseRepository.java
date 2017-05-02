@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Repository;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.User;
 
-public class PurchaseRepository {
+
+@Repository
+public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 
 	private List<Purchase> purchases;
 
@@ -26,10 +29,6 @@ public class PurchaseRepository {
 		this.purchases = purchases;
 	}
 	
-	public void save(Purchase p){
-		this.purchases.add(p);
-	}
-
 	public List<Purchase> getPurchasesByUser(User user) {
 		return this.purchases.stream().filter(p -> p.getUser().isSameUser(user)).collect(Collectors.toList());
 	}
@@ -51,5 +50,10 @@ public class PurchaseRepository {
 	
 	public List<Purchase> getShippings() {
 		return this.purchases.stream().filter(p -> p.getShippingAddress() != null).collect(Collectors.toList());
+	}
+
+	@Override
+	protected Class<Purchase> getDomainClass() {
+		return Purchase.class;
 	}
 }

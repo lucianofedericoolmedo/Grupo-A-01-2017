@@ -1,13 +1,18 @@
 package edu.unq.desapp.groupA.backend.service;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.repository.PriceRepository;
 
+
+@Service
 public class PriceService {
 
+	@Autowired
 	private PriceRepository repository;
 	
 	public PriceService(PriceRepository priceRepository) {
@@ -33,6 +38,5 @@ public class PriceService {
 		Price newPrice = new Price(product, price);
 		return this.getRepository().save(newPrice);
 	}
-
 
 }

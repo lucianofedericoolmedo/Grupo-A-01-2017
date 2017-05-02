@@ -2,11 +2,17 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
 
+
+@Service
 public class CashRegisterService {
 
+	@Autowired
 	private CashRegisterRepository repository;
 
 	public CashRegisterService(CashRegisterRepository repository) {

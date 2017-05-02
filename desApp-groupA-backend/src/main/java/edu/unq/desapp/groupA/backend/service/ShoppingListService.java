@@ -2,14 +2,21 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
 
+
+@Service
 public class ShoppingListService {
 	
+	@Autowired
 	private ShoppingListRepository repository;
+	
 	private Long identifier;
 
 	public ShoppingListService() {

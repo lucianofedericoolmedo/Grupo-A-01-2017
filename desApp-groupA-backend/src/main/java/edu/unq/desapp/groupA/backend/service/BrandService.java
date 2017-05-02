@@ -1,10 +1,16 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.repository.BrandRepository;
 
+
+@Service
 public class BrandService {
 
+	@Autowired
 	private BrandRepository repository;
 	
 	public BrandService(BrandRepository brandRepository) {

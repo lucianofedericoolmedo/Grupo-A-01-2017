@@ -16,7 +16,7 @@ public class PersistenceEntity implements Serializable {
 
 	// Instance Variables
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Long id;
 
 	protected DateTime creationDate;

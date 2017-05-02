@@ -3,6 +3,9 @@ package edu.unq.desapp.groupA.backend.service;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
 import edu.unq.desapp.groupA.backend.csv.CsvResultBasicProductBuilder;
 import edu.unq.desapp.groupA.backend.csv.basicStructures.BasicProduct;
@@ -12,11 +15,20 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
+
+@Service
 public class ProductService {
 
+	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
 	private BrandService brandService;
+	
+	@Autowired
 	private StockService stockService;
+	
+	@Autowired
 	private PriceService priceService;
 
 	public ProductService(ProductRepository repository) {

@@ -2,15 +2,23 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.Threshold;
 import edu.unq.desapp.groupA.backend.repository.ThresholdRepository;
 
+
+@Service
 public class ThresholdService {
 
 	// Repositories and Services
+	@Autowired
 	private ThresholdRepository repository;
+	
+	@Autowired
 	private PurchaseService purchaseService;
 
 	public ThresholdService(ThresholdRepository thresholdRepository) {

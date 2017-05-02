@@ -3,10 +3,14 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Product;
 
-public class CartRepository {
+
+@Repository
+public class CartRepository extends HibernateGenericDAO<Cart> {
 
 	private List<Cart> cartsAvailable;
 
@@ -22,12 +26,13 @@ public class CartRepository {
 		this.cartsAvailable = cartsAvailable;
 	}
 
-	public void save(Cart cart) {
-		this.cartsAvailable.add(cart);		
-	}
-
 	public boolean isCartIncludingProduct(Cart cart, Product product) {
 		return cart.getItems().stream().anyMatch(itemC -> itemC.getProduct() == product);
+	}
+
+	@Override
+	protected Class<Cart> getDomainClass() {
+		return Cart.class;
 	}
 	
 	

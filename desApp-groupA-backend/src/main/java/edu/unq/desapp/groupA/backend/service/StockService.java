@@ -1,11 +1,17 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Stock;
 import edu.unq.desapp.groupA.backend.repository.StockRepository;
 
+
+@Service
 public class StockService {
 
+	@Autowired
 	private StockRepository repository;
 
 	public StockService(StockRepository stockRepository) {

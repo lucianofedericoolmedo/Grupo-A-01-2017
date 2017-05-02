@@ -4,10 +4,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-       
-       
-       
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	xmlns:aop="http://www.springframework.org/schema/aop">
+
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
     <tx:annotation-driven transaction-manager="persistence.transactionManager"	proxy-target-class="true" />
 
 <!--
@@ -67,7 +69,7 @@
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-
+		
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
 				<!-- Propiedades para la configuración de la cache de segundo nivel
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
@@ -77,6 +79,7 @@
 <!-- 				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
 			</props>
 		</property>
+		
 		<!-- property name="mappingLocations">
 			<list>
 				<value>classpath*:mappings/*.hbm.xml</value>

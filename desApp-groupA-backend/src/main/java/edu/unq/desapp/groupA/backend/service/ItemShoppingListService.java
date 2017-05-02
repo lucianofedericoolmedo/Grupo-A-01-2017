@@ -1,12 +1,18 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.repository.ItemShoppingListRepository;
 
+
+@Service
 public class ItemShoppingListService {
 
+	@Autowired
 	private ItemShoppingListRepository repository;
 
 	public ItemShoppingListRepository getRepository() {

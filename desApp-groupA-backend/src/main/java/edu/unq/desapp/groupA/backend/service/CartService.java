@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
@@ -12,8 +15,11 @@ import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
+
+@Service
 public class CartService {
 
+	@Autowired
 	private CartRepository repository;
 	private Long identifier;
 	private ItemCartService itemCartService;

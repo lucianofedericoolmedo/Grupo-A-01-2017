@@ -1,12 +1,18 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 
+
+@Service
 public class ItemCartService {
 
+	@Autowired
 	private ItemCartRepository repository;
 
 

@@ -3,10 +3,14 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 
-public class PriceRepository {
+
+@Repository
+public class PriceRepository extends HibernateGenericDAO<Price> {
 
 	private List<Price> prices;
 	
@@ -22,13 +26,13 @@ public class PriceRepository {
 		this.prices = prices;
 	}
 
-	public Price save(Price newPrice) {
-		this.prices.add(newPrice);
-		return newPrice;
-	}
-
 	public Price findLastPriceByProduct(Product product) {
 		return prices.stream().filter(price -> price.getProduct() == product).max((priceA, priceB) -> priceA.getStartingValidityDate().compareTo(priceB.getStartingValidityDate())).get();
+	}
+
+	@Override
+	protected Class<Price> getDomainClass() {
+		return Price.class;
 	}
 	
 }

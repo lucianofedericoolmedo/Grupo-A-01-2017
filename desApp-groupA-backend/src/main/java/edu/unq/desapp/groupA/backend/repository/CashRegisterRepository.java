@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 
-public class CashRegisterRepository {
+
+@Repository
+public class CashRegisterRepository extends HibernateGenericDAO<CashRegister> {
 
 	private List<CashRegister> registeredCashRegisters;
 	
@@ -16,10 +20,6 @@ public class CashRegisterRepository {
 
 	public void setRegisteredCashRegisters(List<CashRegister> registeredCashRegisters) {
 		this.registeredCashRegisters = registeredCashRegisters;
-	}
-	
-	public void save(CashRegister cashRegister){
-		this.registeredCashRegisters.add(cashRegister);
 	}
 	
 	public CashRegisterRepository(){
@@ -32,5 +32,10 @@ public class CashRegisterRepository {
 
 	public List<CashRegister> getAvailableCashRegisters() {
 		return registeredCashRegisters.stream().filter(caja -> caja.getAvailable()).collect(Collectors.toList());
+	}
+
+	@Override
+	protected Class<CashRegister> getDomainClass() {
+		return CashRegister.class;
 	}
 }
