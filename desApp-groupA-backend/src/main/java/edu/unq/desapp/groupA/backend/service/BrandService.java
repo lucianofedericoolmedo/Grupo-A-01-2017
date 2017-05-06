@@ -8,10 +8,12 @@ import edu.unq.desapp.groupA.backend.repository.BrandRepository;
 
 
 @Service
-public class BrandService {
+public class BrandService extends GenericService<Brand> {
 
 	@Autowired
 	private BrandRepository repository;
+	
+	public BrandService() {}
 	
 	public BrandService(BrandRepository brandRepository) {
 		this.setRepository(brandRepository);
@@ -32,7 +34,7 @@ public class BrandService {
 	public Brand findByNameOrCreate(String brandName) {
 		Brand brand = findByName(brandName);
 		if (brand == null) {
-			brand = this.getRepository().save(new Brand(brandName));
+			brand = this.save(new Brand(brandName));
 		}
 		return brand;
 	}

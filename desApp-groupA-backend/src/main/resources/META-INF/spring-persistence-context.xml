@@ -4,12 +4,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
-	xmlns:aop="http://www.springframework.org/schema/aop">
-
-	<aop:aspectj-autoproxy proxy-target-class="true"/>
-
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       
+       
+       
     <tx:annotation-driven transaction-manager="persistence.transactionManager"	proxy-target-class="true" />
 
 <!--
@@ -69,7 +67,7 @@
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-		
+
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
 				<!-- Propiedades para la configuración de la cache de segundo nivel
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
@@ -79,6 +77,35 @@
 <!-- 				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
 			</props>
 		</property>
+		
+		<property name="annotatedClasses">
+	     <list>
+	       <value>edu.unq.desapp.groupA.backend.model.Brand</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Cart</value>
+	       <value>edu.unq.desapp.groupA.backend.model.CashRegister</value>
+	       <value>edu.unq.desapp.groupA.backend.model.DateThresholdCriteria</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Discount</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ItemCart</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ItemShoppingList</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PaymentType</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PerProduct</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PerProductCategory</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PerProductQuantity</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Price</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Product</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ProductCategory</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Purchase</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PurchasePriceThreshold</value>
+	       <value>edu.unq.desapp.groupA.backend.model.QuantityThresholdCriteria</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ShippingAddress</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ShoppingList</value>
+	       <value>edu.unq.desapp.groupA.backend.model.Stock</value>
+	       <value>edu.unq.desapp.groupA.backend.model.TimeResponse</value>
+	       <value>edu.unq.desapp.groupA.backend.model.User</value>
+	       <value>edu.unq.desapp.groupA.backend.model.UserProfile</value>
+	     </list>
+	   </property>
 		
 		<!-- property name="mappingLocations">
 			<list>
@@ -102,5 +129,17 @@
 			<ref bean="persistence.dataSource" />
 		</constructor-arg>
 	</bean>
+
+	
+	<!-- ________________________________________ -->
+	<!-- ________________________________________ -->
+	<!-- ___________ Beans  de negocio___________ -->
+	<!-- ________________________________________ -->
+	<!-- ________________________________________ -->
+	
+	<bean id="persistence.brandRepository" class="edu.unq.desapp.groupA.backend.repository.BrandRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
 
 </beans>

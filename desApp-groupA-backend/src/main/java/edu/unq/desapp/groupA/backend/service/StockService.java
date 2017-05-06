@@ -33,7 +33,7 @@ public class StockService {
 	public Stock updateStockForProduct(Product product, Integer stockQuantity) {
 		Stock stock = findByProduct(product);
 		if (stock == null) {
-			stock = this.getRepository().save(new Stock(product, stockQuantity));
+//			stock = this.getRepository().save(new Stock(product, stockQuantity));
 		}
 		return stock;
 	}

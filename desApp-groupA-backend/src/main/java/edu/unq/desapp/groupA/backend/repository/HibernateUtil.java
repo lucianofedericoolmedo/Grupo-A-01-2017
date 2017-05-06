@@ -1,14 +1,7 @@
 package edu.unq.desapp.groupA.backend.repository;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-
-import edu.unq.desapp.groupA.backend.model.Brand;
-
 public class HibernateUtil {
-
+	/*
 	 private static SessionFactory sessionFactory;
 	    private static ServiceRegistry serviceRegistry;
 
@@ -30,4 +23,5 @@ public class HibernateUtil {
 	        sessionFactory = buildSessionFactory();
 	        return sessionFactory;
 	    }
+	    */
 }

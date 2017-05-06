@@ -10,6 +10,8 @@ import edu.unq.desapp.groupA.backend.model.Brand;
 @Repository
 public class BrandRepository extends HibernateGenericDAO<Brand> {
 
+	private static final long serialVersionUID = -4425722631916607857L;
+
 	private List<Brand> brands;
 	
 	public BrandRepository() {

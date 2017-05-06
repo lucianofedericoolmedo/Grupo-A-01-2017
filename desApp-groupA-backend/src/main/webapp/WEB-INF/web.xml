@@ -4,12 +4,13 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
-	<display-name>[Grupo A] Comprando aLoLoco</display-name>
+	<display-name>TP Desarrollo</display-name>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath*:/META-INF/spring-persistence-context.xml
+			classpath*:/META-INF/spring-persistence-context.xml,
+			classpath*:/META-INF/spring-services-context.xml
 		</param-value>
 	</context-param>
 

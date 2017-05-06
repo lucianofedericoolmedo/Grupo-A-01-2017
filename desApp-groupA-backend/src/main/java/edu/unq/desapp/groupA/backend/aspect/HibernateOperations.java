@@ -1,17 +1,15 @@
 package edu.unq.desapp.groupA.backend.aspect;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.hibernate.Session;
-
-import edu.unq.desapp.groupA.backend.repository.HibernateUtil;
 
 
 @Aspect
 public class HibernateOperations {
 	
-    @Around("within(@(@org.springframework.stereotype.Repository *) *)")
+	/*
+//    @Around("within(@(@org.springframework.stereotype.Repository *) *)")
+//	@Around("execution(* edu.unq.desapp.groupA.backend.repository.*.*(..))")
+	@Around("@target(org.springframework.transaction.annotation.Transactional)")
     public Object executeInSession(final ProceedingJoinPoint pjp) throws Throwable {
 
     	System.out.println("Before");
@@ -38,4 +36,5 @@ public class HibernateOperations {
         return entity;
     }
 
+*/
 }

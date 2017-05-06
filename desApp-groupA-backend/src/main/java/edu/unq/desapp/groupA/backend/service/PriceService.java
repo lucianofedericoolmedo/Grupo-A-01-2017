@@ -36,7 +36,8 @@ public class PriceService {
 	public Price updatePriceForProduct(Product product, Double price) {
 		finishPriceValidityForProduct(product);
 		Price newPrice = new Price(product, price);
-		return this.getRepository().save(newPrice);
+//		return this.getRepository().save(newPrice);
+		return newPrice;
 	}
 
 }

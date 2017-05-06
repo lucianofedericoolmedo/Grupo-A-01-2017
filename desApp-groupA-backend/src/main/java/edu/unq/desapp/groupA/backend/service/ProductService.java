@@ -64,7 +64,7 @@ public class ProductService {
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
 		Product product = this.getRepository().find(basicProduct.getId());
 		if (product == null) {
-			product = this.getRepository().save(new Product());
+//			product = this.getRepository().save(new Product());
 		}
 		product.setName(basicProduct.getName());
 		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
@@ -72,7 +72,8 @@ public class ProductService {
 		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		product.setPrice(price);
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
-		return this.getRepository().save(product);
+//		return this.getRepository().save(product);
+		return product;
 	}
 
 	// Services

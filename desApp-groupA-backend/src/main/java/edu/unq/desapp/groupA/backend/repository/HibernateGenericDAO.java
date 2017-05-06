@@ -1,167 +1,67 @@
 package edu.unq.desapp.groupA.backend.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-import edu.unq.desapp.groupA.backend.model.PersistenceEntity;
+public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
 
-@SuppressWarnings("unchecked")
-@Repository
-public abstract class HibernateGenericDAO<T extends PersistenceEntity> {
+	private static final long serialVersionUID = 2150025908769301782L;
+	
+	protected Class<T> persistentClass = this.getDomainClass();
 
-    protected Class<T> persistentClass = this.getDomainClass();
-
-
-    public SessionFactory getSessionFactory() {
-    	return HibernateUtil.getSessionFactory();
-    }
-    
-    public Session getSession() {
-    	return getSessionFactory().getCurrentSession();
-    }
-
+    @SuppressWarnings("unchecked")
     public int count() {
-        Session session = null;
-        List<Integer> find = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            find = (List<Integer>) session.createQuery("select count(*) from " + this.persistentClass.getName() + " o");
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return find.get(0);
+        List<Long> list = (List<Long>) this.getHibernateTemplate()
+                .find("select count(*) from " + this.persistentClass.getName() + " o");
+
+        // this.getHibernateTemplate().execute(new HibernateCallback<Car>() {
+        //
+        // @Override
+        // public Car doInHibernate(final Session session) throws
+        // HibernateException, SQLException {
+        // throw new UnsupportedOperationException();
+        // }
+        // });
+        Long count = list.get(0);
+        return count.intValue();
 
     }
 
     public void delete(final T entity) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(entity);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        this.getHibernateTemplate().delete(entity);
     }
 
-    public void delete(Long id) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            T entity = (T) session.get(getDomainClass(), id);
-            session.delete(entity);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public void deleteById(final Serializable id) {
+        T obj = this.findById(id);
+        this.getHibernateTemplate().delete(obj);
     }
 
     public List<T> findAll() {
-        Session session = null;
-        List<T> find = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            find = (List<T>) session.createQuery("from " + this.persistentClass.getName() + " o");
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        List<T> find = (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName() + " o");
         return find;
+
     }
 
-    public T find(Long id) {
+    public List<T> findByExample(final T exampleObject) {
+        return this.getHibernateTemplate().findByExample(exampleObject);
 
-    	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-    	T entity = (T) session.get(getDomainClass(), id);
-    	return entity;
-    	
-    	/*
-        Session session = null;
-        T entity = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            entity =  (T) session.get(getDomainClass(), id);
-            Hibernate.initialize(entity);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return entity;
-        */
+    }
+
+    public T findById(final Serializable id) {
+        return this.getHibernateTemplate().get(this.persistentClass, id);
     }
 
     protected abstract Class<T> getDomainClass();
 
-    public T save(final T entity) {
-    	
-    	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-    	session.save(entity);
-    	return entity;
-    	
-    	/*
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(entity);
-            Hibernate.initialize(entity);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return entity;
-        */
+    public void save(final T entity) {
+        this.getHibernateTemplate().save(entity);
+        this.getHibernateTemplate().flush();
     }
 
     public void update(final T entity) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.update(entity);
-            Hibernate.initialize(entity);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        this.getHibernateTemplate().update(entity);
     }
 
 }
