@@ -28,7 +28,9 @@ public class PurchaseService {
 		this.repository.save(purchase);
 		return purchase;
 	}
-	
+
+	public PurchaseService() { }
+
 	public PurchaseService(PurchaseRepository repository) {
 		this.repository = repository;
 	}

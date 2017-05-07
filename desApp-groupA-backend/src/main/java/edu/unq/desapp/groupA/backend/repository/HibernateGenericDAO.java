@@ -3,6 +3,8 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
@@ -10,6 +12,11 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 	private static final long serialVersionUID = 2150025908769301782L;
 	
 	protected Class<T> persistentClass = this.getDomainClass();
+
+	@Autowired
+	public void init(SessionFactory factory) {
+	    setSessionFactory(factory);
+	}
 
     @SuppressWarnings("unchecked")
     public int count() {

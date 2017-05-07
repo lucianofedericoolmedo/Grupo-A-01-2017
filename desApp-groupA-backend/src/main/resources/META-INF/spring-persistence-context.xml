@@ -137,9 +137,9 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
-	<bean id="persistence.brandRepository" class="edu.unq.desapp.groupA.backend.repository.BrandRepository" >
+	<!-- bean id="persistence.brandRepository" class="edu.unq.desapp.groupA.backend.repository.BrandRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
+	</bean -->
 	
 
 </beans>

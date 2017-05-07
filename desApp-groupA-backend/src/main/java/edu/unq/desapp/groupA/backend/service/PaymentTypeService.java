@@ -12,7 +12,9 @@ public class PaymentTypeService {
 
 	@Autowired
 	PaymentTypeRepository repository;
-		
+
+	public PaymentTypeService() { }
+
 	public PaymentTypeService(PaymentTypeRepository repository) {
 		this.repository = repository;
 	}
