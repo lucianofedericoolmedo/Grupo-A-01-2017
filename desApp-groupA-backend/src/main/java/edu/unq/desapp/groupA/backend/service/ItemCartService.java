@@ -29,6 +29,8 @@ public class ItemCartService {
 		return item;
 	}
 
+	public ItemCartService() { }
+
 	public ItemCartService(ItemCartRepository repository) {
 		this.repository = repository;
 	}

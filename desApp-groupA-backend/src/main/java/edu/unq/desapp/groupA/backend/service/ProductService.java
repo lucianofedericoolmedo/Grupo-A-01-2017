@@ -31,6 +31,8 @@ public class ProductService {
 	@Autowired
 	private PriceService priceService;
 
+	public ProductService() { }
+
 	public ProductService(ProductRepository repository) {
 		this.repository = repository;
 	}

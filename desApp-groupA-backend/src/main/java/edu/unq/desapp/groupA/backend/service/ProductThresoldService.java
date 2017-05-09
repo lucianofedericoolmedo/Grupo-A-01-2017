@@ -12,7 +12,9 @@ public class ProductThresoldService {
 
 	@Autowired
 	private ProductThresoldRepository repository;
-	
+
+	public ProductThresoldService() { }
+
 	public ProductThresoldService(ProductThresoldRepository repository) {
 		this.repository = repository;
 	}

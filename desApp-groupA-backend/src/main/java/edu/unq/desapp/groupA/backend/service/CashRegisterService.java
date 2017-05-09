@@ -15,6 +15,8 @@ public class CashRegisterService {
 	@Autowired
 	private CashRegisterRepository repository;
 
+	public CashRegisterService() { }
+
 	public CashRegisterService(CashRegisterRepository repository) {
 		this.repository = repository;
 	}

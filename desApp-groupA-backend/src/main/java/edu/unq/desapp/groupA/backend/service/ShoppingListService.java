@@ -19,10 +19,7 @@ public class ShoppingListService {
 	
 	private Long identifier;
 
-	public ShoppingListService() {
-		this.setRepository(new ShoppingListRepository());
-		this.identifier = new Long(0);
-	}
+	public ShoppingListService() { }
 
 	public Long getIdentifier() {
 		return identifier;

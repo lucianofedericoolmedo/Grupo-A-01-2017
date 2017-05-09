@@ -22,10 +22,8 @@ public class ItemShoppingListService {
 	public void setRepository(ItemShoppingListRepository repository) {
 		this.repository = repository;
 	}
-	
-	public ItemShoppingListService(){
-		this.repository = new ItemShoppingListRepository();
-	}
+
+	public ItemShoppingListService(){ }
 
 	public ItemShoppingList createItemShoppingList(Product product, Integer quantity,ShoppingList shoppingList) {
 		ItemShoppingList itemShoppingList = new ItemShoppingList();

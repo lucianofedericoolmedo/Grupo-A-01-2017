@@ -24,7 +24,7 @@ public class CartService {
 	private Long identifier;
 	private ItemCartService itemCartService;
 
-
+	public CartService() { }
 	
 	public CartService(CartRepository repository, Long identifier) {
 		this.repository = repository;

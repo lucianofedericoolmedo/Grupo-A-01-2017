@@ -14,6 +14,8 @@ public class StockService {
 	@Autowired
 	private StockRepository repository;
 
+	public StockService() { }
+	
 	public StockService(StockRepository stockRepository) {
 		this.repository = stockRepository;
 	}

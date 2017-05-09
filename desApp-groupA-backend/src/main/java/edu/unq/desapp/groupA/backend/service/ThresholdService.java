@@ -21,6 +21,8 @@ public class ThresholdService {
 	@Autowired
 	private PurchaseService purchaseService;
 
+	public ThresholdService() { }
+
 	public ThresholdService(ThresholdRepository thresholdRepository) {
 		this.repository = thresholdRepository;
 	}

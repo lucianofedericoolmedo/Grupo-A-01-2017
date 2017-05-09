@@ -14,7 +14,9 @@ public class PriceService {
 
 	@Autowired
 	private PriceRepository repository;
-	
+
+	public PriceService() { }
+
 	public PriceService(PriceRepository priceRepository) {
 		this.setRepository(priceRepository);
 	}

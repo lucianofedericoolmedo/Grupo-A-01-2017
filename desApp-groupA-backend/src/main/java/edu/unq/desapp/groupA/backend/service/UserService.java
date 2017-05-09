@@ -1,10 +1,16 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.UserRepository;
 
-public class UserService {
+
+@Service
+public class UserService extends GenericService<User> {
 	
+	@Autowired
 	private UserRepository repository;
 
 	public UserRepository getRepository() {
@@ -15,9 +21,7 @@ public class UserService {
 		this.repository = repository;
 	}
 
-	public UserService(UserRepository userRepository) {
-		this.repository = userRepository;
-	}
+	public UserService() { }
 
 	public User createUser(String username, String password, String email){
 		User user = new User();
