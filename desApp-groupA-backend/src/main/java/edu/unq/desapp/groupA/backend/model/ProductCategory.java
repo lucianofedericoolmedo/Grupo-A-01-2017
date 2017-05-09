@@ -12,6 +12,12 @@ public class ProductCategory extends PersistenceEntity {
 	// Instance Variables
 	private String name;
 
+	public ProductCategory() {}
+	
+	public ProductCategory(String name) {
+		this.name = name;
+	}
+
 	// Getters and Setters
 	public String getName() {
 		return name;

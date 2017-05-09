@@ -2,10 +2,16 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="products")
@@ -17,13 +23,18 @@ public class Product extends PersistenceEntity {
 	private String name;
 
 	@ManyToMany
-	private List<ProductCategory> categories;
+	@JoinTable(name="products_products_categories", 
+		joinColumns={@JoinColumn(name="products_id")}, 
+		inverseJoinColumns={@JoinColumn(name="products_categories_id")})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<ProductCategory> categories = new LinkedList<ProductCategory>();
 	
 	@ManyToOne
 	private Brand brand;
 
-	@ManyToOne
-	private Price price;
+	@OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+	private List<Price> prices = new LinkedList<Price>();
 	
 	// Constructors
 	public Product() {
@@ -55,17 +66,23 @@ public class Product extends PersistenceEntity {
 		this.brand = brand;
 	}
 
-	public Price getPrice() {
-		return price;
+	public List<Price> getPrices() {
+		return prices;
 	}
 
-	public void setPrice(Price price) {
-		this.price = price;
+	public void setPrices(List<Price> prices) {
+		this.prices = prices;
 	}
 
 	// Logic
 	public Double priceForQuantity(Integer quantity) {
-		return price.priceForQuantity(quantity);
+		//TODO: Refactor for a given price ??
+		return this.getCurrentPrice().priceForQuantity(quantity);
+	}
+	
+	public Price getCurrentPrice(){
+		// TODO: Refac to get current price
+		return prices.get(0);
 	}
 
 	public boolean isCategory(ProductCategory categoryForDiscount) {
@@ -74,6 +91,10 @@ public class Product extends PersistenceEntity {
 
 	public void addCategory(ProductCategory aProductCategory) {
 		categories.add(aProductCategory);
+	}
+
+	public void addPrice(Price price) {
+		this.prices.add(price);
 	}
 
 }

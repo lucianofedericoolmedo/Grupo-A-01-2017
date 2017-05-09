@@ -37,7 +37,7 @@ public class PerProductCategoryTest {
 		
 		aProductCategory = new ProductCategory();
 		aProduct = new Product();
-		aProduct.setPrice(aPrice);
+		//aProduct.setPrice(aPrice);
 		aProduct.addCategory(aProductCategory);
 		
 		aItemCart = new ItemCart();

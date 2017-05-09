@@ -10,8 +10,12 @@ import edu.unq.desapp.groupA.backend.model.Product;
 
 
 @Repository
-public class PriceRepository extends HibernateGenericDAO<Price> {
+public class PriceRepository extends HibernateGenericDAO<Price> implements GenericRepository<Price>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1804561481016147344L;
 	private List<Price> prices;
 	
 	public PriceRepository() {
@@ -27,7 +31,8 @@ public class PriceRepository extends HibernateGenericDAO<Price> {
 	}
 
 	public Price findLastPriceByProduct(Product product) {
-		return prices.stream().filter(price -> price.getProduct() == product).max((priceA, priceB) -> priceA.getStartingValidityDate().compareTo(priceB.getStartingValidityDate())).get();
+		return null;
+		//return prices.stream().filter(price -> price.getProduct() == product).max((priceA, priceB) -> priceA.getStartingValidityDate().compareTo(priceB.getStartingValidityDate())).get();
 	}
 
 	@Override

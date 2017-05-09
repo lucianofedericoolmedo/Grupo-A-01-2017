@@ -15,8 +15,8 @@ public class PriceFactory {
 	public static Price newElem(Double price, DateTime startingValidityDate, DateTime finishingValidityDate){
 		Price newPrice = new Price();
 		newPrice.setPrice(price);
-		newPrice.setStartingValidityDate(startingValidityDate);
-		newPrice.setFinishingValidityDate(finishingValidityDate);
+		//newPrice.setStartingValidityDate(startingValidityDate);
+		//newPrice.setFinishingValidityDate(finishingValidityDate);
 		return newPrice;
 	}
 	

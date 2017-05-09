@@ -30,8 +30,8 @@ public class PriceTest {
 	public void testGettersAndSettersCategory() {
 		Price newPrice = new Price();
 		newPrice.setPrice(10.00);
-		newPrice.setStartingValidityDate(firstDayOfMonthOne);
-		newPrice.setFinishingValidityDate(tenthDayOfMonthOne);
+		//newPrice.setStartingValidityDate(firstDayOfMonthOne);
+		//newPrice.setFinishingValidityDate(tenthDayOfMonthOne);
 
 		assertEquals((Double) 10.00, newPrice.getPrice());
 		assertEquals(firstDayOfMonthOne, newPrice.getStartingValidityDate());

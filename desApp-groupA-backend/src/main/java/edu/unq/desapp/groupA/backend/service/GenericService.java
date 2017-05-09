@@ -1,5 +1,7 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.repository.GenericRepository;
@@ -29,6 +31,11 @@ public abstract class GenericService<T> {
 	public void delete(T entity) {
 		this.getRepository().delete(entity);
 	}
+	
+	public List<T> findAll() {
+		return this.getRepository().findAll();
+	}
+	
 	
 	@Transactional
 	public void delete(Long id) {

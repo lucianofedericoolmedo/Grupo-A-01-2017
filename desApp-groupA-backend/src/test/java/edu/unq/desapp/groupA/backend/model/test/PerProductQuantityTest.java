@@ -36,7 +36,7 @@ public class PerProductQuantityTest {
 		aPrice.setPrice(priceForProduct);
 		
 		aProduct = new Product();
-		aProduct.setPrice(aPrice);
+		//aProduct.setPrice(aPrice);
 		
 		aItemCart = new ItemCart();
 		aItemCart.setProduct(aProduct);

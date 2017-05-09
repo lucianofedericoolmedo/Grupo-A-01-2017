@@ -116,7 +116,7 @@ public class ItemCartTest {
 	@Test
 	public void test_GivenAnItemCartWithAProductOfValueFifteenAndQuantityOne_WhenCalculatingTotalValue_ThenShouldReturnFifteen() {
 		ItemCart anItemCart = new ItemCart();
-		aProduct.setPrice(new Price(aProduct, 15.00));
+		aProduct.addPrice(new Price(15.00));
 		anItemCart.setProduct(aProduct);
 		anItemCart.setQuantity(1);
 		
@@ -129,7 +129,7 @@ public class ItemCartTest {
 	@Test
 	public void test_GivenAnItemCartWithAProductOfValueTenAndQuantityThree_WhenCalculatingTotalValue_ThenShouldReturnThirty() {
 		ItemCart anItemCart = new ItemCart();
-		aProduct.setPrice(new Price(aProduct, 10.00));
+		aProduct.addPrice(new Price(10.00));
 		anItemCart.setProduct(aProduct);
 		anItemCart.setQuantity(3);
 		

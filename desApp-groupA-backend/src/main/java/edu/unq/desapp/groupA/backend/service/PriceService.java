@@ -10,7 +10,7 @@ import edu.unq.desapp.groupA.backend.repository.PriceRepository;
 
 
 @Service
-public class PriceService {
+public class PriceService extends GenericService<Price> {
 
 	@Autowired
 	private PriceRepository repository;
@@ -31,13 +31,14 @@ public class PriceService {
 	
 	public void finishPriceValidityForProduct(Product product) {
 		Price lastPrice = this.getRepository().findLastPriceByProduct(product);
-		lastPrice.setFinishingValidityDate(DateTime.now());
+		//lastPrice.setFinishingValidityDate(DateTime.now());
 		this.getRepository().save(lastPrice);		
 	}
 	
 	public Price updatePriceForProduct(Product product, Double price) {
 		finishPriceValidityForProduct(product);
-		Price newPrice = new Price(product, price);
+		Price newPrice = new Price(price);
+		product.addPrice(newPrice);
 //		return this.getRepository().save(newPrice);
 		return newPrice;
 	}

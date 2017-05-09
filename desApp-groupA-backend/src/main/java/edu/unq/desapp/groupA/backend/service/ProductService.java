@@ -17,7 +17,7 @@ import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
 
 @Service
-public class ProductService {
+public class ProductService extends GenericService<Product>{
 
 	@Autowired
 	private ProductRepository repository;
@@ -51,7 +51,7 @@ public class ProductService {
 		product.setBrand(brand);
 		product.setCategories(categories);
 		product.setName(name);
-		product.setPrice(price);
+		product.addPrice(price);
 		repository.save(product);
 		return product;
 	}
@@ -72,7 +72,7 @@ public class ProductService {
 		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
 		product.setBrand(brand);
 		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
-		product.setPrice(price);
+		product.addPrice(price);
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
 //		return this.getRepository().save(product);
 		return product;

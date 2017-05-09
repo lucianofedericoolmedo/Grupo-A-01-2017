@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import edu.unq.desapp.groupA.backend.model.Brand;
 
 @Repository
-public class BrandRepository extends HibernateGenericDAO<Brand> {
+public class BrandRepository extends HibernateGenericDAO<Brand> implements GenericRepository<Brand> {
 
 	private static final long serialVersionUID = -4425722631916607857L;
 
