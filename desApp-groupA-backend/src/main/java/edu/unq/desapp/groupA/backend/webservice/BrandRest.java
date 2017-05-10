@@ -30,7 +30,15 @@ public class BrandRest extends ResponseGenerator{
 	public List<Brand> events() {
 		return this.brandService.findAll();
 	}
+	
+	@GET
+	@Produces("application/json")
+	public Response ok() {
+		return responseOK("OK");
+	}
 
+	
+	
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces("application/json")

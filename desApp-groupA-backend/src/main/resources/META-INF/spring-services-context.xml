@@ -14,7 +14,8 @@
 		<property name="repository" ref="persistence.brandRepository" />
 	</bean -->
 	
-	<context:component-scan base-package="edu.unq.desapp.groupA.backend.service, edu.unq.desapp.groupA.backend.webservice, edu.unq.desapp.groupA.backend.repository">
+	<context:component-scan base-package="edu.unq.desapp.groupA.backend.service
+	, edu.unq.desapp.groupA.backend.repository">
    </context:component-scan>
 	
 
