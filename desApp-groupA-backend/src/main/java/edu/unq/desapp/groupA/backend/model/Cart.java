@@ -13,8 +13,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
 import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
 
 @Entity
 @Table(name = "carts")

@@ -34,10 +34,10 @@ public class PerProductTest {
 		aPrice.setPrice(priceForProduct);
 		
 		aProduct = new Product();
-		//aProduct.setPrice(aPrice);
+		aProduct.addPrice(aPrice);
 		
 		otherProduct = new Product();
-		//otherProduct.setPrice(aPrice);
+		otherProduct.addPrice(aPrice);
 		
 		aItemCart = new ItemCart();
 		aItemCart.setProduct(aProduct);
