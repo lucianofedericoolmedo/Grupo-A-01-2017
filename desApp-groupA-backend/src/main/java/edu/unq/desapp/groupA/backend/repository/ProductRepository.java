@@ -27,10 +27,6 @@ public class ProductRepository extends HibernateGenericDAO<Product> {
 		this.products = new ArrayList<Product>();
 	}
 
-	public Product find(Long id) {
-		return null;
-	}
-
 	@Override
 	protected Class<Product> getDomainClass() {
 		return Product.class;
