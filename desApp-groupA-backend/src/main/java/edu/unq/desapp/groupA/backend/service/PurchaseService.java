@@ -11,11 +11,12 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.repository.GenericRepository;
 import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
 
 
 @Service
-public class PurchaseService {
+public class PurchaseService extends GenericService<Purchase> {
 
 	@Autowired
 	private PurchaseRepository repository;	
@@ -70,6 +71,11 @@ public class PurchaseService {
 
 	public List<Purchase> getShippings() {
 		return repository.getShippings();
+	}
+
+	@Override
+	public GenericRepository<Purchase> getRepository() {
+		return repository;
 	}
 	
 }

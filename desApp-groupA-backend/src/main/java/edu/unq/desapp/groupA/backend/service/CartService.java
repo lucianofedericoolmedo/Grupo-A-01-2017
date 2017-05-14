@@ -17,7 +17,7 @@ import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
 
 @Service
-public class CartService {
+public class CartService extends GenericService<Cart> {
 
 	@Autowired
 	private CartRepository repository;

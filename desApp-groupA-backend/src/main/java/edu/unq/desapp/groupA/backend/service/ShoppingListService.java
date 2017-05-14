@@ -12,7 +12,7 @@ import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
 
 
 @Service
-public class ShoppingListService {
+public class ShoppingListService extends GenericService<ShoppingList> {
 	
 	@Autowired
 	private ShoppingListRepository repository;
@@ -44,13 +44,9 @@ public class ShoppingListService {
 		return value;
 	}
 
-
-
 	public ShoppingListRepository getRepository() {
 		return repository;
 	}
-
-
 
 	public void setRepository(ShoppingListRepository repository) {
 		this.repository = repository;

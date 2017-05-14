@@ -3,6 +3,7 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,23 +23,24 @@ public class Product extends PersistenceEntity {
 	// Instance Variables
 	private String name;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="products_products_categories", 
 		joinColumns={@JoinColumn(name="products_id")}, 
 		inverseJoinColumns={@JoinColumn(name="products_categories_id")})
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<ProductCategory> categories = new LinkedList<ProductCategory>();
+	private List<ProductCategory> categories;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Brand brand;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-	private List<Price> prices = new LinkedList<Price>();
+	private List<Price> prices;
 	
 	// Constructors
 	public Product() {
 		categories = new LinkedList<ProductCategory>();
+		prices = new LinkedList<Price>();
 	}
 	
 	// Getters and Setters
@@ -77,10 +79,10 @@ public class Product extends PersistenceEntity {
 	// Logic
 	public Double priceForQuantity(Integer quantity) {
 		//TODO: Refactor for a given price ??
-		return this.getCurrentPrice().priceForQuantity(quantity);
+		return this.findCurrentPrice().priceForQuantity(quantity);
 	}
 	
-	public Price getCurrentPrice(){
+	public Price findCurrentPrice(){
 		// TODO: Refac to get current price
 		return prices.get(0);
 	}

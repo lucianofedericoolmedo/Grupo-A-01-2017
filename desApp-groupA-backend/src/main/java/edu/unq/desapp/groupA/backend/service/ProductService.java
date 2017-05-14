@@ -64,9 +64,9 @@ public class ProductService extends GenericService<Product>{
 	}
 
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
-		Product product = this.getRepository().find(basicProduct.getId());
+		Product product = super.find(basicProduct.getId());
 		if (product == null) {
-//			product = this.getRepository().save(new Product());
+			product = super.save(new Product());
 		}
 		product.setName(basicProduct.getName());
 		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
@@ -74,8 +74,7 @@ public class ProductService extends GenericService<Product>{
 		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		product.addPrice(price);
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
-//		return this.getRepository().save(product);
-		return product;
+		return super.update(product);
 	}
 
 	// Services

@@ -10,12 +10,13 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- beans de spring -->
-	<!-- bean id="services.brandService" class="edu.unq.desapp.groupA.backend.service.BrandService">
-		<property name="repository" ref="persistence.brandRepository" />
-	</bean -->
+	
+	<bean id="utils.responseGenerator" class="edu.unq.desapp.groupA.backend.utils.ResponseGenerator">
+	</bean>
 	
 	<context:component-scan base-package="edu.unq.desapp.groupA.backend.service
-	, edu.unq.desapp.groupA.backend.repository">
+	, edu.unq.desapp.groupA.backend.repository
+	, edu.unq.desapp.groupA.backend.webservice">
    </context:component-scan>
 	
 

@@ -9,13 +9,13 @@ import edu.unq.desapp.groupA.backend.repository.ProductCategoryRepository;
 @Service
 public class ProductCategoryService extends GenericService<ProductCategory> {
 
-		@Autowired
-		private ProductCategoryRepository repository;
+	@Autowired
+	private ProductCategoryRepository repository;
 
-		@Override
-		public ProductCategoryRepository getRepository() {
-			return repository;
-		}
-		
-		
+	@Override
+	public ProductCategoryRepository getRepository() {
+		return repository;
 	}
+	
+	
+}

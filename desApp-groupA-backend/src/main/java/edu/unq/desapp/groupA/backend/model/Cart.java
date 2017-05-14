@@ -8,7 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
 
 @Entity
 @Table(name = "carts")
@@ -20,6 +26,9 @@ public class Cart extends ItemGroup<ItemCart> {
 	@ManyToOne
 	private ShoppingList usedShoppingList;
 	
+	@JsonSerialize(using = JSONDateSerialize.class)
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private DateTime reservationTime;
 	
 	// Constructors

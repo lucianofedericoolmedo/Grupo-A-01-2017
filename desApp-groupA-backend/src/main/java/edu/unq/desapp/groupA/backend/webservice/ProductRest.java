@@ -1,6 +1,5 @@
 package edu.unq.desapp.groupA.backend.webservice;
 
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,27 +13,26 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.unq.desapp.groupA.backend.model.Brand;
-import edu.unq.desapp.groupA.backend.service.BrandService;
+import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.service.GenericService;
+import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
-
 
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/brand")
-public class BrandRest extends GenericRest<Brand> {
+@Path("/product")
+public class ProductRest extends GenericRest<Product> {
 
 	@Autowired
 	private ResponseGenerator responseGenerator;
 	
 	@Autowired
-	public BrandService brandService;
+	private ProductService productService;
 
 	@Override
-	public GenericService<Brand> getService() {
-		return brandService;
+	public GenericService<Product> getService() {
+		return productService;
 	}
 
 	@GET
@@ -55,13 +53,13 @@ public class BrandRest extends GenericRest<Brand> {
 	}
 	
 	@POST
-	public Response create(Brand brand) {
-		return super.create(brand);
+	public Response create(Product product) {
+		return super.create(product);
 	}
 
 	@PUT
-	public Response update(Brand brand) {
-		return super.update(brand);
+	public Response update(Product product) {
+		return super.update(product);
 	}
 	
 	@DELETE

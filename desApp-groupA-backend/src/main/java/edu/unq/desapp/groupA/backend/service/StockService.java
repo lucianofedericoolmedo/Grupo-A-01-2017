@@ -9,7 +9,7 @@ import edu.unq.desapp.groupA.backend.repository.StockRepository;
 
 
 @Service
-public class StockService {
+public class StockService extends GenericService<Stock> {
 
 	@Autowired
 	private StockRepository repository;
@@ -35,9 +35,11 @@ public class StockService {
 	public Stock updateStockForProduct(Product product, Integer stockQuantity) {
 		Stock stock = findByProduct(product);
 		if (stock == null) {
-//			stock = this.getRepository().save(new Stock(product, stockQuantity));
+			return super.save(new Stock(product, stockQuantity));
+		} else {
+			stock.setQuantity(stockQuantity);
+			return super.update(stock);
 		}
-		return stock;
 	}
 
 }

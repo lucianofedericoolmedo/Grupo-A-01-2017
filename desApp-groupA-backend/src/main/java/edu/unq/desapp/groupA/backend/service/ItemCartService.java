@@ -10,7 +10,7 @@ import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 
 
 @Service
-public class ItemCartService {
+public class ItemCartService extends GenericService<ItemCart> {
 
 	@Autowired
 	private ItemCartRepository repository;

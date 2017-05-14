@@ -52,6 +52,14 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 		
 		<jaxrs:serviceBeans>
 			<ref bean="brandRest" />
+			<ref bean="cartRest" />
+			<ref bean="cashRegisterRest" />
+			<ref bean="itemCartRest" />
+			<ref bean="itemShoppingListRest" />
+			<ref bean="productCategoryRest" />
+			<ref bean="productRest" />
+			<ref bean="purchaseRest" />
+			<ref bean="shoppingListRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -63,8 +71,8 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 		</jaxrs:providers>
 	</jaxrs:server>
 
-	<bean id="brandRest" class="edu.unq.desapp.groupA.backend.webservice.BrandRest">
-	</bean>
+	<!-- bean id="brandRest" class="edu.unq.desapp.groupA.backend.webservice.BrandRest">
+	</bean -->
     
 
 </beans>

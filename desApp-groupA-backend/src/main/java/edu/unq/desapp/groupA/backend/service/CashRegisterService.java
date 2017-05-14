@@ -10,7 +10,7 @@ import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
 
 
 @Service
-public class CashRegisterService {
+public class CashRegisterService extends GenericService<CashRegister> {
 
 	@Autowired
 	private CashRegisterRepository repository;

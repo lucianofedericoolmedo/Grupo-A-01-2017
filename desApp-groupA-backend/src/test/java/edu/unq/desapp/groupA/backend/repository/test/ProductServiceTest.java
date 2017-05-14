@@ -62,7 +62,7 @@ public class ProductServiceTest {
     	Product retrivedProduct = productService.find(product.getId());
     	assertEquals(product.getId(), retrivedProduct.getId());
     	assertEquals(product.getBrand().getName(), retrivedProduct.getBrand().getName());
-    	assertEquals(product.getCurrentPrice().getPrice(), retrivedProduct.getCurrentPrice().getPrice());
+    	assertEquals(product.findCurrentPrice().getPrice(), retrivedProduct.findCurrentPrice().getPrice());
     	assertEquals(aProductCategory.getName() ,retrivedProduct.getCategories().iterator().next().getName());
     } 
 	
