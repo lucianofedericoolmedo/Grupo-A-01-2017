@@ -58,6 +58,17 @@ public class ItemCartRest extends GenericRest<ItemCart> {
 		return super.create(itemCart);
 	}
 
+	@POST
+	@Path("for-cart/{cartId}")
+	public Response createForCart(@PathParam("cartId") Long cartId, ItemCart itemCart) {
+		try {
+			ItemCart savedItemCart = itemCartService.createForCartId(cartId, itemCart); 
+			return responseGenerator.buildSuccessResponse(savedItemCart);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
+	}
+
 	@PUT
 	public Response update(ItemCart itemCart) {
 		return super.update(itemCart);

@@ -1,9 +1,9 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "cash_registers")
@@ -34,7 +34,7 @@ public class CashRegister extends PersistenceEntity {
 	}
 
 	public void requirePurchase(Cart cart) {
-		cart.setReservationTime(new DateTime());
+		cart.setReservationTime(new Date());
 		this.available = false;
 		this.setProductsToProcess(this.productsToProcess + cart.quantityOfItems());		
 	}

@@ -27,7 +27,7 @@ public class UserProfileService extends GenericService<UserProfile> {
 
 	public UserProfile createUserProfile(User user, Threshold thresold) {
 		UserProfile userProfile = new UserProfile();
-		userProfile.setThresold(thresold);
+//		userProfile.setThresold(thresold);
 		userProfile.setUser(user);
 		this.repository.save(userProfile);
 		return userProfile;

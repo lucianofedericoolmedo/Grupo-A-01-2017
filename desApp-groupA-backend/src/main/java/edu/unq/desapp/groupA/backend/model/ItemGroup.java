@@ -16,6 +16,7 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	@ManyToOne
 	protected List<ItemType> items;
 	
+	@ManyToOne
 	protected User user;
 
 	private Long identifier;

@@ -51,10 +51,21 @@ public class CartRest extends GenericRest<Cart> {
 	public Response ok() {
 		return responseGenerator.responseOK("OK");
 	}
-	
+
 	@POST
 	public Response create(Cart cart) {
 		return super.create(cart);
+	}
+
+	@POST
+	@Path("for-user/{userId}")
+	public Response createForUser(@PathParam("userId") Long userId, Cart cart) {
+		try {
+			Cart savedCart = cartService.create(userId, cart);
+			return responseGenerator.buildSuccessResponse(savedCart);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
 	}
 
 	@PUT

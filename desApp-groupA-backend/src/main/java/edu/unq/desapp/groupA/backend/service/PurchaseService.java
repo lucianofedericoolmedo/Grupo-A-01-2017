@@ -1,8 +1,8 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
-		purchase.setCreationDate(new DateTime());
+		purchase.setCreationDate(new Date());
 		this.repository.save(purchase);
 		return purchase;
 	}
@@ -48,7 +48,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
-		purchase.setCreationDate(new DateTime());
+		purchase.setCreationDate(new Date());
 		purchase.setShippingAddress(shippingAddress);
 		this.repository.save(purchase);
 		return purchase;
@@ -60,12 +60,12 @@ public class PurchaseService extends GenericService<Purchase> {
 	}
 	
 	
-	public List<Purchase> fetchLastPurchases(Integer quantityToFetch) {
-		return repository.findLastPurchases(quantityToFetch);
+	public List<Purchase> fetchLastPurchases(Integer quantityToFetch, Long userId) {
+		return repository.findLastPurchases(quantityToFetch, userId);
 	}
 
-	public List<Purchase> fetchPurchasesFrom(DateTime dateFromToFetch) {
-		return repository.findPurchasesFrom(dateFromToFetch);
+	public List<Purchase> fetchPurchasesFrom(Date dateFromToFetch, Long userId) {
+		return repository.findPurchasesFrom(dateFromToFetch, userId);
 	}
 	
 
