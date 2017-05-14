@@ -1,17 +1,17 @@
 package edu.unq.desapp.groupA.backend.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
 import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
@@ -24,13 +24,12 @@ public class PersistenceEntity implements Serializable {
 	// Instance Variables
 	@Id
     @Column(unique = true)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	protected Long id;
 
 	@JsonDeserialize(using = JSONDateDeserialize.class)
     @JsonSerialize(using = JSONDateSerialize.class)    
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-	protected DateTime creationDate;
+	protected Date creationDate;
 
 	// Getters and Setters
 	public Long getId() {
@@ -41,12 +40,17 @@ public class PersistenceEntity implements Serializable {
 		this.id = id;
 	}
 
-	public DateTime getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(DateTime creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	@PrePersist
+	public void onCreate() {
+		setCreationDate(new Date());
 	}
 
 }

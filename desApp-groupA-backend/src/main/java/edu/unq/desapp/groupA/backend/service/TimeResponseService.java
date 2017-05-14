@@ -2,7 +2,6 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.Date;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class TimeResponseService extends GenericService<TimeResponse>{
 	public TimeResponseService(){
 	}
 
-	public void registerResponseTime(DateTime reservationTime, DateTime responseTime) {
+	public void registerResponseTime(Date reservationTime, Date responseTime) {
 		TimeResponse timeResponse = new TimeResponse(reservationTime, responseTime);
 		this.repository.save(timeResponse);
 	}

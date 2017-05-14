@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +11,6 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
 import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
@@ -28,8 +27,7 @@ public class Cart extends ItemGroup<ItemCart> {
 	
 	@JsonSerialize(using = JSONDateSerialize.class)
 	@JsonDeserialize(using = JSONDateDeserialize.class)
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-	private DateTime reservationTime;
+	private Date reservationTime;
 	
 	// Constructors
 	public Cart() {
@@ -66,11 +64,11 @@ public class Cart extends ItemGroup<ItemCart> {
 		return this.items.size();
 	}
 
-	public void setReservationTime(DateTime date) {
+	public void setReservationTime(Date date) {
 		this.reservationTime = date;
 	}
 	
-	public DateTime getReservationTime() {
+	public Date getReservationTime() {
 		return reservationTime;
 	}
 }

@@ -102,7 +102,12 @@
 	       <value>edu.unq.desapp.groupA.backend.model.ShoppingList</value>
 	       <value>edu.unq.desapp.groupA.backend.model.Stock</value>
 	       <value>edu.unq.desapp.groupA.backend.model.TimeResponse</value>
+	       <value>edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PurchasePriceThreshold</value>
+	       <value>edu.unq.desapp.groupA.backend.model.DateThresholdCriteria</value>
+	       <value>edu.unq.desapp.groupA.backend.model.QuantityThresholdCriteria</value>
 	       <value>edu.unq.desapp.groupA.backend.model.User</value>
+	       <value>edu.unq.desapp.groupA.backend.model.UserData</value>
 	       <value>edu.unq.desapp.groupA.backend.model.UserProfile</value>
 	     </list>
 	   </property>

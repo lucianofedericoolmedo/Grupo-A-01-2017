@@ -44,11 +44,11 @@ public class ThresholdService {
 	}
 
 	// Logic
-	public Boolean cartSurpassesAnyThreshold(Cart cart) {
+	public Boolean cartSurpassesAnyThreshold(Cart cart, Long userId) {
 		List<Threshold> enabledThresholdsOfUser = this.getRepository().findEnabledThresholdOfUser(cart.getUser());
 
 		for (Threshold threshold : enabledThresholdsOfUser) {
-			List<Purchase> purchasesToEvaluate = threshold.fetchPurchases(purchaseService);
+			List<Purchase> purchasesToEvaluate = threshold.fetchPurchases(purchaseService, userId);
 			Boolean isSurpassed = threshold.isCartSurpassed(cart, purchasesToEvaluate); 
 			if (isSurpassed) {
 				return true;

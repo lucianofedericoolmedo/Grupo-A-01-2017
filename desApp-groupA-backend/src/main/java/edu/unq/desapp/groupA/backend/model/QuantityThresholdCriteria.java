@@ -34,8 +34,8 @@ public class QuantityThresholdCriteria extends ThresholdCriteria {
 
 	// Logic
 	@Override
-	public List<Purchase> fetchPurchasesCriteria(PurchaseService purchaseService) {
-		return purchaseService.fetchLastPurchases(quantityToFetch);
+	public List<Purchase> fetchPurchasesCriteria(PurchaseService purchaseService, Long userId) {
+		return purchaseService.fetchLastPurchases(quantityToFetch, userId);
 	}
 
 }

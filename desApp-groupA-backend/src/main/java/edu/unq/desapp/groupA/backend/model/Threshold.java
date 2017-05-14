@@ -2,12 +2,14 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Threshold extends PersistenceEntity {
 
@@ -15,15 +17,15 @@ public abstract class Threshold extends PersistenceEntity {
 
 	// Instance Variables
 	protected Double percentageToSurpass;
-	
+
 	protected Boolean enabled;
-	
+
 	@ManyToOne
 	protected ThresholdCriteria criteria;
-	
+
 	@ManyToOne
 	protected User user;
-	
+
 	// Getters and Setters
 	public Double getPercentageToSurpass() {
 		return percentageToSurpass;
@@ -75,8 +77,8 @@ public abstract class Threshold extends PersistenceEntity {
 		return currentTotalValue > quantityToSurpass;
 	}
 	
-	public List<Purchase> fetchPurchases(PurchaseService purchaseService){
-		return this.getCriteria().fetchPurchasesCriteria(purchaseService);
+	public List<Purchase> fetchPurchases(PurchaseService purchaseService, Long userId){
+		return this.getCriteria().fetchPurchasesCriteria(purchaseService, userId);
 	}
 	
 }
