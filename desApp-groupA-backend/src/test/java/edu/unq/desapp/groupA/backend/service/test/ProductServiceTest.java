@@ -53,7 +53,7 @@ public class ProductServiceTest {
 		basicProduct = new BasicProduct();
 
 		productRepository = mock(ProductRepository.class);
-		when(productRepository.find(anyLong())).thenReturn(aProduct);
+		when(productRepository.findById(anyLong())).thenReturn(aProduct);
 //		when(productRepository.save(aProduct)).thenReturn(aProduct);
 
 		brandService = mock(BrandService.class);

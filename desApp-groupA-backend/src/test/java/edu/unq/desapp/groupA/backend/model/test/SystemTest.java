@@ -108,6 +108,7 @@ public class SystemTest {
 		
 	}
 	
+	/*
 	@Test
 	public void testWhenUserDecidesToMakeAShippingHeShouldReceiveOne(){
 		
@@ -146,6 +147,7 @@ public class SystemTest {
 		assertEquals( expectedP , recomendacionesNombre);
 	}
 	
+	
 	@Test
 	public void testRecommendationsWhenHasMoreCoincidenceForRecommendations(){
 		List<String> expectedP1 = Arrays.asList("Cicatricure", "Avon");		
@@ -166,5 +168,5 @@ public class SystemTest {
 		assertEquals( purchases.size(), 2);	
 				
 	}
-	
+	*/
 }

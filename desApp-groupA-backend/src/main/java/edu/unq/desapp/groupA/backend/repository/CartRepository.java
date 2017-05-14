@@ -10,8 +10,10 @@ import edu.unq.desapp.groupA.backend.model.Product;
 
 
 @Repository
-public class CartRepository extends HibernateGenericDAO<Cart> {
+public class CartRepository extends HibernateGenericDAO<Cart> implements GenericRepository<Cart> {
 
+	private static final long serialVersionUID = 3498881987084611507L;
+	
 	private List<Cart> cartsAvailable;
 
 	public List<Cart> getCartsAvailable() {

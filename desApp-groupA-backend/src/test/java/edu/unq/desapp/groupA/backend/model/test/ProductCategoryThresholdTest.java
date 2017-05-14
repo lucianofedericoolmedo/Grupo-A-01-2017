@@ -64,23 +64,23 @@ public class ProductCategoryThresholdTest {
 		categoryAlimentos = new ProductCategory();
 
 		productWithValueTen0 = new Product();
-		//productWithValueTen0.setPrice(new Price(productWithValueTen0, 10.00));
+		productWithValueTen0.addPrice(new Price( 10.00));
 		productWithValueTen0.addCategory(categoryAlimentos);
 		
 		productWithValueTen1 = new Product();
-		//productWithValueTen1.setPrice(new Price(productWithValueTen1, 10.00));
+		productWithValueTen1.addPrice(new Price(10.00));
 		productWithValueTen1.addCategory(categoryBebidas);
 		
 		productWithValueFifteen0 = new Product();
-		//productWithValueFifteen0.setPrice(new Price(productWithValueFifteen0, 15.00));
+		productWithValueFifteen0.addPrice(new Price(15.00));
 		productWithValueFifteen0.addCategory(categoryAlimentos);
 		
 		productWithValueFifteen1 = new Product();
-		//productWithValueFifteen1.setPrice(new Price(productWithValueFifteen1, 15.00));
+		productWithValueFifteen1.addPrice(new Price( 15.00));
 		productWithValueFifteen1.addCategory(categoryBebidas);
 		
 		productWithValueTwenty = new Product();
-		//productWithValueTwenty.setPrice(new Price(productWithValueTwenty, 20.00));
+		productWithValueTwenty.addPrice(new Price( 20.00));
 		productWithValueTwenty.addCategory(categoryAlimentos);
 		
 		itemCartWithValueTen0 = new ItemCart(productWithValueTen0, 1);
