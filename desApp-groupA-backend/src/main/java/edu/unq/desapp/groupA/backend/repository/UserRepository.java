@@ -27,10 +27,6 @@ public class UserRepository extends HibernateGenericDAO<User> implements Generic
 		this.users = new ArrayList<User>();
 	}
 
-	public void save(User user) {
-		this.users.add(user);
-	}
-
 	@Override
 	protected Class<User> getDomainClass() {
 		return User.class;

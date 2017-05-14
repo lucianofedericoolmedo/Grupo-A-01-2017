@@ -3,6 +3,8 @@ package edu.unq.desapp.groupA.backend.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
@@ -16,7 +18,7 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	@ManyToOne
 	protected List<ItemType> items;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	protected User user;
 
 	private Long identifier;

@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
@@ -10,6 +11,7 @@ import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 
 
 @Service
+@Transactional
 public class ItemCartService extends GenericService<ItemCart> {
 
 	@Autowired

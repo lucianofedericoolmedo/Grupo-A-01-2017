@@ -13,26 +13,26 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.unq.desapp.groupA.backend.model.Product;
+import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.GenericService;
-import edu.unq.desapp.groupA.backend.service.ProductService;
+import edu.unq.desapp.groupA.backend.service.UserService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/product")
-public class ProductRest extends GenericRest<Product> {
+@Path("/user")
+public class UserRest  extends GenericRest<User> {
 
 	@Autowired
 	private ResponseGenerator responseGenerator;
 	
 	@Autowired
-	private ProductService productService;
+	private UserService userService;
 
 	@Override
-	public GenericService<Product> getService() {
-		return productService;
+	public GenericService<User> getService() {
+		return userService;
 	}
 
 	@GET
@@ -53,14 +53,13 @@ public class ProductRest extends GenericRest<Product> {
 	}
 	
 	@POST
-	public Response create(Product product) {
-		System.out.println(product);
-		return super.create(product);
+	public Response create(User user) {
+		return super.create(user);
 	}
 
 	@PUT
-	public Response update(Product product) {
-		return super.update(product);
+	public Response update(User user) {
+		return super.update(user);
 	}
 	
 	@DELETE

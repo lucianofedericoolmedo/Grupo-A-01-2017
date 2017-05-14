@@ -60,6 +60,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="productRest" />
 			<ref bean="purchaseRest" />
 			<ref bean="shoppingListRest" />
+			<ref bean="userRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />

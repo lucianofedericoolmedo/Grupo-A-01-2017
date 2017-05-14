@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
@@ -10,7 +11,7 @@ public abstract class Item extends PersistenceEntity {
 	private static final long serialVersionUID = -454916293375732956L;
 
 	// Instance Variables
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	protected Product product;
 
 	protected Integer quantity;

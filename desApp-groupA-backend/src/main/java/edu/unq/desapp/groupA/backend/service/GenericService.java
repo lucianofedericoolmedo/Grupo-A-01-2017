@@ -13,6 +13,7 @@ public abstract class GenericService<T> {
 	@Transactional
 	public T save(T entity) {
 		this.getRepository().save(entity);
+		System.out.println(entity);
 		return entity;
 	}
 	

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
@@ -17,6 +18,7 @@ import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
 
 @Service
+@Transactional
 public class CartService extends GenericService<Cart> {
 
 	@Autowired
