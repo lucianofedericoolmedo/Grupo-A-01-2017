@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +22,8 @@ public class PerProductCategoryTest {
 
 	private ProductCategory aProductCategory;
 	private Double percentageToDiscountTest;
-	private DateTime startingDate;
-	private DateTime finishingDate;
+	private Date startingDate;
+	private Date finishingDate;
 	private Double priceForProduct;
 	private Price aPrice;
 	private Product aProduct;
@@ -43,8 +45,8 @@ public class PerProductCategoryTest {
 		aItemCart = new ItemCart();
 		aItemCart.setProduct(aProduct);
 		
-		startingDate = new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(2017);
-		finishingDate = new DateTime().withDayOfMonth(1).withMonthOfYear(2).withYear(2017);
+		startingDate = new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(2017).toDate();
+		finishingDate = new DateTime().withDayOfMonth(1).withMonthOfYear(2).withYear(2017).toDate();
 	}
 	
 	@Test
