@@ -21,6 +21,10 @@ public class CartService extends GenericService<Cart> {
 
 	@Autowired
 	private CartRepository repository;
+	
+	@Autowired
+	private UserService userService;
+	
 	private Long identifier;
 	private ItemCartService itemCartService;
 
@@ -104,5 +108,10 @@ public class CartService extends GenericService<Cart> {
 		this.itemCartService = itemCartService;
 	}
 
+	public Cart create(Long userId, Cart cart) {
+		User user = userService.find(userId);
+		cart.setUser(user);
+		return super.save(cart);
+	}
 	
 }

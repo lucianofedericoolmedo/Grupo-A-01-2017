@@ -15,6 +15,8 @@ public class ItemCartService extends GenericService<ItemCart> {
 	@Autowired
 	private ItemCartRepository repository;
 
+	@Autowired
+	private CartService cartService;
 
 	/**
 	 * Creates a @ItemCart instance with the given parameters and adds itself to the @Cart.
@@ -54,6 +56,14 @@ public class ItemCartService extends GenericService<ItemCart> {
 	public void checkItemCart(ItemCart itemCart) {
 		itemCart.setChecked(true);
 		this.getRepository().save(itemCart);
+	}
+	
+	public ItemCart createForCartId(Long cartId, ItemCart itemCart) {
+		Cart cart = cartService.find(cartId);
+		itemCart = super.save(itemCart);
+		cart.addItems(itemCart);
+		cartService.update(cart);
+		return itemCart;
 	}
 
 }

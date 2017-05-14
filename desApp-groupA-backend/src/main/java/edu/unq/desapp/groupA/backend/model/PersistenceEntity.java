@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -27,9 +27,10 @@ public class PersistenceEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	protected Long id;
 
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@JsonDeserialize(using = JSONDateDeserialize.class)
     @JsonSerialize(using = JSONDateSerialize.class)    
-	protected Date creationDate;
+	protected Date creationDate = new Date();
 
 	// Getters and Setters
 	public Long getId() {
@@ -48,9 +49,4 @@ public class PersistenceEntity implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
-	@PrePersist
-	public void onCreate() {
-		setCreationDate(new Date());
-	}
-
 }
