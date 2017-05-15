@@ -1,6 +1,5 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +26,10 @@ public class CartService extends GenericService<Cart> {
 	@Autowired
 	private UserService userService;
 	
-	private Long identifier;
+	@Autowired
 	private ItemCartService itemCartService;
+
+	private Long identifier;
 
 	public CartService() { }
 	
@@ -44,14 +45,11 @@ public class CartService extends GenericService<Cart> {
 	public void setIdentifier(Long id) {
 		this.identifier = id;
 	}
-	
+
 	public Cart createCart(User user) {
 		Cart cart = new Cart();
-		cart.setItems(new ArrayList<ItemCart>());
-		cart.setIdentifier(this.insertID());
 		cart.setUser(user);
-		this.repository.save(cart);
-		return cart;
+		return super.save(cart);
 	}
 
 	/**
@@ -64,7 +62,7 @@ public class CartService extends GenericService<Cart> {
 		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
 		cart.setItems(items);
 		cart.setUsedShoppingList(shoppingList);
-		repository.save(cart);
+		super.save(cart);
 		return cart;
 	}
 
@@ -82,12 +80,6 @@ public class CartService extends GenericService<Cart> {
 		ItemCart itemCart = getItemCartService().createItemCart(product, 0, cart);
 		cart.addItems(itemCart);
 		return itemCart;
-	}
-
-	private Long insertID(){
-		Long value = this.getIdentifier();
-		this.identifier = this.identifier + (long) 1;
-		return value;
 	}
 
 	public boolean isCartIncludingProduct(Cart cart, Product product) {
