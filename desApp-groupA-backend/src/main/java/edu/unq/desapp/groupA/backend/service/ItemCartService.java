@@ -33,6 +33,12 @@ public class ItemCartService extends GenericService<ItemCart> {
 		this.repository.save(item);
 		return item;
 	}
+	
+	
+	public void createItemCart(ItemCart notSavedItemCart){
+		this.repository.save(notSavedItemCart);
+		
+	}
 
 	public ItemCartService() { }
 

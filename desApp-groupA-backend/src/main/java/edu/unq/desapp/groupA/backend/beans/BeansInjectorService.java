@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
+import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
@@ -68,14 +69,13 @@ public class BeansInjectorService {
 		aShoppingList.setUser(user);
 		aShoppingList.addItems(itemShoppingList1);
 		aShoppingList.addItems(itemShoppingList2);
-		System.out.println("---------------------");
-		System.out.println("---------------------");
-		System.out.println(aShoppingList.getItems().size());
-		System.out.println("---------------------");
-		System.out.println("---------------------");
+		
 		shoppingListService.save(aShoppingList);
 		Cart createdCart = cartService.createCartForShoppingList(aShoppingList);
-    	
+		System.out.println("POST CART SAVED");
+    	for (ItemCart item : createdCart.getItems()){
+    		System.out.println(item.getProduct().getName());
+    	}
     	
     	
     	return createdCart;
