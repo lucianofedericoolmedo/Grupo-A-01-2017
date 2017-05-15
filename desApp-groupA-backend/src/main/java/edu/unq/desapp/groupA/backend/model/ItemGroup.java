@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity {
@@ -15,10 +17,11 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	private static final long serialVersionUID = -7139614401053628294L;
 
 	// Instance Variables
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	protected List<ItemType> items;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	protected User user;
 
 	private Long identifier;

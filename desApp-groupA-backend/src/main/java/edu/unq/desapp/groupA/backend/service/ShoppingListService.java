@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
@@ -12,6 +13,7 @@ import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
 
 
 @Service
+@Transactional
 public class ShoppingListService extends GenericService<ShoppingList> {
 	
 	@Autowired

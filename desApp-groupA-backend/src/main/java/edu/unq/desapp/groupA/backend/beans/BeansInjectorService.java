@@ -13,6 +13,7 @@ import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
+import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 import edu.unq.desapp.groupA.backend.service.UserService;
@@ -29,6 +30,9 @@ public class BeansInjectorService {
 	
 	@Autowired
 	private ShoppingListService shoppingListService;
+	
+	@Autowired
+	private ItemShoppingListService itemShoppingListService;
 	
 	@Autowired
 	private CartService cartService;
@@ -58,10 +62,12 @@ public class BeansInjectorService {
 		ItemShoppingList itemShoppingList1 = new ItemShoppingList();
 		itemShoppingList1.setProduct(product);
 		itemShoppingList1.setQuantity(1);
+		itemShoppingListService.save(itemShoppingList1);
 
 		ItemShoppingList itemShoppingList2 = new ItemShoppingList();
 		itemShoppingList2.setProduct(otherProduct);
 		itemShoppingList2.setQuantity(1);
+		itemShoppingListService.save(itemShoppingList2);
 
 		
 		ShoppingList aShoppingList = new ShoppingList();
