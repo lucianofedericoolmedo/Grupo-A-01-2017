@@ -33,6 +33,7 @@ public class CartServiceTest {
 	private ItemCartService itemCartService;
 	@Autowired
 	private ShoppingListService shoppingListService;
+	
 	private User aUser;
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;

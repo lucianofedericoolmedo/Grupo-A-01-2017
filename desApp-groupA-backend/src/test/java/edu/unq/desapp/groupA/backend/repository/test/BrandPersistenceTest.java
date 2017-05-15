@@ -24,7 +24,8 @@ public class BrandPersistenceTest {
 	
 	@Before
 	public void setup() {
-		aBrand = new Brand("Bagley");
+		aBrand = new Brand();
+		aBrand.setName("bagley");
 		
 		// Brand savedBrand =
 		System.out.println(service);

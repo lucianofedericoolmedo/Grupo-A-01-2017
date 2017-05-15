@@ -16,6 +16,7 @@
 	
 	<context:component-scan base-package="edu.unq.desapp.groupA.backend.service
 	, edu.unq.desapp.groupA.backend.repository
+	, edu.unq.desapp.groupA.backend.beans
 	, edu.unq.desapp.groupA.backend.webservice">
    </context:component-scan>
 	

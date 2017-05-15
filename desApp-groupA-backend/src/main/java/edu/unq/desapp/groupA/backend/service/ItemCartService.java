@@ -29,6 +29,7 @@ public class ItemCartService extends GenericService<ItemCart> {
 	 */
 	public ItemCart createItemCart(Product product, Integer quantity, Cart cart){
 		ItemCart item = new ItemCart(product, quantity);
+		cart.addItems(item);
 		this.repository.save(item);
 		return item;
 	}

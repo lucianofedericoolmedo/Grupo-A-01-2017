@@ -1,6 +1,7 @@
 package edu.unq.desapp.groupA.backend.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,6 +11,7 @@ public class ItemCart extends Item {
 	private static final long serialVersionUID = -2357797967770914119L;
 
 	// Instance Variables
+	//@OneToOne
 	private Discount discount;
 
 	private Boolean checked;
