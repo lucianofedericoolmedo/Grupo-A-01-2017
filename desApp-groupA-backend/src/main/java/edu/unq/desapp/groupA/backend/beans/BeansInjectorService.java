@@ -49,9 +49,9 @@ public class BeansInjectorService {
 	@Transactional
 	public Cart initializeItemsAndProducts(){
 		Product product = ProductFactory.exampleNewElem("Rex");	
-    	productService.save(product);
+    	product = productService.save(product);
     	Product otherProduct = ProductFactory.exampleNewElem("Opera");	
-    	productService.save(otherProduct);
+    	otherProduct = productService.save(otherProduct);
     	User user = userService.createUser("fake", "fake123", "fake@gmail.com");
     	
     	/*
@@ -59,30 +59,32 @@ public class BeansInjectorService {
     	itemCartService.createItemCart(product, 5, cart);
     	itemCartService.createItemCart(otherProduct, 5, cart);
     	*/
-		
+
+		ShoppingList aShoppingList = new ShoppingList();
+		aShoppingList.setUser(user);
+		shoppingListService.save(aShoppingList);
+    	
+		System.out.println(product);
+		System.out.println(otherProduct);
+
 		ItemShoppingList itemShoppingList1 = new ItemShoppingList();
 		itemShoppingList1.setProduct(product);
 		itemShoppingList1.setQuantity(1);
-		itemShoppingListService.save(itemShoppingList1);
+//		itemShoppingListService.save(itemShoppingList1);
 
 		ItemShoppingList itemShoppingList2 = new ItemShoppingList();
 		itemShoppingList2.setProduct(otherProduct);
 		itemShoppingList2.setQuantity(1);
-		itemShoppingListService.save(itemShoppingList2);
+//		itemShoppingListService.save(itemShoppingList2);
 
+		aShoppingList = shoppingListService.createItemForShoppingList(aShoppingList.getId(), itemShoppingList1);
+		aShoppingList = shoppingListService.createItemForShoppingList(aShoppingList.getId(), itemShoppingList2);
 		
-		ShoppingList aShoppingList = new ShoppingList();
-		aShoppingList.setUser(user);
-		aShoppingList.addItems(itemShoppingList1);
-		aShoppingList.addItems(itemShoppingList2);
-		
-		shoppingListService.save(aShoppingList);
 		Cart createdCart = cartService.createCartForShoppingList(aShoppingList);
 		System.out.println("POST CART SAVED");
     	for (ItemCart item : createdCart.getItems()){
-    		System.out.println(item.getProduct().getName());
+//    		System.out.println(item.getProduct().getName());
     	}
-    	
     	
     	return createdCart;
     	//itemCartService.save(itemCart);

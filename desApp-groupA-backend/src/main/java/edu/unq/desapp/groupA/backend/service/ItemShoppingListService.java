@@ -16,6 +16,9 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 
 	@Autowired
 	private ItemShoppingListRepository repository;
+	
+	@Autowired
+	private ShoppingListService shoppingListService;
 
 	public ItemShoppingListRepository getRepository() {
 		return repository;
@@ -35,4 +38,15 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 		repository.save(itemShoppingList);
 		return itemShoppingList;
 	}
+
+	public ItemShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
+		ShoppingList shoppingList = shoppingListService.find(shoppingListId);
+		shoppingList.addItem(itemShoppingList);
+		itemShoppingList = super.save(itemShoppingList);
+		shoppingListService.update(shoppingList);
+		System.out.println("Printing shopping list list");
+		System.out.println(shoppingList.getItems());
+		return itemShoppingList;
+	}
+
 }

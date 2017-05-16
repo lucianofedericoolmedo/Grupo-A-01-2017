@@ -98,5 +98,10 @@ public class Product extends PersistenceEntity {
 	public void addPrice(Price price) {
 		this.prices.add(price);
 	}
+	
+	@Override
+	public String toString() {
+		return "Product: " + name + ", id: " + getId().toString();
+	}
 
 }

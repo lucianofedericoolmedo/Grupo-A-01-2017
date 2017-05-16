@@ -59,16 +59,16 @@ public class CartService extends GenericService<Cart> {
 	 */
 	public Cart createCartForShoppingList(ShoppingList shoppingList) {
 		Cart cart = createCart(shoppingList.getUser());
+		cart.setUsedShoppingList(shoppingList);
+		super.save(cart);
+
 		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
 		
 		for (ItemCart item : items){
 			itemCartService.createItemCart(item);
+			cart.addItems(item);
 		}
-		cart.setItems(items);
-		cart.setUsedShoppingList(shoppingList);
-		super.save(cart);
-		
-		return cart;
+		return super.update(cart);
 	}
 
 	/**

@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity {
@@ -17,16 +15,19 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	private static final long serialVersionUID = -7139614401053628294L;
 
 	// Instance Variables
-	@ManyToOne(cascade=CascadeType.MERGE)
+	/*
+	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	protected List<ItemType> items;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	protected User user;
+	*/
 
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	protected User user;
+	
 	private Long identifier;
 
 	//Getters and Setters
+	/*
 	public List<ItemType> getItems() {
 		return items;
 	}
@@ -34,6 +35,11 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	public void setItems(List<ItemType> items) {
 		this.items = items;
 	}
+	*/
+
+	public abstract List<ItemType> getItems();
+
+	public abstract void setItems(List<ItemType> items);
 
 	public void setUser(User user) {
 		this.user = user;
@@ -57,11 +63,11 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	}
 	
 	public Double totalValue() {
-		return totalValueOfItems(items);
+		return totalValueOfItems(getItems());
 	}
 
 	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount) {
-		return itemsCartWithCategory(categoryForDiscount, items);
+		return itemsCartWithCategory(categoryForDiscount, getItems());
 	}
 
 	public List<ItemType> itemsCartWithCategory(ProductCategory categoryForDiscount, List<ItemType> items) {
@@ -73,11 +79,11 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	}
 
 	public Boolean containsProduct(Product product) {
-		return items.stream().anyMatch(item -> item.isProduct(product));
+		return getItems().stream().anyMatch(item -> item.isProduct(product));
 	}
 
 	public void addItems(ItemType item) {
-		this.items.add(item);
+		this.getItems().add(item);
 	}
 
 }

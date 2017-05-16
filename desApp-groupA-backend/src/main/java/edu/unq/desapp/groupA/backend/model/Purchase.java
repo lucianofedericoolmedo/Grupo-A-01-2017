@@ -94,7 +94,7 @@ public class Purchase extends PersistenceEntity {
 
 	private List<Product> getProducts() {
 		// TODO Auto-generated method stub
-		return this.cart.items.stream().map(p-> p.getProduct()).collect(Collectors.toList());
+		return this.cart.getItems().stream().map(p-> p.getProduct()).collect(Collectors.toList());
 	}
 
 }

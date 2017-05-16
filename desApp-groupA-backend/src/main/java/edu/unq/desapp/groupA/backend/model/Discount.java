@@ -2,11 +2,13 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Discount extends PersistenceEntity {
 	

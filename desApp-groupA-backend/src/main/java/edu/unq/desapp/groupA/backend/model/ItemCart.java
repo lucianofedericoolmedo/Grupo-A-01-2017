@@ -1,8 +1,11 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 @Entity
 @Table(name = "items_cart")
@@ -11,8 +14,12 @@ public class ItemCart extends Item {
 	private static final long serialVersionUID = -2357797967770914119L;
 
 	// Instance Variables
-	//@OneToOne
+	@ManyToOne
 	private Discount discount;
+
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JsonBackReference
+	protected Cart parent;
 
 	private Boolean checked;
 
@@ -36,9 +43,12 @@ public class ItemCart extends Item {
 		this.discount = discount;
 	}
 
-	// Logic
-	public Boolean hasAppliedDiscount() {
-		return discount != null;
+	public void setParent(Cart parent) {
+		this.parent = parent;
+	}
+
+	public Cart getParent() {
+		return parent;
 	}
 
 	public Boolean getChecked() {
@@ -47,6 +57,11 @@ public class ItemCart extends Item {
 
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
+	}
+
+	// Logic
+	public Boolean hasAppliedDiscount() {
+		return discount != null;
 	}
 
 }
