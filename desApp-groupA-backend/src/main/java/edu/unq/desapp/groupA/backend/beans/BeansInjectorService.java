@@ -119,15 +119,12 @@ public class BeansInjectorService {
     public void initialize() {
     	Cart cart = initializeItemsAndProducts();  	
     	
-    	
-    	/*
     	cashRegisterService.createCashRegister();
     	CashRegister cashRegister = cashRegisterService.getCashRegister();
     	cashRegister.requirePurchase(cart);
     	PaymentType paymentType = new PaymentType();
     	paymentType.setName("Credit Card");
     	purchaseService.createPurchase(cart,paymentType,cashRegister);	
-    	*/
     	
     }
     

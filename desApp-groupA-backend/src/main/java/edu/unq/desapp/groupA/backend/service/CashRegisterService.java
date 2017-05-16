@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.repository.CashRegisterRepository;
 
 
 @Service
+@Transactional
 public class CashRegisterService extends GenericService<CashRegister> {
 
 	@Autowired
