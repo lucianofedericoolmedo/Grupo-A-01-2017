@@ -69,6 +69,8 @@ public class BeansInjectorService {
     	itemCartService.createItemCart(product, 5, cart);
     	itemCartService.createItemCart(otherProduct, 5, cart);
     	*/
+    	
+    	
 
 		ShoppingList aShoppingList = new ShoppingList();
 		aShoppingList.setUser(user);
@@ -104,6 +106,7 @@ public class BeansInjectorService {
     	System.out.println(itemShoppingListService.find(new Long(2)).getProduct());
     	System.out.println(itemShoppingListService.find(new Long(2)).getQuantity());
 
+    	
     	return createdCart;
     	//itemCartService.save(itemCart);
     	//itemCartService.save(otherItemCart);
@@ -114,13 +117,17 @@ public class BeansInjectorService {
     @PostConstruct
     @Transactional
     public void initialize() {
-    	Cart cart = initializeItemsAndProducts();
+    	Cart cart = initializeItemsAndProducts();  	
+    	
+    	
+    	/*
     	cashRegisterService.createCashRegister();
     	CashRegister cashRegister = cashRegisterService.getCashRegister();
     	cashRegister.requirePurchase(cart);
-    	
     	PaymentType paymentType = new PaymentType();
     	paymentType.setName("Credit Card");
+    	purchaseService.createPurchase(cart,paymentType,cashRegister);	
+    	*/
     	
     }
     

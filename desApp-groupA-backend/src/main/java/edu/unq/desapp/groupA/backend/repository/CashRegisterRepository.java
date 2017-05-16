@@ -12,6 +12,9 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 @Repository
 public class CashRegisterRepository extends HibernateGenericDAO<CashRegister> {
 
+	
+	private static final long serialVersionUID = -8172055643638973267L;
+	
 	private List<CashRegister> registeredCashRegisters;
 	
 	public List<CashRegister> getRegisteredCashRegisters() {
