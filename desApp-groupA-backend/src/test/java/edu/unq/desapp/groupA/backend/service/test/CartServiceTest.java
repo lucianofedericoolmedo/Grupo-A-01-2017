@@ -20,7 +20,9 @@ import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
+import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
+import edu.unq.desapp.groupA.backend.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
@@ -33,6 +35,10 @@ public class CartServiceTest {
 	private ItemCartService itemCartService;
 	@Autowired
 	private ShoppingListService shoppingListService;
+	@Autowired
+	private ItemShoppingListService itemShoppingListService;
+	@Autowired
+	private UserService userService;
 	
 	private User aUser;
 	private Product product0;
@@ -53,26 +59,31 @@ public class CartServiceTest {
 		//cartService.setItemCartService(itemCartService);
 		
 		aUser = new User();
+		userService.save(aUser);
 		
 		product0 = new Product();
 		itemShoppingList0 = new ItemShoppingList();
 		itemShoppingList0.setProduct(product0);
 		itemShoppingList0.setQuantity(2);
+		itemShoppingListService.save(itemShoppingList0);
 
 		product1 = new Product();
 		itemShoppingList1 = new ItemShoppingList();
 		itemShoppingList1.setProduct(product1);
 		itemShoppingList1.setQuantity(0);
+		itemShoppingListService.save(itemShoppingList1);
 
 		product2 = new Product();
 		itemShoppingList2 = new ItemShoppingList();
 		itemShoppingList2.setProduct(product2);
 		itemShoppingList2.setQuantity(1);
+		itemShoppingListService.save(itemShoppingList2);
 
 		product3 = new Product();
 		itemShoppingList3 = new ItemShoppingList();
 		itemShoppingList3.setProduct(product3);
 		itemShoppingList3.setQuantity(10);
+		itemShoppingListService.save(itemShoppingList3);
 		
 		aShoppingList = new ShoppingList();
 		aShoppingList.setUser(aUser);
