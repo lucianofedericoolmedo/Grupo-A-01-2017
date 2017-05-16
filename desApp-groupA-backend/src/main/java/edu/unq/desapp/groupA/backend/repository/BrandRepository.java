@@ -19,15 +19,9 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	}
 	
 	public Brand findByName(String brand) {
-		return brands.stream().filter(b -> b.getName().equals(brand)).findFirst().get();
+		String query = "FROM Brand brand WHERE brand.name = " + brand;
+		return (Brand) this.getHibernateTemplate().find(query);
 	}
-
-	/*
-	public Brand save(Brand brand) {
-		this.brands.add(brand);
-		return brand;
-	}
-	*/
 
 	@Override
 	protected Class<Brand> getDomainClass() {

@@ -15,6 +15,9 @@ public class PriceService extends GenericService<Price> {
 
 	@Autowired
 	private PriceRepository repository;
+	
+	@Autowired
+	private ProductService productService;
 
 	public PriceService() { }
 
@@ -29,17 +32,19 @@ public class PriceService extends GenericService<Price> {
 	public void setRepository(PriceRepository repository) {
 		this.repository = repository;
 	}
-	
+
 	public void finishPriceValidityForProduct(Product product) {
-		Price lastPrice = this.getRepository().findLastPriceByProduct(product);
+		Price lastPrice = product.findCurrentPrice();
 		lastPrice.setFinishingValidityDate(new Date());
 		this.getRepository().save(lastPrice);		
 	}
-	
+
 	public Price updatePriceForProduct(Product product, Double price) {
 		finishPriceValidityForProduct(product);
-		Price newPrice = new Price(price);
-		return super.save(newPrice);
+		Price newPrice = save(new Price(price));
+		product.addPrice(newPrice);
+		productService.update(product);
+		return newPrice;
 	}
 
 }

@@ -15,7 +15,7 @@ public abstract class Item extends PersistenceEntity {
 	private static final long serialVersionUID = -454916293375732956L;
 
 	// Instance Variables
-	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.ALL},fetch=FetchType.EAGER, optional=false)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch=FetchType.EAGER, optional=false)
 	protected Product product;
 
 	protected Integer quantity;

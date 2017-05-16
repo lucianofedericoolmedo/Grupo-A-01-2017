@@ -29,7 +29,7 @@ public class Cart extends ItemGroup<ItemCart> {
 	private static final long serialVersionUID = -6570435320228105087L;
 
 	// Instance Variables
-	@OneToMany(mappedBy="parent", cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ItemCart> items;

@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -83,8 +84,7 @@ public class Product extends PersistenceEntity {
 	}
 	
 	public Price findCurrentPrice(){
-		// TODO: Refac to get current price
-		return prices.get(0);
+		return prices.stream().filter(price -> price.getFinishingValidityDate() == null).findFirst().get();
 	}
 
 	public boolean isCategory(ProductCategory categoryForDiscount) {

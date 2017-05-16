@@ -21,6 +21,7 @@ import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
 import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
+import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 
@@ -39,7 +40,9 @@ public class CartServiceTest {
 	private ItemShoppingListService itemShoppingListService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private ProductService productService;
+
 	private User aUser;
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;
@@ -57,29 +60,33 @@ public class CartServiceTest {
 
 		//cartService = new CartService(new CartRepository(), (long) (0));
 		//cartService.setItemCartService(itemCartService);
-		
+
 		aUser = new User();
 		userService.save(aUser);
 		
 		product0 = new Product();
+		productService.save(product0);
 		itemShoppingList0 = new ItemShoppingList();
 		itemShoppingList0.setProduct(product0);
 		itemShoppingList0.setQuantity(2);
 		itemShoppingListService.save(itemShoppingList0);
 
 		product1 = new Product();
+		productService.save(product1);
 		itemShoppingList1 = new ItemShoppingList();
 		itemShoppingList1.setProduct(product1);
 		itemShoppingList1.setQuantity(0);
 		itemShoppingListService.save(itemShoppingList1);
 
 		product2 = new Product();
+		productService.save(product2);
 		itemShoppingList2 = new ItemShoppingList();
 		itemShoppingList2.setProduct(product2);
 		itemShoppingList2.setQuantity(1);
 		itemShoppingListService.save(itemShoppingList2);
 
 		product3 = new Product();
+		productService.save(product3);
 		itemShoppingList3 = new ItemShoppingList();
 		itemShoppingList3.setProduct(product3);
 		itemShoppingList3.setQuantity(10);
