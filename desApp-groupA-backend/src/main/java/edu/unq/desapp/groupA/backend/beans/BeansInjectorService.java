@@ -70,12 +70,12 @@ public class BeansInjectorService {
 		ItemShoppingList itemShoppingList1 = new ItemShoppingList();
 		itemShoppingList1.setProduct(product);
 		itemShoppingList1.setQuantity(1);
-//		itemShoppingListService.save(itemShoppingList1);
+		itemShoppingListService.save(itemShoppingList1);
 
 		ItemShoppingList itemShoppingList2 = new ItemShoppingList();
 		itemShoppingList2.setProduct(otherProduct);
 		itemShoppingList2.setQuantity(1);
-//		itemShoppingListService.save(itemShoppingList2);
+		itemShoppingListService.save(itemShoppingList2);
 
 		aShoppingList = shoppingListService.createItemForShoppingList(aShoppingList.getId(), itemShoppingList1);
 		aShoppingList = shoppingListService.createItemForShoppingList(aShoppingList.getId(), itemShoppingList2);
@@ -86,6 +86,14 @@ public class BeansInjectorService {
 //    		System.out.println(item.getProduct().getName());
     	}
     	
+    	System.out.println("-------- item shopping list with id 1 -------");
+    	System.out.println(itemShoppingListService.find(new Long(1)).getProduct());
+    	System.out.println(itemShoppingListService.find(new Long(1)).getQuantity());
+
+    	System.out.println("-------- item shopping list with id 2 -------");
+    	System.out.println(itemShoppingListService.find(new Long(2)).getProduct());
+    	System.out.println(itemShoppingListService.find(new Long(2)).getQuantity());
+
     	return createdCart;
     	//itemCartService.save(itemCart);
     	//itemCartService.save(otherItemCart);

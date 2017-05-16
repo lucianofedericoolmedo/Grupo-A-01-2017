@@ -18,7 +18,7 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 	private static final long serialVersionUID = 8643357050037176048L;
 
 	// Instance Variables
-	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy="parent", cascade=CascadeType.MERGE, orphanRemoval=true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ItemShoppingList> items;
 	

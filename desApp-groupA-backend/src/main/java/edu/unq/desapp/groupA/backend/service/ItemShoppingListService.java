@@ -44,8 +44,6 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 		shoppingList.addItem(itemShoppingList);
 		itemShoppingList = super.save(itemShoppingList);
 		shoppingListService.update(shoppingList);
-		System.out.println("Printing shopping list list");
-		System.out.println(shoppingList.getItems());
 		return itemShoppingList;
 	}
 
