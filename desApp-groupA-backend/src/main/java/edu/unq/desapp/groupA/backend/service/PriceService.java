@@ -33,14 +33,21 @@ public class PriceService extends GenericService<Price> {
 		this.repository = repository;
 	}
 
-	public void finishPriceValidityForProduct(Product product) {
+	private void finishPriceValidity(Price price) {
+		price.setFinishingValidityDate(new Date());
+		this.getRepository().save(price);
+	}
+	
+	public void finishPriceValidityForProductIfAny(Product product) {
 		Price lastPrice = product.findCurrentPrice();
-		lastPrice.setFinishingValidityDate(new Date());
-		this.getRepository().save(lastPrice);		
+		// TODO : Maybe refac for using an Exception.
+		if (lastPrice != null) {
+			finishPriceValidity(lastPrice);
+		}
 	}
 
 	public Price updatePriceForProduct(Product product, Double price) {
-		finishPriceValidityForProduct(product);
+		finishPriceValidityForProductIfAny(product);
 		Price newPrice = save(new Price(price));
 		product.addPrice(newPrice);
 		productService.update(product);

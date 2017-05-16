@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -84,7 +85,12 @@ public class Product extends PersistenceEntity {
 	}
 	
 	public Price findCurrentPrice(){
-		return prices.stream().filter(price -> price.getFinishingValidityDate() == null).findFirst().get();
+		Optional<Price> opt = prices.stream().filter(price -> price.getFinishingValidityDate() == null).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			return null;
+		}
 	}
 
 	public boolean isCategory(ProductCategory categoryForDiscount) {

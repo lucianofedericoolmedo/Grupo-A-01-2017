@@ -10,6 +10,7 @@ import edu.unq.desapp.groupA.backend.model.Stock;
 
 
 @Repository
+@SuppressWarnings("unchecked")
 public class StockRepository extends HibernateGenericDAO<Stock> {
 
 	private static final long serialVersionUID = -2793867362203643967L;
@@ -30,7 +31,11 @@ public class StockRepository extends HibernateGenericDAO<Stock> {
 
 	public Stock findByProduct(Product product) {
 		String prodId = product.getId().toString();
-		return (Stock) getHibernateTemplate().find("FROM Stock stock WHERE stock.product.id = " + prodId);
+		List<Stock> stocks = (List<Stock>) getHibernateTemplate().find("FROM " + this.persistentClass.getName() + " stock WHERE stock.product.id = " + prodId);
+		if (stocks.isEmpty()) { 
+			return null;
+		}
+		return stocks.get(0);
 	}
 
 	@Override

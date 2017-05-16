@@ -1,28 +1,38 @@
 package edu.unq.desapp.groupA.backend.service.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.unq.desapp.groupA.backend.csv.basicStructures.BasicProduct;
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Stock;
-import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 import edu.unq.desapp.groupA.backend.service.BrandService;
 import edu.unq.desapp.groupA.backend.service.PriceService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.StockService;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles(profiles = "test")
+@ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class ProductServiceTest {
 
+	@Autowired
 	private ProductService productService;
-	private ProductRepository productRepository;
+	@Autowired
 	private BrandService brandService;
+	@Autowired
 	private StockService stockService;
+	@Autowired
 	private PriceService priceService;
 
 	private BasicProduct basicProduct;
@@ -48,13 +58,21 @@ public class ProductServiceTest {
 		aBrand.setName(brandName);
 		aStock = new Stock();
 		aStock.setQuantity(stockQuantity);
+		aStock.setProduct(aProduct);
 		aPrice = new Price(priceValue);
+		
+		aProduct.setName(productName);
+		aProduct.setBrand(aBrand);
+		aProduct.addPrice(aPrice);
+		
+		productService.save(aProduct);
 
 		basicProduct = new BasicProduct();
 
+		/*
 		productRepository = mock(ProductRepository.class);
 		when(productRepository.findById(anyLong())).thenReturn(aProduct);
-//		when(productRepository.save(aProduct)).thenReturn(aProduct);
+		when(productRepository.save(aProduct)).thenReturn(aProduct);
 
 		brandService = mock(BrandService.class);
 		when(brandService.findByNameOrCreate(anyString())).thenReturn(aBrand);
@@ -67,6 +85,8 @@ public class ProductServiceTest {
 		productService.setBrandService(brandService);
 		productService.setPriceService(priceService);
 		productService.setStockService(stockService);
+		*/
+
 	}
 
 	@Test

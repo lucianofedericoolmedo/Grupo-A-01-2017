@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
 import edu.unq.desapp.groupA.backend.csv.CsvResultBasicProductBuilder;
@@ -63,6 +64,7 @@ public class ProductService extends GenericService<Product>{
 		}
 	}
 
+	@Transactional
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
 		Product product = super.find(basicProduct.getId());
 		if (product == null) {
