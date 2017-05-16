@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 
 @Service
+@Transactional
 public class BalancerService {
 	
 	CashRegister sendCartToQueue(List<CashRegister> cashRegisters) {

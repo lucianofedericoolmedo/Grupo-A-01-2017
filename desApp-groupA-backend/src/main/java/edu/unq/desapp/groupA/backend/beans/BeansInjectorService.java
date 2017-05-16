@@ -18,6 +18,7 @@ import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.CashRegisterService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
 import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
+import edu.unq.desapp.groupA.backend.service.PaymentTypeService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
@@ -50,6 +51,9 @@ public class BeansInjectorService {
 	
 	@Autowired
 	private PurchaseService purchaseService; 
+	
+	@Autowired
+	private PaymentTypeService paymentTypeService;
 
     /**
      * En este método se deben inicializar todas las entidades básicas y
@@ -119,12 +123,18 @@ public class BeansInjectorService {
     public void initialize() {
     	Cart cart = initializeItemsAndProducts();  	
     	
-    	cashRegisterService.createCashRegister();
-    	CashRegister cashRegister = cashRegisterService.getCashRegister();
+    	CashRegister cashRegister = cashRegisterService.createCashRegister();
+    	
+    	System.out.println("----------------");
+    	System.out.println(cashRegister.getAvailable());
+    	System.out.println("----------------");
+    	
+    	//cashRegister = cashRegisterService.getCashRegister();
     	cashRegister.requirePurchase(cart);
-    	PaymentType paymentType = new PaymentType();
-    	paymentType.setName("Credit Card");
+    	PaymentType paymentType = paymentTypeService.create("Credit Card", "Mastercard");
+    	
     	purchaseService.createPurchase(cart,paymentType,cashRegister);	
+    	
     	
     }
     

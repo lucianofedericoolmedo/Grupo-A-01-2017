@@ -26,9 +26,10 @@ public class CashRegisterService extends GenericService<CashRegister> {
 		this.repository = repository;
 	}
 
-	public void createCashRegister() {
+	public CashRegister createCashRegister() {
 		CashRegister cr = new CashRegister();
-		repository.save(cr);		
+		repository.save(cr);
+		return cr;
 	}
 
 	public List<CashRegister> getAvailableCashRegisters() {

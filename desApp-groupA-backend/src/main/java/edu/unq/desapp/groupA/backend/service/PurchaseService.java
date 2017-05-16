@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
@@ -17,6 +18,7 @@ import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
 
 
 @Service
+@Transactional
 public class PurchaseService extends GenericService<Purchase> {
 
 	@Autowired
