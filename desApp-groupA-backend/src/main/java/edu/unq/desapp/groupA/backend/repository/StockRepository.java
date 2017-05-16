@@ -3,10 +3,16 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Stock;
 
-public class StockRepository {
+
+@Repository
+public class StockRepository extends HibernateGenericDAO<Stock> {
+
+	private static final long serialVersionUID = -2793867362203643967L;
 
 	private List<Stock> stocks;
 
@@ -22,13 +28,14 @@ public class StockRepository {
 		this.stocks = stocks;
 	}
 
-	public Stock save(Stock stock) {
-		this.stocks.add(stock);
-		return stock;
+	public Stock findByProduct(Product product) {
+		String prodId = product.getId().toString();
+		return (Stock) getHibernateTemplate().find("FROM Stock stock WHERE stock.product.id = " + prodId);
 	}
 
-	public Stock findByProduct(Product product) {
-		return this.stocks.stream().filter(stock -> stock.getProduct() == product).findFirst().get();
+	@Override
+	protected Class<Stock> getDomainClass() {
+		return Stock.class;
 	}
 
 }

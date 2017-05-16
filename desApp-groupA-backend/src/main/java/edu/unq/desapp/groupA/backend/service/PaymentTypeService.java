@@ -1,17 +1,24 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.PaymentType;
+import edu.unq.desapp.groupA.backend.repository.GenericRepository;
 import edu.unq.desapp.groupA.backend.repository.PaymentTypeRepository;
 
-public class PaymentTypeService {
 
+@Service
+public class PaymentTypeService extends GenericService<PaymentType> {
+
+	@Autowired
 	PaymentTypeRepository repository;
-	
-		
+
+	public PaymentTypeService() { }
+
 	public PaymentTypeService(PaymentTypeRepository repository) {
 		this.repository = repository;
 	}
-
 
 	public PaymentType create(String name, String description){
 		PaymentType paymentType = new PaymentType();
@@ -20,7 +27,10 @@ public class PaymentTypeService {
 		repository.save(paymentType);
 		return paymentType;
 	}
-	
-	
+
+	@Override
+	public GenericRepository<PaymentType> getRepository() {
+		return repository;
+	}
 	
 }

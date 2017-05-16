@@ -3,9 +3,15 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.User;
 
-public class UserRepository {
+
+@Repository
+public class UserRepository extends HibernateGenericDAO<User> implements GenericRepository<User>{
+
+	private static final long serialVersionUID = -2433619667876428408L;
 
 	List<User> users;
 
@@ -21,7 +27,8 @@ public class UserRepository {
 		this.users = new ArrayList<User>();
 	}
 
-	public void save(User user) {
-		this.users.add(user);
+	@Override
+	protected Class<User> getDomainClass() {
+		return User.class;
 	}
 }

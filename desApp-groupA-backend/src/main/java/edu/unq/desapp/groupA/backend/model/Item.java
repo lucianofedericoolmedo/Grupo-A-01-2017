@@ -1,8 +1,22 @@
 package edu.unq.desapp.groupA.backend.model;
 
-public abstract class Item extends Entity {
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Item extends PersistenceEntity {
+
+	private static final long serialVersionUID = -454916293375732956L;
 
 	// Instance Variables
+	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER, optional=false)
+	@Fetch(FetchMode.JOIN)
 	protected Product product;
 
 	protected Integer quantity;
@@ -35,6 +49,11 @@ public abstract class Item extends Entity {
 
 	public Boolean isProduct(Product productForDiscount) {
 		return product.equals(productForDiscount);
+	}
+	
+	@Override
+	public String toString() {
+		return "Product: " + product.getName() + ", Quantity: " + quantity.toString();
 	}
 
 }

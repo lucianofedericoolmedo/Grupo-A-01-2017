@@ -1,8 +1,11 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
@@ -12,13 +15,23 @@ import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 
-public class CartService {
 
+@Service
+@Transactional
+public class CartService extends GenericService<Cart> {
+
+	@Autowired
 	private CartRepository repository;
-	private Long identifier;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private ItemCartService itemCartService;
 
+	private Long identifier;
 
+	public CartService() { }
 	
 	public CartService(CartRepository repository, Long identifier) {
 		this.repository = repository;
@@ -32,14 +45,11 @@ public class CartService {
 	public void setIdentifier(Long id) {
 		this.identifier = id;
 	}
-	
+
 	public Cart createCart(User user) {
 		Cart cart = new Cart();
-		cart.setItems(new ArrayList<ItemCart>());
-		cart.setIdentifier(this.insertID());
 		cart.setUser(user);
-		this.repository.save(cart);
-		return cart;
+		return super.save(cart);
 	}
 
 	/**
@@ -49,11 +59,16 @@ public class CartService {
 	 */
 	public Cart createCartForShoppingList(ShoppingList shoppingList) {
 		Cart cart = createCart(shoppingList.getUser());
-		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
-		cart.setItems(items);
 		cart.setUsedShoppingList(shoppingList);
-		repository.save(cart);
-		return cart;
+		super.save(cart);
+
+		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
+		
+		for (ItemCart item : items){
+			itemCartService.createItemCart(item);
+			cart.addItems(item);
+		}
+		return super.update(cart);
 	}
 
 	/**
@@ -70,12 +85,6 @@ public class CartService {
 		ItemCart itemCart = getItemCartService().createItemCart(product, 0, cart);
 		cart.addItems(itemCart);
 		return itemCart;
-	}
-
-	private Long insertID(){
-		Long value = this.getIdentifier();
-		this.identifier = this.identifier + (long) 1;
-		return value;
 	}
 
 	public boolean isCartIncludingProduct(Cart cart, Product product) {
@@ -98,5 +107,10 @@ public class CartService {
 		this.itemCartService = itemCartService;
 	}
 
+	public Cart create(Long userId, Cart cart) {
+		User user = userService.find(userId);
+		cart.setUser(user);
+		return super.save(cart);
+	}
 	
 }

@@ -1,15 +1,23 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import org.joda.time.DateTime;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.repository.PriceRepository;
 
-public class PriceService {
 
+@Service
+public class PriceService extends GenericService<Price> {
+
+	@Autowired
 	private PriceRepository repository;
-	
+
+	public PriceService() { }
+
 	public PriceService(PriceRepository priceRepository) {
 		this.setRepository(priceRepository);
 	}
@@ -24,15 +32,14 @@ public class PriceService {
 	
 	public void finishPriceValidityForProduct(Product product) {
 		Price lastPrice = this.getRepository().findLastPriceByProduct(product);
-		lastPrice.setFinishingValidityDate(DateTime.now());
+		lastPrice.setFinishingValidityDate(new Date());
 		this.getRepository().save(lastPrice);		
 	}
 	
 	public Price updatePriceForProduct(Product product, Double price) {
 		finishPriceValidityForProduct(product);
-		Price newPrice = new Price(product, price);
-		return this.getRepository().save(newPrice);
+		Price newPrice = new Price(price);
+		return super.save(newPrice);
 	}
-
 
 }

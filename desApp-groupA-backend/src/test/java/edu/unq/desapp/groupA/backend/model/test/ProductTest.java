@@ -43,12 +43,12 @@ public class ProductTest {
 		
 		newProduct.setName("Surtidas");
 		newProduct.setBrand(aBrand);
-		newProduct.setPrice(aPrice);
+		//newProduct.setPrice(aPrice);
 		newProduct.setCategories(productCategories);
 		
 		assertEquals("Surtidas", newProduct.getName());
 		assertEquals(aBrand, newProduct.getBrand());
-		assertEquals(aPrice, newProduct.getPrice());
+		//assertEquals(aPrice, newProduct.getPrice());
 		assertEquals(productCategories, newProduct.getCategories());
 	}
 

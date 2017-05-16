@@ -3,10 +3,14 @@ package edu.unq.desapp.groupA.backend.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Discount;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Priority;
 
+
+@Service
 public class DiscountAssigner {
 
 	public List<Discount> findActiveDiscountsWithPriority(Priority priority) {

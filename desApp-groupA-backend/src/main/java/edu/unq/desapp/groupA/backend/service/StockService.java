@@ -1,13 +1,21 @@
 package edu.unq.desapp.groupA.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Stock;
 import edu.unq.desapp.groupA.backend.repository.StockRepository;
 
-public class StockService {
 
+@Service
+public class StockService extends GenericService<Stock> {
+
+	@Autowired
 	private StockRepository repository;
 
+	public StockService() { }
+	
 	public StockService(StockRepository stockRepository) {
 		this.repository = stockRepository;
 	}
@@ -27,9 +35,11 @@ public class StockService {
 	public Stock updateStockForProduct(Product product, Integer stockQuantity) {
 		Stock stock = findByProduct(product);
 		if (stock == null) {
-			stock = this.getRepository().save(new Stock(product, stockQuantity));
+			return super.save(new Stock(product, stockQuantity));
+		} else {
+			stock.setQuantity(stockQuantity);
+			return super.update(stock);
 		}
-		return stock;
 	}
 
 }

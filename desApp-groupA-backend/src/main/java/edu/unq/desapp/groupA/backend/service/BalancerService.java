@@ -3,8 +3,11 @@ package edu.unq.desapp.groupA.backend.service;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 
+@Service
 public class BalancerService {
 	
 	CashRegister sendCartToQueue(List<CashRegister> cashRegisters) {

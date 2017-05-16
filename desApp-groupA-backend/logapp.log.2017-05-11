@@ -1,0 +1,168 @@
+2017-05-11 20:24:38,663 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:24:38,666 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:24:38,667 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:24:38,667 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:24:38,668 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:24:38,668 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:24:38,669 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:24:38,669 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:24:38,670 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:24:38,670 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:24:38,671 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:24:38,672 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:24:38,672 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:24:38,673 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:24:38,674 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:24:38,674 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:24:38,676 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:24:38,677 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:24:38,677 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:24:38,678 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:24:38,679 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:24:38,679 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:24:38,680 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:24:38,680 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:24:38,681 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:24:38,681 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:24:38,681 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:24:38,682 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY
+2017-05-11 20:31:06,339 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:31:06,342 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:31:06,343 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:31:06,343 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:31:06,344 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:31:06,345 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:31:06,345 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:31:06,345 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:31:06,346 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:31:06,346 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:31:06,346 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:31:06,347 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:31:06,348 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:31:06,350 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:31:06,351 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:31:06,351 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:31:06,353 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:31:06,354 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:31:06,354 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:31:06,355 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:31:06,355 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:31:06,356 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:31:06,357 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:31:06,357 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:31:06,358 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:31:06,359 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:31:06,359 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:31:06,360 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY
+2017-05-11 20:32:03,502 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:32:03,507 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:32:03,508 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:32:03,508 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:32:03,509 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:32:03,509 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:32:03,510 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:32:03,510 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:32:03,511 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:32:03,511 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:32:03,512 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:32:03,512 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:32:03,512 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:32:03,513 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:32:03,513 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:32:03,514 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:32:03,515 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:32:03,516 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:32:03,516 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:32:03,517 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:32:03,517 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:32:03,517 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:32:03,518 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:32:03,518 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:32:03,519 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:32:03,519 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:32:03,520 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:32:03,520 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY
+2017-05-11 20:43:00,601 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:43:00,604 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:43:00,604 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:43:00,605 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:43:00,605 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:43:00,606 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:43:00,606 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:43:00,606 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:43:00,607 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:43:00,607 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:43:00,608 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:43:00,608 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:43:00,608 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:43:00,609 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:43:00,609 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:43:00,609 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:43:00,611 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:43:00,611 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:43:00,612 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:43:00,612 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:43:00,613 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:43:00,613 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:43:00,614 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:43:00,614 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:43:00,615 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:43:00,615 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:43:00,616 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:43:00,616 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY
+2017-05-11 20:44:02,401 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:44:02,404 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:44:02,405 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:44:02,406 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:44:02,406 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:44:02,407 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:44:02,408 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:44:02,408 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:44:02,408 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:44:02,409 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:44:02,409 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:44:02,409 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:44:02,410 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:44:02,411 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:44:02,411 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:44:02,412 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:44:02,414 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:44:02,415 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:44:02,415 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:44:02,416 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:44:02,416 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:44:02,417 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:44:02,417 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:44:02,418 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:44:02,418 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:44:02,419 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:44:02,420 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:44:02,420 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY
+2017-05-11 20:45:10,254 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table carts drop constraint FK_kd0j7g2ara8c0s9fkf8etkqhw
+2017-05-11 20:45:10,257 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.CARTS
+2017-05-11 20:45:10,258 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product drop constraint FK_2t3jlv9ilimgx2gvbjpivs5ih
+2017-05-11 20:45:10,258 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT
+2017-05-11 20:45:10,258 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table discounts_per_product_category drop constraint FK_rlcvv0sbimdj3wrfhqa6n59tx
+2017-05-11 20:45:10,259 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.DISCOUNTS_PER_PRODUCT_CATEGORY
+2017-05-11 20:45:10,259 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products drop constraint FK_6hy60v15d0rxyov6x0b71wx61
+2017-05-11 20:45:10,260 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS
+2017-05-11 20:45:10,260 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_ix8jyc7jwfx8lhpqoav86prk4
+2017-05-11 20:45:10,260 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:45:10,261 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_prices drop constraint FK_4r3fu85wm2kdq0kgoyxfecidc
+2017-05-11 20:45:10,261 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRICES
+2017-05-11 20:45:10,262 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_rat2ft1m0dmlqhv04dyg2f7jw
+2017-05-11 20:45:10,262 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:45:10,263 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table products_products_categories drop constraint FK_s3y2vmkv07o7cg3n60jxwr6ep
+2017-05-11 20:45:10,263 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PRODUCTS_PRODUCTS_CATEGORIES
+2017-05-11 20:45:10,265 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_tm28ebnkrr31wdbhmjkt7s5fw
+2017-05-11 20:45:10,265 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:45:10,266 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_6mnnj5sx418yjum97fhlcukl6
+2017-05-11 20:45:10,266 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:45:10,267 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_fo88022au8crbsmi34k9i7dgi
+2017-05-11 20:45:10,267 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:45:10,268 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table purchases drop constraint FK_dq4oj8cchwv09dot5j248b6xp
+2017-05-11 20:45:10,268 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.PURCHASES
+2017-05-11 20:45:10,268 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table stocks drop constraint FK_htp625bmmsb6gay567r5sdfoc
+2017-05-11 20:45:10,269 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.STOCKS
+2017-05-11 20:45:10,270 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:425) - HHH000389: Unsuccessful: alter table thresholds_product_category drop constraint FK_apfi2fpldfj0ba4vwlki4yvau
+2017-05-11 20:45:10,270 ERROR org.hibernate.tool.hbm2ddl.SchemaExport (SchemaExport.java:426) - usuario no tiene privilegios suficientes o objeto no encontrado: PUBLIC.THRESHOLDS_PRODUCT_CATEGORY

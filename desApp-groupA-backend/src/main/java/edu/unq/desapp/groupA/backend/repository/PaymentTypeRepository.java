@@ -3,9 +3,13 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 
-public class PaymentTypeRepository {
+
+@Repository
+public class PaymentTypeRepository extends HibernateGenericDAO<PaymentType> {
 
 	private List<PaymentType> paymentTypes;
 	
@@ -21,7 +25,8 @@ public class PaymentTypeRepository {
 		this.paymentTypes = paymentTypes;
 	}
 	
-	public void save(PaymentType p){
-		this.paymentTypes.add(p);
+	@Override
+	protected Class<PaymentType> getDomainClass() {
+		return PaymentType.class;
 	}
 }

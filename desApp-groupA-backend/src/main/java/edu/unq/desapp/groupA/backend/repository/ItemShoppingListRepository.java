@@ -3,9 +3,13 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 
-public class ItemShoppingListRepository {
+
+@Repository
+public class ItemShoppingListRepository extends HibernateGenericDAO<ItemShoppingList> {
 
 	private List<ItemShoppingList> items;
 
@@ -21,8 +25,9 @@ public class ItemShoppingListRepository {
 		this.items = new ArrayList<ItemShoppingList>();
 	}
 	
-	public void save(ItemShoppingList itemShoppingList) {
-		this.items.add(itemShoppingList);
+	@Override
+	protected Class<ItemShoppingList> getDomainClass() {
+		return ItemShoppingList.class;
 	}
 
 }

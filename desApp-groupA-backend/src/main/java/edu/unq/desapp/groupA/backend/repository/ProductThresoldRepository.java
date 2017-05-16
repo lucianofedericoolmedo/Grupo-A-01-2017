@@ -3,10 +3,13 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 
 
-public class ProductThresoldRepository {
+@Repository
+public class ProductThresoldRepository extends HibernateGenericDAO<ProductCategoryThreshold>{
 
 	private List<ProductCategoryThreshold> productThresolds;
 
@@ -22,7 +25,8 @@ public class ProductThresoldRepository {
 		this.productThresolds = new ArrayList<ProductCategoryThreshold>();
 	}
 	
-	public void save(ProductCategoryThreshold productThresold){
-		this.productThresolds.add(productThresold);
+	@Override
+	protected Class<ProductCategoryThreshold> getDomainClass() {
+		return ProductCategoryThreshold.class;
 	}
 }

@@ -4,15 +4,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Purchase extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "purchases")
+public class Purchase extends PersistenceEntity {
+
+	private static final long serialVersionUID = 8013837936064742125L;
 
 	// Instance Variables
+	@OneToOne
 	private Cart cart;
 	
+	@ManyToOne
 	private ShippingAddress shippingAddress;
 		
+	@ManyToOne
 	private PaymentType payment;
 
+	@ManyToOne
 	private CashRegister cashRegister;
 
 	// Getters and Setters
@@ -81,7 +94,7 @@ public class Purchase extends Entity {
 
 	private List<Product> getProducts() {
 		// TODO Auto-generated method stub
-		return this.cart.items.stream().map(p-> p.getProduct()).collect(Collectors.toList());
+		return this.cart.getItems().stream().map(p-> p.getProduct()).collect(Collectors.toList());
 	}
 
 }

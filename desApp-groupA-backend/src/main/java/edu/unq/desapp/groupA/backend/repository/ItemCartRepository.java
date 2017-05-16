@@ -3,9 +3,13 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 
-public class ItemCartRepository {
+
+@Repository
+public class ItemCartRepository extends HibernateGenericDAO<ItemCart> {
 
 	private List<ItemCart> items;
 
@@ -23,8 +27,8 @@ public class ItemCartRepository {
 		this.setItems(new ArrayList<ItemCart>());
 	}
 
-
-	public void save(ItemCart item) {
-		this.items.add(item);
+	@Override
+	protected Class<ItemCart> getDomainClass() {
+		return ItemCart.class;
 	}
 }

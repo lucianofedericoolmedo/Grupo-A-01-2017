@@ -3,6 +3,9 @@ package edu.unq.desapp.groupA.backend.service;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
 import edu.unq.desapp.groupA.backend.csv.CsvResultBasicProductBuilder;
 import edu.unq.desapp.groupA.backend.csv.basicStructures.BasicProduct;
@@ -12,12 +15,23 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
-public class ProductService {
 
+@Service
+public class ProductService extends GenericService<Product>{
+
+	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
 	private BrandService brandService;
+	
+	@Autowired
 	private StockService stockService;
+	
+	@Autowired
 	private PriceService priceService;
+
+	public ProductService() { }
 
 	public ProductService(ProductRepository repository) {
 		this.repository = repository;
@@ -37,7 +51,7 @@ public class ProductService {
 		product.setBrand(brand);
 		product.setCategories(categories);
 		product.setName(name);
-		product.setPrice(price);
+		product.addPrice(price);
 		repository.save(product);
 		return product;
 	}
@@ -50,17 +64,17 @@ public class ProductService {
 	}
 
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
-		Product product = this.getRepository().find(basicProduct.getId());
+		Product product = super.find(basicProduct.getId());
 		if (product == null) {
-			product = this.getRepository().save(new Product());
+			product = super.save(new Product());
 		}
 		product.setName(basicProduct.getName());
 		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
 		product.setBrand(brand);
 		Price price = getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
-		product.setPrice(price);
+		product.addPrice(price);
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
-		return this.getRepository().save(product);
+		return super.update(product);
 	}
 
 	// Services

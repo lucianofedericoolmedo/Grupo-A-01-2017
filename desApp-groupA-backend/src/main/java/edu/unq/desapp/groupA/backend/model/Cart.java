@@ -1,24 +1,53 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.joda.time.DateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+
+@Entity
+@Table(name = "carts")
 public class Cart extends ItemGroup<ItemCart> {
 
+	private static final long serialVersionUID = -6570435320228105087L;
+
 	// Instance Variables
+	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<ItemCart> items;
+	
+	@ManyToOne
 	private ShoppingList usedShoppingList;
-	private DateTime reservationTime;
+	
+	@JsonSerialize(using = JSONDateSerialize.class)
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+	private Date reservationTime;
 	
 	// Constructors
 	public Cart() {
-		this.items = new LinkedList<ItemCart>();
+		this.setItems(new LinkedList<ItemCart>());
 	}
 	
 	public boolean includesProduct(Product p){
-		return this.items.stream().anyMatch(itemC -> itemC.getProduct().equals(p));
+		return this.getItems().stream().anyMatch(itemC -> itemC.getProduct().equals(p));
 	}
 	
 	// Getters and Setters
@@ -29,10 +58,23 @@ public class Cart extends ItemGroup<ItemCart> {
 	public void setUsedShoppingList(ShoppingList usedShoppingList) {
 		this.usedShoppingList = usedShoppingList;
 	}
-	
+
+	public List<ItemCart> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemCart> items) {
+		this.items = items;
+	}
+
 	// Logic
+	public void addItems(ItemCart item) {
+		item.setParent(this);
+		super.addItems(item);
+	}
+	
 	public List<ItemCart> checkedItems() {
-		return items.stream().filter(item -> item.getChecked()).collect(Collectors.toList());
+		return getItems().stream().filter(item -> item.getChecked()).collect(Collectors.toList());
 	}
 
 	public Double totalValueOfCheckedItemsWithProductCategory(ProductCategory categoryForDiscount) {
@@ -44,14 +86,15 @@ public class Cart extends ItemGroup<ItemCart> {
 	}
 
 	public Integer quantityOfItems() {
-		return this.items.size();
+		return this.getItems().size();
 	}
 
-	public void setReservationTime(DateTime date) {
+	public void setReservationTime(Date date) {
 		this.reservationTime = date;
 	}
 	
-	public DateTime getReservationTime() {
+	public Date getReservationTime() {
 		return reservationTime;
 	}
+
 }

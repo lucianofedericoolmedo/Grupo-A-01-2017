@@ -6,6 +6,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
@@ -13,15 +18,22 @@ import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
-import edu.unq.desapp.groupA.backend.repository.CartRepository;
-import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
+import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles(profiles = "test")
+@ContextConfiguration({ "/META-INF/spring-persistence-context.xml", "/META-INF/spring-services-context.xml" })
 public class CartServiceTest {
 
+	@Autowired
 	private CartService cartService;
-	private ItemCartService itemCartService; 
+	@Autowired
+	private ItemCartService itemCartService;
+	@Autowired
+	private ShoppingListService shoppingListService;
+	
 	private User aUser;
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;
@@ -35,10 +47,10 @@ public class CartServiceTest {
 
 	@Before
 	public void setup() {
-		itemCartService = new ItemCartService(new ItemCartRepository());
+		//itemCartService = new ItemCartService(new ItemCartRepository());
 
-		cartService = new CartService(new CartRepository(), (long) (0));
-		cartService.setItemCartService(itemCartService);
+		//cartService = new CartService(new CartRepository(), (long) (0));
+		//cartService.setItemCartService(itemCartService);
 		
 		aUser = new User();
 		
@@ -68,26 +80,37 @@ public class CartServiceTest {
 		aShoppingList.addItems(itemShoppingList1);
 		aShoppingList.addItems(itemShoppingList2);
 		
+		//deleteItemsInCartDatabase();
+	}
+	
+	public void deleteItemsInCartDatabase() {
+		System.out.println("Executed delete");
+		for (Cart cart : cartService.findAll()) {
+			System.out.println("Deleted " + cart.getId());
+			cartService.delete(cart.getId());
+		}
 	}
 
 	@Test
 	public void test_GivenAnUser_CreateNewEmptyCart() {
-		Long newIdentifier = new Long(0);
+//		Long newIdentifier = new Long(1);
 
 		Cart newCart = cartService.createCart(aUser);
 
 		assertTrue(newCart.getItems().isEmpty());
-		assertEquals(newIdentifier, newCart.getIdentifier());
+//		assertEquals(newIdentifier, newCart.getId());
 		assertEquals(aUser, newCart.getUser());
 	}
 
 	@Test
 	public void test_GivenAShoppingListWithThreeProducts_WhenCreatingACartWithTheShoppingList_ThenTheCreatedCartShouldHaveTheThreePRoducts() {
+		
 		assertTrue(aShoppingList.containsProduct(product0));
 		assertTrue(aShoppingList.containsProduct(product1));
 		assertTrue(aShoppingList.containsProduct(product2));
 		assertFalse(aShoppingList.containsProduct(product3));
 		
+		shoppingListService.save(aShoppingList);
 		Cart createdCart = cartService.createCartForShoppingList(aShoppingList);
 
 		assertTrue(createdCart.containsProduct(product0));
