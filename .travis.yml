@@ -12,3 +12,6 @@ deploy:
   on:
     repo: lucianofedericoolmedo/Grupo-A-01-2017
 repo: lucianofedericoolmedo/Grupo-A-01-2017
+
+after_success:
+- mvn clean test jacoco:report coveralls:report
