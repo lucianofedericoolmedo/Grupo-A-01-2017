@@ -7,15 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
+import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
+import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.CartService;
+import edu.unq.desapp.groupA.backend.service.CashRegisterService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
 import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
+import edu.unq.desapp.groupA.backend.service.PurchaseService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 import edu.unq.desapp.groupA.backend.service.provider.ProductFactory;
@@ -40,6 +44,12 @@ public class BeansInjectorService {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CashRegisterService cashRegisterService;
+	
+	@Autowired
+	private PurchaseService purchaseService; 
 
     /**
      * En este método se deben inicializar todas las entidades básicas y
@@ -96,7 +106,13 @@ public class BeansInjectorService {
     @PostConstruct
     @Transactional
     public void initialize() {
-    	initializeItemsAndProducts();
+    	Cart cart = initializeItemsAndProducts();
+    	cashRegisterService.createCashRegister();
+    	CashRegister cashRegister = cashRegisterService.getCashRegister();
+    	cashRegister.requirePurchase(cart);
+    	
+    	PaymentType paymentType = new PaymentType();
+    	paymentType.setName("Credit Card");
     	
     }
     

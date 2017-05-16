@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
+import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
@@ -21,11 +22,23 @@ public class PurchaseService extends GenericService<Purchase> {
 	@Autowired
 	private PurchaseRepository repository;	
 	
+	@Autowired
+	private TimeResponseService timeResponseService;
+	
 	public Purchase createPurchase(Cart cart, PaymentType paymentType){
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
 		purchase.setPayment(paymentType);
 		purchase.setCreationDate(new Date());
+		this.repository.save(purchase);
+		return purchase;
+	}
+	
+	public Purchase createPurchase(Cart cart, PaymentType paymentType, Date creationDate){
+		Purchase purchase = new Purchase();
+		purchase.setCart(cart);
+		purchase.setPayment(paymentType);
+		purchase.setCreationDate(creationDate);
 		this.repository.save(purchase);
 		return purchase;
 	}
@@ -66,6 +79,13 @@ public class PurchaseService extends GenericService<Purchase> {
 
 	public List<Purchase> fetchPurchasesFrom(Date dateFromToFetch, Long userId) {
 		return repository.findPurchasesFrom(dateFromToFetch, userId);
+	}
+	
+	public Purchase createPurchase(Cart cart,PaymentType paymentType, CashRegister cashRegister) {
+		cashRegister.removeItems(cart.quantityOfItems());
+		Purchase purchase = this.createPurchase(cart, paymentType);
+		timeResponseService.registerResponseTime(cart.getReservationTime(),purchase.getCreationDate());
+		return purchase;
 	}
 	
 

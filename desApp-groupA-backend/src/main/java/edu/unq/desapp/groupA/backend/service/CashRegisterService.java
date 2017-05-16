@@ -14,6 +14,9 @@ public class CashRegisterService extends GenericService<CashRegister> {
 
 	@Autowired
 	private CashRegisterRepository repository;
+	
+	@Autowired
+	private BalancerService balancerService;
 
 	public CashRegisterService() { }
 
@@ -50,6 +53,15 @@ public class CashRegisterService extends GenericService<CashRegister> {
 		return this.repository.getRegisteredCashRegisters();
 	}
 	
-	
+	public CashRegister getCashRegister() {
+		List<CashRegister> availableCashRegister = this.getAvailableCashRegisters();
+		if (! availableCashRegister.isEmpty()){
+			return availableCashRegister.get(0);
+		}
+		else {
+			List<CashRegister> cajasHabilitadas = this.getRegisteredCashRegisters();
+			return balancerService.sendCartToQueue(cajasHabilitadas);
+		}
+	}
 	
 }

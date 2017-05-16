@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class Purchase extends PersistenceEntity {
 	// Instance Variables
 	@OneToOne
 	private Cart cart;
-	
+		
 	@ManyToOne
 	private ShippingAddress shippingAddress;
 		
