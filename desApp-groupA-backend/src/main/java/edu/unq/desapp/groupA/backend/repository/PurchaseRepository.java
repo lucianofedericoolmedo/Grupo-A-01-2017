@@ -41,27 +41,19 @@ public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 	}
 
 	public List<Purchase> findLastPurchases(Integer quantityToFetch, Long userId) {
-		String query = "FROM Purchase purchase "
+		String query = "FROM " + this.persistentClass.getName() + " purchase "
 				+ " WHERE purchase.cart.user.id = " + userId.toString()
 				+ " ORDER BY purchase.creationDate DESC "
 				+ quantityToFetch.toString();
 		return (List<Purchase>) getHibernateTemplate().find(query);
-		/*
-		return this.purchases.stream().sorted((c1, c2) -> (c1.getCreationDate().isAfter(c2.getCreationDate())) ? 1 : 0).
-			collect(Collectors.toList()).subList(0, quantityToFetch);
-		*/
 	}
 
 	public List<Purchase> findPurchasesFrom(Date dateFromToFetch, Long userId) {
-		String query = "FROM Purchase purchase "
+		String query = "FROM " + this.persistentClass.getName() + " purchase "
 				+ " WHERE purchase.cart.user.id = " + userId.toString()
 				+ " AND purchase.creationDate > " + dateFromToFetch.toString()
 				+ " ORDER BY purchase.creationDate DESC ";
 		return (List<Purchase>) getHibernateTemplate().find(query);
-		/*
-		return this.purchases.stream().filter(p -> p.getCreationDate().isAfter(dateFromToFetch)).
-				collect(Collectors.toList());
-		*/
 	}
 	
 	public List<Purchase> getShippings() {
