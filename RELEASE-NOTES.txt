@@ -19,3 +19,20 @@ NOTES:
 * Some functionalities were not include in a centralized service.
 * Implemented Discounts having three levels of prioties. HIGH, MEDIUM, LOW. When applying discounts to a specific Item in the Cart (ItemCart) the Discounts with higher priority will be set first, if applies. Then the rest with lower priority will be applied. Once an Item in a Cart has an applied Discount, another Discount can NOT be applied to the same Item. The ADMINISTRATOR will have the possibility of managing the Discount level of priority when creating or updating the Discounts.
 * Implemented Thresholds with a Threshold Criteria. These criteria indicates if the Thresholds should use the last 'n' purchases, or if it should use the purchases starting from an specific date to calculate the average. The USER will have the possibility of managing this criteria for each Threshold.
+
+---------------------------------------------------------------------
+TAG 2.0
+---------------------------------------------------------------------
+NEW FEATURES:
+* Created more services centralizing functionalities and rest CRUD services for Brands , Products, Purchases.
+* Import CSV from a file.
+* Web proyect using angular-yeoman generator
+* Heroku app for web project
+* Internationalization using I18n- US_ES
+* Hibernate and Spring integration using HSQLDB.
+* Fake data for "tryout" the app
+* Rest functionalities:
+	* Listing products
+	* Adding products to shopping cart
+	* Adding purchase to further payment process
+	* Uploading batch products file with format : <ID, Name, Brand, Stock, Price, Image>
