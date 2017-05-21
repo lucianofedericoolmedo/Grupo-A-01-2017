@@ -36,4 +36,3 @@ NEW FEATURES:
 	* Adding products to shopping cart
 	* Adding purchase to further payment process
 	* Uploading batch products file with format : <ID, Name, Brand, Stock, Price, Image>
-
