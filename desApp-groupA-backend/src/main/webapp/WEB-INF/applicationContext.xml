@@ -43,6 +43,10 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 
 	<bean id='jacksonProvider' class='org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider' />
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1"/>
+	</bean>
+	
 
 <!-- =========================== -->
 <!-- =========Servicios  ========= -->
@@ -56,6 +60,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="cashRegisterRest" />
 			<ref bean="itemCartRest" />
 			<ref bean="itemShoppingListRest" />
+			<ref bean="productBatchLoadRest" />
 			<ref bean="productCategoryRest" />
 			<ref bean="productRest" />
 			<ref bean="purchaseRest" />

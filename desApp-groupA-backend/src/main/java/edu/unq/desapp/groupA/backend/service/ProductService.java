@@ -18,6 +18,7 @@ import edu.unq.desapp.groupA.backend.repository.ProductRepository;
 
 
 @Service
+@Transactional
 public class ProductService extends GenericService<Product>{
 
 	@Autowired
@@ -64,7 +65,6 @@ public class ProductService extends GenericService<Product>{
 		}
 	}
 
-	@Transactional
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
 		Product product = super.find(basicProduct.getId());
 		if (product == null) {

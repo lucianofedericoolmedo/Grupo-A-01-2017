@@ -13,6 +13,9 @@
 	
 	<bean id="utils.responseGenerator" class="edu.unq.desapp.groupA.backend.utils.ResponseGenerator">
 	</bean>
+
+	<bean id="utils.fileUtil" class="edu.unq.desapp.groupA.backend.utils.FileUtil">
+	</bean>
 	
 	<context:component-scan base-package="edu.unq.desapp.groupA.backend.service
 	, edu.unq.desapp.groupA.backend.repository

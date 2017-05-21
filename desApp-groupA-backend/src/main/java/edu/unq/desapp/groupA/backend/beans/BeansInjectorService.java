@@ -98,18 +98,6 @@ public class BeansInjectorService {
 		
 		Cart createdCart = cartService.createCartForShoppingList(aShoppingList);
 		System.out.println("POST CART SAVED");
-    	for (ItemCart item : createdCart.getItems()){
-//    		System.out.println(item.getProduct().getName());
-    	}
-    	
-    	System.out.println("-------- item shopping list with id 1 -------");
-    	System.out.println(itemShoppingListService.find(new Long(1)).getProduct());
-    	System.out.println(itemShoppingListService.find(new Long(1)).getQuantity());
-
-    	System.out.println("-------- item shopping list with id 2 -------");
-    	System.out.println(itemShoppingListService.find(new Long(2)).getProduct());
-    	System.out.println(itemShoppingListService.find(new Long(2)).getQuantity());
-
     	
     	return createdCart;
     	//itemCartService.save(itemCart);
@@ -121,6 +109,7 @@ public class BeansInjectorService {
     @PostConstruct
     @Transactional
     public void initialize() {
+    	/*
     	Cart cart = initializeItemsAndProducts();  	
     	
     	CashRegister cashRegister = cashRegisterService.createCashRegister();
@@ -134,7 +123,7 @@ public class BeansInjectorService {
     	PaymentType paymentType = paymentTypeService.create("Credit Card", "Mastercard");
     	
     	purchaseService.createPurchase(cart,paymentType,cashRegister);	
-    	
+    	*/
     	
     }
     

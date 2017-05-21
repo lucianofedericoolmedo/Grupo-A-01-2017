@@ -24,7 +24,7 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	public Brand findByName(String brand) {
 		String query = "SELECT brand FROM " + this.persistentClass.getName() + " brand WHERE brand.name = '" + brand + "'";
 		List<Brand> brands = (List<Brand>) this.getHibernateTemplate().find(query);
-		return brands.get(0);
+		return brands.isEmpty() ? null : brands.get(0);
 	}
 
 	@Override
