@@ -6,5 +6,5 @@ BACKEND:
    HEROKU LINK: http://grupo-a-012017.herokuapp.com/
   
 FRONTEND:
-   HEROKU LINK: http://desapp-groupa-frontend.herokuapp.com/
+   HEROKU LINK: https://group-a-comprando-a-lo-loco.herokuapp.com/#!/
 
