@@ -39,7 +39,7 @@ public class StockRepository extends HibernateGenericDAO<Stock> {
 	}
 
 	@Override
-	protected Class<Stock> getDomainClass() {
+	public Class<Stock> getDomainClass() {
 		return Stock.class;
 	}
 

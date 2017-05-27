@@ -11,6 +11,8 @@ import edu.unq.desapp.groupA.backend.model.ShoppingList;
 @Repository
 public class ShoppingListRepository extends HibernateGenericDAO<ShoppingList> {
 
+	private static final long serialVersionUID = 7566968066160299788L;
+
 	private List<ShoppingList> shoppingLists;
 
 	public ShoppingListRepository() {
@@ -26,7 +28,7 @@ public class ShoppingListRepository extends HibernateGenericDAO<ShoppingList> {
 	}
 
 	@Override
-	protected Class<ShoppingList> getDomainClass() {
+	public Class<ShoppingList> getDomainClass() {
 		return ShoppingList.class;
 	}
 	

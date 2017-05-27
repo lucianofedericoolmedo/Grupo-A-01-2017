@@ -22,7 +22,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/item-cart")
+@Path("/items-cart")
 public class ItemCartRest extends GenericRest<ItemCart> {
 
 	@Autowired

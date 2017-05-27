@@ -33,7 +33,7 @@ public class CartRepository extends HibernateGenericDAO<Cart> implements Generic
 	}
 
 	@Override
-	protected Class<Cart> getDomainClass() {
+	public Class<Cart> getDomainClass() {
 		return Cart.class;
 	}
 	

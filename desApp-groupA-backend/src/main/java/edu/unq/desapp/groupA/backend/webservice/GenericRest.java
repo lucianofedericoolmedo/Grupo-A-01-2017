@@ -66,4 +66,14 @@ public abstract class GenericRest <T> {
 		}
 	}
 
+	public Response findByPage(Integer pageNumber, Integer pageSize) {
+		try {
+			return responseGenerator.buildSuccessResponse(getService().findByPage(pageNumber, pageSize));
+		} catch (RuntimeException re) {
+			return responseGenerator.buildResponse(re.getMessage(), Status.BAD_REQUEST);
+		} catch (Exception e) {
+			return responseGenerator.buildResponse(e.getMessage(), Status.BAD_REQUEST);
+		} 
+	}
+
 }

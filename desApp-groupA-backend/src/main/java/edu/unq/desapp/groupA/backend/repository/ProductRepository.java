@@ -28,7 +28,7 @@ public class ProductRepository extends HibernateGenericDAO<Product> {
 	}
 
 	@Override
-	protected Class<Product> getDomainClass() {
+	public Class<Product> getDomainClass() {
 		return Product.class;
 	}
 

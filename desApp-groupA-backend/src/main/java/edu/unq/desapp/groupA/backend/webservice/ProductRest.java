@@ -8,6 +8,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/product")
+@Path("/products")
 public class ProductRest extends GenericRest<Product> {
 
 	@Autowired
@@ -48,6 +49,13 @@ public class ProductRest extends GenericRest<Product> {
 	}
 	
 	@GET
+	@Path("/find-by-page")
+	public Response findByPage(@QueryParam("pageNumber") Integer pageNumber,
+			@QueryParam("pageSize") Integer pageSize) {
+		return super.findByPage(pageNumber, pageSize);
+	}
+	
+	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");
 	}
@@ -59,6 +67,7 @@ public class ProductRest extends GenericRest<Product> {
 	}
 
 	@PUT
+	@Path("/{id}")
 	public Response update(Product product) {
 		return super.update(product);
 	}

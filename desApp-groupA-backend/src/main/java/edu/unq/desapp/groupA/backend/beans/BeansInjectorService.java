@@ -124,7 +124,6 @@ public class BeansInjectorService {
     	
     	purchaseService.createPurchase(cart,paymentType,cashRegister);	
     	*/
-    	
     }
     
 }

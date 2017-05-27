@@ -32,7 +32,7 @@ public class TimeResponseRepository extends HibernateGenericDAO<TimeResponse> im
 	}
 
 	@Override
-	protected Class<TimeResponse> getDomainClass() {
+	public Class<TimeResponse> getDomainClass() {
 		return TimeResponse.class;
 	}	
 }

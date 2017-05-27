@@ -12,6 +12,8 @@ import edu.unq.desapp.groupA.backend.model.User;
 @Repository
 public class ThresholdRepository extends HibernateGenericDAO<Threshold> {
 
+	private static final long serialVersionUID = 7255438698679596488L;
+
 	private List<Threshold> thresholds;
 	
 	public List<Threshold> findEnabledThresholdOfUser(User user) {
@@ -27,7 +29,7 @@ public class ThresholdRepository extends HibernateGenericDAO<Threshold> {
 	}
 
 	@Override
-	protected Class<Threshold> getDomainClass() {
+	public Class<Threshold> getDomainClass() {
 		return Threshold.class;
 	}
 

@@ -28,7 +28,7 @@ public class ItemCartRepository extends HibernateGenericDAO<ItemCart> {
 	}
 
 	@Override
-	protected Class<ItemCart> getDomainClass() {
+	public Class<ItemCart> getDomainClass() {
 		return ItemCart.class;
 	}
 }

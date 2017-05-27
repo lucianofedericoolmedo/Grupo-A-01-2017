@@ -61,7 +61,7 @@ public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 	}
 
 	@Override
-	protected Class<Purchase> getDomainClass() {
+	public Class<Purchase> getDomainClass() {
 		return Purchase.class;
 	}
 }

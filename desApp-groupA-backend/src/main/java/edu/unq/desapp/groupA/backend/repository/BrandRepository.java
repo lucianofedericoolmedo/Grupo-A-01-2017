@@ -28,7 +28,7 @@ public class BrandRepository extends HibernateGenericDAO<Brand> implements Gener
 	}
 
 	@Override
-	protected Class<Brand> getDomainClass() {
+	public Class<Brand> getDomainClass() {
 		return Brand.class;
 	}
 

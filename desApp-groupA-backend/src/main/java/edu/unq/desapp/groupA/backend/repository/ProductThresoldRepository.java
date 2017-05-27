@@ -11,6 +11,8 @@ import edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold;
 @Repository
 public class ProductThresoldRepository extends HibernateGenericDAO<ProductCategoryThreshold>{
 
+	private static final long serialVersionUID = -4421513659341747971L;
+
 	private List<ProductCategoryThreshold> productThresolds;
 
 	public List<ProductCategoryThreshold> getProductThresolds() {
@@ -26,7 +28,7 @@ public class ProductThresoldRepository extends HibernateGenericDAO<ProductCatego
 	}
 	
 	@Override
-	protected Class<ProductCategoryThreshold> getDomainClass() {
+	public Class<ProductCategoryThreshold> getDomainClass() {
 		return ProductCategoryThreshold.class;
 	}
 }

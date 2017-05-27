@@ -10,7 +10,7 @@ public class PerProductQuantityRepository extends HibernateGenericDAO<PerProduct
 	private static final long serialVersionUID = 5223275347846529204L;
 
 	@Override
-	protected Class<PerProductQuantity> getDomainClass() {
+	public Class<PerProductQuantity> getDomainClass() {
 		return PerProductQuantity.class;
 	}
 }

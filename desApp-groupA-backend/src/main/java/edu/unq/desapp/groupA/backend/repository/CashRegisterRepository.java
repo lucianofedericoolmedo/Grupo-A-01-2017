@@ -38,7 +38,7 @@ public class CashRegisterRepository extends HibernateGenericDAO<CashRegister> {
 	}
 
 	@Override
-	protected Class<CashRegister> getDomainClass() {
+	public Class<CashRegister> getDomainClass() {
 		return CashRegister.class;
 	}
 }

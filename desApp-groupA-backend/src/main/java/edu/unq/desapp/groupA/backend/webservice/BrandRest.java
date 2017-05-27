@@ -23,7 +23,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/brand")
+@Path("/brands")
 public class BrandRest extends GenericRest<Brand> {
 
 	@Autowired
@@ -56,6 +56,7 @@ public class BrandRest extends GenericRest<Brand> {
 	
 	@POST
 	public Response create(Brand brand) {
+		System.out.println("About to create Brand");
 		return super.create(brand);
 	}
 

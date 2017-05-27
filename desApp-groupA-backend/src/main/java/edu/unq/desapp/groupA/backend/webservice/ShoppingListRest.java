@@ -21,7 +21,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/shopping-list")
+@Path("/shopping-lists")
 public class ShoppingListRest extends GenericRest<ShoppingList> {
 
 	@Autowired

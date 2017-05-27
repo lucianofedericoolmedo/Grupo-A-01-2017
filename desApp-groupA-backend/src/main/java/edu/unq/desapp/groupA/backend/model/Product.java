@@ -39,6 +39,8 @@ public class Product extends PersistenceEntity {
     @LazyCollection(LazyCollectionOption.FALSE)
 	private List<Price> prices;
 	
+	private String imageUrl;
+	
 	// Constructors
 	public Product() {
 		categories = new LinkedList<ProductCategory>();
@@ -78,6 +80,14 @@ public class Product extends PersistenceEntity {
 		this.prices = prices;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	// Logic
 	public Double priceForQuantity(Integer quantity) {
 		//TODO: Refactor for a given price ??
@@ -107,7 +117,7 @@ public class Product extends PersistenceEntity {
 	
 	@Override
 	public String toString() {
-		return "Product: " + name + ", id: " + getId().toString();
+		return "Product: " + name + ", id: " + getId();
 	}
 
 }

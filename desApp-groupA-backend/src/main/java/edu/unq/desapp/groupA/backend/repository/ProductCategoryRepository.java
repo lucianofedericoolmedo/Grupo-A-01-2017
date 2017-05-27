@@ -10,7 +10,7 @@ public class ProductCategoryRepository extends HibernateGenericDAO<ProductCatego
 	private static final long serialVersionUID = -1804561481016147344L;
 	
 	@Override
-	protected Class<ProductCategory> getDomainClass() {
+	public Class<ProductCategory> getDomainClass() {
 		return ProductCategory.class;
 	}
 	

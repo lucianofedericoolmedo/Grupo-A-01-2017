@@ -11,6 +11,8 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 @Repository
 public class PaymentTypeRepository extends HibernateGenericDAO<PaymentType> {
 
+	private static final long serialVersionUID = 2452202520983780950L;
+
 	private List<PaymentType> paymentTypes;
 	
 	public PaymentTypeRepository(){
@@ -26,7 +28,7 @@ public class PaymentTypeRepository extends HibernateGenericDAO<PaymentType> {
 	}
 	
 	@Override
-	protected Class<PaymentType> getDomainClass() {
+	public Class<PaymentType> getDomainClass() {
 		return PaymentType.class;
 	}
 }

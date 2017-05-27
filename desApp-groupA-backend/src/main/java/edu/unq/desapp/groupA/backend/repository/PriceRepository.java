@@ -12,10 +12,8 @@ import edu.unq.desapp.groupA.backend.model.Product;
 @Repository
 public class PriceRepository extends HibernateGenericDAO<Price> implements GenericRepository<Price>{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1804561481016147344L;
+
 	private List<Price> prices;
 	
 	public PriceRepository() {
@@ -36,7 +34,7 @@ public class PriceRepository extends HibernateGenericDAO<Price> implements Gener
 	}
 
 	@Override
-	protected Class<Price> getDomainClass() {
+	public Class<Price> getDomainClass() {
 		return Price.class;
 	}
 	

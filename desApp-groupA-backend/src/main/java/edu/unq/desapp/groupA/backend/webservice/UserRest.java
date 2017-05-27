@@ -21,7 +21,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/user")
+@Path("/users")
 public class UserRest  extends GenericRest<User> {
 
 	@Autowired

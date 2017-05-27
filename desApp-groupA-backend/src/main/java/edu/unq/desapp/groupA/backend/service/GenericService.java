@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.repository.GenericRepository;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageRequest;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageRequestBuilder;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 public abstract class GenericService<T> {
 	
@@ -13,7 +16,7 @@ public abstract class GenericService<T> {
 	@Transactional
 	public T save(T entity) {
 		this.getRepository().save(entity);
-		System.out.println(entity);
+		System.out.println("Saved entity with");
 		return entity;
 	}
 	
@@ -41,6 +44,14 @@ public abstract class GenericService<T> {
 	@Transactional
 	public void delete(Long id) {
 		this.getRepository().deleteById(id);
+	}
+
+	public PageResponse<T> findByPage(Integer pageNumber, Integer pageSize) {
+		PageRequest<T> pageRequest = new PageRequestBuilder<T>(getRepository().getDomainClass())
+				.setPageSize(pageSize)
+				.setPageNumber(pageNumber)
+				.build();
+		return getRepository().findByPage(pageRequest);
 	}
 
 }

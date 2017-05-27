@@ -485,6 +485,18 @@
 			            </goals>
 			        </execution>
 			    </executions>
+			    <configuration>
+			        <excludes>
+			        	<exclude>**/beans/*</exclude>
+			            <exclude>**/webservice/*</exclude>
+			            <exclude>**/aspect/*</exclude>
+			            <exclude>**/dto/*</exclude>
+			            <exclude>**/exceptions/*</exclude>
+			            <exclude>**/repository/*</exclude>
+			            <exclude>**/utils/*</exclude>
+			            <exclude>**/service/provider/*</exclude>
+			        </excludes>
+			    </configuration>
 			</plugin> 
 					
 		</plugins>

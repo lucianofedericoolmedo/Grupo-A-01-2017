@@ -32,7 +32,7 @@ public class UserProfileRepository extends HibernateGenericDAO<UserProfile> impl
 	}
 
 	@Override
-	protected Class<UserProfile> getDomainClass() {
+	public Class<UserProfile> getDomainClass() {
 		return UserProfile.class;
 	}
 	

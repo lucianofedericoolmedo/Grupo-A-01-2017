@@ -21,7 +21,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Service
 @Produces("application/json")
 @Consumes("application/json")
-@Path("/product-category")
+@Path("/products-categories")
 public class ProductCategoryRest extends GenericRest<ProductCategory> {
 
 	@Autowired

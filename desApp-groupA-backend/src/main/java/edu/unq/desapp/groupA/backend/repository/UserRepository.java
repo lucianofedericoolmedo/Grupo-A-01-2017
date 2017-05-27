@@ -28,7 +28,7 @@ public class UserRepository extends HibernateGenericDAO<User> implements Generic
 	}
 
 	@Override
-	protected Class<User> getDomainClass() {
+	public Class<User> getDomainClass() {
 		return User.class;
 	}
 }

@@ -3,10 +3,19 @@ package edu.unq.desapp.groupA.backend.repository;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
+import edu.unq.desapp.groupA.backend.repository.pagination.PageRequest;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
+
+@SuppressWarnings("unchecked")
 public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
 
 	private static final long serialVersionUID = 2150025908769301782L;
@@ -18,22 +27,18 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 	    setSessionFactory(factory);
 	}
 
-    @SuppressWarnings("unchecked")
     public int count() {
         List<Long> list = (List<Long>) this.getHibernateTemplate()
                 .find("select count(*) from " + this.persistentClass.getName() + " o");
-
-        // this.getHibernateTemplate().execute(new HibernateCallback<Car>() {
-        //
-        // @Override
-        // public Car doInHibernate(final Session session) throws
-        // HibernateException, SQLException {
-        // throw new UnsupportedOperationException();
-        // }
-        // });
         Long count = list.get(0);
         return count.intValue();
+    }
 
+    public int count(String query) {
+        List<Long> list = (List<Long>) this.getHibernateTemplate()
+                .find(query);
+        Long count = list.get(0);
+        return count.intValue();
     }
 
     public void delete(final T entity) {
@@ -60,15 +65,67 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
         return this.getHibernateTemplate().get(this.persistentClass, id);
     }
 
-    protected abstract Class<T> getDomainClass();
+    public abstract Class<T> getDomainClass();
 
     public void save(final T entity) {
         this.getHibernateTemplate().saveOrUpdate(entity);
         this.getHibernateTemplate().flush();
+        System.out.println("Saved");
     }
 
     public void update(final T entity) {
         this.getHibernateTemplate().update(entity);
+    }
+    
+	/**
+	* Returns a page of items depending on the page size and the number.
+    * @param pageSize the total record in one page.
+    * @param pageNumber the page number starts from 0.
+    */
+    public List<T> findByPage(Integer pageNumber, Integer pageSize) {
+       HibernateTemplate template = getHibernateTemplate();
+       return (List<T>) template.execute(new HibernateCallback() {
+           public List<T> doInHibernate(Session session) throws HibernateException {
+               Query query = session.createQuery("from " + persistentClass.getName());
+               query.setMaxResults(pageSize);
+               query.setFirstResult(pageSize * pageNumber);
+               return query.list();
+           }
+       });
+    }
+
+	/**
+	* Returns a page of items depending on the page size, the page number and a query.
+    * @param pageSize the total record in one page.
+    * @param pageNumber the page number starts from 0.
+    * @param hQuery the query to filter the entities.
+    */
+    public List<T> findByPage(Integer pageNumber, Integer pageSize, String hQuery) {
+       HibernateTemplate template = getHibernateTemplate();
+       return (List<T>) template.execute(new HibernateCallback() {
+           public List<T> doInHibernate(Session session) throws HibernateException {
+               Query query = session.createQuery(hQuery);
+               query.setMaxResults(pageSize);
+               query.setFirstResult(pageSize * pageNumber);
+               return query.list();
+           }
+       });
+    }
+
+	/**
+	* Returns a page of items depending on the page size, the page number and a query.
+    * @param pageSize the total record in one page.
+    * @param pageNumber the page number starts from 0.
+    * @param hQuery the query to filter the entities.
+    */
+    public PageResponse<T> findByPage(PageRequest<T> pageRequest) {
+    	if (pageRequest.getQuery() != null) {
+    		List<T> result = (List<T>) this.findByPage(pageRequest.getPageNumber(), pageRequest.getPageSize(), pageRequest.getQuery());
+    		return new PageResponse<T>(result, count(pageRequest.getCountQuery()));
+    	} else {
+    		List<T> result = (List<T>) this.findByPage(pageRequest.getPageNumber(), pageRequest.getPageSize());
+    		return new PageResponse<T>(result, count());
+    	}
     }
 
 }
