@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Product;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.service.ProductService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
@@ -54,7 +55,20 @@ public class ProductRest extends GenericRest<Product> {
 			@QueryParam("pageSize") Integer pageSize) {
 		return super.findByPage(pageNumber, pageSize);
 	}
-	
+
+	@GET
+	@Path("/find-not-in-shopping-list")
+	public Response findByPageNotInShoppingList(@QueryParam("pageNumber") Integer pageNumber,
+			@QueryParam("pageSize") Integer pageSize,
+			@QueryParam("shoppingListId") Integer shoppingListId) {
+		try {
+			PageResponse<Product> productsPage = productService.findByPageProductsNotInShoppingList(pageNumber, pageSize, shoppingListId);
+			return responseGenerator.buildSuccessResponse(productsPage);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
+	}
+
 	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");

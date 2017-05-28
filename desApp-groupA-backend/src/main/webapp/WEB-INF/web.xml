@@ -28,7 +28,7 @@
 
 	<filter>
 		<filter-name>CORS</filter-name>
-		<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+		<filter-class>edu.unq.desapp.groupA.backend.utils.CORSFilter</filter-class>
 	</filter>
 	
 	<filter-mapping>

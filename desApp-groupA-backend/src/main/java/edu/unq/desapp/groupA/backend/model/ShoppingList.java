@@ -22,6 +22,10 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ItemShoppingList> items;
 	
+	private String name;
+	
+	private String description;
+	
 	// Constructors
 	public ShoppingList() {
 		this.items = new LinkedList<ItemShoppingList>();
@@ -42,6 +46,22 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 	@Override
 	public void setItems(List<ItemShoppingList> items) {
 		this.items = items;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

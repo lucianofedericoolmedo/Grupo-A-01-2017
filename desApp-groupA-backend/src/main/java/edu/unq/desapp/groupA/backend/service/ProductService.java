@@ -15,6 +15,7 @@ import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.repository.ProductRepository;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
 @Service
@@ -109,6 +110,10 @@ public class ProductService extends GenericService<Product>{
 
 	public void setRepository(ProductRepository repository) {
 		this.repository = repository;
+	}
+
+	public PageResponse<Product> findByPageProductsNotInShoppingList(Integer pageNumber, Integer pageSize, Integer shoppingListId) {
+		return getRepository().findByPageProductsNotInShoppingList(pageNumber, pageSize, shoppingListId);
 	}
 
 }

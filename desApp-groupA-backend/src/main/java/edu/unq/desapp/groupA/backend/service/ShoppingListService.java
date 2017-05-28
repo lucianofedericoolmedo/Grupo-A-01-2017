@@ -57,12 +57,13 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		this.repository = repository;
 	}
 
-	public ShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
+	public ItemShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
 		ShoppingList shoppingList = super.find(shoppingListId);
 //		itemShoppingList.setParent(shoppingList);
 //		shoppingList.addItem(itemShoppingListService.save(itemShoppingList));
 		shoppingList.addItem(itemShoppingList);
-		return super.update(shoppingList);
+		super.update(shoppingList);
+		return itemShoppingList;
 	}
 	
 }

@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
@@ -57,7 +58,19 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 		return super.create(shoppingList);
 	}
 
+	@POST
+	@Path("create-item-for/{shoppingListId}")
+	public Response create(@PathParam("shoppingListId") Long shoppingListId, ItemShoppingList itemShoppingList) {
+		try {
+			ItemShoppingList createdItem = shoppingListService.createItemForShoppingList(shoppingListId, itemShoppingList);
+			return responseGenerator.buildSuccessResponse(createdItem);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
+	}
+
 	@PUT
+	@Path("{id}")
 	public Response update(ShoppingList shoppingList) {
 		return super.update(shoppingList);
 	}

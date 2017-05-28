@@ -13,11 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="products")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Product extends PersistenceEntity {
 
 	private static final long serialVersionUID = 8727166810127029053L;

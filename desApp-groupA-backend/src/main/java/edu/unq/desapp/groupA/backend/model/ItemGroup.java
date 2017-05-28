@@ -18,28 +18,12 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	private static final long serialVersionUID = -7139614401053628294L;
 
 	// Instance Variables
-	/*
-	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	protected List<ItemType> items;
-	*/
-
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	protected User user;
 	
 	private Long identifier;
 
 	//Getters and Setters
-	/*
-	public List<ItemType> getItems() {
-		return items;
-	}
-
-	public void setItems(List<ItemType> items) {
-		this.items = items;
-	}
-	*/
-
 	public abstract List<ItemType> getItems();
 
 	public abstract void setItems(List<ItemType> items);
