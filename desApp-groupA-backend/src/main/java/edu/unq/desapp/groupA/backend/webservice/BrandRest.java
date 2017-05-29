@@ -58,8 +58,6 @@ public class BrandRest extends GenericRest<Brand> {
 	
 	@POST
 	public Response create(@Context HttpServletRequest request,Brand brand) {
-		System.out.println("About to create Brand");
-		System.out.println(brand.getName());
 		return super.create(brand);
 	}
 
