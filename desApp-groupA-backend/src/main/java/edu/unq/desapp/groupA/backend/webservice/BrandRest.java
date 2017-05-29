@@ -1,6 +1,7 @@
 package edu.unq.desapp.groupA.backend.webservice;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +57,18 @@ public class BrandRest extends GenericRest<Brand> {
 	}
 	
 	@POST
-	public Response create(Brand brand) {
+	public Response create(@Context HttpServletRequest request,Brand brand) {
 		System.out.println("About to create Brand");
+		System.out.println(brand.getName());
 		return super.create(brand);
 	}
 
 	@PUT
-	public Response update(Brand brand) {
-		return super.update(brand);
+	public Response update(@Context HttpServletRequest request,
+			@PathParam("id") final Long id, Brand brand) {
+		Brand originalBrand = this.brandService.find(id);
+		originalBrand.setName(brand.getName());
+		return super.update(originalBrand);
 	}
 	
 	@DELETE
