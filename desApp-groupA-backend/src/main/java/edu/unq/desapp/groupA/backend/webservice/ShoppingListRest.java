@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,18 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	@Path("/{id}")
 	public Response delete(@PathParam("id") final Long id) {
 		return super.delete(id);
+	}
+	
+	@DELETE
+	@Path("/remove-item-in/{itemId}/{shoppingListId}")
+	public Response deleteItemFromShoppingList(@PathParam("itemId") Long itemId,
+			@PathParam("shoppingListId") Long shoppingListId) {
+		try {
+			shoppingListService.removeItemFromShoppingList(itemId, shoppingListId);
+			return responseGenerator.buildResponse(Status.OK);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
 	}
 
 }

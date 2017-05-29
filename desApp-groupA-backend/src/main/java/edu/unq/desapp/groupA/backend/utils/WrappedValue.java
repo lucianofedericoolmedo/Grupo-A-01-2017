@@ -4,6 +4,8 @@ public class WrappedValue<T> {
 
 	private T value;
 
+	public WrappedValue() { }
+
 	public WrappedValue(T value) {
 		this.value = value;
 	}

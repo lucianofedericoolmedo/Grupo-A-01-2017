@@ -59,11 +59,16 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 
 	public ItemShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
 		ShoppingList shoppingList = super.find(shoppingListId);
-//		itemShoppingList.setParent(shoppingList);
-//		shoppingList.addItem(itemShoppingListService.save(itemShoppingList));
-		shoppingList.addItem(itemShoppingList);
-		super.update(shoppingList);
+		itemShoppingList.setParent(shoppingList);
+		shoppingList.addItem(itemShoppingListService.save(itemShoppingList));
 		return itemShoppingList;
+	}
+
+	public void removeItemFromShoppingList(Long itemId, Long shoppingListId) {
+		itemShoppingListService.delete(itemId);
+		ShoppingList shoppingList = super.find(shoppingListId);
+		shoppingList.deleteItemWithId(itemId);
+		super.update(shoppingList);
 	}
 	
 }

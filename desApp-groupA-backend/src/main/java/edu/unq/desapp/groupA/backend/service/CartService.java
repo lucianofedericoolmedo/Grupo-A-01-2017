@@ -28,6 +28,9 @@ public class CartService extends GenericService<Cart> {
 	
 	@Autowired
 	private ItemCartService itemCartService;
+	
+	@Autowired
+	private ShoppingListService shoppingListService;
 
 	private Long identifier;
 
@@ -111,6 +114,15 @@ public class CartService extends GenericService<Cart> {
 		User user = userService.find(userId);
 		cart.setUser(user);
 		return super.save(cart);
+	}
+
+	public Cart create(Long shoppingListId, Long userId) {
+		User fetchedUser = userService.find(userId);
+		ShoppingList shoppingList = shoppingListService.find(shoppingListId);
+		Cart createdCart = this.createCartForShoppingList(shoppingList);
+		createdCart.setUsedShoppingList(shoppingList);
+		createdCart.setUser(fetchedUser);
+		return super.update(createdCart);
 	}
 	
 }

@@ -18,7 +18,7 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 	private static final long serialVersionUID = 8643357050037176048L;
 
 	// Instance Variables
-	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy="parent", cascade=CascadeType.MERGE, orphanRemoval=true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ItemShoppingList> items;
 	
@@ -62,6 +62,23 @@ public class ShoppingList extends ItemGroup<ItemShoppingList> {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	// Logic
+	public ItemShoppingList getItemWithId(Long itemId) {
+		for (ItemShoppingList itemShoppingList : items) {
+			if (itemShoppingList.getId().equals(itemId)) {
+				return itemShoppingList;
+			}
+		}
+		return null;
+	}
+
+	public void deleteItemWithId(Long itemId) {
+		ItemShoppingList item = getItemWithId(itemId);
+		if (item != null) {
+			this.items.remove(item);
+		}
 	}
 
 }
