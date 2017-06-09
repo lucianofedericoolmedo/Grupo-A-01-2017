@@ -28,7 +28,6 @@ public class BrandPersistenceTest {
 		aBrand.setName("bagley");
 		
 		// Brand savedBrand =
-		System.out.println(service);
 		service.save(aBrand);
 		//System.out.println(savedBrand.getId());
 	}

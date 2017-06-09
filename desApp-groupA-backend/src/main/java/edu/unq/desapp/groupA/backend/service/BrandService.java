@@ -2,11 +2,13 @@ package edu.unq.desapp.groupA.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.repository.BrandRepository;
 
 
+@Transactional
 @Service
 public class BrandService extends GenericService<Brand> {
 
@@ -37,6 +39,23 @@ public class BrandService extends GenericService<Brand> {
 			brand = this.save(new Brand(brandName));
 		}
 		return brand;
+	}
+	
+	private void validateBrandNameExistence(String brandName) {
+		Brand brand = this.findByName(brandName);
+		if (brand != null) {
+			throw new RuntimeException("A brand with the name " + brandName + " has already been created");
+		}
+	}
+	
+	public Brand update(Brand newBrand) {
+		validateBrandNameExistence(newBrand.getName());
+		return super.update(newBrand);
+	}
+	
+	public Brand save(Brand newBrand) {
+		validateBrandNameExistence(newBrand.getName());
+		return super.save(newBrand);
 	}
 
 }

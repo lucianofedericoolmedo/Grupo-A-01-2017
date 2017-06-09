@@ -45,7 +45,11 @@ public class ProductServiceTest {
 		
 		
 		// Brand savedBrand = System.out.println(service);
-		aBrand = brandService.save(new Brand("Bagley"));
+		try {
+			aBrand = brandService.save(new Brand("Bagley"));
+		} catch (RuntimeException re) {
+			// do nothing
+		}
 		aPrice = priceService.save(new Price(new Double(60)));
 		aProductCategory = productCategoryService.save(new ProductCategory("Gaseosa"));
 		//System.out.println(savedBrand.getId());

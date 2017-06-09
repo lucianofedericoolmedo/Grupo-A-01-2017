@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -54,6 +55,13 @@ public class BrandRest extends GenericRest<Brand> {
 	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");
+	}
+	
+	@GET
+	@Path("/find-by-page")
+	public Response findByPage(@QueryParam("pageNumber") Integer pageNumber,
+			@QueryParam("pageSize") Integer pageSize) {
+		return super.findByPage(pageNumber, pageSize);
 	}
 	
 	@POST
