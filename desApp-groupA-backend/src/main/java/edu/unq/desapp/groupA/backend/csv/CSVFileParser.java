@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.csv;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,11 +16,45 @@ public class CSVFileParser {
 	public static final char IGNORE_LINE = '#';
 
 	public static <BuildingType extends BasicStructure> List<BuildingType> parseCSVFile(String csvFilePath, CsvResultAbstractBuilder<BuildingType> builder) throws FileNotFoundException {
+		File foundFile = new File(csvFilePath);
+		System.out.println("-------- file exists " + foundFile.exists());
+		System.out.println("-------- file length " + foundFile.length());
+		Scanner scanner = new Scanner(foundFile);
+		return parseCSVFileWithScanner(scanner, builder);
+	}
+	
+	public static <BuildingType extends BasicStructure> List<BuildingType> parseCSVFile(InputStream is, CsvResultAbstractBuilder<BuildingType> builder) throws FileNotFoundException {
+		Scanner scanner = new Scanner(is);
+		return parseCSVFileWithScanner(scanner, builder);
+	}
+	
+	/*
+	public static <BuildingType extends BasicStructure> List<BuildingType> parseCSVFile(String csvFilePath, CsvResultAbstractBuilder<BuildingType> builder) throws FileNotFoundException {
 		Scanner scanner = new Scanner(new File(csvFilePath));
 		List<BuildingType> basicStructures = new LinkedList<BuildingType>();
 		
 		while (scanner.hasNext()) {
 			String nextLine = scanner.nextLine();
+			System.out.println("---------");
+			System.out.println(nextLine);
+			BuildingType basicStructure = builder.build(parseLine(nextLine));
+			if (basicStructure != null) {
+				basicStructures.add(basicStructure);
+			}
+		}
+		scanner.close();
+		
+		return basicStructures;
+	}
+	*/
+	
+	public static <BuildingType extends BasicStructure> List<BuildingType> parseCSVFileWithScanner(Scanner scanner, CsvResultAbstractBuilder<BuildingType> builder) throws FileNotFoundException {
+		List<BuildingType> basicStructures = new LinkedList<BuildingType>();
+		
+		while (scanner.hasNext()) {
+			String nextLine = scanner.nextLine();
+			System.out.println("---------");
+			System.out.println(nextLine);
 			BuildingType basicStructure = builder.build(parseLine(nextLine));
 			if (basicStructure != null) {
 				basicStructures.add(basicStructure);

@@ -33,7 +33,7 @@ public class ProductBatchLoadRest {
 	private ResponseGenerator responseGenerator;
 	
 //	@Value("${documents.dir}")
-    private final String directoryForDocs = "/home/files";	
+    private final String directoryForDocs = "files";
 
 //	@Value("${csv.dir}")
     private final String directoryForCsv = "csv";	
@@ -43,7 +43,7 @@ public class ProductBatchLoadRest {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(Attachment file) throws Exception {
 		ArchivoDTO archivo = fileUploadService.saveFile(file, directoryForDocs, directoryForCsv);
-    	productService.updateProductsViaCSVFile(archivo.getNombre());
+    	productService.updateProductsViaCSVFile(archivo.getPath() + "/" + archivo.getNombre());
 		return responseGenerator.buildResponse(Status.OK);
     }
 	

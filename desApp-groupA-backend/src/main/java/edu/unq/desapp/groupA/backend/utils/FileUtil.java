@@ -3,12 +3,10 @@ package edu.unq.desapp.groupA.backend.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +14,7 @@ import java.text.MessageFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.cxf.helpers.IOUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -39,30 +37,15 @@ public class FileUtil {
     }
 
     public String saveToFile(String absolutePath, String fileName, InputStream is) {
-
-        String file = fileName;//getCompleteFileName(absolutePath, fileName);
-
-        OutputStream outputStream = null;
-
+    	String absolutePathFile = getCompleteFileName(absolutePath, fileName);
         try {
-            outputStream = new FileOutputStream(file);
-
-            IOUtils.copy(is, outputStream);
-
+		    File targetFile = new File(absolutePathFile);
+		    FileUtils.copyInputStreamToFile(is, targetFile);
         } catch (Exception e) {
-            LOGGER.error(MessageFormat.format("Ocurrio un error al intentar guardar el archivo {0}", file), e);
+            LOGGER.error(MessageFormat.format("Ocurrio un error al intentar guardar el archivo {0}", absolutePathFile), e);
             throw new RuntimeException(e);
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
-        return file;
+        return absolutePathFile;
     }
 
     private String getCompleteFileName(String absolutePath, String fileName) {
@@ -134,7 +117,7 @@ public class FileUtil {
         try {
         	InputStream is = attachment.getDataHandler().getInputStream();
             String line;
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( is ) );
+            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( is,"UTF-8" ) );
             while( (line = bufferedReader.readLine()) != null )
             { 
             	lineas.add(line);

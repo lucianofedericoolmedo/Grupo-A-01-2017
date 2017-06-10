@@ -58,8 +58,9 @@ public class ProductService extends GenericService<Product>{
 		repository.save(product);
 		return product;
 	}
-	
+
 	public void updateProductsViaCSVFile(String filePath) throws FileNotFoundException {
+		System.out.println("------------ updating.");
 		List<BasicProduct> basicProducts = CSVFileParser.parseCSVFile(filePath, new CsvResultBasicProductBuilder());
 		for (BasicProduct basicProduct : basicProducts) {
 			updateOrCreateFromBasicProduct(basicProduct);
@@ -74,6 +75,7 @@ public class ProductService extends GenericService<Product>{
 		product.setName(basicProduct.getName());
 		Brand brand = getBrandService().findByNameOrCreate(basicProduct.getBrand());
 		product.setBrand(brand);
+		product.setImageUrl(basicProduct.getImage());
 		getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
 		return super.update(product);
