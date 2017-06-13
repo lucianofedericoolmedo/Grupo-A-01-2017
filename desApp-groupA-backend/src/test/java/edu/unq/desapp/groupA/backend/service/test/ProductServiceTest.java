@@ -55,6 +55,9 @@ public class ProductServiceTest {
 		
 		aProduct = new Product();
 		aBrand = new Brand();
+		
+		brandService.save(aBrand);
+		
 		aBrand.setName(brandName);
 		aStock = new Stock();
 		aStock.setQuantity(stockQuantity);
@@ -68,7 +71,6 @@ public class ProductServiceTest {
 		productService.save(aProduct);
 
 		basicProduct = new BasicProduct();
-
 		/*
 		productRepository = mock(ProductRepository.class);
 		when(productRepository.findById(anyLong())).thenReturn(aProduct);
@@ -80,12 +82,7 @@ public class ProductServiceTest {
 		when(stockService.updateStockForProduct(aProduct, stockQuantity)).thenReturn(aStock);
 		priceService = mock(PriceService.class);
 		when(priceService.updatePriceForProduct(aProduct, priceValue)).thenReturn(aPrice);
-
-		productService = new ProductService(productRepository);
-		productService.setBrandService(brandService);
-		productService.setPriceService(priceService);
-		productService.setStockService(stockService);
-		*/
+	*/
 
 	}
 
@@ -101,6 +98,6 @@ public class ProductServiceTest {
 		Product resultingProduct = productService.updateOrCreateFromBasicProduct(basicProduct);
 		assertEquals(productName, resultingProduct.getName());
 		assertEquals(brandName, resultingProduct.getBrand().getName());
-		//assertEquals(priceValue, resultingProduct.getPrice().getPrice());
+		assertEquals(priceValue, resultingProduct.getCurrentPrice().getPrice());
 	}
 }
