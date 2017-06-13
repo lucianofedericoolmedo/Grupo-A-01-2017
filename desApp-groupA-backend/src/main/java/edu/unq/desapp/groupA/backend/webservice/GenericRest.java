@@ -5,10 +5,11 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import edu.unq.desapp.groupA.backend.model.PersistenceEntity;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 
-public abstract class GenericRest <T> {
+public abstract class GenericRest <T extends PersistenceEntity> {
 
 	@Autowired
 	private ResponseGenerator responseGenerator;
