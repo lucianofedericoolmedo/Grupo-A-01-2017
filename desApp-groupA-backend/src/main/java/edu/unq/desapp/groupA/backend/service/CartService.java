@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
+import edu.unq.desapp.groupA.backend.model.CartState;
+import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
@@ -31,6 +33,9 @@ public class CartService extends GenericService<Cart> {
 	
 	@Autowired
 	private ShoppingListService shoppingListService;
+	
+	@Autowired
+	private BalancerService balancerService;
 
 	private Long identifier;
 
@@ -68,7 +73,6 @@ public class CartService extends GenericService<Cart> {
 		List<ItemCart> items = shoppingList.getItems().stream().map(item -> new ItemCart(item.getProduct(), item.getQuantity())).collect(Collectors.toList());
 		
 		for (ItemCart item : items){
-//			itemCartService.createItemCart(item);
 			cart.addItems(item);
 		}
 		return super.update(cart);
@@ -125,4 +129,16 @@ public class CartService extends GenericService<Cart> {
 		return super.update(createdCart);
 	}
 	
+	public void queueForPurchase(Cart cart) {
+		CashRegister cashRegister = balancerService.getCashRegisterToQueue();
+		cart.setActualState(CartState.QUEUED);
+		
+	}
+	
+	public void setStateToCart(Long cartId, CartState newState) {
+		Cart cart = super.find(cartId);
+		cart.setActualState(newState);
+		super.update(cart);
+	}
+
 }

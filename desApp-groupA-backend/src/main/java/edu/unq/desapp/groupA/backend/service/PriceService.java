@@ -47,11 +47,24 @@ public class PriceService extends GenericService<Price> {
 	}
 
 	public Price updatePriceForProduct(Product product, Double price) {
-		finishPriceValidityForProductIfAny(product);
-		Price newPrice = save(new Price(price));
-		product.addPrice(newPrice);
-		productService.update(product);
-		return newPrice;
+		if (!currentPriceEqualsNewPrice(product, price)) {
+			finishPriceValidityForProductIfAny(product);
+			Price newPrice = save(new Price(price));
+			product.addPrice(newPrice);
+			productService.update(product);
+			return newPrice;
+		} else {
+			return product.findCurrentPrice();
+		}
+	}
+
+	private boolean currentPriceEqualsNewPrice(Product product, Double price) {
+		Price lastPrice = product.findCurrentPrice();
+		if (lastPrice == null) {
+			return false;
+		} else {
+			return lastPrice.getPrice().equals(price);
+		}
 	}
 
 }

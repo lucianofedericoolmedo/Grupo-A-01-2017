@@ -54,6 +54,7 @@ public class ProductCategoryRest extends GenericRest<ProductCategory> {
 	
 	@POST
 	public Response create(ProductCategory productCategory) {
+		System.out.println("created category");
 		return super.create(productCategory);
 	}
 

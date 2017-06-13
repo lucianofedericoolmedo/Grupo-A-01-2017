@@ -73,8 +73,7 @@ public class PurchaseService extends GenericService<Purchase> {
 	public List<Purchase> getPurchases() {
 		return this.repository.getPurchases();
 	}
-	
-	
+
 	public List<Purchase> fetchLastPurchases(Integer quantityToFetch, Long userId) {
 		return repository.findLastPurchases(quantityToFetch, userId);
 	}
@@ -82,14 +81,13 @@ public class PurchaseService extends GenericService<Purchase> {
 	public List<Purchase> fetchPurchasesFrom(Date dateFromToFetch, Long userId) {
 		return repository.findPurchasesFrom(dateFromToFetch, userId);
 	}
-	
+
 	public Purchase createPurchase(Cart cart,PaymentType paymentType, CashRegister cashRegister) {
-		cashRegister.removeItems(cart.quantityOfItems());
+		cashRegister.removeItems(cart.totalValueOfCheckedItems().intValue());
 		Purchase purchase = this.createPurchase(cart, paymentType);
 		timeResponseService.registerResponseTime(cart.getReservationTime(),purchase.getCreationDate());
 		return purchase;
 	}
-	
 
 	public List<Purchase> getShippings() {
 		return repository.getShippings();
@@ -99,5 +97,5 @@ public class PurchaseService extends GenericService<Purchase> {
 	public GenericRepository<Purchase> getRepository() {
 		return repository;
 	}
-	
+
 }

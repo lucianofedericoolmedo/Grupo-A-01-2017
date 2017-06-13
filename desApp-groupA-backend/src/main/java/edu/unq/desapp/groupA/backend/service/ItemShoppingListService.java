@@ -46,5 +46,11 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 		shoppingListService.update(shoppingList);
 		return itemShoppingList;
 	}
+	
+	public ItemShoppingList update(ItemShoppingList itemShoppingList) {
+		ItemShoppingList fetchedItem = super.find(itemShoppingList.getId());
+		fetchedItem.setQuantity(itemShoppingList.getQuantity());
+		return super.update(fetchedItem);
+	}
 
 }

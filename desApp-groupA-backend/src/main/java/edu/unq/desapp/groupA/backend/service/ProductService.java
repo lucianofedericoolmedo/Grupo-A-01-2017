@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.unq.desapp.groupA.backend.csv.CSVFileParser;
 import edu.unq.desapp.groupA.backend.csv.CsvResultBasicProductBuilder;
 import edu.unq.desapp.groupA.backend.csv.basicStructures.BasicProduct;
+import edu.unq.desapp.groupA.backend.dto.ProductCrud;
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
@@ -60,7 +61,6 @@ public class ProductService extends GenericService<Product>{
 	}
 
 	public void updateProductsViaCSVFile(String filePath) throws FileNotFoundException {
-		System.out.println("------------ updating.");
 		List<BasicProduct> basicProducts = CSVFileParser.parseCSVFile(filePath, new CsvResultBasicProductBuilder());
 		for (BasicProduct basicProduct : basicProducts) {
 			updateOrCreateFromBasicProduct(basicProduct);
@@ -79,6 +79,12 @@ public class ProductService extends GenericService<Product>{
 		getPriceService().updatePriceForProduct(product, basicProduct.getPrice());
 		getStockService().updateStockForProduct(product, basicProduct.getStock());
 		return super.update(product);
+	}
+	
+	public Product update(Product product) {
+		Product fetchedProduct = super.find(product.getId());
+		fetchedProduct.updateValues(product);
+		return super.update(fetchedProduct);
 	}
 
 	// Services
@@ -116,6 +122,18 @@ public class ProductService extends GenericService<Product>{
 
 	public PageResponse<Product> findByPageProductsNotInShoppingList(Integer pageNumber, Integer pageSize, Integer shoppingListId) {
 		return getRepository().findByPageProductsNotInShoppingList(pageNumber, pageSize, shoppingListId);
+	}
+
+	public void createFromDto(ProductCrud productCrud) {
+		Product savedProduct = super.save(productCrud.getProduct());
+		stockService.updateStockForProduct(savedProduct, productCrud.getStock());
+		priceService.updatePriceForProduct(productCrud.getProduct(), productCrud.getPrice());
+	}
+
+	public void updateFromDto(ProductCrud productCrud) {
+		Product updatedProduct = this.update(productCrud.getProduct());
+		stockService.updateStockForProduct(updatedProduct, productCrud.getStock());
+		priceService.updatePriceForProduct(updatedProduct, productCrud.getPrice());
 	}
 
 }

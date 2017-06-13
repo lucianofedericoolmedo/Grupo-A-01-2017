@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.service.GenericService;
+import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 
@@ -31,6 +32,9 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	
 	@Autowired
 	private ShoppingListService shoppingListService;
+	
+	@Autowired
+	private ItemShoppingListService itemShoppingListService;
 
 	@Override
 	public GenericService<ShoppingList> getService() {
@@ -65,6 +69,17 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 		try {
 			ItemShoppingList createdItem = shoppingListService.createItemForShoppingList(shoppingListId, itemShoppingList);
 			return responseGenerator.buildSuccessResponse(createdItem);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
+	}
+	
+	@PUT
+	@Path("update-item/{id}")
+	public Response create(ItemShoppingList itemShoppingList) {
+		try {
+			itemShoppingListService.update(itemShoppingList);
+			return responseGenerator.buildResponse(Status.OK);
 		} catch (Exception e) {
 			return responseGenerator.responseBadRequest(e.getMessage());
 		}

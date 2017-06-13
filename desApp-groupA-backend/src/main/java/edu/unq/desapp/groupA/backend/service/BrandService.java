@@ -41,20 +41,23 @@ public class BrandService extends GenericService<Brand> {
 		return brand;
 	}
 	
-	private void validateBrandNameExistence(String brandName) {
+	private void validateBrandNameExistence(String brandName, Brand brandToCompare) {
 		Brand brand = this.findByName(brandName);
 		if (brand != null) {
-			throw new RuntimeException("A brand with the name " + brandName + " has already been created");
+			Boolean sameId = brandToCompare.getId() != null && brandToCompare.getId().equals(brand.getId());
+			if (brand.getId() == null || !sameId) {
+				throw new RuntimeException("A brand with the name " + brandName + " has already been created");
+			}
 		}
 	}
 	
 	public Brand update(Brand newBrand) {
-		validateBrandNameExistence(newBrand.getName());
+		validateBrandNameExistence(newBrand.getName(), newBrand);
 		return super.update(newBrand);
 	}
 	
 	public Brand save(Brand newBrand) {
-		validateBrandNameExistence(newBrand.getName());
+		validateBrandNameExistence(newBrand.getName(), newBrand);
 		return super.save(newBrand);
 	}
 

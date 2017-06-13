@@ -63,7 +63,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		shoppingList.addItem(itemShoppingListService.save(itemShoppingList));
 		return itemShoppingList;
 	}
-
+	
 	public void removeItemFromShoppingList(Long itemId, Long shoppingListId) {
 		itemShoppingListService.delete(itemId);
 		ShoppingList shoppingList = super.find(shoppingListId);

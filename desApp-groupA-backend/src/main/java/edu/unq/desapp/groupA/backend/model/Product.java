@@ -27,14 +27,14 @@ public class Product extends PersistenceEntity {
 	// Instance Variables
 	private String name;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name="products_products_categories", 
 		joinColumns={@JoinColumn(name="products_id")}, 
 		inverseJoinColumns={@JoinColumn(name="products_categories_id")})
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ProductCategory> categories;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Brand brand;
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -122,4 +122,26 @@ public class Product extends PersistenceEntity {
 		return "Product: " + name + ", id: " + getId();
 	}
 
+	public void updateValues(Product product) {
+		this.name = product.getName();
+		this.brand = product.getBrand();
+		this.imageUrl = product.getImageUrl();
+		List<ProductCategory> notInActual = categoriesNotInList(product.getCategories(), this.categories);
+		List<ProductCategory> notInUpdated = categoriesNotInList(this.categories, product.getCategories());
+		this.categories.removeAll(notInUpdated);
+		this.categories.addAll(notInActual);
+		
+	}
+	
+	public List<ProductCategory> categoriesNotInList(List<ProductCategory> categories, List<ProductCategory> otherCategories) {
+		List<ProductCategory> categoriesNotInList = new LinkedList<ProductCategory>();
+		for (ProductCategory productCategory : categories) {
+			Optional<ProductCategory> possibleCategory = otherCategories.stream().filter(category -> category.getId().equals(productCategory.getId())).findFirst();
+			if (!possibleCategory.isPresent()) {
+				categoriesNotInList.add(productCategory);
+			}
+		}
+		return categoriesNotInList;
+	}
+	
 }

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -41,6 +43,9 @@ public class Cart extends ItemGroup<ItemCart> {
 	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date reservationTime;
 	
+	@Enumerated(EnumType.STRING)
+	private CartState actualState = CartState.UNATTENDED;
+
 	// Constructors
 	public Cart() {
 		this.setItems(new LinkedList<ItemCart>());
@@ -67,6 +72,22 @@ public class Cart extends ItemGroup<ItemCart> {
 		this.items = items;
 	}
 
+	public void setReservationTime(Date date) {
+		this.reservationTime = date;
+	}
+	
+	public Date getReservationTime() {
+		return reservationTime;
+	}
+
+	public CartState getActualState() {
+		return actualState;
+	}
+
+	public void setActualState(CartState actualState) {
+		this.actualState = actualState;
+	}
+
 	// Logic
 	public void addItems(ItemCart item) {
 		item.setParent(this);
@@ -87,14 +108,6 @@ public class Cart extends ItemGroup<ItemCart> {
 
 	public Integer quantityOfItems() {
 		return this.getItems().size();
-	}
-
-	public void setReservationTime(Date date) {
-		this.reservationTime = date;
-	}
-	
-	public Date getReservationTime() {
-		return reservationTime;
 	}
 
 }

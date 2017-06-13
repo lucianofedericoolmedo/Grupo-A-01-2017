@@ -49,10 +49,5 @@ public abstract class Item extends PersistenceEntity {
 	public Boolean isProduct(Product productForDiscount) {
 		return product.equals(productForDiscount);
 	}
-	
-	@Override
-	public String toString() {
-		return "Product: " + product.getName() + ", Quantity: " + quantity.toString();
-	}
 
 }

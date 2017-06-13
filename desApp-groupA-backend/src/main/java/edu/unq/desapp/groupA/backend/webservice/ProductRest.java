@@ -10,10 +10,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.desapp.groupA.backend.dto.ProductCrud;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 import edu.unq.desapp.groupA.backend.service.GenericService;
@@ -79,11 +81,35 @@ public class ProductRest extends GenericRest<Product> {
 		System.out.println(product);
 		return super.create(product);
 	}
+	
+	@POST
+	@Path("create-dto")
+	public Response createFromDto(ProductCrud productCrud) {
+//		try {
+			System.out.println(productCrud);
+			productService.createFromDto(productCrud);
+			return responseGenerator.buildResponse(Status.OK);
+//		} catch (Exception e) {
+//			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+//		}
+	}
 
 	@PUT
 	@Path("/{id}")
 	public Response update(Product product) {
 		return super.update(product);
+	}
+	
+	@PUT
+	@Path("update-dto/{id}")
+	public Response updateFromDto(ProductCrud productCrud) {
+//		try {
+			System.out.println(productCrud);
+			productService.updateFromDto(productCrud);
+			return responseGenerator.buildResponse(Status.OK);
+//		} catch (Exception e) {
+//			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+//		}
 	}
 	
 	@DELETE
