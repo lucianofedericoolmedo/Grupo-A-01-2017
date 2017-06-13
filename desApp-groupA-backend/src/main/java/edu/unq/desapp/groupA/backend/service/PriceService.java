@@ -39,7 +39,7 @@ public class PriceService extends GenericService<Price> {
 	}
 	
 	public void finishPriceValidityForProductIfAny(Product product) {
-		Price lastPrice = product.findCurrentPrice();
+		Price lastPrice = product.getCurrentPrice();
 		// TODO : Maybe refac for using an Exception.
 		if (lastPrice != null) {
 			finishPriceValidity(lastPrice);
@@ -54,12 +54,12 @@ public class PriceService extends GenericService<Price> {
 			productService.update(product);
 			return newPrice;
 		} else {
-			return product.findCurrentPrice();
+			return product.getCurrentPrice();
 		}
 	}
 
 	private boolean currentPriceEqualsNewPrice(Product product, Double price) {
-		Price lastPrice = product.findCurrentPrice();
+		Price lastPrice = product.getCurrentPrice();
 		if (lastPrice == null) {
 			return false;
 		} else {

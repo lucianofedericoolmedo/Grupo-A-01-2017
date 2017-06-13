@@ -85,13 +85,13 @@ public class ProductRest extends GenericRest<Product> {
 	@POST
 	@Path("create-dto")
 	public Response createFromDto(ProductCrud productCrud) {
-//		try {
+		try {
 			System.out.println(productCrud);
 			productService.createFromDto(productCrud);
 			return responseGenerator.buildResponse(Status.OK);
-//		} catch (Exception e) {
-//			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
-//		}
+		} catch (Exception e) {
+			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PUT
@@ -103,13 +103,12 @@ public class ProductRest extends GenericRest<Product> {
 	@PUT
 	@Path("update-dto/{id}")
 	public Response updateFromDto(ProductCrud productCrud) {
-//		try {
-			System.out.println(productCrud);
+		try {
 			productService.updateFromDto(productCrud);
 			return responseGenerator.buildResponse(Status.OK);
-//		} catch (Exception e) {
-//			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
-//		}
+		} catch (Exception e) {
+			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@DELETE

@@ -42,4 +42,8 @@ public class StockService extends GenericService<Stock> {
 		}
 	}
 
+	public Stock findForProductId(Long productId) {
+		return this.repository.findforProductId(productId);
+	}
+
 }

@@ -93,10 +93,10 @@ public class Product extends PersistenceEntity {
 	// Logic
 	public Double priceForQuantity(Integer quantity) {
 		//TODO: Refactor for a given price ??
-		return this.findCurrentPrice().priceForQuantity(quantity);
+		return this.getCurrentPrice().priceForQuantity(quantity);
 	}
 	
-	public Price findCurrentPrice(){
+	public Price getCurrentPrice(){
 		Optional<Price> opt = prices.stream().filter(price -> price.getFinishingValidityDate() == null).findFirst();
 		if (opt.isPresent()) {
 			return opt.get();

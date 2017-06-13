@@ -1,12 +1,16 @@
 package edu.unq.desapp.groupA.backend.dto;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import edu.unq.desapp.groupA.backend.model.Product;
 
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ProductCrud {
+public class ProductCrud implements Serializable {
+
+	private static final long serialVersionUID = 7532386347606189968L;
 
 	// Instance Variables
 	private Product product;

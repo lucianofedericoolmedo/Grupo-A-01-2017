@@ -43,4 +43,16 @@ public class StockRepository extends HibernateGenericDAO<Stock> {
 		return Stock.class;
 	}
 
+	public Stock findforProductId(Long productId) {
+		String query = "SELECT stock FROM " + this.persistentClass.getName() + " stock "
+						+ "WHERE stock.product.id =	" + productId.toString();
+		System.out.println("---- query " + query);
+		List<Stock> stocks = (List<Stock>) this.getHibernateTemplate().find(query);
+		if (stocks.isEmpty()) {
+			return null;
+		} else {
+			return stocks.get(0);
+		}
+	}
+
 }
