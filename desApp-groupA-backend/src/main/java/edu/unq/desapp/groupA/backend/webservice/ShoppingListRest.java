@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.webservice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -8,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -59,13 +61,13 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	}
 	
 	@POST
-	public Response create(ShoppingList shoppingList) {
+	public Response create(@Context HttpServletRequest request,ShoppingList shoppingList) {
 		return super.create(shoppingList);
 	}
 
 	@POST
 	@Path("create-item-for/{shoppingListId}")
-	public Response create(@PathParam("shoppingListId") Long shoppingListId, ItemShoppingList itemShoppingList) {
+	public Response create(@Context HttpServletRequest request,@PathParam("shoppingListId") Long shoppingListId, ItemShoppingList itemShoppingList) {
 		try {
 			ItemShoppingList createdItem = shoppingListService.createItemForShoppingList(shoppingListId, itemShoppingList);
 			return responseGenerator.buildSuccessResponse(createdItem);
@@ -76,7 +78,7 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	
 	@PUT
 	@Path("update-item/{id}")
-	public Response create(ItemShoppingList itemShoppingList) {
+	public Response create(@Context HttpServletRequest request,ItemShoppingList itemShoppingList) {
 		try {
 			itemShoppingListService.update(itemShoppingList);
 			return responseGenerator.buildResponse(Status.OK);
@@ -87,19 +89,19 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 
 	@PUT
 	@Path("{id}")
-	public Response update(ShoppingList shoppingList) {
+	public Response update(@Context HttpServletRequest request,ShoppingList shoppingList) {
 		return super.update(shoppingList);
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response delete(@PathParam("id") final Long id) {
+	public Response delete(@Context HttpServletRequest request,@PathParam("id") final Long id) {
 		return super.delete(id);
 	}
 	
 	@DELETE
 	@Path("/remove-item-in/{itemId}/{shoppingListId}")
-	public Response deleteItemFromShoppingList(@PathParam("itemId") Long itemId,
+	public Response deleteItemFromShoppingList(@Context HttpServletRequest request,@PathParam("itemId") Long itemId,
 			@PathParam("shoppingListId") Long shoppingListId) {
 		try {
 			shoppingListService.removeItemFromShoppingList(itemId, shoppingListId);
