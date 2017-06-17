@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.webservice;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,7 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +100,18 @@ public class CartRest extends GenericRest<Cart> {
 	@Path("{id}")
 	public Response update(Cart cart) {
 		return super.update(cart);
+	}
+	
+	@PUT
+	@Path("check-item-cart/{id}")
+	public Response setValueToItemCart(@Context HttpServletRequest request, @PathParam("id") Long itemCartId, 
+			WrappedValue<Boolean> valueToSet) {
+		try {
+			cartService.setValueToItem(itemCartId, valueToSet.getValue());
+			return responseGenerator.buildResponse(Status.OK);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
 	}
 	
 	@DELETE

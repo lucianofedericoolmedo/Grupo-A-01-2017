@@ -141,4 +141,8 @@ public class CartService extends GenericService<Cart> {
 		super.update(cart);
 	}
 
+	public void setValueToItem(Long itemCartId, Boolean valueToSet) {
+		itemCartService.setValueToItem(itemCartId, valueToSet);
+	}
+
 }
