@@ -132,7 +132,7 @@ public class ComprandoALoLocoService {
 		return this.cashRegisterService.getRegisteredCashRegisters();
 	}
 
-	
+	/*
 	public CashRegister getCashRegister() {
 		List<CashRegister> availableCashRegister = cashRegisterService.getAvailableCashRegisters();
 		if (! availableCashRegister.isEmpty()){
@@ -143,6 +143,7 @@ public class ComprandoALoLocoService {
 			return balancerService.sendCartToQueue(cajasHabilitadas);
 		}
 	}
+	*/
 	
 	public List<Purchase> getPurchasesByUser(User user){
 		return purchaseService.getPurchasesByUser(user);
@@ -220,11 +221,13 @@ public class ComprandoALoLocoService {
 		return paymentType;
 	}
 
+	/*
 	public void createCashRegisters(int index) {
 		for (int i = 0 ; i < index ; i ++){
 			this.cashRegisterService.createCashRegister();
 		}
 	}
+	*/
 
 	public void setPaymentTypeService(PaymentTypeService paymentTypeService) {
 		this.paymentTypeService = paymentTypeService;

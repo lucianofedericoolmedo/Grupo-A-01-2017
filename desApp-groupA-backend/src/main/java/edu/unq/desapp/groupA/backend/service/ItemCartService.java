@@ -75,9 +75,12 @@ public class ItemCartService extends GenericService<ItemCart> {
 		return itemCart;
 	}
 
-	public void setValueToItem(Long itemCartId, Boolean valueToSet) {
+	public void setValueToItem(Long itemCartId, Boolean checked, Integer newQuantity) {
 		ItemCart item = super.find(itemCartId);
-		item.setChecked(valueToSet);
+		item.setChecked(checked);
+		if (checked) {
+			item.setQuantity(newQuantity);
+		}
 		super.update(item);
 	}
 

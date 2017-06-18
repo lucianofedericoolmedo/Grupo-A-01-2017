@@ -1,6 +1,5 @@
 package edu.unq.desapp.groupA.backend.service;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +15,17 @@ public class BalancerService {
 	@Autowired
 	private CashRegisterManagement cashRegisterManagement;
 
+	/*
 	public CashRegister sendCartToQueue(List<CashRegister> cashRegisters) {
 		Stream<CashRegister> crs = unAvailableCashRegisters(cashRegisters);
 		crs = sortByProductsToProcess(crs);
 		CashRegister cashRegister = crs.findFirst().get();
 		return cashRegister;
 	}
+	*/
 	
 	public CashRegister getCashRegisterToQueue() {
-		Stream<CashRegister> crs = unAvailableCashRegisters(cashRegisterManagement.getAllActive());
+		Stream<CashRegister> crs = cashRegisterManagement.getAllActive().stream();
 		crs = sortByProductsToProcess(crs);
 		CashRegister cashRegister = crs.findFirst().get();
 		return cashRegister;
@@ -34,8 +35,10 @@ public class BalancerService {
 		return cashRegisters.sorted((c1, c2) -> c1.getProductsToProcess().compareTo(c2.getProductsToProcess()));
 	}
 
+	/*
 	private Stream<CashRegister> unAvailableCashRegisters(List<CashRegister> cashRegisters){
 		return cashRegisters.stream().filter(cr -> !cr.getAvailable());
 	}
+	*/
 	
 }

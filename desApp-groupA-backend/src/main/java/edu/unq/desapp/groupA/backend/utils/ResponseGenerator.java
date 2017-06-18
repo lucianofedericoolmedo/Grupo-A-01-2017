@@ -31,5 +31,12 @@ public class ResponseGenerator  {
 				.entity(entity)
 				.build();
 	}
+	
+	public Response buildErrorResponse(Exception exception) {
+		if (exception instanceof RuntimeException) {
+			return buildResponse(new Message(exception.getMessage()), Status.BAD_REQUEST);
+		}
+		return buildResponse(new Message("A problem has ocurred!"), Status.INTERNAL_SERVER_ERROR);
+	}
 
 }

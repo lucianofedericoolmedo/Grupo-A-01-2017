@@ -41,7 +41,7 @@ public class ComprandoALoLocoProvider {
 		comprandoALoLocoService.setShoppingListService(new ShoppingListService());
 		comprandoALoLocoService.setItemShoppingListService(new ItemShoppingListService());
 		comprandoALoLocoService.setTimeResponseService(new TimeResponseService());
-		comprandoALoLocoService.createCashRegisters(2);
+		//comprandoALoLocoService.createCashRegisters(2);
 		return comprandoALoLocoService;
 	}
 	

@@ -9,13 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
-import edu.unq.desapp.groupA.backend.model.CartState;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
+import edu.unq.desapp.groupA.backend.model.PaymentTurn;
+import edu.unq.desapp.groupA.backend.model.PaymentTurnStatus;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
+import edu.unq.desapp.groupA.backend.worker.PaymentCountdownThread;
 
 
 @Service
@@ -36,6 +38,12 @@ public class CartService extends GenericService<Cart> {
 	
 	@Autowired
 	private BalancerService balancerService;
+	
+	@Autowired
+	private CashRegisterManagement cashRegisterManagement;
+	
+	@Autowired
+	private PaymentTurnService paymentTurnService;
 
 	private Long identifier;
 
@@ -128,21 +136,25 @@ public class CartService extends GenericService<Cart> {
 		createdCart.setUser(fetchedUser);
 		return super.update(createdCart);
 	}
-	
-	public void queueForPurchase(Cart cart) {
+
+	public PaymentTurn requestTurnToPay(Long cartId) {
 		CashRegister cashRegister = balancerService.getCashRegisterToQueue();
-		cart.setActualState(CartState.QUEUED);
-		
-	}
-	
-	public void setStateToCart(Long cartId, CartState newState) {
-		Cart cart = super.find(cartId);
-		cart.setActualState(newState);
-		super.update(cart);
+		PaymentTurn turn = new PaymentTurn(cartId, cashRegister.getCode(), cashRegister.getStimatedTime());
+		return paymentTurnService.save(turn);
 	}
 
-	public void setValueToItem(Long itemCartId, Boolean valueToSet) {
-		itemCartService.setValueToItem(itemCartId, valueToSet);
+	public void queueForPurchase(PaymentTurn turn) {
+		turn.setStatus(PaymentTurnStatus.CONFIRMED);
+		Cart cart  = super.find(turn.getCartId());
+		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
+		cashRegister.requirePurchase(cart);
+		paymentTurnService.save(turn);
+		PaymentCountdownThread countdownThread = new PaymentCountdownThread(paymentTurnService, turn);
+		countdownThread.start();
+	}
+
+	public void setValueToItem(Long itemCartId, Boolean checked, Integer newQuantity) {
+		itemCartService.setValueToItem(itemCartId, checked, newQuantity);
 	}
 
 }

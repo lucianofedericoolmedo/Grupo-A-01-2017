@@ -2,7 +2,6 @@ package edu.unq.desapp.groupA.backend.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,10 +30,6 @@ public class CashRegisterRepository extends HibernateGenericDAO<CashRegister> {
 
 	public CashRegister findCashRegisterByIndex(int index) {
 		return registeredCashRegisters.get(index);
-	}
-
-	public List<CashRegister> getAvailableCashRegisters() {
-		return registeredCashRegisters.stream().filter(caja -> caja.getAvailable()).collect(Collectors.toList());
 	}
 
 	@Override

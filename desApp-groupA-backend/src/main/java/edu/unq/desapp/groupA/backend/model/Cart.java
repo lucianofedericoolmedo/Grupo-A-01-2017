@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,8 +19,8 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
 import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
 
 @Entity
 @Table(name = "carts")
@@ -43,9 +41,6 @@ public class Cart extends ItemGroup<ItemCart> {
 	@JsonDeserialize(using = JSONDateDeserialize.class)
 	private Date reservationTime;
 	
-	@Enumerated(EnumType.STRING)
-	private CartState actualState = CartState.UNATTENDED;
-
 	// Constructors
 	public Cart() {
 		this.setItems(new LinkedList<ItemCart>());
@@ -78,14 +73,6 @@ public class Cart extends ItemGroup<ItemCart> {
 	
 	public Date getReservationTime() {
 		return reservationTime;
-	}
-
-	public CartState getActualState() {
-		return actualState;
-	}
-
-	public void setActualState(CartState actualState) {
-		this.actualState = actualState;
 	}
 
 	// Logic

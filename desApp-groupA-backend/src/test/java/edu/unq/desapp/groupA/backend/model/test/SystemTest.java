@@ -1,25 +1,17 @@
 package edu.unq.desapp.groupA.backend.model.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import edu.unq.desapp.groupA.backend.model.Brand;
 import edu.unq.desapp.groupA.backend.model.Cart;
-import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.Purchase;
-import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.service.ComprandoALoLocoService;
@@ -89,22 +81,22 @@ public class SystemTest {
 		
 				
 		
-		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
-		CashRegister anotherCashRegister = comprandoALoLocoService.getCashRegister();
+//		CashRegister cashRegister = comprandoALoLocoService.getCashRegister();
+//		CashRegister anotherCashRegister = comprandoALoLocoService.getCashRegister();
 		
 		
 		paymentType = comprandoALoLocoService.createPaymentType("Credit Card", 
 				"Mastercard");
 		
 				
-		cashRegister = comprandoALoLocoService.requirePurchase(aCartForPocho,cashRegister);
-		anotherCashRegister = comprandoALoLocoService.requirePurchase(anotherCartForPocho,anotherCashRegister);
+//		cashRegister = comprandoALoLocoService.requirePurchase(aCartForPocho,cashRegister);
+//		anotherCashRegister = comprandoALoLocoService.requirePurchase(anotherCartForPocho,anotherCashRegister);
 		
 		
 				
-		firstPurchase = comprandoALoLocoService.createPurchase(aCartForPocho,paymentType,cashRegister);		
-		secondPurchase = comprandoALoLocoService.createPurchase(anotherCartForPocho,paymentType, 
-				anotherCashRegister);
+//		firstPurchase = comprandoALoLocoService.createPurchase(aCartForPocho,paymentType,cashRegister);		
+//		secondPurchase = comprandoALoLocoService.createPurchase(anotherCartForPocho,paymentType, 
+//				anotherCashRegister);
 		
 	}
 	

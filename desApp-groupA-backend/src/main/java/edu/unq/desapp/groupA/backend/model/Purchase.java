@@ -1,6 +1,5 @@
 package edu.unq.desapp.groupA.backend.model;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,9 +25,6 @@ public class Purchase extends PersistenceEntity {
 	@ManyToOne
 	private PaymentType payment;
 
-	@ManyToOne
-	private CashRegister cashRegister;
-
 	// Getters and Setters
 	public Cart getCart() {
 		return cart;
@@ -44,14 +40,6 @@ public class Purchase extends PersistenceEntity {
 
 	public void setPayment(PaymentType payment) {
 		this.payment = payment;
-	}
-
-	public void setCashRegister(CashRegister cashRegister) {
-		this.cashRegister = cashRegister;
-	}
-	
-	public CashRegister getCashRegister(){
-		return this.cashRegister;
 	}
 
 	// Logic

@@ -1,18 +1,19 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "cash_registers")
-public class CashRegister extends PersistenceEntity {
+public class CashRegister implements Serializable {
 	
 	private static final long serialVersionUID = 2557711174710524531L;
+	
+	private static final Integer stimatedSecondsPerProduct = 5;
+	
+	private static final Integer stimatedSecondsPerPurchasePayment = 60;
 
 	// Instance Variables
-	private Boolean available;
+	private Long code;
 	private Integer productsToProcess;
 	
 	// Getters and Setters
@@ -20,23 +21,22 @@ public class CashRegister extends PersistenceEntity {
 		return productsToProcess;
 	}
 
-	public CashRegister(){
+	public CashRegister(Long code){
+		this.setCode(code);
 		this.productsToProcess = 0;
-		this.setAvailable(true);
 	}
 
-	public Boolean getAvailable() {
-		return available;
+	public Long getCode() {
+		return code;
 	}
 
-	public void setAvailable(Boolean available) {
-		this.available = available;
+	public void setCode(Long code) {
+		this.code = code;
 	}
 
 	public void requirePurchase(Cart cart) {
 		cart.setReservationTime(new Date());
-		this.available = false;
-		this.setProductsToProcess(this.productsToProcess + cart.quantityOfItems());		
+		this.setProductsToProcess(this.productsToProcess + cart.totalValueOfCheckedItems().intValue());		
 	}
 
 	public void setProductsToProcess(Integer productosPorProcesar) {
@@ -45,10 +45,10 @@ public class CashRegister extends PersistenceEntity {
 
 	public void removeItems(Integer quantityOfItems) {
 		this.setProductsToProcess(this.productsToProcess - quantityOfItems);
-		if (this.productsToProcess == 0){
-			this.available = true;
-		}
-		
+	}
+
+	public Integer getStimatedTime() {
+		return (this.productsToProcess * stimatedSecondsPerProduct) + stimatedSecondsPerPurchasePayment;
 	}
 	
 }

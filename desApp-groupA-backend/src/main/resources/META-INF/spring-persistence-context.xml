@@ -103,6 +103,7 @@
 	       <value>edu.unq.desapp.groupA.backend.model.Stock</value>
 	       <value>edu.unq.desapp.groupA.backend.model.TimeResponse</value>
 	       <value>edu.unq.desapp.groupA.backend.model.ProductCategoryThreshold</value>
+	       <value>edu.unq.desapp.groupA.backend.model.PaymentTurn</value>
 	       <value>edu.unq.desapp.groupA.backend.model.PurchasePriceThreshold</value>
 	       <value>edu.unq.desapp.groupA.backend.model.DateThresholdCriteria</value>
 	       <value>edu.unq.desapp.groupA.backend.model.QuantityThresholdCriteria</value>

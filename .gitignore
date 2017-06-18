@@ -1,5 +1,6 @@
 .metadata/
 .recommenders/
 *.csv
+logs/
 logapp.log.*
 RemoteSystemsTempFiles/
