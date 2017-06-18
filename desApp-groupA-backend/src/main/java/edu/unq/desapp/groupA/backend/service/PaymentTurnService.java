@@ -30,4 +30,15 @@ public class PaymentTurnService extends GenericService<PaymentTurn> {
 		}
 	}
 
+	public PaymentTurn findByCartIdWithState(Long cartId, PaymentTurnStatus status) {
+		return paymentTurnRepository.findByCartIdWithState(cartId, status);
+	}
+
+	public void deleteRequestedForCartId(Long cartId) {
+		PaymentTurn turn = findByCartIdWithState(cartId, PaymentTurnStatus.REQUESTED);
+		if (turn != null) {
+			super.delete(turn);
+		}
+	}
+
 }

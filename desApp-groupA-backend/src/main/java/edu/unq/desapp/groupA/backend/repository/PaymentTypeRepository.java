@@ -9,6 +9,7 @@ import edu.unq.desapp.groupA.backend.model.PaymentType;
 
 
 @Repository
+@SuppressWarnings("unchecked")
 public class PaymentTypeRepository extends HibernateGenericDAO<PaymentType> {
 
 	private static final long serialVersionUID = 2452202520983780950L;
@@ -26,9 +27,20 @@ public class PaymentTypeRepository extends HibernateGenericDAO<PaymentType> {
 	public void setPaymentTypes(List<PaymentType> paymentTypes) {
 		this.paymentTypes = paymentTypes;
 	}
-	
+
+	public PaymentType findByName(String name) {
+		String query = "SELECT type FROM " + this.persistentClass.getName() + " type WHERE type.name = " + name;
+		List<PaymentType> payments = (List<PaymentType>) this.getHibernateTemplate().find(query);
+		if (payments.isEmpty()) {
+			return null;
+		} else {
+			return payments.get(0);
+		}
+	}
+
 	@Override
 	public Class<PaymentType> getDomainClass() {
 		return PaymentType.class;
 	}
+
 }

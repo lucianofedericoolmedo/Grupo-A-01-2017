@@ -22,17 +22,17 @@ public class PaymentTypeService extends GenericService<PaymentType> {
 		this.repository = repository;
 	}
 
-	public PaymentType create(String name, String description){
-		PaymentType paymentType = new PaymentType();
-		paymentType.setDescription(description);
-		paymentType.setName(name);
-		repository.save(paymentType);
-		return paymentType;
+	public PaymentType create(PaymentType paymentType){
+		PaymentType foundPayment = repository.findByName(paymentType.getName());
+		if (foundPayment != null) {
+			throw new RuntimeException("A payment type with the given name has already been created");
+		}
+		return super.save(paymentType);
 	}
-
+	
 	@Override
 	public GenericRepository<PaymentType> getRepository() {
 		return repository;
 	}
-	
+
 }

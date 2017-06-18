@@ -1,18 +1,18 @@
 package edu.unq.desapp.groupA.backend.worker;
 
 import edu.unq.desapp.groupA.backend.model.PaymentTurn;
-import edu.unq.desapp.groupA.backend.service.PaymentTurnService;
+import edu.unq.desapp.groupA.backend.service.CartService;
 
 public class PaymentCountdownThread extends Thread {
 
 	private static final Integer milisecondsInASecond = 1000;
 
-	private PaymentTurnService paymentTurnService;
+	private CartService cartService;
 
 	private PaymentTurn turn;
 
-	public PaymentCountdownThread(PaymentTurnService paymentTurnService, PaymentTurn turn) {
-		this.paymentTurnService = paymentTurnService;
+	public PaymentCountdownThread(CartService cartService, PaymentTurn turn) {
+		this.cartService = cartService;
 		this.turn = turn;
 	}
 
@@ -22,8 +22,7 @@ public class PaymentCountdownThread extends Thread {
 			Integer secondsToSleep = turn.getStimatedTime();
 			Integer milisecondsToSleep = secondsToSleep * milisecondsInASecond;
 			Thread.sleep(milisecondsToSleep);
-			paymentTurnService.notifyTurnIsNextToPay(this.turn.getId());
-			return;
+			cartService.createCashRegisterPurchaseFor(turn);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

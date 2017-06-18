@@ -13,7 +13,10 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.PaymentTurn;
 import edu.unq.desapp.groupA.backend.model.PaymentTurnStatus;
+import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Product;
+import edu.unq.desapp.groupA.backend.model.Purchase;
+import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.User;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
@@ -44,6 +47,9 @@ public class CartService extends GenericService<Cart> {
 	
 	@Autowired
 	private PaymentTurnService paymentTurnService;
+	
+	@Autowired
+	private PurchaseService purchaseService;
 
 	private Long identifier;
 
@@ -138,6 +144,7 @@ public class CartService extends GenericService<Cart> {
 	}
 
 	public PaymentTurn requestTurnToPay(Long cartId) {
+		paymentTurnService.deleteRequestedForCartId(cartId);
 		CashRegister cashRegister = balancerService.getCashRegisterToQueue();
 		PaymentTurn turn = new PaymentTurn(cartId, cashRegister.getCode(), cashRegister.getStimatedTime());
 		return paymentTurnService.save(turn);
@@ -149,12 +156,27 @@ public class CartService extends GenericService<Cart> {
 		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
 		cashRegister.requirePurchase(cart);
 		paymentTurnService.save(turn);
-		PaymentCountdownThread countdownThread = new PaymentCountdownThread(paymentTurnService, turn);
+		PaymentCountdownThread countdownThread = new PaymentCountdownThread(this, turn);
 		countdownThread.start();
 	}
 
 	public void setValueToItem(Long itemCartId, Boolean checked, Integer newQuantity) {
 		itemCartService.setValueToItem(itemCartId, checked, newQuantity);
+	}
+
+	public void createCashRegisterPurchaseFor(PaymentTurn turnParam) {
+		this.createPurchaseFor(turnParam, PaymentType.CASH_REGISTER, null);
+	}
+
+	public void createHomeDeliveryPurchaseFor(PaymentTurn turnParam, ShippingAddress shippingAddress) {
+		this.createPurchaseFor(turnParam, PaymentType.HOME_DELIVERY, shippingAddress);
+	}
+
+	public void createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
+		PaymentTurn turn = paymentTurnService.find(turnParam.getId());
+		Cart cart = this.find(turnParam.getCartId());
+		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddress);
+		purchaseService.save(newPurchase);
 	}
 
 }

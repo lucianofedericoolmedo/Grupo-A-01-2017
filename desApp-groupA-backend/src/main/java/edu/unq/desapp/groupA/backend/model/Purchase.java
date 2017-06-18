@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,9 +23,34 @@ public class Purchase extends PersistenceEntity {
 		
 	@ManyToOne
 	private ShippingAddress shippingAddress;
-		
+
 	@ManyToOne
+	private PaymentTurn turn;
+	
+	@Enumerated(EnumType.STRING)
 	private PaymentType payment;
+
+	// Constructors
+	public Purchase() {
+	}
+	
+	public Purchase(Cart cart, PaymentTurn turn) {
+		this.cart = cart;
+		this.turn = turn;
+	}
+	
+	public Purchase(Cart cart, PaymentType paymentType, PaymentTurn turn) {
+		this.cart = cart;
+		this.payment = paymentType;
+		this.turn = turn;
+	}
+
+	public Purchase(Cart cart, PaymentType paymentType, PaymentTurn turn, ShippingAddress shippingAddress) {
+		this.cart = cart;
+		this.payment = paymentType;
+		this.turn = turn;
+		this.shippingAddress = shippingAddress;
+	}
 
 	// Getters and Setters
 	public Cart getCart() {
@@ -32,14 +59,6 @@ public class Purchase extends PersistenceEntity {
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
-	}
-
-	public PaymentType getPayment() {
-		return payment;
-	}
-
-	public void setPayment(PaymentType payment) {
-		this.payment = payment;
 	}
 
 	// Logic
@@ -79,11 +98,25 @@ public class Purchase extends PersistenceEntity {
 	public Set<String> namesOfProductsInPurchase(){
 		return this.getProducts().stream().map(p -> p.getName()).collect(Collectors.toSet());
 	}
-	
 
 	private List<Product> getProducts() {
-		// TODO Auto-generated method stub
 		return this.cart.getItems().stream().map(p-> p.getProduct()).collect(Collectors.toList());
+	}
+
+	public PaymentTurn getTurn() {
+		return turn;
+	}
+
+	public void setTurn(PaymentTurn turn) {
+		this.turn = turn;
+	}
+
+	public PaymentType getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentType paymentType) {
+		this.payment = paymentType;
 	}
 
 }

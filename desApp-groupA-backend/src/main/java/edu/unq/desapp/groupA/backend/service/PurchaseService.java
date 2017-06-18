@@ -23,10 +23,10 @@ public class PurchaseService extends GenericService<Purchase> {
 
 	@Autowired
 	private PurchaseRepository repository;	
-	
+
 	@Autowired
 	private TimeResponseService timeResponseService;
-	
+
 	public Purchase createPurchase(Cart cart, PaymentType paymentType){
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
