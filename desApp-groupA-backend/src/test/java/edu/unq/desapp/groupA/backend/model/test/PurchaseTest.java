@@ -17,7 +17,7 @@ public class PurchaseTest {
 	@Before
 	public void setup() {
 		cart = new Cart();
-		aPaymentType = new PaymentType();
+		aPaymentType = PaymentType.CASH_REGISTER;
 	}
 	
 	@Test

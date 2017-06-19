@@ -23,7 +23,7 @@ public class PaymentTypeService extends GenericService<PaymentType> {
 	}
 
 	public PaymentType create(PaymentType paymentType){
-		PaymentType foundPayment = repository.findByName(paymentType.getName());
+		PaymentType foundPayment = repository.findByName(paymentType.name());
 		if (foundPayment != null) {
 			throw new RuntimeException("A payment type with the given name has already been created");
 		}

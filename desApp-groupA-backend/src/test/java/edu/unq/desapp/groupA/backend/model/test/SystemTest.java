@@ -85,8 +85,7 @@ public class SystemTest {
 //		CashRegister anotherCashRegister = comprandoALoLocoService.getCashRegister();
 		
 		
-		paymentType = comprandoALoLocoService.createPaymentType("Credit Card", 
-				"Mastercard");
+		paymentType = PaymentType.CASH_REGISTER;
 		
 				
 //		cashRegister = comprandoALoLocoService.requirePurchase(aCartForPocho,cashRegister);

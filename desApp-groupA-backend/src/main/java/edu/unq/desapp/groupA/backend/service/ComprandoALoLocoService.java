@@ -216,10 +216,12 @@ public class ComprandoALoLocoService {
 		this.timeResponseService = timeResponseService;
 	}
 
+	/*
 	public PaymentType createPaymentType(String name, String description) {
 		PaymentType paymentType = paymentTypeService.create(name,description);
 		return paymentType;
 	}
+	*/
 
 	/*
 	public void createCashRegisters(int index) {
