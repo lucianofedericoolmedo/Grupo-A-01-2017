@@ -13,7 +13,7 @@ import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.CashRegisterService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
@@ -66,7 +66,7 @@ public class BeansInjectorService {
     	product = productService.save(product);
     	Product otherProduct = ProductFactory.exampleNewElem("Opera");	
     	otherProduct = productService.save(otherProduct);
-    	User user = userService.createUser("fake", "fake123", "fake@gmail.com");
+    	UserCredential user = userService.createUser("fake", "fake123", "fake@gmail.com");
     	
     	/*
     	Cart cart = cartService.createCart(user);

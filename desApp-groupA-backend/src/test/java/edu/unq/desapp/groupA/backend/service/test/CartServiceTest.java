@@ -17,7 +17,7 @@ import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.service.CartService;
 import edu.unq.desapp.groupA.backend.service.ItemCartService;
 import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
@@ -43,7 +43,7 @@ public class CartServiceTest {
 	@Autowired
 	private ProductService productService;
 
-	private User aUser;
+	private UserCredential aUser;
 	private Product product0;
 	private ItemShoppingList itemShoppingList0;
 	private Product product1;
@@ -61,7 +61,7 @@ public class CartServiceTest {
 		//cartService = new CartService(new CartRepository(), (long) (0));
 		//cartService.setItemCartService(itemCartService);
 
-		aUser = new User();
+		aUser = new UserCredential();
 		userService.save(aUser);
 		
 		product0 = new Product();

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
 
 
@@ -34,7 +34,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		this.identifier = id;
 	}
 
-	public ShoppingList createShoppingList(User user) {
+	public ShoppingList createShoppingList(UserCredential user) {
 		ShoppingList shoppingList = new ShoppingList();
 		shoppingList.setItems(new ArrayList<ItemShoppingList>());
 		shoppingList.setIdentifier(this.insertID());

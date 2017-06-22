@@ -24,7 +24,7 @@ public abstract class Threshold extends PersistenceEntity {
 	protected ThresholdCriteria criteria;
 
 	@ManyToOne
-	protected User user;
+	protected UserProfile userProfile;
 
 	// Getters and Setters
 	public Double getPercentageToSurpass() {
@@ -51,12 +51,12 @@ public abstract class Threshold extends PersistenceEntity {
 		this.criteria = criteria;
 	}
 
-	public User getUser() {
-		return user;
+	public UserProfile getUser() {
+		return userProfile;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(UserProfile userProfile) {
+		this.userProfile = userProfile;
 	}
 
 	// Logic

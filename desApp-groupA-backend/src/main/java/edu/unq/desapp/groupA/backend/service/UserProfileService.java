@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Threshold;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
+import edu.unq.desapp.groupA.backend.model.UserData;
 import edu.unq.desapp.groupA.backend.repository.UserProfileRepository;
 
 
@@ -25,12 +26,18 @@ public class UserProfileService extends GenericService<UserProfile> {
 		this.repository = repository;
 	}
 
-	public UserProfile createUserProfile(User user, Threshold thresold) {
+	public UserProfile createUserProfile(UserCredential user, Threshold thresold) {
 		UserProfile userProfile = new UserProfile();
 //		userProfile.setThresold(thresold);
 		userProfile.setUser(user);
 		this.repository.save(userProfile);
 		return userProfile;
+	}
+
+	public void createUserProfile(UserCredential userCredential) {
+		UserData userData = new UserData();
+		UserProfile userProfile = new UserProfile(userCredential, userData);
+		super.save(userProfile);
 	}
 
 }

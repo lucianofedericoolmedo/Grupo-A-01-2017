@@ -81,6 +81,18 @@ public class CartRest extends GenericRest<Cart> {
 		}
 	}
 	
+	@GET
+	@Path("/find-unattended-cart-for-user/{userId}")
+	public Response findUnattendedCartForUser(@Context HttpServletRequest request, 
+			@PathParam("userId") Long userId) {
+		try {
+			Long unattendedCartId = cartService.findUnattendedCartByUserId(userId);
+			return responseGenerator.buildSuccessResponse(new WrappedValue<Long>(unattendedCartId));
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 	@POST
 	@Path("/confirm-turn")
 	public Response requestTurn(@Context HttpServletRequest request, PaymentTurn turn) {

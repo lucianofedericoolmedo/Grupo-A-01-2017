@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import edu.unq.desapp.groupA.backend.model.Threshold;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 
 
 @Repository
@@ -16,7 +16,7 @@ public class ThresholdRepository extends HibernateGenericDAO<Threshold> {
 
 	private List<Threshold> thresholds;
 	
-	public List<Threshold> findEnabledThresholdOfUser(User user) {
+	public List<Threshold> findEnabledThresholdOfUser(UserCredential user) {
 		return this.thresholds.stream().filter(t -> t.getUser().equals(user)).collect(Collectors.toList());
 	}
 

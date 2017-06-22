@@ -50,5 +50,9 @@ public class CashRegister implements Serializable {
 	public Integer getStimatedTime() {
 		return (this.productsToProcess * stimatedSecondsPerProduct) + stimatedSecondsPerPurchasePayment;
 	}
+
+	public void removecheckedItemsFrom(Cart cart) {
+		this.productsToProcess -= cart.quantityOfcheckedItems();
+	}
 	
 }

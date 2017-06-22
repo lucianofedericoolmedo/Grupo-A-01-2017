@@ -13,7 +13,7 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.service.ComprandoALoLocoService;
 import edu.unq.desapp.groupA.backend.service.provider.ComprandoALoLocoProvider;
 import edu.unq.desapp.groupA.backend.service.provider.PriceFactory;
@@ -27,7 +27,7 @@ public class SystemTest {
 	private Product heineken;
 	private Product avon;
 	private Purchase firstPurchase;
-	private User user;
+	private UserCredential user;
 	private ProductCategory healthCare;
 	private ProductCategory lotions;
 	private ProductCategory beverage;

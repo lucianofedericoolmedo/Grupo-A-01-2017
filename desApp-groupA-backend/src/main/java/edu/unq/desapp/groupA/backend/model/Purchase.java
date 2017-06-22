@@ -90,7 +90,7 @@ public class Purchase extends PersistenceEntity {
 		this.shippingAddress = shippingAddress;
 	}
 	
-	public User getUser(){
+	public UserCredential getUser(){
 		return getCart().getUser();
 	}
 	

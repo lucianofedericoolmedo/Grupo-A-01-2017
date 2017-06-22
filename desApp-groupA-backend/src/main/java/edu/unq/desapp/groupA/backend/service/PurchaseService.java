@@ -12,7 +12,7 @@ import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.GenericRepository;
 import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
 
@@ -51,7 +51,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		this.repository = repository;
 	}
 
-	public List<Purchase> getPurchasesByUser(User user) {
+	public List<Purchase> getPurchasesByUser(UserCredential user) {
 		return this.repository.getPurchasesByUser(user);
 	}
 

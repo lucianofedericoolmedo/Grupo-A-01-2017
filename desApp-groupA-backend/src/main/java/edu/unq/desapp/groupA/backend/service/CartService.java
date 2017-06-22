@@ -18,7 +18,7 @@ import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.CartRepository;
 import edu.unq.desapp.groupA.backend.worker.PaymentCountdownThread;
 
@@ -68,7 +68,7 @@ public class CartService extends GenericService<Cart> {
 		this.identifier = id;
 	}
 
-	public Cart createCart(User user) {
+	public Cart createCart(UserCredential user) {
 		Cart cart = new Cart();
 		cart.setUser(user);
 		return super.save(cart);
@@ -129,13 +129,13 @@ public class CartService extends GenericService<Cart> {
 	}
 
 	public Cart create(Long userId, Cart cart) {
-		User user = userService.find(userId);
+		UserCredential user = userService.find(userId);
 		cart.setUser(user);
 		return super.save(cart);
 	}
 
 	public Cart create(Long shoppingListId, Long userId) {
-		User fetchedUser = userService.find(userId);
+		UserCredential fetchedUser = userService.find(userId);
 		ShoppingList shoppingList = shoppingListService.find(shoppingListId);
 		Cart createdCart = this.createCartForShoppingList(shoppingList);
 		createdCart.setUsedShoppingList(shoppingList);
@@ -175,8 +175,14 @@ public class CartService extends GenericService<Cart> {
 	public void createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
 		PaymentTurn turn = paymentTurnService.find(turnParam.getId());
 		Cart cart = this.find(turnParam.getCartId());
+		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
+		cashRegister.removecheckedItemsFrom(cart);
 		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddress);
 		purchaseService.save(newPurchase);
+	}
+
+	public Long findUnattendedCartByUserId(Long userId) {
+		return this.repository.findUnattendedCartByUserId(userId);
 	}
 
 }

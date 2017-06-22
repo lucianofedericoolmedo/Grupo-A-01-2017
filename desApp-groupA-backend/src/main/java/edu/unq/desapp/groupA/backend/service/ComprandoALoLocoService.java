@@ -19,7 +19,7 @@ import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.Threshold;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.model.UserProfile;
 
 public class ComprandoALoLocoService {
@@ -145,7 +145,7 @@ public class ComprandoALoLocoService {
 	}
 	*/
 	
-	public List<Purchase> getPurchasesByUser(User user){
+	public List<Purchase> getPurchasesByUser(UserCredential user){
 		return purchaseService.getPurchasesByUser(user);
 	}
 	
@@ -191,7 +191,7 @@ public class ComprandoALoLocoService {
 		return this.productService.createProduct(brand, categories, name, price);
 	}
 
-	public Cart createCartForUser(User user) {
+	public Cart createCartForUser(UserCredential user) {
 		Cart cart = cartService.createCart(user);
 		return cart;
 	}
@@ -244,7 +244,7 @@ public class ComprandoALoLocoService {
 		return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
 	}
 
-	public User createUser(String username, String password, String email) {
+	public UserCredential createUser(String username, String password, String email) {
 		return userService.createUser(username, password, email);
 	}
 
@@ -253,7 +253,7 @@ public class ComprandoALoLocoService {
 		return productThresoldService.createProductThreshold();
 	}
 
-	public UserProfile createUserProfile(User user, Threshold pt) {
+	public UserProfile createUserProfile(UserCredential user, Threshold pt) {
 		return userProfileService.createUserProfile(user, pt);
 	}
 
@@ -265,7 +265,7 @@ public class ComprandoALoLocoService {
 		this.userProfileService = userProfileService;
 	}
 
-	public ShoppingList createShoppingListForUser(User user) {
+	public ShoppingList createShoppingListForUser(UserCredential user) {
 		return shoppingListService.createShoppingList(user);
 	}
 

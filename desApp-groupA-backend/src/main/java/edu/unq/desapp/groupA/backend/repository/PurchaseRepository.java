@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 
 
 @Repository
@@ -32,7 +32,7 @@ public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 		this.purchases = purchases;
 	}
 	
-	public List<Purchase> getPurchasesByUser(User user) {
+	public List<Purchase> getPurchasesByUser(UserCredential user) {
 		return this.purchases.stream().filter(p -> p.getUser().isSameUser(user)).collect(Collectors.toList());
 	}
 

@@ -19,7 +19,7 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 
 	// Instance Variables
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	protected User user;
+	protected UserCredential user;
 	
 	private Long identifier;
 
@@ -28,11 +28,11 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 
 	public abstract void setItems(List<ItemType> items);
 
-	public void setUser(User user) {
+	public void setUser(UserCredential user) {
 		this.user = user;
 	}
 	
-	public User getUser(){
+	public UserCredential getUser(){
 		return this.user;
 	}
 

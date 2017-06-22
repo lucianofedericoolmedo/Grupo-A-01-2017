@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.webservice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -8,12 +9,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.unq.desapp.groupA.backend.model.User;
+import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.service.UserService;
 import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
@@ -22,7 +24,7 @@ import edu.unq.desapp.groupA.backend.utils.ResponseGenerator;
 @Produces("application/json")
 @Consumes("application/json")
 @Path("/users")
-public class UserRest  extends GenericRest<User> {
+public class UserRest  extends GenericRest<UserCredential> {
 
 	@Autowired
 	private ResponseGenerator responseGenerator;
@@ -31,7 +33,7 @@ public class UserRest  extends GenericRest<User> {
 	private UserService userService;
 
 	@Override
-	public GenericService<User> getService() {
+	public GenericService<UserCredential> getService() {
 		return userService;
 	}
 
@@ -43,7 +45,7 @@ public class UserRest  extends GenericRest<User> {
 
 	@GET
 	@Path("/{id}")
-	public Response find(@PathParam("id") final Long id) {
+	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		return super.find(id);
 	}
 	
@@ -53,18 +55,38 @@ public class UserRest  extends GenericRest<User> {
 	}
 	
 	@POST
-	public Response create(User user) {
+	public Response create(@Context HttpServletRequest request, UserCredential user) {
 		return super.create(user);
 	}
 
+	@POST
+	@Path("/signup")
+	public Response signup(@Context HttpServletRequest request, UserCredential user) {
+		try {
+			return responseGenerator.buildSuccessResponse(userService.signup(user));
+		} catch( Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
+	@POST
+	@Path("/signin")
+	public Response signin(@Context HttpServletRequest request, UserCredential user) {
+		try {
+			return responseGenerator.buildSuccessResponse(userService.signin(user));
+		} catch( Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+
 	@PUT
-	public Response update(User user) {
+	public Response update(@Context HttpServletRequest request, UserCredential user) {
 		return super.update(user);
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response delete(@PathParam("id") final Long id) {
+	public Response delete(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		return super.delete(id);
 	}
 
