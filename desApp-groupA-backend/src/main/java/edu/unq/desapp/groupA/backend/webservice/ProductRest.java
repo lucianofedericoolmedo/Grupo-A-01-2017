@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.webservice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -41,33 +43,35 @@ public class ProductRest extends GenericRest<Product> {
 
 	@GET
 	@Path("/all")
-	public Response findAll() {
+	public Response findAll(@Context HttpServletRequest request) {
 		return super.findAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public Response find(@PathParam("id") final Long id) {
+	public Response find(@Context HttpServletRequest request, @PathParam("id") final Long id) {
 		return super.find(id);
 	}
 	
 	@GET
 	@Path("/find-by-page")
-	public Response findByPage(@QueryParam("pageNumber") Integer pageNumber,
+	public Response findByPage(@Context HttpServletRequest request,
+			@QueryParam("pageNumber") Integer pageNumber,
 			@QueryParam("pageSize") Integer pageSize) {
 		return super.findByPage(pageNumber, pageSize);
 	}
 
 	@GET
 	@Path("/find-not-in-shopping-list")
-	public Response findByPageNotInShoppingList(@QueryParam("pageNumber") Integer pageNumber,
+	public Response findByPageNotInShoppingList(@Context HttpServletRequest request,
+			@QueryParam("pageNumber") Integer pageNumber,
 			@QueryParam("pageSize") Integer pageSize,
 			@QueryParam("shoppingListId") Integer shoppingListId) {
 		try {
 			PageResponse<Product> productsPage = productService.findByPageProductsNotInShoppingList(pageNumber, pageSize, shoppingListId);
 			return responseGenerator.buildSuccessResponse(productsPage);
 		} catch (Exception e) {
-			return responseGenerator.responseBadRequest(e.getMessage());
+			return responseGenerator.buildErrorResponse(e);
 		}
 	}
 
@@ -77,43 +81,46 @@ public class ProductRest extends GenericRest<Product> {
 	}
 	
 	@POST
-	public Response create(Product product) {
-		System.out.println(product);
+	public Response create(@Context HttpServletRequest request,
+			Product product) {
 		return super.create(product);
 	}
 	
 	@POST
 	@Path("create-dto")
-	public Response createFromDto(ProductCrud productCrud) {
+	public Response createFromDto(@Context HttpServletRequest request,
+			ProductCrud productCrud) {
 		try {
-			System.out.println(productCrud);
 			productService.createFromDto(productCrud);
 			return responseGenerator.buildResponse(Status.OK);
 		} catch (Exception e) {
-			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+			return responseGenerator.buildErrorResponse(e);
 		}
 	}
 
 	@PUT
 	@Path("/{id}")
-	public Response update(Product product) {
+	public Response update(@Context HttpServletRequest request,
+			Product product) {
 		return super.update(product);
 	}
 	
 	@PUT
 	@Path("update-dto/{id}")
-	public Response updateFromDto(ProductCrud productCrud) {
+	public Response updateFromDto(@Context HttpServletRequest request,
+			ProductCrud productCrud) {
 		try {
 			productService.updateFromDto(productCrud);
 			return responseGenerator.buildResponse(Status.OK);
 		} catch (Exception e) {
-			return responseGenerator.buildResponse(e.getMessage(), Status.INTERNAL_SERVER_ERROR);
+			return responseGenerator.buildErrorResponse(e);
 		}
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response delete(@PathParam("id") final Long id) {
+	public Response delete(@Context HttpServletRequest request,
+			@PathParam("id") final Long id) {
 		return super.delete(id);
 	}
 

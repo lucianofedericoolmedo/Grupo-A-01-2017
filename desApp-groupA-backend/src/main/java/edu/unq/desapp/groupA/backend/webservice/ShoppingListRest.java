@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.service.ItemShoppingListService;
 import edu.unq.desapp.groupA.backend.service.ShoppingListService;
@@ -56,6 +58,20 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	}
 	
 	@GET
+	@Path("/page-by-user")
+	public Response findPageByUserId(@Context HttpServletRequest request,
+			@QueryParam("userId") final Long userId,
+			@QueryParam("pageNumber") Integer pageNumber,
+			@QueryParam("pageSize") Integer pageSize) {
+		try {
+			PageResponse<ShoppingList> usersShoppingListPage = shoppingListService.findPageByUserId(pageNumber, pageSize, userId);
+			return responseGenerator.buildSuccessResponse(usersShoppingListPage);
+		} catch (Exception e) {
+			return responseGenerator.responseBadRequest(e.getMessage());
+		}
+	}
+	
+	@GET
 	public Response ok() {
 		return responseGenerator.responseOK("OK");
 	}
@@ -63,6 +79,17 @@ public class ShoppingListRest extends GenericRest<ShoppingList> {
 	@POST
 	public Response create(@Context HttpServletRequest request,ShoppingList shoppingList) {
 		return super.create(shoppingList);
+	}
+	
+	@POST
+	@Path("create-for/{userId}")
+	public Response createFor(@Context HttpServletRequest request, @PathParam("userId") Long userId, 
+			ShoppingList shoppingList) {
+		try {
+			return responseGenerator.buildSuccessResponse(shoppingListService.createFor(userId, shoppingList));
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
 	}
 
 	@POST

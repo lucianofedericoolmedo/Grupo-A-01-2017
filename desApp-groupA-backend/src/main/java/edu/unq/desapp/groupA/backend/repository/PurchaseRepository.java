@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageRequest;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageRequestBuilder;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
 @Repository
@@ -42,18 +45,29 @@ public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 
 	public List<Purchase> findLastPurchases(Integer quantityToFetch, Long userId) {
 		String query = "FROM " + this.persistentClass.getName() + " purchase "
-				+ " WHERE purchase.cart.user.id = " + userId.toString()
+				+ " WHERE purchase.cart.user.id = ? "
 				+ " ORDER BY purchase.creationDate DESC "
 				+ quantityToFetch.toString();
-		return (List<Purchase>) getHibernateTemplate().find(query);
+		return (List<Purchase>) getHibernateTemplate().find(query, userId);
 	}
 
 	public List<Purchase> findPurchasesFrom(Date dateFromToFetch, Long userId) {
 		String query = "FROM " + this.persistentClass.getName() + " purchase "
-				+ " WHERE purchase.cart.user.id = " + userId.toString()
-				+ " AND purchase.creationDate > " + dateFromToFetch.toString()
+				+ " WHERE purchase.cart.user.id = ? "
+				+ " AND purchase.creationDate > ? "
 				+ " ORDER BY purchase.creationDate DESC ";
-		return (List<Purchase>) getHibernateTemplate().find(query);
+		return (List<Purchase>) getHibernateTemplate().find(query, userId, dateFromToFetch);
+	}
+	
+	public PageResponse<Purchase> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
+		String query = "FROM Purchase purchase "
+						+ "WHERE purchase.cart.user.id = " + userId;
+		PageRequest<Purchase> pageRequest = new PageRequestBuilder<Purchase>(getDomainClass())
+				.setPageNumber(pageNumber)
+				.setPageSize(pageSize)
+				.setQuery(query)
+				.build();
+		return findByPage(pageRequest);
 	}
 	
 	public List<Purchase> getShippings() {

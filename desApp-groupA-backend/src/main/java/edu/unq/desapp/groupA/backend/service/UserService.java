@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.dto.UserDTO;
+import edu.unq.desapp.groupA.backend.model.Role;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.UserRepository;
 import edu.unq.desapp.groupA.backend.utils.StringValidator;
@@ -19,6 +20,9 @@ public class UserService extends GenericService<UserCredential> {
 	
 	@Autowired
 	private UserProfileService userProfileService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	public UserRepository getRepository() {
 		return repository;
@@ -57,11 +61,16 @@ public class UserService extends GenericService<UserCredential> {
 		}
 	}
 
+	private Role fetchClientRole() {
+		return roleService.findByName("CLIENT");
+	}
+	
 	public UserDTO signup(UserCredential userParam) {
 		validateCredentialsForSignup(userParam);
 		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword());
 		userCredential = super.save(userCredential);
 		userProfileService.createUserProfile(userCredential);
+		userCredential.addRole(fetchClientRole());
 		return new UserDTO(userCredential);
 	}
 

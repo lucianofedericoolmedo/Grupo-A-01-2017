@@ -142,6 +142,17 @@ public class CartRest extends GenericRest<Cart> {
 	}
 	
 	@PUT
+	@Path("cancel-cart/{id}")
+	public Response cancelCart(@Context HttpServletRequest request, @PathParam("id") Long cartId) {
+		try {
+			cartService.setCartAsCanceled(cartId);
+			return responseGenerator.buildResponse(Status.OK);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
+	@PUT
 	@Path("check-item-cart/{id}")
 	public Response setValueToItemCart(@Context HttpServletRequest request, @PathParam("id") Long itemCartId, 
 			Map<String, Object> data) {

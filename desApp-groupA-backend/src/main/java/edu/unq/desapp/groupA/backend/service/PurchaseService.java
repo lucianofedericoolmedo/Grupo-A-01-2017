@@ -15,6 +15,7 @@ import edu.unq.desapp.groupA.backend.model.ShippingAddress;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.GenericRepository;
 import edu.unq.desapp.groupA.backend.repository.PurchaseRepository;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
 @Service
@@ -96,6 +97,10 @@ public class PurchaseService extends GenericService<Purchase> {
 	@Override
 	public GenericRepository<Purchase> getRepository() {
 		return repository;
+	}
+
+	public PageResponse<Purchase> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
+		return repository.findPageByUserId(pageNumber, pageSize, userId);
 	}
 
 }

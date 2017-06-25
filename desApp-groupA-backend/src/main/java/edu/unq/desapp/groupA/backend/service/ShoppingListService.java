@@ -10,6 +10,7 @@ import edu.unq.desapp.groupA.backend.model.ItemShoppingList;
 import edu.unq.desapp.groupA.backend.model.ShoppingList;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.ShoppingListRepository;
+import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
 @Service
@@ -21,6 +22,9 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 	
 	@Autowired
 	private ItemShoppingListService itemShoppingListService;
+	
+	@Autowired
+	private UserService userService;
 	
 	private Long identifier;
 
@@ -69,6 +73,19 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		ShoppingList shoppingList = super.find(shoppingListId);
 		shoppingList.deleteItemWithId(itemId);
 		super.update(shoppingList);
+	}
+
+	public ShoppingList createFor(Long userId, ShoppingList shoppingList) {
+		UserCredential user = userService.find(userId);
+		if (user == null) {
+			throw new RuntimeException("Invalid user");
+		}
+		shoppingList.setUser(user);
+		return super.save(shoppingList);
+	}
+
+	public PageResponse<ShoppingList> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
+		return repository.findPageByUserId(pageNumber, pageSize, userId);
 	}
 	
 }

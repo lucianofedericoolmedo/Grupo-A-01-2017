@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.exceptions.ProductAlreadyInItemGroupException;
 import edu.unq.desapp.groupA.backend.model.Cart;
+import edu.unq.desapp.groupA.backend.model.CartState;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.ItemCart;
 import edu.unq.desapp.groupA.backend.model.PaymentTurn;
@@ -152,7 +153,7 @@ public class CartService extends GenericService<Cart> {
 
 	public void queueForPurchase(PaymentTurn turn) {
 		turn.setStatus(PaymentTurnStatus.CONFIRMED);
-		Cart cart  = super.find(turn.getCartId());
+		Cart cart = updateCartStatus(turn.getCartId(), CartState.QUEUED);
 		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
 		cashRegister.requirePurchase(cart);
 		paymentTurnService.save(turn);
@@ -174,7 +175,7 @@ public class CartService extends GenericService<Cart> {
 
 	public void createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
 		PaymentTurn turn = paymentTurnService.find(turnParam.getId());
-		Cart cart = this.find(turnParam.getCartId());
+		Cart cart = updateCartStatus(turn.getCartId(), CartState.PURCHASE);
 		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
 		cashRegister.removecheckedItemsFrom(cart);
 		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddress);
@@ -183,6 +184,18 @@ public class CartService extends GenericService<Cart> {
 
 	public Long findUnattendedCartByUserId(Long userId) {
 		return this.repository.findUnattendedCartByUserId(userId);
+	}
+	
+	public Cart updateCartStatus(Long cartId, CartState status) {
+		Cart cart = this.find(cartId);
+		cart.setStatus(status);
+		return super.update(cart);
+	}
+
+	public void setCartAsCanceled(Long cartId) {
+		Cart fetchedCart = super.find(cartId);
+		fetchedCart.setStatus(CartState.CANCELED);
+		super.update(fetchedCart);
 	}
 
 }

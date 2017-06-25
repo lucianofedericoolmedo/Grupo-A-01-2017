@@ -18,7 +18,7 @@ public abstract class ItemGroup<ItemType extends Item> extends PersistenceEntity
 	private static final long serialVersionUID = -7139614401053628294L;
 
 	// Instance Variables
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	protected UserCredential user;
 	
 	private Long identifier;
