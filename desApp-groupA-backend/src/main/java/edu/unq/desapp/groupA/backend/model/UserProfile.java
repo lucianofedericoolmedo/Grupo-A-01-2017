@@ -19,7 +19,7 @@ public class UserProfile extends PersistenceEntity {
 
 	// Instance Variables
 	@JsonIgnore
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	private UserCredential user;
 
 	@OneToOne(cascade=CascadeType.ALL)

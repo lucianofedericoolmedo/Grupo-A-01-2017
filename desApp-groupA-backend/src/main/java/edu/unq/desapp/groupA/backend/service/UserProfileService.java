@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.model.Threshold;
-import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.model.UserData;
+import edu.unq.desapp.groupA.backend.model.UserProfile;
 import edu.unq.desapp.groupA.backend.repository.UserProfileRepository;
 
 
@@ -38,6 +38,15 @@ public class UserProfileService extends GenericService<UserProfile> {
 		UserData userData = new UserData();
 		UserProfile userProfile = new UserProfile(userCredential, userData);
 		super.save(userProfile);
+	}
+
+	public UserProfile findByUserId(Long id) {
+		UserProfile fetchedProfile =  repository.findByUserId(id);
+		if (fetchedProfile == null) {
+			throw new RuntimeException("No matching profile could be found for user");
+		} else {
+			return fetchedProfile;
+		}
 	}
 
 }

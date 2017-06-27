@@ -58,14 +58,13 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="brandRest" />
 			<ref bean="cartRest" />
 			<ref bean="cashRegisterRest" />
-			<ref bean="itemCartRest" />
-			<ref bean="itemShoppingListRest" />
 			<ref bean="productBatchLoadRest" />
 			<ref bean="productCategoryRest" />
 			<ref bean="productRest" />
 			<ref bean="purchaseRest" />
 			<ref bean="shoppingListRest" />
 			<ref bean="stockRest" />
+			<ref bean="userProfileRest" />
 			<ref bean="userRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>

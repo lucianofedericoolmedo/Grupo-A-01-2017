@@ -9,6 +9,7 @@ import edu.unq.desapp.groupA.backend.model.UserProfile;
 
 
 @Repository
+@SuppressWarnings("unchecked")
 public class UserProfileRepository extends HibernateGenericDAO<UserProfile> implements GenericRepository<UserProfile>{
 
 	private static final long serialVersionUID = 6537732777373591739L;
@@ -34,6 +35,17 @@ public class UserProfileRepository extends HibernateGenericDAO<UserProfile> impl
 	@Override
 	public Class<UserProfile> getDomainClass() {
 		return UserProfile.class;
+	}
+
+	public UserProfile findByUserId(Long id) {
+		String query = "FROM " + persistentClass.getName() + " profile "
+						+ "WHERE profile.user.id = ? ";
+		List<UserProfile> profiles = (List<UserProfile>) this.getHibernateTemplate().find(query, id);
+		if (profiles.isEmpty()) {
+			return null;
+		} else {
+			return profiles.get(0);
+		}
 	}
 	
 }
