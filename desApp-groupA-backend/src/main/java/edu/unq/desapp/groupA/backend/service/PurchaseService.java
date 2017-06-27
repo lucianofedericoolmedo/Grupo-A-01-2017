@@ -2,11 +2,14 @@ package edu.unq.desapp.groupA.backend.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.unq.desapp.groupA.backend.dto.PurchaseDTO;
+import edu.unq.desapp.groupA.backend.dto.PurchaseWithItemsDTO;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.CashRegister;
 import edu.unq.desapp.groupA.backend.model.PaymentType;
@@ -99,8 +102,18 @@ public class PurchaseService extends GenericService<Purchase> {
 		return repository;
 	}
 
-	public PageResponse<Purchase> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
-		return repository.findPageByUserId(pageNumber, pageSize, userId);
+	public PageResponse<PurchaseDTO> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
+		PageResponse<Purchase> purchasePageResponse = repository.findPageByUserId(pageNumber, pageSize, userId);
+		return new PageResponse<PurchaseDTO>(toPurchaseDto(purchasePageResponse.getResult()), purchasePageResponse.getTotalSize());
+	}
+
+	public PurchaseWithItemsDTO findDtoById(Long id) {
+		Purchase fetchedPurchase = super.find(id);
+		return new PurchaseWithItemsDTO(fetchedPurchase);
+	}
+	
+	private List<PurchaseDTO> toPurchaseDto(List<Purchase> purchases) {
+		return purchases.stream().map(p -> new PurchaseDTO(p)).collect(Collectors.toList());
 	}
 
 }

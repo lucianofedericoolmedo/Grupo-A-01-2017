@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.repository.pagination.PageRequest;
 import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
@@ -72,6 +73,7 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
         this.getHibernateTemplate().flush();
     }
 
+    @Transactional
     public void update(final T entity) {
         this.getHibernateTemplate().update(entity);
     }

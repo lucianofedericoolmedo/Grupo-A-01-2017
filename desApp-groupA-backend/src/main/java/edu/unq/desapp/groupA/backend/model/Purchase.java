@@ -20,20 +20,20 @@ public class Purchase extends PersistenceEntity {
 	// Instance Variables
 	@OneToOne
 	private Cart cart;
-		
+
 	@ManyToOne
 	private ShippingAddress shippingAddress;
 
 	@ManyToOne
 	private PaymentTurn turn;
-	
+
 	@Enumerated(EnumType.STRING)
 	private PaymentType payment;
 
 	// Constructors
 	public Purchase() {
 	}
-	
+
 	public Purchase(Cart cart, PaymentTurn turn) {
 		this.cart = cart;
 		this.turn = turn;

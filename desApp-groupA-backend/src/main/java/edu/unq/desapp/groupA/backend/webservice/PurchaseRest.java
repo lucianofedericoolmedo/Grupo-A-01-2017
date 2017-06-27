@@ -13,9 +13,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.desapp.groupA.backend.dto.PurchaseDTO;
 import edu.unq.desapp.groupA.backend.model.Purchase;
 import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 import edu.unq.desapp.groupA.backend.service.GenericService;
@@ -50,18 +52,29 @@ public class PurchaseRest extends GenericRest<Purchase> {
 	public Response find(@PathParam("id") final Long id) {
 		return super.find(id);
 	}
+
+	@GET
+	@Path("/get-dto/{purchaseId}")
+	public Response findPurchaseDto(@Context HttpServletRequest request, 
+			@PathParam("purchaseId") final Long id) {
+		try {
+			return responseGenerator.buildSuccessResponse(purchaseService.findDtoById(id));
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
 	
 	@GET
 	@Path("/find-by-page-for-user")
 	public Response findPageByUserId(@Context HttpServletRequest request,
-			@QueryParam("userId") final Long userId,
+			@QueryParam("userId") Long userId,
 			@QueryParam("pageNumber") Integer pageNumber,
 			@QueryParam("pageSize") Integer pageSize) {
 		try {
-			PageResponse<Purchase> usersPurchasePage = purchaseService.findPageByUserId(pageNumber, pageSize, userId);
+			PageResponse<PurchaseDTO> usersPurchasePage = purchaseService.findPageByUserId(pageNumber, pageSize, userId);
 			return responseGenerator.buildSuccessResponse(usersPurchasePage);
 		} catch (Exception e) {
-			return responseGenerator.responseBadRequest(e.getMessage());
+			return responseGenerator.buildErrorResponse(e);
 		}
 	}
 	

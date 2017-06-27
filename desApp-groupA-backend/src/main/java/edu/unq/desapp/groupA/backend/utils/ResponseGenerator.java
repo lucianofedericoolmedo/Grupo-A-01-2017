@@ -3,12 +3,15 @@ package edu.unq.desapp.groupA.backend.utils;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class ResponseGenerator  {
 
+	private static final Logger LOGGER = Logger.getLogger("edu.unq.desapp.groupA.backend.error");
+	
 	public Response responseOK(String message){
 		return buildResponse(message, Status.OK);
 	}
@@ -33,6 +36,7 @@ public class ResponseGenerator  {
 	}
 	
 	public Response buildErrorResponse(Exception exception) {
+		LOGGER.error("Exception", exception);
 		if (exception instanceof RuntimeException) {
 			return buildResponse(new Message(exception.getMessage()), Status.BAD_REQUEST);
 		}

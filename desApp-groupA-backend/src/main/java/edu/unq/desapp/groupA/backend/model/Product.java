@@ -1,5 +1,6 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -142,6 +143,17 @@ public class Product extends PersistenceEntity {
 			}
 		}
 		return categoriesNotInList;
+	}
+
+	public Price findPriceForDate(Date creationDate) {
+		for (Price price : prices) {
+			Boolean isAfterStartingValidityDate = creationDate.compareTo(price.getStartingValidityDate()) >= 0;
+			Boolean isBeforeFinishingValidityDate = price.getFinishingValidityDate() == null || creationDate.compareTo(price.getFinishingValidityDate()) <= 0;
+			if (isAfterStartingValidityDate && isBeforeFinishingValidityDate) {
+				return price;
+			}
+		}
+		return null;
 	}
 	
 }

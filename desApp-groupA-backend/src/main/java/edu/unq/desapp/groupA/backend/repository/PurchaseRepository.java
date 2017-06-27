@@ -58,7 +58,7 @@ public class PurchaseRepository extends HibernateGenericDAO<Purchase> {
 				+ " ORDER BY purchase.creationDate DESC ";
 		return (List<Purchase>) getHibernateTemplate().find(query, userId, dateFromToFetch);
 	}
-	
+
 	public PageResponse<Purchase> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
 		String query = "FROM Purchase purchase "
 						+ "WHERE purchase.cart.user.id = " + userId;
