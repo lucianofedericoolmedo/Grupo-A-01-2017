@@ -63,6 +63,7 @@ public class UserProfileRest  extends GenericRest<UserProfile> {
 	}
 
 	@PUT
+	@Path("/{idca}")
 	public Response update(@Context HttpServletRequest request, UserProfile userProfile) {
 		return super.update(userProfile);
 	}

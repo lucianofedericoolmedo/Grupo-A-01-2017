@@ -6,7 +6,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import edu.unq.desapp.groupA.backend.service.PurchaseService;
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
 
 @Entity
 @Table(name = "thresholds_criterias_date")
@@ -17,6 +22,8 @@ public class DateThresholdCriteria extends ThresholdCriteria {
 	public static final String description = "Por compras desde cierta fecha";
 	
 	// Instance Variables
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+    @JsonSerialize(using = JSONDateSerialize.class)
 	private Date dateFromToFetch;
 
 	// Getters and Setters

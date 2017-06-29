@@ -13,6 +13,8 @@ public class ProductCategoryThreshold  extends Threshold{
 
 	private static final long serialVersionUID = 4868683580506959194L;
 	
+	private static final String name = "Per Product Category";
+	
 	// Instance Variables
 	@ManyToOne
 	private ProductCategory productCategory;
@@ -35,6 +37,11 @@ public class ProductCategoryThreshold  extends Threshold{
 	@Override
 	public Double currentCartValue(Cart cart) {
 		return cart.totalValueOfCheckedItemsWithProductCategory(productCategory);
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

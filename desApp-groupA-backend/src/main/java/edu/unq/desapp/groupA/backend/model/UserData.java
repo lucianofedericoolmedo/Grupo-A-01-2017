@@ -5,6 +5,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+import edu.unq.desapp.groupA.backend.utils.JSONSimpleDateSerialize;
+
 @Entity
 @Table(name="users_data")
 public class UserData extends PersistenceEntity {
@@ -16,6 +22,8 @@ public class UserData extends PersistenceEntity {
 	
 	private String surname;
 	
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+    @JsonSerialize(using = JSONSimpleDateSerialize.class)
 	private Date birthday;
 	
 	private String dni;

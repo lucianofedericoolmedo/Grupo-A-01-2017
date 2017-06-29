@@ -15,6 +15,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import edu.unq.desapp.groupA.backend.utils.StringValidator;
+
 @Entity
 @Table(name="users")
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -100,6 +102,10 @@ public class UserCredential extends PersistenceEntity {
 		for (Role role : roles) {
 			this.addRole(role);
 		}
+	}
+	
+	public Boolean isWellFormed() {
+		return StringValidator.isValidString(username) && StringValidator.isValidString(password);
 	}
 
 }

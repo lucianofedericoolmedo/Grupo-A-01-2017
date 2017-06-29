@@ -8,7 +8,6 @@ import edu.unq.desapp.groupA.backend.dto.UserDTO;
 import edu.unq.desapp.groupA.backend.model.Role;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.repository.UserRepository;
-import edu.unq.desapp.groupA.backend.utils.StringValidator;
 
 
 @Service
@@ -44,7 +43,7 @@ public class UserService extends GenericService<UserCredential> {
 	}
 
 	private void validateIncompleteFields(UserCredential user) {
-		if (!StringValidator.isValidString(user.getUsername()) || !StringValidator.isValidString(user.getPassword())) {
+		if (!user.isWellFormed()) {
 			throw new RuntimeException("Incomplete information sent");
 		}
 	}

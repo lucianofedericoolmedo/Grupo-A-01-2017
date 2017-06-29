@@ -12,6 +12,8 @@ public class PurchasePriceThreshold extends Threshold {
 
 	private static final long serialVersionUID = 329192937256974350L;
 	
+	private static final String name = "Per Purchase Price";
+	
 	// Instance Variables
 	private Double priceToSurpass;
 
@@ -33,6 +35,11 @@ public class PurchasePriceThreshold extends Threshold {
 	@Override
 	public Double currentCartValue(Cart cart) {
 		return cart.totalValueOfCheckedItems();
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

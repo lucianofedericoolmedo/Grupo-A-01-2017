@@ -17,7 +17,6 @@ public class JSONDateDeserialize extends JsonDeserializer<Date> {
 	@Override
 	public Date deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException {
         String date = jp.getText();
-        System.out.println("debug" + date);
         Date newDate = null;
 		try {
 			newDate = dateFormat.parse(date);

@@ -64,6 +64,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="purchaseRest" />
 			<ref bean="shoppingListRest" />
 			<ref bean="stockRest" />
+			<ref bean="thresholdRest" />
 			<ref bean="userProfileRest" />
 			<ref bean="userRest" />
 		</jaxrs:serviceBeans>

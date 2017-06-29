@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="users_profiles")
@@ -18,14 +20,14 @@ public class UserProfile extends PersistenceEntity {
 	private static final long serialVersionUID = -5227774846544481307L;
 
 	// Instance Variables
-	@JsonIgnore
-	@OneToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private UserCredential user;
 
 	@OneToOne(cascade=CascadeType.ALL)
 	private UserData userData;
 
-	@OneToMany(mappedBy="userProfile")
+	@OneToMany(mappedBy="userProfile", orphanRemoval=true)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Threshold> thresolds;
 
 	// Constructors
@@ -35,7 +37,7 @@ public class UserProfile extends PersistenceEntity {
 	
 	public UserProfile(UserCredential userCredential, UserData userData) {
 		this.user = userCredential;
-		this.userData = userData;
+		this.setUserData(userData);
 		this.thresolds = new LinkedList<Threshold>();
 	}
 
@@ -54,6 +56,14 @@ public class UserProfile extends PersistenceEntity {
 
 	public void setThresolds(List<Threshold> thresolds) {
 		this.thresolds = thresolds;
+	}
+
+	public UserData getUserData() {
+		return userData;
+	}
+
+	public void setUserData(UserData userData) {
+		this.userData = userData;
 	}
 
 }

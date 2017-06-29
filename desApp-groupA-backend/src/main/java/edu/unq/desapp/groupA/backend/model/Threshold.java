@@ -64,6 +64,8 @@ public abstract class Threshold extends PersistenceEntity {
 	
 	public abstract Double currentCartValue(Cart cart);
 	
+	public abstract String getName();
+	
 	public Boolean isCartSurpassed(Cart cart, List<Purchase> purchasesToEvaluate) {
 		// Calculate historical
 		List<Double> purchasesTotals = purchasesToEvaluateValues(purchasesToEvaluate);
