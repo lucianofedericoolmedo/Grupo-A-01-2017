@@ -10,16 +10,17 @@ import edu.unq.desapp.groupA.backend.repository.pagination.PageRequestBuilder;
 import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
-@Transactional
 public abstract class GenericService<T> {
 	
 	public abstract GenericRepository<T> getRepository();
 	
+	@Transactional
 	public T save(T entity) {
 		this.getRepository().save(entity);
 		return entity;
 	}
 	
+	@Transactional
 	public T update(T entity) {
 		this.getRepository().update(entity);
 		return entity;
@@ -29,6 +30,7 @@ public abstract class GenericService<T> {
 		return this.getRepository().findById(id);
 	}
 	
+	@Transactional
 	public void delete(T entity) {
 		this.getRepository().delete(entity);
 	}
@@ -37,6 +39,7 @@ public abstract class GenericService<T> {
 		return this.getRepository().findAll();
 	}
 	
+	@Transactional
 	public void delete(Long id) {
 		this.getRepository().deleteById(id);
 	}

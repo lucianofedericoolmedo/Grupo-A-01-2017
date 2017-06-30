@@ -11,7 +11,6 @@ import edu.unq.desapp.groupA.backend.repository.PaymentTurnRepository;
 
 
 @Service
-@Transactional
 public class PaymentTurnService extends GenericService<PaymentTurn> {
 
 	@Autowired
@@ -22,6 +21,7 @@ public class PaymentTurnService extends GenericService<PaymentTurn> {
 		return paymentTurnRepository;
 	}
 
+	@Transactional
 	public void notifyTurnIsNextToPay(Long turnId) {
 		PaymentTurn turn = super.find(turnId);
 		if (!turn.getStatus().equals(PaymentTurnStatus.CANCELED)) {
@@ -30,10 +30,12 @@ public class PaymentTurnService extends GenericService<PaymentTurn> {
 		}
 	}
 
+	@Transactional
 	public PaymentTurn findByCartIdWithState(Long cartId, PaymentTurnStatus status) {
 		return paymentTurnRepository.findByCartIdWithState(cartId, status);
 	}
 
+	@Transactional
 	public void deleteRequestedForCartId(Long cartId) {
 		PaymentTurn turn = findByCartIdWithState(cartId, PaymentTurnStatus.REQUESTED);
 		if (turn != null) {

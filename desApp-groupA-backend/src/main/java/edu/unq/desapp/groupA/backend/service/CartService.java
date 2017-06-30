@@ -25,7 +25,7 @@ import edu.unq.desapp.groupA.backend.worker.PaymentCountdownThread;
 
 
 @Service
-@Transactional
+//@Transactional
 public class CartService extends GenericService<Cart> {
 
 	@Autowired
@@ -69,6 +69,7 @@ public class CartService extends GenericService<Cart> {
 		this.identifier = id;
 	}
 
+	@Transactional
 	public Cart createCart(UserCredential user) {
 		Cart cart = new Cart();
 		cart.setUser(user);
@@ -80,6 +81,7 @@ public class CartService extends GenericService<Cart> {
 	 * @param shoppingList : The @ShoppingList used to construct a @Cart.
 	 * @return A @Cart instance.
 	 */
+	@Transactional
 	public Cart createCartForShoppingList(ShoppingList shoppingList) {
 		Cart cart = createCart(shoppingList.getUser());
 		cart.setUsedShoppingList(shoppingList);
@@ -100,6 +102,7 @@ public class CartService extends GenericService<Cart> {
 	 * @param product : The Product to create the ItemCart with.
 	 * @throws ProductAlreadyInItemGroupException : If the Product is in the Cart.
 	 */
+	@Transactional
 	public ItemCart addProductInCartIfMissing(Cart cart, Product product) {
 		if (cart.containsProduct(product)) {
 			throw new ProductAlreadyInItemGroupException(product, "The cart already has and item with the product");
@@ -109,6 +112,7 @@ public class CartService extends GenericService<Cart> {
 		return itemCart;
 	}
 
+	@Transactional
 	public boolean isCartIncludingProduct(Cart cart, Product product) {
 		return this.repository.isCartIncludingProduct(cart,product);
 	}
@@ -129,12 +133,14 @@ public class CartService extends GenericService<Cart> {
 		this.itemCartService = itemCartService;
 	}
 
+	@Transactional
 	public Cart create(Long userId, Cart cart) {
 		UserCredential user = userService.find(userId);
 		cart.setUser(user);
 		return super.save(cart);
 	}
 
+	@Transactional
 	public Cart create(Long shoppingListId, Long userId) {
 		UserCredential fetchedUser = userService.find(userId);
 		ShoppingList shoppingList = shoppingListService.find(shoppingListId);
@@ -144,6 +150,7 @@ public class CartService extends GenericService<Cart> {
 		return super.update(createdCart);
 	}
 
+	@Transactional
 	public PaymentTurn requestTurnToPay(Long cartId) {
 		paymentTurnService.deleteRequestedForCartId(cartId);
 		CashRegister cashRegister = balancerService.getCashRegisterToQueue();
@@ -151,6 +158,7 @@ public class CartService extends GenericService<Cart> {
 		return paymentTurnService.save(turn);
 	}
 
+	@Transactional
 	public void queueForPurchase(PaymentTurn turn) {
 		turn.setStatus(PaymentTurnStatus.CONFIRMED);
 		Cart cart = updateCartStatus(turn.getCartId(), CartState.QUEUED);
@@ -165,14 +173,17 @@ public class CartService extends GenericService<Cart> {
 		itemCartService.setValueToItem(itemCartId, checked, newQuantity);
 	}
 
+	@Transactional
 	public void createCashRegisterPurchaseFor(PaymentTurn turnParam) {
 		this.createPurchaseFor(turnParam, PaymentType.CASH_REGISTER, null);
 	}
 
+	@Transactional
 	public void createHomeDeliveryPurchaseFor(PaymentTurn turnParam, ShippingAddress shippingAddress) {
 		this.createPurchaseFor(turnParam, PaymentType.HOME_DELIVERY, shippingAddress);
 	}
 
+	@Transactional
 	public void createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
 		PaymentTurn turn = paymentTurnService.find(turnParam.getId());
 		Cart cart = updateCartStatus(turn.getCartId(), CartState.PURCHASE);
@@ -186,6 +197,7 @@ public class CartService extends GenericService<Cart> {
 		return this.repository.findUnattendedCartByUserId(userId);
 	}
 	
+	@Transactional
 	public Cart updateCartStatus(Long cartId, CartState status) {
 		Cart cart = this.find(cartId);
 		cart.setStatus(status);

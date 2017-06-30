@@ -11,7 +11,6 @@ import edu.unq.desapp.groupA.backend.repository.ItemCartRepository;
 
 
 @Service
-@Transactional
 public class ItemCartService extends GenericService<ItemCart> {
 
 	@Autowired
@@ -27,6 +26,7 @@ public class ItemCartService extends GenericService<ItemCart> {
 	 * @param cart : The @Cart to add the new @ItemCart instance.
 	 * @return The created @ItemCart instance.
 	 */
+	@Transactional
 	public ItemCart createItemCart(Product product, Integer quantity, Cart cart){
 		ItemCart item = new ItemCart(product, quantity);
 		cart.addItems(item);
@@ -34,7 +34,7 @@ public class ItemCartService extends GenericService<ItemCart> {
 		return item;
 	}
 	
-	
+	@Transactional
 	public void createItemCart(ItemCart notSavedItemCart){
 		this.repository.save(notSavedItemCart);
 		
@@ -46,6 +46,7 @@ public class ItemCartService extends GenericService<ItemCart> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public ItemCart createItemCart(Product product, Cart cart){
 		ItemCart item = new ItemCart();
 		item.setProduct(product);
@@ -62,11 +63,13 @@ public class ItemCartService extends GenericService<ItemCart> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public void checkItemCart(ItemCart itemCart) {
 		itemCart.setChecked(true);
 		this.getRepository().save(itemCart);
 	}
 	
+	@Transactional
 	public ItemCart createForCartId(Long cartId, ItemCart itemCart) {
 		Cart cart = cartService.find(cartId);
 		itemCart = super.save(itemCart);

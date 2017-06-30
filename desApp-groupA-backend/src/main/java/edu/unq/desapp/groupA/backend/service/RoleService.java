@@ -20,6 +20,7 @@ public class RoleService extends GenericService<Role> {
 		return repository.findByName(role);
 	}
 	
+	@Transactional
 	private void validateRoleNameExistence(String roleName, Role roleToCompare) {
 		Role role = repository.findByName(roleName);
 		if (role != null) {
@@ -30,6 +31,7 @@ public class RoleService extends GenericService<Role> {
 		}
 	}
 	
+	@Transactional
 	public Role update(Role newRole) {
 		validateRoleNameExistence(newRole.getName(), newRole);
 		return super.update(newRole);

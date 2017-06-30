@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Price;
 import edu.unq.desapp.groupA.backend.model.Product;
@@ -33,11 +34,13 @@ public class PriceService extends GenericService<Price> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	private void finishPriceValidity(Price price) {
 		price.setFinishingValidityDate(new Date());
 		this.getRepository().save(price);
 	}
 	
+	@Transactional
 	public void finishPriceValidityForProductIfAny(Product product) {
 		Price lastPrice = product.getCurrentPrice();
 		// TODO : Maybe refac for using an Exception.
@@ -46,6 +49,7 @@ public class PriceService extends GenericService<Price> {
 		}
 	}
 
+	@Transactional
 	public Price updatePriceForProduct(Product product, Double price) {
 		if (!currentPriceEqualsNewPrice(product, price)) {
 			finishPriceValidityForProductIfAny(product);
@@ -58,6 +62,7 @@ public class PriceService extends GenericService<Price> {
 		}
 	}
 
+	@Transactional
 	private boolean currentPriceEqualsNewPrice(Product product, Double price) {
 		Price lastPrice = product.getCurrentPrice();
 		if (lastPrice == null) {

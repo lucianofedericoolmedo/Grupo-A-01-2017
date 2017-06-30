@@ -20,7 +20,6 @@ import edu.unq.desapp.groupA.backend.repository.pagination.PageResponse;
 
 
 @Service
-@Transactional
 public class ProductService extends GenericService<Product>{
 
 	@Autowired
@@ -49,6 +48,7 @@ public class ProductService extends GenericService<Product>{
 		this.setPriceService(priceService);
 	}
 
+	@Transactional
 	public Product createProduct(Brand brand, List<ProductCategory> categories,
 			String name, Price price){
 		Product product = new Product();
@@ -60,6 +60,7 @@ public class ProductService extends GenericService<Product>{
 		return product;
 	}
 
+	@Transactional
 	public void updateProductsViaCSVFile(String filePath) throws FileNotFoundException {
 		List<BasicProduct> basicProducts = CSVFileParser.parseCSVFile(filePath, new CsvResultBasicProductBuilder());
 		for (BasicProduct basicProduct : basicProducts) {
@@ -67,6 +68,7 @@ public class ProductService extends GenericService<Product>{
 		}
 	}
 
+	@Transactional
 	public Product updateOrCreateFromBasicProduct(BasicProduct basicProduct) {
 		Product product = super.find(basicProduct.getId());
 		if (product == null) {
@@ -81,6 +83,7 @@ public class ProductService extends GenericService<Product>{
 		return super.update(product);
 	}
 	
+	@Transactional
 	public Product update(Product product) {
 		Product fetchedProduct = super.find(product.getId());
 		fetchedProduct.updateValues(product);
@@ -124,12 +127,14 @@ public class ProductService extends GenericService<Product>{
 		return getRepository().findByPageProductsNotInShoppingList(pageNumber, pageSize, shoppingListId);
 	}
 
+	@Transactional
 	public void createFromDto(ProductCrud productCrud) {
 		Product savedProduct = super.save(productCrud.getProduct());
 		stockService.updateStockForProduct(savedProduct, productCrud.getStock());
 		priceService.updatePriceForProduct(productCrud.getProduct(), productCrud.getPrice());
 	}
 
+	@Transactional
 	public void updateFromDto(ProductCrud productCrud) {
 		Product updatedProduct = this.update(productCrud.getProduct());
 		stockService.updateStockForProduct(updatedProduct, productCrud.getStock());

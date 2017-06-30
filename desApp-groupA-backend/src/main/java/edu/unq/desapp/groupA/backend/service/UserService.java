@@ -33,6 +33,7 @@ public class UserService extends GenericService<UserCredential> {
 
 	public UserService() { }
 
+	@Transactional
 	public UserCredential createUser(String username, String password, String email){
 		UserCredential user = new UserCredential();
 		user.setEmail(email);
@@ -42,6 +43,7 @@ public class UserService extends GenericService<UserCredential> {
 		return user;
 	}
 
+	@Transactional
 	private void validateIncompleteFields(UserCredential user) {
 		if (!user.isWellFormed()) {
 			throw new RuntimeException("Incomplete information sent");
@@ -52,6 +54,7 @@ public class UserService extends GenericService<UserCredential> {
 		return this.repository.findByUsername(username);
 	}
 	
+	@Transactional
 	private void validateCredentialsForSignup(UserCredential user) {
 		validateIncompleteFields(user);
 		UserCredential userCredential = this.findByUsername(user.getUsername());
@@ -60,10 +63,12 @@ public class UserService extends GenericService<UserCredential> {
 		}
 	}
 
+	@Transactional
 	private Role fetchClientRole() {
 		return roleService.findByName("CLIENT");
 	}
 	
+	@Transactional
 	public UserDTO signup(UserCredential userParam) {
 		validateCredentialsForSignup(userParam);
 		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword());
@@ -73,6 +78,7 @@ public class UserService extends GenericService<UserCredential> {
 		return new UserDTO(userCredential);
 	}
 
+	@Transactional
 	public UserDTO signin(UserCredential user) {
 		validateIncompleteFields(user);
 		UserCredential fetchedUser = this.findByUsername(user.getUsername());

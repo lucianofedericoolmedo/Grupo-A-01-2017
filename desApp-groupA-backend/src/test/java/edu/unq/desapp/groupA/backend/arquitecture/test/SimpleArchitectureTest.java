@@ -1,6 +1,6 @@
 package edu.unq.desapp.groupA.backend.arquitecture.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -27,51 +27,7 @@ public class SimpleArchitectureTest {
     
     private static final String FIND_METHOD_NAME_ID = "find";
 
-	@Test
-	public void transactionalOnGenericServiceTest() {
-
-		boolean retSuperClass = false;
-		boolean retSubClasses = false;
-
-		Class serviceClass = GenericService.class;
-
-		retSuperClass = this.checkTransactional(serviceClass);
-
-		Object[] clases = this.getAllClassForPackage("edu.unq.desapp.groupA.backend.service", GenericService.class);
-
-		//boolean retFinal = true;
-
-		for (Object element : clases) {
-
-			String name = element.toString();
-			String[] sp = name.split(" ");
-			List<String> spArray = new ArrayList<String>();
-
-			for (String string : sp) {
-				spArray.add(string);
-			}
-
-			Class clase = null;
-
-			try {
-				clase = Class.forName(spArray.get(1));
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-
-			retSubClasses = this.checkTransactional(clase);
-			
-			if(!retSubClasses)
-				break;
-
-		}
-		
-		//assertTrue(retSuperClass);
-		//assertTrue(retSubClasses);		
-
-		//assertTrue(retSuperClass && retSubClasses);
-
-	}
+	
 	
 	@Test
 	public void transactionalOnOtherServiceTest() {
@@ -83,10 +39,11 @@ public class SimpleArchitectureTest {
 
 		retSuperClass = this.checkTransactional(serviceClass);
 
-		Object[] classes = this.getAllClassForPackage("edu.unq.desapp.groupA.backend.service", GenericService.class);
+		Object[] classes = this.getAllClassForPackage("edu.unq.desapp.groupA.backend.service"
+				, GenericService.class);
 
-		//boolean retFinal = true;
-
+		boolean retFinal = true;
+		
 		for (Object element : classes) {
 
 			String name = element.toString();
@@ -112,11 +69,7 @@ public class SimpleArchitectureTest {
 
 		}
 		
-		assertTrue(retSuperClass);
-		//TODO: Refac in Model !!!
-		//assertFalse(retSubClasses);		
-
-		//assertTrue(retSuperClass && retSubClasses);
+		assertTrue(retSuperClass && retSubClasses);
 
 	}
 
@@ -129,16 +82,15 @@ public class SimpleArchitectureTest {
 
 		for (Method method : methods) {
 
+			
 			if (method.getName() != "getRepository" && method.getName() != "setRepository" &&
 					isNotGetterOrSetterOrFindMethod(method)) {
-
 				Annotation[] annot = method.getAnnotations();
  				int cont = 0;
 
 				// if (annot.length > 0) {
 
 				for (Annotation annotation : annot) {
-
 					if (annotation.annotationType().getSimpleName().equals("Transactional"))
 						cont++;
 
@@ -148,8 +100,6 @@ public class SimpleArchitectureTest {
 
 				if (!retFinal)
 					break;
-
-				// }
 
 			}
 
@@ -172,6 +122,9 @@ public class SimpleArchitectureTest {
 	private boolean isNotGetterOrSetterOrFindMethod(Method method) {
 	        return !method.getName().contains(SETTER_METHOD_NAME_ID) && 
 	        		!method.getName().contains(FIND_METHOD_NAME_ID) &&
+	        		!method.getName().contains("lambda") &&
+	        		!method.getName().contains("save") &&
+	        		!method.getName().contains("update") &&
 	        		!method.getName().contains(GETTER_METHOD_NAME_ID);
 	}
 	

@@ -38,6 +38,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		this.identifier = id;
 	}
 
+	@Transactional
 	public ShoppingList createShoppingList(UserCredential user) {
 		ShoppingList shoppingList = new ShoppingList();
 		shoppingList.setItems(new ArrayList<ItemShoppingList>());
@@ -47,6 +48,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		return shoppingList;
 	}
 
+	@Transactional
 	private Long insertID(){
 		Long value = this.getIdentifier();
 		this.identifier = this.identifier + (long) 1;
@@ -61,6 +63,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public ItemShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
 		ShoppingList shoppingList = super.find(shoppingListId);
 		itemShoppingList.setParent(shoppingList);
@@ -68,6 +71,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		return itemShoppingList;
 	}
 	
+	@Transactional
 	public void removeItemFromShoppingList(Long itemId, Long shoppingListId) {
 		itemShoppingListService.delete(itemId);
 		ShoppingList shoppingList = super.find(shoppingListId);
@@ -75,6 +79,7 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 		super.update(shoppingList);
 	}
 
+	@Transactional
 	public ShoppingList createFor(Long userId, ShoppingList shoppingList) {
 		UserCredential user = userService.find(userId);
 		if (user == null) {

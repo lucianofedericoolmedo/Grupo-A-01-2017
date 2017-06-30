@@ -28,6 +28,7 @@ public class UserProfileService extends GenericService<UserProfile> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public UserProfile createUserProfile(UserCredential user, Threshold thresold) {
 		UserProfile userProfile = new UserProfile();
 //		userProfile.setThresold(thresold);
@@ -36,6 +37,7 @@ public class UserProfileService extends GenericService<UserProfile> {
 		return userProfile;
 	}
 
+	@Transactional
 	public void createUserProfile(UserCredential userCredential) {
 		UserData userData = new UserData();
 		UserProfile userProfile = new UserProfile(userCredential, userData);

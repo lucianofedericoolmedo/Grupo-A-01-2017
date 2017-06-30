@@ -11,7 +11,7 @@ import edu.unq.desapp.groupA.backend.repository.ItemShoppingListRepository;
 
 
 @Service
-@Transactional
+
 public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 
 	@Autowired
@@ -30,6 +30,7 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 
 	public ItemShoppingListService(){ }
 
+	@Transactional
 	public ItemShoppingList createItemShoppingList(Product product, Integer quantity,ShoppingList shoppingList) {
 		ItemShoppingList itemShoppingList = new ItemShoppingList();
 		itemShoppingList.setProduct(product);
@@ -39,6 +40,7 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 		return itemShoppingList;
 	}
 
+	@Transactional
 	public ItemShoppingList createItemForShoppingList(Long shoppingListId, ItemShoppingList itemShoppingList) {
 		ShoppingList shoppingList = shoppingListService.find(shoppingListId);
 		shoppingList.addItem(itemShoppingList);
@@ -46,6 +48,7 @@ public class ItemShoppingListService extends GenericService<ItemShoppingList> {
 		shoppingListService.update(shoppingList);
 		return itemShoppingList;
 	}
+	
 	
 	public ItemShoppingList update(ItemShoppingList itemShoppingList) {
 		ItemShoppingList fetchedItem = super.find(itemShoppingList.getId());

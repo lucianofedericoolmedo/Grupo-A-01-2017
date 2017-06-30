@@ -9,7 +9,7 @@ import edu.unq.desapp.groupA.backend.model.ProductCategory;
 import edu.unq.desapp.groupA.backend.repository.ProductCategoryRepository;
 
 
-@Transactional
+
 @Service
 public class ProductCategoryService extends GenericService<ProductCategory> {
 
@@ -25,6 +25,7 @@ public class ProductCategoryService extends GenericService<ProductCategory> {
 		return this.getRepository().findByName(categoryName);
 	}
 	
+	@Transactional
 	private void validateCategoryNameExistence(String categoryName, ProductCategory categoryToCompare) {
 		ProductCategory productCategory = this.findByName(categoryToCompare.getName());
 		if (productCategory != null) {
@@ -35,11 +36,13 @@ public class ProductCategoryService extends GenericService<ProductCategory> {
 		}
 	}
 	
+	@Transactional
 	public ProductCategory update(ProductCategory productCategory) {
 		validateCategoryNameExistence(productCategory.getName(), productCategory);
 		return super.update(productCategory);
 	}
 	
+	@Transactional
 	public ProductCategory save(ProductCategory productCategory) {
 		validateCategoryNameExistence(productCategory.getName(), productCategory);
 		return super.save(productCategory);

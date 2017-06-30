@@ -33,6 +33,7 @@ public class BrandService extends GenericService<Brand> {
 		return this.getRepository().findByName(brand);
 	}
 
+	@Transactional
 	public Brand findByNameOrCreate(String brandName) {
 		Brand brand = findByName(brandName);
 		if (brand == null) {
@@ -41,6 +42,7 @@ public class BrandService extends GenericService<Brand> {
 		return brand;
 	}
 	
+	@Transactional
 	private void validateBrandNameExistence(String brandName, Brand brandToCompare) {
 		Brand brand = this.findByName(brandName);
 		if (brand != null) {
@@ -51,11 +53,13 @@ public class BrandService extends GenericService<Brand> {
 		}
 	}
 	
+	@Transactional
 	public Brand update(Brand newBrand) {
 		validateBrandNameExistence(newBrand.getName(), newBrand);
 		return super.update(newBrand);
 	}
 	
+	@Transactional
 	public Brand save(Brand newBrand) {
 		validateBrandNameExistence(newBrand.getName(), newBrand);
 		return super.save(newBrand);

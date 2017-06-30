@@ -31,6 +31,7 @@ public class PurchaseService extends GenericService<Purchase> {
 	@Autowired
 	private TimeResponseService timeResponseService;
 
+	@Transactional
 	public Purchase createPurchase(Cart cart, PaymentType paymentType){
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
@@ -40,6 +41,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		return purchase;
 	}
 	
+	@Transactional
 	public Purchase createPurchase(Cart cart, PaymentType paymentType, Date creationDate){
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
@@ -63,6 +65,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		return this.repository.getAllCarts();
 	}
 
+	@Transactional
 	public Purchase createPurchase(Cart cart, PaymentType paymentType, ShippingAddress shippingAddress) {
 		Purchase purchase = new Purchase();
 		purchase.setCart(cart);
@@ -78,14 +81,17 @@ public class PurchaseService extends GenericService<Purchase> {
 		return this.repository.getPurchases();
 	}
 
+	@Transactional
 	public List<Purchase> fetchLastPurchases(Integer quantityToFetch, Long userId) {
 		return repository.findLastPurchases(quantityToFetch, userId);
 	}
 
+	@Transactional
 	public List<Purchase> fetchPurchasesFrom(Date dateFromToFetch, Long userId) {
 		return repository.findPurchasesFrom(dateFromToFetch, userId);
 	}
 
+	@Transactional
 	public Purchase createPurchase(Cart cart,PaymentType paymentType, CashRegister cashRegister) {
 		cashRegister.removeItems(cart.totalValueOfCheckedItems().intValue());
 		Purchase purchase = this.createPurchase(cart, paymentType);
@@ -102,6 +108,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		return repository;
 	}
 
+	
 	public PageResponse<PurchaseDTO> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
 		PageResponse<Purchase> purchasePageResponse = repository.findPageByUserId(pageNumber, pageSize, userId);
 		return new PageResponse<PurchaseDTO>(toPurchaseDto(purchasePageResponse.getResult()), purchasePageResponse.getTotalSize());
@@ -112,6 +119,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		return new PurchaseWithItemsDTO(fetchedPurchase);
 	}
 	
+	@Transactional
 	private List<PurchaseDTO> toPurchaseDto(List<Purchase> purchases) {
 		return purchases.stream().map(p -> new PurchaseDTO(p)).collect(Collectors.toList());
 	}

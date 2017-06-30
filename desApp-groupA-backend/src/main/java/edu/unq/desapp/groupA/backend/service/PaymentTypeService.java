@@ -10,7 +10,6 @@ import edu.unq.desapp.groupA.backend.repository.PaymentTypeRepository;
 
 
 @Service
-@Transactional
 public class PaymentTypeService extends GenericService<PaymentType> {
 
 	@Autowired
@@ -22,6 +21,7 @@ public class PaymentTypeService extends GenericService<PaymentType> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public PaymentType create(PaymentType paymentType){
 		PaymentType foundPayment = repository.findByName(paymentType.name());
 		if (foundPayment != null) {
