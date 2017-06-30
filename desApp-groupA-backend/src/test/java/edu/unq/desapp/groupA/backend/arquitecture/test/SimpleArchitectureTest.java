@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,12 +32,12 @@ public class SimpleArchitectureTest {
 	@Test
 	public void transactionalOnOtherServiceTest() {
 
-		boolean retSuperClass = false;
-		boolean retSubClasses = false;
+		boolean isInitialServiceClassTransactional = false;
+		boolean isClassTransactional = false;
 
 		Class serviceClass = GenericService.class;
 
-		retSuperClass = this.checkTransactional(serviceClass);
+		isInitialServiceClassTransactional = this.checkTransactional(serviceClass);
 
 		Object[] classes = this.getAllClassForPackage("edu.unq.desapp.groupA.backend.service"
 				, GenericService.class);
@@ -46,30 +46,27 @@ public class SimpleArchitectureTest {
 		
 		for (Object element : classes) {
 
-			String name = element.toString();
-			String[] sp = name.split(" ");
-			List<String> spArray = new ArrayList<String>();
-
-			for (String string : sp) {
-				spArray.add(string);
-			}
+			String rawClassName = element.toString();
+			String[] className = rawClassName.split(" ");
+			List<String> spArray = Arrays.asList(className);
 
 			Class aClass = null;
 
 			try {
 				aClass = Class.forName(spArray.get(1));
+				isClassTransactional = this.checkTransactional(aClass);				
+				if(!isClassTransactional)
+					break;
+				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 
-			retSubClasses = this.checkTransactional(aClass);
 			
-			if(!retSubClasses)
-				break;
 
 		}
 		
-		assertTrue(retSuperClass && retSubClasses);
+		assertTrue(isInitialServiceClassTransactional && isClassTransactional);
 
 	}
 
@@ -108,16 +105,6 @@ public class SimpleArchitectureTest {
 		return retFinal;
 	}
 
-	public Object[] getAllClassForPackage2(String namePackage, Class clase) {
-
-		//Reflections reflections = new Reflections(namePackage);
-		
-		Reflections reflections = new Reflections(namePackage, new SubTypesScanner(false));
-		Object[] classes = (reflections.getSubTypesOf(clase)).toArray();
-		return classes;
-
-	}
-	
 	
 	private boolean isNotGetterOrSetterOrFindMethod(Method method) {
 	        return !method.getName().contains(SETTER_METHOD_NAME_ID) && 
