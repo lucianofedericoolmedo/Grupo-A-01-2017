@@ -46,6 +46,13 @@ public class UserCredential extends PersistenceEntity {
 		this.password = password;
 		this.roles = new LinkedList<Role>();
 	}
+	
+	public UserCredential(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.roles = new LinkedList<Role>();
+	}
 
 	// Getters and Setters
 	public String getUsername() {

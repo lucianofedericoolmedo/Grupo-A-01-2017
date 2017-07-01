@@ -54,10 +54,14 @@ public class UserService extends GenericService<UserCredential> {
 		return this.repository.findByUsername(username);
 	}
 	
+	public UserCredential findByEmail(String username) {
+		return this.repository.findByEmail(username);
+	}
+	
 	@Transactional
 	private void validateCredentialsForSignup(UserCredential user) {
 		validateIncompleteFields(user);
-		UserCredential userCredential = this.findByUsername(user.getUsername());
+		UserCredential userCredential = this.findByEmail(user.getEmail());
 		if (userCredential != null) {
 			throw new RuntimeException("The username has already been taken");
 		}
@@ -70,12 +74,17 @@ public class UserService extends GenericService<UserCredential> {
 	
 	@Transactional
 	public UserDTO signup(UserCredential userParam) {
+		return new UserDTO(obtainCredential(userParam));
+	}
+	
+	@Transactional
+	public UserCredential obtainCredential(UserCredential userParam){
 		validateCredentialsForSignup(userParam);
 		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword());
 		userCredential = super.save(userCredential);
 		userProfileService.createUserProfile(userCredential);
 		userCredential.addRole(fetchClientRole());
-		return new UserDTO(userCredential);
+		return userCredential;
 	}
 
 	@Transactional

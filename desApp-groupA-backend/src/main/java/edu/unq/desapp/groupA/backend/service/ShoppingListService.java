@@ -81,6 +81,12 @@ public class ShoppingListService extends GenericService<ShoppingList> {
 
 	@Transactional
 	public ShoppingList createFor(Long userId, ShoppingList shoppingList) {
+		for (UserCredential user : userService.getRepository().getUsers()){
+			System.out.println("----" );
+			System.out.println(user.getEmail());
+			System.out.println("------");
+		}
+		
 		UserCredential user = userService.find(userId);
 		if (user == null) {
 			throw new RuntimeException("Invalid user");

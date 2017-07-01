@@ -43,4 +43,16 @@ public class UserRepository extends HibernateGenericDAO<UserCredential> implemen
 			return users.get(0);
 		}
 	}
+	
+	
+	public UserCredential findByEmail(String email) {
+		String query = "SELECT user FROM " + persistentClass.getName() + " user "
+						+ "WHERE user.email = ? ";
+		List<UserCredential> users = (List<UserCredential>) this.getHibernateTemplate().find(query, email);
+		if (users.isEmpty()) {
+			return null;
+		} else {
+			return users.get(0);
+		}
+	}
 }

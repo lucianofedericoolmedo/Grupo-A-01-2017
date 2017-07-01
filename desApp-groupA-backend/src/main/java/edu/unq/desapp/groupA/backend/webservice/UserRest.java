@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.unq.desapp.groupA.backend.dto.UserAuthDTO;
 import edu.unq.desapp.groupA.backend.model.UserCredential;
 import edu.unq.desapp.groupA.backend.service.GenericService;
 import edu.unq.desapp.groupA.backend.service.UserService;
@@ -31,6 +32,7 @@ public class UserRest  extends GenericRest<UserCredential> {
 	
 	@Autowired
 	private UserService userService;
+	
 
 	@Override
 	public GenericService<UserCredential> getService() {
@@ -68,6 +70,26 @@ public class UserRest  extends GenericRest<UserCredential> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
+	
+	@POST
+	@Path("/getOrCreateProfile")
+	public Response getOrCreateProfile(@Context HttpServletRequest request, UserAuthDTO user) {
+		try {
+			UserCredential userC = userService.findByEmail(user.getEmail());
+			if (userC != null){
+				return responseGenerator.buildSuccessResponse(userService.signin(userC));
+			}
+			else{
+				userC = new UserCredential(user.getName() + user.getSurname(), 
+						user.getSurname(), user.getEmail());
+				return responseGenerator.buildSuccessResponse(userService.signup(userC));
+			}
+			
+		} catch( Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 	
 	@POST
 	@Path("/signin")

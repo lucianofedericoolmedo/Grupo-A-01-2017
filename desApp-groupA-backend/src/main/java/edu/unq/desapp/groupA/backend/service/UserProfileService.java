@@ -38,10 +38,10 @@ public class UserProfileService extends GenericService<UserProfile> {
 	}
 
 	@Transactional
-	public void createUserProfile(UserCredential userCredential) {
+	public UserProfile createUserProfile(UserCredential userCredential) {
 		UserData userData = new UserData();
 		UserProfile userProfile = new UserProfile(userCredential, userData);
-		super.save(userProfile);
+		return super.save(userProfile);
 	}
 
 	public UserProfile findByUserId(Long id) {
