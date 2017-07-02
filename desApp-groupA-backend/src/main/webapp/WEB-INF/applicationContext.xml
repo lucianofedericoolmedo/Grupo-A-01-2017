@@ -58,6 +58,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="brandRest" />
 			<ref bean="cartRest" />
 			<ref bean="cashRegisterRest" />
+			<ref bean="discountRest" />
 			<ref bean="productBatchLoadRest" />
 			<ref bean="productCategoryRest" />
 			<ref bean="productRest" />

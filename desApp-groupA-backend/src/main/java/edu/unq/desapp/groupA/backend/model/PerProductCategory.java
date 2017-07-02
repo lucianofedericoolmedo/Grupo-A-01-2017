@@ -1,5 +1,7 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,10 +16,23 @@ public class PerProductCategory extends Discount {
 	 */
 
 	private static final long serialVersionUID = -7635636745291483929L;
+	
+	private static final String name = "Per Product Category";
 
 	// Instance Variables
 	@ManyToOne
 	private ProductCategory categoryForDiscount;
+
+	// Constructors
+	public PerProductCategory() {
+
+	}
+
+	public PerProductCategory(ProductCategory productCategory, Date startingDate, Date finishingDate,
+			Double percentagePerProductToDiscount, Priority priority) {
+		super(startingDate, finishingDate, percentagePerProductToDiscount, priority);
+		this.categoryForDiscount = productCategory;
+	}
 
 	// Getters and Setters
 	public ProductCategory getCategoryForDiscount() {
@@ -38,6 +53,11 @@ public class PerProductCategory extends Discount {
 	@Override
 	public Boolean isItemValidForDiscount(ItemCart item) {
 		return item.isCategory(categoryForDiscount);
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

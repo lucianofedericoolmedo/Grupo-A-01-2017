@@ -1,6 +1,10 @@
 package edu.unq.desapp.groupA.backend.model;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,11 +18,26 @@ public class PerProductQuantity extends Discount {
 	 */
 
 	private static final long serialVersionUID = -6073547991687988709L;
+	
+	private static final String name = "Per Product Quantity";
 
 	// Instance Variables
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Product productForDiscount;
 	
 	private Integer quantityToApply;
+
+	// Constructors
+	public PerProductQuantity() {
+
+	}
+	
+	public PerProductQuantity(Product product, Integer quantity, Date startingDate, Date finishingDate,
+			Double percentagePerProductToDiscount, Priority priority) {
+		super(startingDate, finishingDate, percentagePerProductToDiscount, priority);
+		this.productForDiscount = product;
+		this.quantityToApply = quantity;
+	}
 
 	// Getters and Setters
 	public Product getProductForDiscount() {
@@ -48,6 +67,11 @@ public class PerProductQuantity extends Discount {
 	@Override
 	public Boolean isItemValidForDiscount(ItemCart item) {
 		return item.isProduct(productForDiscount) && item.getQuantity() >= quantityToApply;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

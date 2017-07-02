@@ -8,15 +8,27 @@ import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
+import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
+
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Discount extends PersistenceEntity {
 	
 	private static final long serialVersionUID = 1266654534266762877L;
+	
+	public abstract String getName();
 
 	// Instance Variables
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+    @JsonSerialize(using = JSONDateSerialize.class)
 	private Date startingDate;
 	
+	@JsonDeserialize(using = JSONDateDeserialize.class)
+    @JsonSerialize(using = JSONDateSerialize.class)
 	private Date finishingDate;
 	
 	private Double percentagePerProductToDiscount;
@@ -24,6 +36,18 @@ public abstract class Discount extends PersistenceEntity {
 	@Enumerated(value = EnumType.STRING)
 	private Priority priority;
 
+	// Constructors
+	public Discount() {
+		
+	}
+	
+	public Discount(Date startingDate, Date finishingDate, Double percentagePerProductToDiscount, Priority priority) {
+		this.startingDate = startingDate;
+		this.finishingDate = finishingDate;
+		this.percentagePerProductToDiscount = percentagePerProductToDiscount;
+		this.priority = priority;
+	}
+	
 	// Getters and Setters
 	public Date getStartingDate() {
 		return startingDate;

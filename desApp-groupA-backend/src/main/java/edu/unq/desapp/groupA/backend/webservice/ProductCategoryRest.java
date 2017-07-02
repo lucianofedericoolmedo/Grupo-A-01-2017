@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -47,6 +48,14 @@ public class ProductCategoryRest extends GenericRest<ProductCategory> {
 	@Path("/{id}")
 	public Response find(@PathParam("id") final Long id) {
 		return super.find(id);
+	}
+	
+	@GET
+	@Path("/find-by-page")
+	public Response findByPage(@Context HttpServletRequest request,
+			@QueryParam("pageNumber") Integer pageNumber,
+			@QueryParam("pageSize") Integer pageSize) {
+		return super.findByPage(pageNumber, pageSize);
 	}
 	
 	@GET
