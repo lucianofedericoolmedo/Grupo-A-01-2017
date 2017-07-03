@@ -12,7 +12,7 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import edu.unq.desapp.groupA.backend.utils.JSONDateDeserialize;
-import edu.unq.desapp.groupA.backend.utils.JSONDateSerialize;
+import edu.unq.desapp.groupA.backend.utils.JSONSimpleDateSerialize;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,11 +24,11 @@ public abstract class Discount extends PersistenceEntity {
 
 	// Instance Variables
 	@JsonDeserialize(using = JSONDateDeserialize.class)
-    @JsonSerialize(using = JSONDateSerialize.class)
+    @JsonSerialize(using = JSONSimpleDateSerialize.class)
 	private Date startingDate;
 	
 	@JsonDeserialize(using = JSONDateDeserialize.class)
-    @JsonSerialize(using = JSONDateSerialize.class)
+    @JsonSerialize(using = JSONSimpleDateSerialize.class)
 	private Date finishingDate;
 	
 	private Double percentagePerProductToDiscount;

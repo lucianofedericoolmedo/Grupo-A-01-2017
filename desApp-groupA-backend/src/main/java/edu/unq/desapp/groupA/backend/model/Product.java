@@ -107,7 +107,11 @@ public class Product extends PersistenceEntity {
 	}
 
 	public boolean isCategory(ProductCategory categoryForDiscount) {
-		return categories.contains(categoryForDiscount);
+		if (categoryForDiscount.getId() != null) {
+			return categories.stream().anyMatch(c -> c.getId().equals(categoryForDiscount.getId()));
+		} else {
+			return categories.contains(categoryForDiscount);
+		}
 	}
 
 	public void addCategory(ProductCategory aProductCategory) {

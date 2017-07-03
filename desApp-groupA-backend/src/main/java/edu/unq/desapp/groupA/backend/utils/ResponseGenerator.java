@@ -13,11 +13,11 @@ public class ResponseGenerator  {
 	private static final Logger LOGGER = Logger.getLogger("edu.unq.desapp.groupA.backend.error");
 	
 	public Response responseOK(String message){
-		return buildResponse(message, Status.OK);
+		return buildResponse(new Message(message), Status.OK);
 	}
 
 	public Response responseBadRequest(String message){
-		return buildResponse(message, Status.BAD_REQUEST);
+		return buildResponse(new Message(message), Status.BAD_REQUEST);
 	}
 	
 	public <T> Response buildSuccessResponse(T entity) {

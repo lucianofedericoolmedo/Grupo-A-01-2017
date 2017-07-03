@@ -47,7 +47,11 @@ public abstract class Item extends PersistenceEntity {
 	}
 
 	public Boolean isProduct(Product productForDiscount) {
-		return product.equals(productForDiscount);
+		if (product.getId() != null && productForDiscount.getId() != null) {
+			return product.getId().equals(productForDiscount.getId());
+		} else {
+			return product.equals(productForDiscount);
+		}
 	}
 
 }

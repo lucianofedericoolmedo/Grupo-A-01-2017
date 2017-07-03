@@ -36,7 +36,7 @@ public class CashRegister implements Serializable {
 
 	public void requirePurchase(Cart cart) {
 		cart.setReservationTime(new Date());
-		this.setProductsToProcess(this.productsToProcess + cart.totalValueOfCheckedItems().intValue());		
+		this.setProductsToProcess(this.productsToProcess + cart.quantityOfcheckedItems());		
 	}
 
 	public void setProductsToProcess(Integer productosPorProcesar) {

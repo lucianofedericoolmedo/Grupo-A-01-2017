@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "discounts_per_product_quantity")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class PerProductQuantity extends Discount {
 
 	/**

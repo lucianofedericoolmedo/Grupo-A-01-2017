@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "discounts_per_product_category")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class PerProductCategory extends Discount {
 	/**
 	 * This Discount applies for each Product with correct Category.

@@ -42,7 +42,7 @@ public class DiscountAssigner {
 		Priority[] priorities = new Priority[]{Priority.HIGH, Priority.MEDIUM, Priority.LOW};
 		for (Priority priority : priorities) {
 			if (!findDiscountsWithPriorityAndAssigns(itemsToApply, priority)) {
-				break;
+				//break;
 			}
 		}
 	}
@@ -57,7 +57,8 @@ public class DiscountAssigner {
 	@Transactional
 	public Boolean findDiscountsWithPriorityAndAssigns(List<ItemCart> items, Priority priority) {
 		List<Discount> discountsWithHighPriority = findActiveDiscountsWithPriority(priority);
-		items.removeAll(assignSpecifiedDiscounts(items, discountsWithHighPriority));
+//		items.removeAll(assignSpecifiedDiscounts(items, discountsWithHighPriority));
+		assignSpecifiedDiscounts(items, discountsWithHighPriority);
 		return !items.isEmpty();
 	}
 	

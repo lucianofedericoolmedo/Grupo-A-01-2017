@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 import edu.unq.desapp.groupA.backend.dto.DiscountDTO;
 import edu.unq.desapp.groupA.backend.model.Discount;
+import edu.unq.desapp.groupA.backend.model.PerProduct;
+import edu.unq.desapp.groupA.backend.model.PerProductCategory;
+import edu.unq.desapp.groupA.backend.model.PerProductQuantity;
 import edu.unq.desapp.groupA.backend.model.Priority;
 import edu.unq.desapp.groupA.backend.service.DiscountService;
 import edu.unq.desapp.groupA.backend.service.GenericService;
@@ -124,6 +127,25 @@ public class DiscountRest extends GenericRest<Discount> {
 	public Response update(@Context HttpServletRequest request, Discount discount) {
 		return super.update(discount);
 	}
+	
+	@PUT
+	@Path("/per-product")
+	public Response updatePerProduct(@Context HttpServletRequest request, PerProduct discount) {
+		return super.update(discount);
+	}
+	
+	@PUT
+	@Path("/per-product-category")
+	public Response updatePerProductCategory(@Context HttpServletRequest request, PerProductCategory discount) {
+		return super.update(discount);
+	}
+	
+	@PUT
+	@Path("/per-product-quantity")
+	public Response updatePerProductQuantity(@Context HttpServletRequest request, PerProductQuantity discount) {
+		return super.update(discount);
+	}
+
 
 	@GET
 	public Response ok() {

@@ -14,7 +14,7 @@ public class ItemCart extends Item {
 	private static final long serialVersionUID = -2357797967770914119L;
 
 	// Instance Variables
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Discount discount;
 
 	@ManyToOne(cascade=CascadeType.MERGE)
