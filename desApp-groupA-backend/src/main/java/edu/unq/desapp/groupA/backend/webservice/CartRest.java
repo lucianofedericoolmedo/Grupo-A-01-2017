@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.unq.desapp.groupA.backend.dto.DeliveryDTO;
 import edu.unq.desapp.groupA.backend.model.Cart;
 import edu.unq.desapp.groupA.backend.model.PaymentTurn;
 import edu.unq.desapp.groupA.backend.service.CartService;
@@ -103,6 +104,18 @@ public class CartRest extends GenericRest<Cart> {
 			return responseGenerator.buildErrorResponse(e);
 		}
 	}
+	
+	@POST
+	@Path("/confirmDelivery")
+	public Response confirmDelivery(@Context HttpServletRequest request, DeliveryDTO dto) {
+		try {
+			cartService.createHomeDeliveryPurchaseFor(dto.getTurn(), dto.getShippingAddress());
+			return responseGenerator.buildSuccessResponse(Status.OK);
+		} catch (Exception e) {
+			return responseGenerator.buildErrorResponse(e);
+		}
+	}
+	
 
 	@POST
 	public Response create(@Context HttpServletRequest request, Cart cart) {

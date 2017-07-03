@@ -35,6 +35,9 @@ public class CartService extends GenericService<Cart> {
 	private UserService userService;
 	
 	@Autowired
+	private ShippingAddressService shippingAddressService;
+	
+	@Autowired
 	private ItemCartService itemCartService;
 	
 	@Autowired
@@ -193,7 +196,8 @@ public class CartService extends GenericService<Cart> {
 		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
 		cashRegister.removecheckedItemsFrom(cart);
 		discountAssigner.assignDiscounts(cart);
-		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddress);
+		ShippingAddress shippingAddressSaved = shippingAddressService.save(shippingAddress);
+		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddressSaved);
 		purchaseService.save(newPurchase);
 	}
 

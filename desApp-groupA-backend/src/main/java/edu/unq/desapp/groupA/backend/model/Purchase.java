@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,7 +25,7 @@ public class Purchase extends PersistenceEntity {
 	@ManyToOne
 	private ShippingAddress shippingAddress;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private PaymentTurn turn;
 
 	@Enumerated(EnumType.STRING)
