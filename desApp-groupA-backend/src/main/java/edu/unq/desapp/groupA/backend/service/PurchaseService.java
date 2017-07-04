@@ -57,10 +57,12 @@ public class PurchaseService extends GenericService<Purchase> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public List<Purchase> getPurchasesByUser(UserCredential user) {
 		return this.repository.getPurchasesByUser(user);
 	}
 
+	@Transactional
 	public List<Cart> getAllCarts() {
 		return this.repository.getAllCarts();
 	}
@@ -77,6 +79,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		
 	}
 
+	@Transactional
 	public List<Purchase> getPurchases() {
 		return this.repository.getPurchases();
 	}
@@ -99,6 +102,7 @@ public class PurchaseService extends GenericService<Purchase> {
 		return purchase;
 	}
 
+	@Transactional
 	public List<Purchase> getShippings() {
 		return repository.getShippings();
 	}
@@ -108,12 +112,13 @@ public class PurchaseService extends GenericService<Purchase> {
 		return repository;
 	}
 
-	
+	@Transactional
 	public PageResponse<PurchaseDTO> findPageByUserId(Integer pageNumber, Integer pageSize, Long userId) {
 		PageResponse<Purchase> purchasePageResponse = repository.findPageByUserId(pageNumber, pageSize, userId);
 		return new PageResponse<PurchaseDTO>(toPurchaseDto(purchasePageResponse.getResult()), purchasePageResponse.getTotalSize());
 	}
 
+	@Transactional
 	public PurchaseWithItemsDTO findDtoById(Long id) {
 		Purchase fetchedPurchase = super.find(id);
 		return new PurchaseWithItemsDTO(fetchedPurchase);

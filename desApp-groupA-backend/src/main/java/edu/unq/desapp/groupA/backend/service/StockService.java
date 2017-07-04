@@ -2,6 +2,7 @@ package edu.unq.desapp.groupA.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.unq.desapp.groupA.backend.model.Product;
 import edu.unq.desapp.groupA.backend.model.Stock;
@@ -28,10 +29,12 @@ public class StockService extends GenericService<Stock> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public Stock findByProduct(Product product) {
 		return this.getRepository().findByProduct(product);
 	}
 
+	@Transactional
 	public Stock updateStockForProduct(Product product, Integer stockQuantity) {
 		Stock stock = findByProduct(product);
 		if (stock == null) {
@@ -42,6 +45,7 @@ public class StockService extends GenericService<Stock> {
 		}
 	}
 
+	@Transactional
 	public Stock findForProductId(Long productId) {
 		return this.repository.findforProductId(productId);
 	}

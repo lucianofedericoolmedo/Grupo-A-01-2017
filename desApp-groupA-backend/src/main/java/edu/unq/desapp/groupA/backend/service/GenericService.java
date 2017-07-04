@@ -26,6 +26,7 @@ public abstract class GenericService<T> {
 		return entity;
 	}
 	
+	@Transactional
 	public T find(Long id) {
 		return this.getRepository().findById(id);
 	}
@@ -35,6 +36,8 @@ public abstract class GenericService<T> {
 		this.getRepository().delete(entity);
 	}
 	
+	
+	@Transactional
 	public List<T> findAll() {
 		return this.getRepository().findAll();
 	}
@@ -44,6 +47,7 @@ public abstract class GenericService<T> {
 		this.getRepository().deleteById(id);
 	}
 
+	@Transactional
 	public PageResponse<T> findByPage(Integer pageNumber, Integer pageSize) {
 		PageRequest<T> pageRequest = new PageRequestBuilder<T>(getRepository().getDomainClass())
 				.setPageSize(pageSize)

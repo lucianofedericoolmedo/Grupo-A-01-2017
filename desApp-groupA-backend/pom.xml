@@ -488,6 +488,10 @@
 						<!-- <includeTags>fast</includeTags> -->
 						<excludeTags>slow</excludeTags>
 					</properties>
+					<!--  
+					<reuseForks>false</reuseForks>
+        			<forkCount>1</forkCount>
+        			-->
 				</configuration>
 				<dependencies>
 					<dependency>
