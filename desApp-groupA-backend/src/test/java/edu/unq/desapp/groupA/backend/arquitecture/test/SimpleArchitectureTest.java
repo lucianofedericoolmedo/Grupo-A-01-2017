@@ -56,6 +56,7 @@ public class SimpleArchitectureTest {
 				aClass = Class.forName(spArray.get(1));
 				isClassTransactional = this.checkTransactional(aClass);				
 				if(!isClassTransactional){
+					System.out.println(spArray.get(1));
 					break;
 				}
 				
