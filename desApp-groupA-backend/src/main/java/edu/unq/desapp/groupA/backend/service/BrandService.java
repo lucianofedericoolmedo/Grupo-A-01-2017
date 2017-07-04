@@ -29,6 +29,7 @@ public class BrandService extends GenericService<Brand> {
 		this.repository = repository;
 	}
 
+	@Transactional
 	public Brand findByName(String brand) {
 		return this.getRepository().findByName(brand);
 	}
@@ -63,6 +64,12 @@ public class BrandService extends GenericService<Brand> {
 	public Brand save(Brand newBrand) {
 		validateBrandNameExistence(newBrand.getName(), newBrand);
 		return super.save(newBrand);
+	}
+	
+	@Transactional
+	public void saveBrandWithErrorForTransactionalTest(Brand brand) {
+		super.save(brand);
+		throw new RuntimeException("Exception thrown on purpose for transactional testing");
 	}
 
 }
