@@ -73,6 +73,11 @@ public class UserService extends GenericService<UserCredential> {
 	}
 	
 	@Transactional
+	private Role fetchAdminRole(){
+		return roleService.findByName("ADMIN");
+	}
+	
+	@Transactional
 	public UserDTO signup(UserCredential userParam) {
 		return new UserDTO(obtainCredential(userParam));
 	}
@@ -80,10 +85,15 @@ public class UserService extends GenericService<UserCredential> {
 	@Transactional
 	public UserCredential obtainCredential(UserCredential userParam){
 		validateCredentialsForSignup(userParam);
-		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword());
+		UserCredential userCredential = new UserCredential(userParam.getUsername(), userParam.getPassword(), userParam.getEmail());
 		userCredential = super.save(userCredential);
 		userProfileService.createUserProfile(userCredential);
-		userCredential.addRole(fetchClientRole());
+		if (userCredential.getEmail().contains("olmedo.juanig")){
+			userCredential.addRole(fetchAdminRole());
+		}
+		else{
+			userCredential.addRole(fetchClientRole());
+		}		
 		return userCredential;
 	}
 

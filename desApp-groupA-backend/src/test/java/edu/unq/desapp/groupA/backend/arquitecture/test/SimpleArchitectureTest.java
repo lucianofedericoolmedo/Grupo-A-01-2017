@@ -55,8 +55,9 @@ public class SimpleArchitectureTest {
 			try {
 				aClass = Class.forName(spArray.get(1));
 				isClassTransactional = this.checkTransactional(aClass);				
-				if(!isClassTransactional)
+				if(!isClassTransactional){
 					break;
+				}
 				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
