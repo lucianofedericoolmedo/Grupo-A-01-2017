@@ -190,15 +190,19 @@ public class CartService extends GenericService<Cart> {
 	}
 
 	@Transactional
-	public void createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
+	public Purchase createPurchaseFor(PaymentTurn turnParam, PaymentType paymentType, ShippingAddress shippingAddress) {
 		PaymentTurn turn = paymentTurnService.find(turnParam.getId());
 		Cart cart = updateCartStatus(turn.getCartId(), CartState.PURCHASE);
 		CashRegister cashRegister = cashRegisterManagement.getCashRegisterWithCode(turn.getCashRegisterCode());
 		cashRegister.removecheckedItemsFrom(cart);
 		discountAssigner.assignDiscounts(cart);
-		ShippingAddress shippingAddressSaved = shippingAddressService.save(shippingAddress);
-		Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddressSaved);
-		purchaseService.save(newPurchase);
+		if (shippingAddress != null){
+			ShippingAddress shippingAddressSaved = shippingAddressService.save(shippingAddress);
+			Purchase newPurchase = new Purchase(cart, paymentType, turn, shippingAddressSaved);
+			return purchaseService.save(newPurchase);
+		}
+		Purchase newPurchase = new Purchase(cart, paymentType, turn);
+		return purchaseService.save(newPurchase);
 	}
 
 	public Long findUnattendedCartByUserId(Long userId) {
